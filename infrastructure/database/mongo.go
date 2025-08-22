@@ -14,7 +14,7 @@ import (
 
 var Client *mongo.Client
 
-func ConnectMongo() *mongo.Client{
+func ConnectMongo() *mongo.Client {
 	err := godotenv.Load()
 	if err != nil {
 		log.Println("No .env file found")
@@ -36,7 +36,15 @@ func ConnectMongo() *mongo.Client{
 
 	fmt.Println("MongoDB connected Seccussfully!")
 	Client = client
-	
+
 	return client
 }
 
+// GetCollection returns a MongoDB collection by name
+func GetCollection(collectionName string) *mongo.Collection {
+	dbName := os.Getenv("DB_NAME")
+	if dbName == "" {
+		dbName = "remedymate" // default database name
+	}
+	return Client.Database(dbName).Collection(collectionName)
+}
