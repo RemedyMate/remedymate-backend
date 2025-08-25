@@ -21,7 +21,7 @@ func main() {
 	}
 
 	// Connect to MongoDB
-	database.ConnectMongo()
+	database.ConnectMongo() // commented because we don't need it currently
 
 	// Load OAuth configuration
 	oauthConfig := config.LoadOAuthConfig()
