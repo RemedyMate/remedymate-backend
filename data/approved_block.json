@@ -1,0 +1,310 @@
+[
+  {
+    "topic_key": "indigestion",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Eat smaller, more frequent meals throughout the day.",
+          "Avoid foods that trigger your indigestion, such as fatty, spicy, or acidic foods.",
+          "Drink peppermint or ginger tea to help settle your stomach.",
+          "Loosen tight clothing around your waist.",
+          "Avoid eating close to bedtime."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "antacid",
+            "safety_note": "You can ask a pharmacist about antacids to reduce stomach acid. Always follow the dosage instructions on the label and do not use them for too long without medical advice."
+          }
+        ], 
+        "seek_care_if": [
+          "You experience severe or persistent stomach pain.",
+          "You have black, tarry, or bloody stools.",
+          "You have unexplained weight loss.",
+          "You experience difficulty or pain when swallowing.",
+          "Your indigestion is new, worsening, or accompanied by dizziness or sweating."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "በቀን ውስጥ ትንሽ እና ደጋግመው ይመገቡ።",
+          "የሆድ ቁርጠትዎን የሚያስነሱ ምግቦችን ያስወግዱ፣ ለምሳሌ ቅባት የበዛባቸው፣ ቅመም የበዛባቸው ወይም አሲዳማ የሆኑ ምግቦች።",
+          "ሆድዎን ለማረጋጋት ሚንት ወይም ዝንጅብል ሻይ ይጠጡ።",
+          "በወገብዎ ላይ ያለውን ጥብቅ ልብስ ያላቅቁ።",
+          "ከመኝታ ሰዓትዎ በፊት ምግብ ከመመገብ ይቆጠቡ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "አንታሲድ (Antacid)",
+            "safety_note": "የሆድ አሲድ ለመቀነስ ስለ አንታሲድ ፋርማሲስት መጠየቅ ይችላሉ። ሁልጊዜ በጥቅሉ ላይ ያለውን የመድሃኒት መጠን ይከተሉ እና የህክምና ምክር ሳይወስዱ ለረጅም ጊዜ አይጠቀሙባቸው።"
+          }
+        ],
+        "seek_care_if": [
+          "ከባድ ወይም የማያቋርጥ የሆድ ህመም ካለብዎት።",
+          "ጥቁር፣ ሬንጅ የሚመስል ወይም ደም የያዘ ሰገራ ካለብዎት።",
+          "ያልታወቀ ክብደት መቀነስ ካለብዎት።",
+          "ምግብ ሲውጡ አስቸጋሪነት ወይም ህመም ካለብዎት።",
+          "የሆድ ቁርጠትዎ አዲስ ከሆነ፣ እየባሰ ከሄደ፣ ወይም ከማዞር ወይም ከላብ ጋር አብሮ ከመጣ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "headache",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Rest in a quiet, dark room.",
+          "Apply a cool, damp cloth to your forehead.",
+          "Drink water to stay hydrated. A small amount of caffeine (like a cup of coffee or tea) may help if you regularly consume caffeine."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "pain reliever",
+            "safety_note": "You can ask a pharmacist to help you choose the right one, such as paracetamol or ibuprofen. Always follow the dosage instructions on the label and do not exceed the recommended dose."
+          }
+        ],
+        "seek_care_if": [
+          "The headache is very sudden and severe (often described as the 'worst headache of your life' or a 'thunderclap' headache).",
+          "You also have a high fever, stiff neck, confusion, or vision changes.",
+          "It follows a recent head injury.",
+          "The pain is severe and does not improve with rest or over-the-counter medicine.",
+          "You experience weakness or numbness on one side of your body, or difficulty speaking."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "በጸጥታ እና ጨለማ ክፍል ውስጥ ዕረፍት ይውሰዱ።",
+          "ቀዝቃዛ እና እርጥብ ጨርቅ ግንባርዎ ላይ ይደግፉ።",
+          "በቂ ውሃ ይጠጡ። በየጊዜው ካፌይን የሚጠጡ ከሆነ አነስተኛ መጠን ያለው ካፌይን (እንደ አንድ ኩባያ ቡና ወይም ሻይ) ሊረዳ ይችላል።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ህመም ማስታገሻ",
+            "safety_note": "ትክክለኛውን እንዲመርጡልዎ ፋርማሲስት ስለ ፓራሲታሞል ወይም አይቡፕሮፌን መጠየቅ ይችላሉ። ሁልጊዜ በጥቅሉ ላይ ያለውን የመድሀኒት መጠን ይከተሉ እና ከሚመከረው መጠን በላይ አይወስዱ።"
+          }
+        ],
+        "seek_care_if": [
+          "የራስ ህመምዎ በጣም ድንገተኛ እና ከባድ ነው (ብዙውን ጊዜ 'በሕይወትዎ ውስጥ እጅግ የከፋ የራስ ምታት' ወይም 'በጣም ከባድ የራስ ምታት' ተብሎ ይገለጻል)።",
+          "ከፍተኛ ትኩሳት፣ የአንገት መጠንከር፣ ግራ መጋባት ወይም የእይታ ለውጥ አለዎት።",
+          "ከቅርብ ጊዜ የጭንቅላት ጉዳት ተከስቷል።",
+          "ህመሙ ከባድ ነው እና በእረፍት ወይም በገበያ ውስጥ በሚገኝ መድሀኒት የማይሻሻል ከሆነ።",
+          "በሰውነትዎ በአንደኛው ጎን የመድከም ወይም የመደንዘዝ ስሜት፣ ወይም ለመናገር መቸገር ካጋጠመዎት።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "sore_throat",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Gargle with warm salt water (1/4 teaspoon of salt in 1 cup of warm water) several times a day.",
+          "Suck on lozenges or hard candies (for adults and older children, not for children under 4 years due to choking risk).",
+          "Drink plenty of warm liquids like tea with honey (honey is not for children under 1 year).",
+          "Use a humidifier or inhale steam from a bowl of hot water (carefully) to soothe your throat.",
+          "Get plenty of rest."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "pain reliever",
+            "safety_note": "You can ask a pharmacist about options like paracetamol or ibuprofen to help with pain. Always follow the dosage instructions on the label. Do not give aspirin to children under 16."
+          }
+        ],
+        "seek_care_if": [
+          "You have difficulty breathing or swallowing.",
+          "Your sore throat is very severe and lasts longer than a few days.",
+          "You have a high fever (above 38.3°C / 101°F).",
+          "You have swollen glands in your neck or a rash.",
+          "You have pus on your tonsils."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "በቀን ውስጥ ብዙ ጊዜ በሞቀ ጨዋማ ውሃ (1 ኩባያ ሞቅ ያለ ውሃ ውስጥ 1/4 የሻይ ማንኪያ ጨው) ይጉመጥመጡ።",
+          "የጉሮሮ ከረሜላ (ሎዘንጅ) ወይም ጠንካራ ከረሜላ ይመጥምጡ። (ለአዋቂዎች እና ትልልቅ ልጆች እንጂ ከአራት አመት በታች ለሆኑ ህፃናት በትልቀት ስጋት ምክንያት አይመከርም)።",
+          "ብዙ ሙቅ ፈሳሾችን እንደ ማር የተጨመረበት ሻይ ይጠጡ።(ማር ከአንድ አመት በታች ለሆኑ ህፃናት አይሰጥም።)",
+          "ጉሮሮዎትን ለማለስለስ የእርጥበት ማሽን (humidifier) ይጠቀሙ ወይም (በጥንቃቄ) ከሞቀ ውሃ በሚወጣው እንፋሎት ይተንፍሱ።",
+          "በቂ እረፍት ያግኙ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ህመም ማስታገሻ",
+            "safety_note": "ህመምን ለመርዳት ስለ ፓራሲታሞል ወይም አይቡፕሮፌን ያሉ አማራጮችን ፋርማሲስት መጠየቅ ይችላሉ። ሁልጊዜ በጥቅሉ ላይ ያለውን የመድሃኒት መጠን ይከተሉ። ከ16 አመት በታች ለሆኑ ህፃናት አስፕሪን አይስጡ።"
+          }
+        ],
+        "seek_care_if": [
+          "ለመተንፈስ ወይም ለመዋጥ ከተቸገሩ።",
+          "የጉሮሮ ህመምዎ በጣም ከባድ ከሆነ እና ከጥቂት ቀናት በላይ ከቆየ።",
+          "ከፍተኛ ትኩሳት (ከ38.3°C / 101°F በላይ) ካለብዎ።",
+          "በአንገትዎ ላይ ያበጡ እጢዎች ወይም የቆዳ ሽፍታ ካለብዎ።",
+          "በቶንሲልዎ ላይ መግል ካለብዎ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "cough",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Drink plenty of fluids like water, juice, or warm broth to thin mucus.",
+          "Sip on warm liquids like honey and lemon tea (honey is not for children under 1 year).",
+          "Use a humidifier or take a steamy shower to help loosen congestion.",
+          "Get plenty of rest to help your body recover.",
+          "Avoid irritants like smoke and dust."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "cough suppressant (for dry cough) or expectorant (for wet cough)",
+            "safety_note": "You can ask a pharmacist about over-the-counter cough medicines. Always read the label carefully and ensure it is suitable for your age and condition. Avoid for children under 6 years unless advised by a doctor."
+          }
+        ],
+        "seek_care_if": [
+          "You have difficulty breathing or shortness of breath.",
+          "You are coughing up blood or pink-tinged mucus.",
+          "You have chest pain with your cough.",
+          "You have a high fever (above 38.3°C / 101°F).",
+          "Your cough lasts longer than 2-3 weeks.",
+          "You develop a new, worsening headache with your cough."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "አክታን ለማቅጠን እንደ ውሃ፣ ጭማቂ ወይም ሞቅ ያለ ሾርባ ያሉ ብዙ ፈሳሾችን ይጠጡ።",
+          "እንደ ማርና ሎሚ ሻይ ያሉ ሞቅ ያሉ ፈሳሾችን ይጎንጩ (ማር ከአንድ አመት በታች ለሆኑ ህፃናት አይሰጥም)።",
+          "አክታን ለማላቀቅ የእርጥበት ማድረቂያ ይጠቀሙ ወይም በእንፋሎት ይታጠቡ።",
+          "ሰውነትዎ እንዲያገግም ለመርዳት በቂ እረፍት ያግኙ።",
+          "እንደ ጭስ እና አቧራ ያሉ የሚያበሳጩ ነገሮችን ያስወግዱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የሳል ማስታገሻ (ለደረቅ ሳል) ወይም አክታ ማውጫ (ለእርጥብ ሳል)",
+            "safety_note": "ስለ ያለሀኪም ማዘዣ የሳል መድሃኒቶች ፋርማሲስት መጠየቅ ይችላሉ። ሁልጊዜ በጥንቃቄ መመሪያውን ያንብቡ እና ለዕድሜዎ እና ለጤና ሁኔታዎ ተስማሚ መሆኑን ያረጋግጡ። ሀኪም ካልመከረዎት በስተቀር ከ6 አመት በታች ለሆኑ ህፃናት አይስጡ።"
+          }
+        ],
+        "seek_care_if": [
+          "ለመተንፈስ ከተቸገሩ ወይም ትንፋሽዎ አጠር ካለ።",
+          "ደም ወይም ሮዝ ቀለም ያለው አክታ እየሳሉ ከሆነ።",
+          "በሳልዎ የደረት ህመም ካለብዎት።",
+          "ከፍተኛ ትኩሳት (ከ38.3°C / 101°F በላይ) ካለብዎት።",
+          "ሳልዎ ከ2-3 ሳምንታት በላይ ከቆየ።",
+          "ከሳልዎ ጋር አዲስና እየባሰ የመጣ ራስ ምታት አጋጥሞዎታል።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "fever",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Get plenty of rest.",
+          "Drink plenty of fluids like water, broth, or juice to prevent dehydration.",
+          "Wear light clothing and avoid heavy blankets.",
+          "Take a lukewarm bath or use a cool, damp cloth on your forehead or body (do not use cold water or ice).",
+          "Keep the room temperature comfortable, not too hot or too cold."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "fever reducer / pain reliever",
+            "safety_note": "You can ask a pharmacist about over-the-counter options like paracetamol or ibuprofen to help reduce fever and pain. Always follow the dosage instructions on the label. Do not give aspirin to children or teenagers as it can cause a serious condition called Reye's syndrome."
+          }
+        ],
+        "seek_care_if": [
+          "Your fever is 39°C (102°F) or higher for adults.",
+          "The fever is in an infant younger than 3 months (seek care immediately).",
+          "You have a stiff neck, severe headache, confusion, or unusual sensitivity to light.",
+          "You experience difficulty breathing or severe chest pain.",
+          "You have a new rash.",
+          "The fever lasts for more than 3 days, or keeps returning.",
+          "You have severe pain anywhere in your body."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "በቂ እረፍት ያግኙ።",
+          "የሰውነት ፈሳሽ እንዳይቀንስ ለመከላከል እንደ ውሃ፣ ሾርባ ወይም ጭማቂ ያሉ ብዙ ፈሳሾችን ይጠጡ።",
+          "ቀላል ልብስ ይልበሱ እና ወፍራም ብርድ ልብሶችን ያስወግዱ።",
+          "ለብ ባለ ውሃ ገላዎን ይታጠቡ ወይም ግንባርዎ ላይ እና ሰውነትዎ ላይ ቀዝቃዛና እርጥብ ጨርቅ ያድርጉ። (ቀዝቃዛ ውሃ ወይም በረዶ አይጠቀሙ።)",
+          "የክፍሉን የሙቀት መጠን ምቹ ያድርጉት፣ በጣም ሞቃት ወይም በጣም ቀዝቃዛ እንዳይሆን።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ትኩሳት መቀነሻ / ህመም ማስታገሻ",
+            "safety_note": "ትኩሳትን እና ህመምን ለመቀነስ ስለ ፓራሲታሞል ወይም አይቡፕሮፌን ያሉ በፋርማሲ የሚገኙ መድኃኒቶችን ፋርማሲስትዎን መጠየቅ ይችላሉ። ሁልጊዜም በጥቅሉ ላይ ያለውን የአጠቃቀም መመሪያ ይከተሉ። አስፕሪን ሬይ ሲንድሮም የሚባል ከባድ ህመም ሊያስከትል ስለሚችል ለህጻናት ወይም ለታዳጊዎች አይስጡ።"
+          }
+        ],
+        "seek_care_if": [
+          "የአዋቂዎች ትኩሳት 39°C (102°F) ወይም ከዚያ በላይ ከሆነ።",
+          "ትኩሳቱ ከ3 ወር በታች በሆነ ህፃን ላይ ከሆነ (ወዲያውኑ የህክምና እርዳታ ይፈልጉ)።",
+          "የአንገት ጥንካሬ፣ ከባድ ራስ ምታት፣ ግራ መጋባት ወይም ለብርሃን ያልተለመደ ስሜት አለብዎት።",
+          "ለመተንፈስ ከተቸገሩ ወይም ከባድ የደረት ህመም ካለብዎት።",
+          "አዲስ የቆዳ ሽፍታ ካለብዎ።",
+          "ትኩሳቱ ከ3 ቀናት በላይ ከቆየ፣ ወይም ደግሞ እየተመለሰ ከመጣ።",
+          "በሰውነትዎ ውስጥ በማንኛውም ቦታ ከባድ ህመም ካለብዎት።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "back_pain",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Rest for a short period (1-2 days) if the pain is severe, but avoid prolonged bed rest.",
+          "Apply heat (warm compress or bath) or cold (ice pack wrapped in cloth) to the affected area for 15-20 minutes at a time.",
+          "Engage in gentle movement and stretching as pain allows. Avoid strenuous activities.",
+          "Maintain good posture when sitting, standing, and lifting.",
+          "Use a firm mattress and sleep on your side with a pillow between your knees, or on your back with a pillow under your knees."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "pain reliever",
+            "safety_note": "You can ask a pharmacist about over-the-counter pain relievers like paracetamol or ibuprofen. Always follow the dosage instructions on the label and do not exceed the recommended dose."
+          }
+        ],
+        "seek_care_if": [
+          "The back pain is sudden and severe after an injury or fall.",
+          "You experience numbness, tingling, or weakness in your legs.",
+          "You have trouble controlling your bladder or bowels.",
+          "The pain does not improve after a few weeks of self-care.",
+          "You also have a fever, chills, or unexplained weight loss."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ህመሙ ከባድ ከሆነ ለአጭር ጊዜ (ከ1-2 ቀናት) ያርፉ፣ ነገር ግን ለረጅም ጊዜ በአልጋ ላይ ከመቆየት ይቆጠቡ።",
+          "በተጎዳው አካል ላይ ሙቀት (በሞቀ ውሃ የተነከረ ጨርቅ ወይም ገላ መታጠብ) ወይም ቅዝቃዜ (በረዶ በጨርቅ ጠቅልሎ) በአንድ ጊዜ ከ15-20 ደቂቃ ያድርጉ።",
+          "በሚችሉት መጠን ቀለል ያሉ እንቅስቃሴዎችን እና ዝርጋታዎችን ያድርጉ። ከባድ እንቅስቃሴዎችን ያስወግዱ።",
+          "በመቀመጥ፣ በመቆም እና እቃ ሲያነሱ ጥሩ አቋም ይኑርዎት።",
+          "በጥሩ ፍራሽ ላይ ይተኙ እና በጎንዎ ሲተኙ ትራስ በጉልበቶችዎ መካከል ያድርጉ፤ ወይም በጀርባዎ ሲተኙ ትራስ ከጉልበቶችዎ በታች ያድርጉ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ህመም ማስታገሻ",
+            "safety_note": "ስለ ፓራሲታሞል ወይም አይቡፕሮፌን ያሉ ያለሀኪም ማዘዣ የህመም ማስታገሻዎችን ፋርማሲስት መጠየቅ ይችላሉ። ሁልጊዜ በጥቅሉ ላይ ያለውን የመድሃኒት መጠን ይከተሉ እና ከሚመከረው መጠን በላይ አይወስዱ።"
+          }
+        ],
+        "seek_care_if": [
+          "የጀርባ ህመሙ ከጉዳት ወይም ከመውደቅ በኋላ ድንገተኛ እና ከባድ ከሆነ።",
+          "በእግሮችዎ ላይ የመደንዘዝ፣ የመኮማተር ወይም የመድከም ስሜት ካጋጠመዎት።",
+          "ፊኛዎን ወይም አንጀትዎን ለመቆጣጠር ከተቸገሩ።",
+          "ህመሙ ከጥቂት ሳምንታት የራስ እንክብካቤ በኋላ ካልተሻሻለ።",
+          "ከህመሙ ጋር ትኩሳት፣ ብርድ ብርድ ማለት ወይም ያልታወቀ ክብደት መቀነስ ካለብዎ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  }
+]
