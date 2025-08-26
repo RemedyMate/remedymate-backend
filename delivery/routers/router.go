@@ -72,5 +72,11 @@ func SetupRouter(oauthController *controllers.OAuthController, authController *c
 		remedymate.POST("/triage", remedyMateController.GetTriage)
 	}
 
+	// Content routes (public access, no authentication required)
+	content := v1.Group("/content")
+	{
+		content.GET("/:topic_key", remedyMateController.GetContent)
+	}
+
 	return r
 }
