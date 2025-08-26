@@ -16,6 +16,7 @@ type TriageService interface {
 // RemedyMateUsecase defines the main use case interface
 type RemedyMateUsecase interface {
 	GetTriage(ctx context.Context, req dto.TriageRequest) (*dto.TriageResponse, error)
+	GetContent(ctx context.Context, topicKey, language string) (*entities.ContentTranslation, error)
 }
 
 // ContentService defines the interface for content management
