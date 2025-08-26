@@ -15,7 +15,7 @@ type RemedyMateUsecase struct {
 	contentService interfaces.ContentService
 }
 
-//  creates a new RemedyMate usecase
+//  NewRemedyMateUsecase creates a new RemedyMate usecase
 func NewRemedyMateUsecase(
 	triageService interfaces.TriageService,
 	contentService interfaces.ContentService,
@@ -27,7 +27,7 @@ func NewRemedyMateUsecase(
 	}
 }
 
-// performs only triage classification
+// GetTriage performs only triage classification
 func (rmu *RemedyMateUsecase) GetTriage(ctx context.Context, req dto.TriageRequest) (*dto.TriageResponse, error) {
 	input := entities.SymptomInput{
 		Text:     req.Text,
@@ -47,7 +47,7 @@ func (rmu *RemedyMateUsecase) GetTriage(ctx context.Context, req dto.TriageReque
 	}, nil
 }
 
-// generates a unique session ID
+// generateSessionID generates a unique session ID
 func generateSessionID() string {
 	return fmt.Sprintf("session_%d", time.Now().UnixNano())
 }

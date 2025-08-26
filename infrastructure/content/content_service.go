@@ -16,7 +16,7 @@ type ContentService struct {
 	dataPath       string
 }
 
-// creates a new content service instance
+// NewContentService creates a new content service instance
 func NewContentService(dataPath string) interfaces.ContentService {
 	service := &ContentService{
 		dataPath: dataPath,
