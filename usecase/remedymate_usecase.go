@@ -2,6 +2,8 @@ package usecase
 
 import (
 	"context"
+	"crypto/rand"
+	"encoding/hex"
 	"fmt"
 	"time"
 
@@ -15,7 +17,7 @@ type RemedyMateUsecase struct {
 	contentService interfaces.ContentService
 }
 
-//  NewRemedyMateUsecase creates a new RemedyMate usecase
+// NewRemedyMateUsecase creates a new RemedyMate usecase
 func NewRemedyMateUsecase(
 	triageService interfaces.TriageService,
 	contentService interfaces.ContentService,
@@ -49,5 +51,11 @@ func (rmu *RemedyMateUsecase) GetTriage(ctx context.Context, req dto.TriageReque
 
 // generateSessionID generates a unique session ID
 func generateSessionID() string {
-	return fmt.Sprintf("session_%d", time.Now().UnixNano())
+	b := make([]byte, 16)
+	_, err := rand.Read(b)
+	if err != nil {
+		// fallback to timestamp if random fails
+		return fmt.Sprintf("session_%d", time.Now().UnixNano())
+	}
+	return "session_" + hex.EncodeToString(b)
 }
