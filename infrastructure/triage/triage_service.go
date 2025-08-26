@@ -30,8 +30,19 @@ func (ts *TriageService) ClassifySymptoms(ctx context.Context, input entities.Sy
 	}
 
 	triageLevel, detectedFlags, err := ts.classifyWithLLM(ctx, input)
+
 	if err != nil {
 		return nil, fmt.Errorf("triage classification failed: %w", err)
+	}
+
+	// Handle unclear input specially
+	if len(detectedFlags) > 0 && detectedFlags[0] == "unclear_input" {
+		result := &entities.TriageResult{
+			Level:    entities.TriageLevelGreen, // Use green level but with clarification message
+			RedFlags: []string{},
+			Message:  ts.getClarificationMessage(input.Language),
+		}
+		return result, nil
 	}
 
 	result := &entities.TriageResult{
@@ -78,11 +89,12 @@ func (ts *TriageService) ValidateInput(input entities.SymptomInput) error {
 func (ts *TriageService) classifyWithLLM(ctx context.Context, input entities.SymptomInput) (entities.TriageLevel, []string, error) {
 	redFlagPrompt := ts.formatRedFlagRulesForPrompt(input.Language)
 	yellowFlagPrompt := ts.formatYellowFlagRulesForPrompt(input.Language)
+	approvedTopicsPrompt := ts.formatApprovedTopicsForPrompt(input.Language)
 
 	prompt := fmt.Sprintf(`
 You are a medical triage classifier. Analyze the user input and determine if it describes a medical emergency.
 Your ONLY output must be a single JSON object with this exact structure:
-{"level": "RED" | "YELLOW" | "GREEN", "flags": ["flag1", "flag2"]}
+{"level": "RED" | "YELLOW" | "GREEN" | "UNCLEAR", "flags": ["flag1", "flag2"]}
 
 CRITICAL RED FLAGS (output RED if you detect any of these):
 %s
@@ -90,14 +102,19 @@ CRITICAL RED FLAGS (output RED if you detect any of these):
 YELLOW FLAGS (output YELLOW if you detect any of these, but no red flags):
 %s
 
-GREEN: mild symptoms that don't match any red or yellow flags.
+GREEN FLAGS (output GREEN only if the symptom matches one of these approved topics):
+%s
 
-Be conservative - when in doubt, escalate to YELLOW or RED.
+UNCLEAR: If the input doesn't clearly match any of the above categories, or if you cannot understand what the user is describing.
+
+Be conservative - when in doubt about red/yellow flags, escalate to YELLOW or RED.
+Only return GREEN if the symptom clearly matches one of the approved topics.
 
 User Input (Language: %s): "%s"
 	`,
 		redFlagPrompt,
 		yellowFlagPrompt,
+		approvedTopicsPrompt,
 		input.Language,
 		input.Text)
 
@@ -106,11 +123,18 @@ User Input (Language: %s): "%s"
 		return entities.TriageLevelGreen, nil, fmt.Errorf("LLM API call failed: %w", err)
 	}
 
+	// Clean the response by removing markdown formatting
+	cleanedResponse := strings.TrimSpace(response)
+	cleanedResponse = strings.TrimPrefix(cleanedResponse, "```json")
+	cleanedResponse = strings.TrimPrefix(cleanedResponse, "```")
+	cleanedResponse = strings.TrimSuffix(cleanedResponse, "```")
+	cleanedResponse = strings.TrimSpace(cleanedResponse)
+
 	var llmResult struct {
 		Level string   `json:"level"`
 		Flags []string `json:"flags"`
 	}
-	if err := json.Unmarshal([]byte(response), &llmResult); err != nil {
+	if err := json.Unmarshal([]byte(cleanedResponse), &llmResult); err != nil {
 		return entities.TriageLevelGreen, nil, fmt.Errorf("failed to parse LLM response: %w", err)
 	}
 
@@ -122,6 +146,9 @@ User Input (Language: %s): "%s"
 		level = entities.TriageLevelYellow
 	case "GREEN":
 		level = entities.TriageLevelGreen
+	case "UNCLEAR":
+		// Return a special response asking for clarification
+		return entities.TriageLevelGreen, []string{"unclear_input"}, nil
 	default:
 		return entities.TriageLevelGreen, nil, fmt.Errorf("LLM returned invalid triage level: %s", llmResult.Level)
 	}
@@ -157,6 +184,33 @@ func (ts *TriageService) formatYellowFlagRulesForPrompt(language string) string 
 	}
 
 	return strings.Join(ruleDescriptions, "\n")
+}
+
+// formatApprovedTopicsForPrompt formats approved topics for inclusion in LLM prompts
+func (ts *TriageService) formatApprovedTopicsForPrompt(language string) string {
+	approvedBlocks, err := ts.contentService.GetApprovedBlocks()
+	if err != nil {
+		return ""
+	}
+
+	var topicDescriptions []string
+	for _, block := range approvedBlocks {
+		if translation, exists := block.Translations[language]; exists {
+			// Create a description based on the topic key and self-care items
+			desc := fmt.Sprintf("%s: %s", block.TopicKey, strings.Join(translation.SelfCare[:min(2, len(translation.SelfCare))], ", "))
+			topicDescriptions = append(topicDescriptions, desc)
+		}
+	}
+
+	return strings.Join(topicDescriptions, "\n")
+}
+
+// min helper function
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
 
 // gets only red flag rules from content service
@@ -195,4 +249,11 @@ func (ts *TriageService) getGreenFlagMessage(language string) string {
 		return "ምልክቶችዎ ቀላል ሊሆኑ ይችላሉ። የራስ እንክብካቤ ምክሮችን ይከተሉ።"
 	}
 	return "Your symptoms appear to be mild. Follow self-care recommendations."
+}
+
+func (ts *TriageService) getClarificationMessage(language string) string {
+	if language == "am" {
+		return "ይቅርታ፣ የገለጹልኝን ምልክቶች በግልጽ ለመረዳት አልቻልኩም። ምልክቶችዎን በሌላ መንገድ ሊያስረዱኝ ወይም ተጨማሪ ዝርዝር ሊሰጡኝ ይችላሉ?"
+	}
+	return "I'm sorry, I couldn't clearly understand the symptoms you described. Could you please explain your symptoms in a different way or provide more details?"
 }

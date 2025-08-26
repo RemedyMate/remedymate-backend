@@ -54,11 +54,6 @@ func (cs *ContentService) LoadContent() error {
 	return nil
 }
 
-// reloads content from files
-func (cs *ContentService) ReloadContent() error {
-	return cs.LoadContent()
-}
-
 // returns all approved blocks
 func (cs *ContentService) GetApprovedBlocks() ([]entities.ApprovedBlock, error) {
 	if len(cs.approvedBlocks) == 0 {

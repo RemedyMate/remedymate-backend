@@ -51,7 +51,7 @@ func (g *GeminiClient) callGemini(ctx context.Context, prompt string) (string, e
 		},
 		SafetySettings: []dto.GeminiSafetySetting{
 			{Category: "HARM_CATEGORY_DANGEROUS_CONTENT", Threshold: "BLOCK_MEDIUM_AND_ABOVE"},
-			{Category: "HARM_CATEGORY_MEDICAL", Threshold: "BLOCK_MEDIUM_AND_ABOVE"},
+			{Category: "HARM_CATEGORY_HARASSMENT", Threshold: "BLOCK_MEDIUM_AND_ABOVE"},
 		},
 	}
 
@@ -98,6 +98,6 @@ func (g *GeminiClient) callGemini(ctx context.Context, prompt string) (string, e
 		return "", fmt.Errorf("no response content returned from Gemini")
 	}
 
-// 5. Return the generated text
+	// 5. Return the generated text
 	return geminiResp.Candidates[0].Content.Parts[0].Text, nil
 }
