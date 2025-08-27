@@ -10,6 +10,7 @@ import (
 	"github.com/RemedyMate/remedymate-backend/domain/dto"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/auth"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/content"
+	"github.com/RemedyMate/remedymate-backend/infrastructure/conversation"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/database"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/llm"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/triage"
@@ -41,6 +42,11 @@ func main() {
 	// Initialize repositories
 	userRepo := repository.NewUserRepository()
 	oauthRepo := repository.NewOAuthRepository(database.GetCollection("users"))
+	dbName := os.Getenv("DB_NAME")
+	if dbName == "" {
+		dbName = "remedymate" // default database name
+	}
+	conversationRepo := repository.NewConversationRepository(database.Client.Database(dbName))
 
 	// Initialize usecases
 	userUsecase := usecase.NewUserUsecase(userRepo)
@@ -68,6 +74,7 @@ func main() {
 	log.Printf("✅ Using Gemini LLM client (model=%s)", llmConfig.Model)
 
 	triageService := triage.NewTriageService(contentService, geminiClient)
+	conversationService := conversation.NewConversationService(geminiClient)
 
 	// Initialize RemedyMate usecase
 	remedyMateUsecase := usecase.NewRemedyMateUsecase(
@@ -75,14 +82,21 @@ func main() {
 		contentService,
 	)
 
+	// Initialize Conversation usecase
+	conversationUsecase := usecase.NewConversationUsecase(
+		conversationService,
+		conversationRepo,
+	)
+
 	// Initialize controllers
 	oauthController := controllers.NewOAuthController(oauthUsecase)
 	authController := controllers.NewAuthController(authUsecase, userUsecase)
 	userController := controllers.NewUserController(userUsecase)
 	remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
+	conversationController := controllers.NewConversationController(conversationUsecase)
 
 	// Setup router
-	r := routers.SetupRouter(oauthController, authController, userController, remedyMateController)
+	r := routers.SetupRouter(oauthController, authController, userController, remedyMateController, conversationController)
 
 	// Get port from environment
 	port := os.Getenv("PORT")
@@ -94,5 +108,6 @@ func main() {
 	log.Printf("✅ OAuth endpoints: /api/v1/auth/oauth/*")
 	log.Printf("✅ Login endpoint: /api/v1/auth/login")
 	log.Printf("✅ Protected endpoints: /api/v1/auth/* (with JWT)")
+	log.Printf("✅ Conversation endpoints: /api/v1/conversation/*")
 	log.Fatal(r.Run(":" + port))
 }
