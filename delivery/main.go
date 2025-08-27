@@ -7,8 +7,12 @@ import (
 	"github.com/RemedyMate/remedymate-backend/config"
 	"github.com/RemedyMate/remedymate-backend/delivery/controllers"
 	"github.com/RemedyMate/remedymate-backend/delivery/routers"
+	"github.com/RemedyMate/remedymate-backend/domain/dto"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/auth"
+	"github.com/RemedyMate/remedymate-backend/infrastructure/content"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/database"
+	"github.com/RemedyMate/remedymate-backend/infrastructure/llm"
+	"github.com/RemedyMate/remedymate-backend/infrastructure/triage"
 	"github.com/RemedyMate/remedymate-backend/repository"
 	"github.com/RemedyMate/remedymate-backend/usecase"
 	"github.com/joho/godotenv"
@@ -45,14 +49,44 @@ func main() {
 	authUsecase := usecase.NewAuthUsecase(userRepo, passwordService, jwtService)
 	remedyUsecase := usecase.NewRemedyUsecase(llmRepo)
 
+	// Initialize RemedyMate services
+	contentService := content.NewContentService("./data")
+
+	// Initialize Gemini LLM client
+	gemKey := os.Getenv("GEMINI_API_KEY")
+	if gemKey == "" {
+		log.Fatal("❌ GEMINI_API_KEY not set.")
+	}
+
+	llmConfig := dto.LLMConfig{
+		APIKey:      gemKey,
+		Model:       os.Getenv("GEMINI_MODEL"),
+		MaxTokens:   150,
+		Temperature: 0.1,
+		Timeout:     30,
+	}
+
+	geminiClient := llm.NewGeminiClient(llmConfig)
+	log.Printf("✅ Using Gemini LLM client (model=%s)", llmConfig.Model)
+
+	triageService := triage.NewTriageService(contentService, geminiClient)
+
+	// Initialize RemedyMate usecase
+	remedyMateUsecase := usecase.NewRemedyMateUsecase(
+		triageService,
+		contentService,
+	)
+
 	// Initialize controllers
 	oauthController := controllers.NewOAuthController(oauthUsecase)
 	authController := controllers.NewAuthController(authUsecase, userUsecase) // Added userUsecase
 	userController := controllers.NewUserController(userUsecase)              // Re-added for profile management
 	remedyHandler := controllers.NewRemedyHandler(remedyUsecase)
+  remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
 
 	// Setup router
-	r := routers.SetupRouter(oauthController, authController, userController, remedyHandler) // Added userController back
+	r := routers.SetupRouter(oauthController, authController, userController, remedyHandler, remedyMateController) // Added userController back
+
 
 	// Get port from environment
 	port := os.Getenv("PORT")

@@ -1,0 +1,46 @@
+[
+  {
+    "keywords": [
+      "high fever",
+      "fever over 39",
+      "very high temperature",
+      "burning up"
+    ],
+    "language": "en",
+    "level": "YELLOW",
+    "description": "High fever requiring monitoring"
+  },
+  {
+    "keywords": ["ከፍተኛ ትኩሳት", "ከ39 በላይ ትኩሳት", "በጣም ከፍተኛ ሙቀት"],
+    "language": "am",
+    "level": "YELLOW",
+    "description": "High fever requiring monitoring (Amharic)"
+  },
+  {
+    "keywords": [
+      "severe pain",
+      "pain 8/10",
+      "excruciating pain",
+      "unbearable pain"
+    ],
+    "language": "en",
+    "level": "YELLOW",
+    "description": "Severe pain requiring medical attention"
+  },
+  {
+    "keywords": ["ከባድ ህመም", "በጣም የሚያሰቃይ ህመም", "ማይታገስ ህመም"],
+    "language": "am",
+    "level": "YELLOW",
+    "description": "Severe pain requiring medical attention (Amharic)"
+  },
+  {
+    "keywords": [
+      "persistent vomiting",
+      "can't keep food down",
+      "vomiting for hours"
+    ],
+    "language": "en",
+    "level": "YELLOW",
+    "description": "Persistent vomiting requiring medical evaluation"
+  }
+]
