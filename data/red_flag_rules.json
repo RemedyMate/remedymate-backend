@@ -1,0 +1,104 @@
+[
+  {
+    "keywords": [
+      "chest pain",
+      "pressure in chest",
+      "heart attack",
+      "crushing pain",
+      "squeezing chest"
+    ],
+    "language": "en",
+    "level": "RED",
+    "description": "Chest pain or pressure - potential heart attack"
+  },
+  {
+    "keywords": ["የደረት ህመም", "የልብ ህመም", "ደረት ላይ ጫና", "የልብ ድካም"],
+    "language": "am",
+    "level": "RED",
+    "description": "Chest pain or pressure - potential heart attack (Amharic)"
+  },
+  {
+    "keywords": [
+      "difficulty breathing",
+      "shortness of breath",
+      "can't breathe",
+      "gasping",
+      "choking"
+    ],
+    "language": "en",
+    "level": "RED",
+    "description": "Severe breathing difficulties"
+  },
+  {
+    "keywords": ["መተንፈስ ችግር", "ትንፋሽ ማጣት", "መተንፈስ አለመቻል", "መታፈን"],
+    "language": "am",
+    "level": "RED",
+    "description": "Severe breathing difficulties (Amharic)"
+  },
+  {
+    "keywords": [
+      "severe bleeding",
+      "heavy bleeding",
+      "blood loss",
+      "hemorrhage",
+      "bleeding heavily"
+    ],
+    "language": "en",
+    "level": "RED",
+    "description": "Severe bleeding requiring immediate attention"
+  },
+  {
+    "keywords": ["ከባድ ደም መፍሰስ", "ብዙ ደም መፍሰስ", "ደም ማጣት"],
+    "language": "am",
+    "level": "RED",
+    "description": "Severe bleeding requiring immediate attention (Amharic)"
+  },
+  {
+    "keywords": [
+      "suicidal",
+      "want to die",
+      "kill myself",
+      "end my life",
+      "suicide"
+    ],
+    "language": "en",
+    "level": "RED",
+    "description": "Suicidal thoughts - immediate mental health crisis"
+  },
+  {
+    "keywords": ["ራሴን መግደል", "መሞት እፈልጋለሁ", "ራሴን ማጥፋት"],
+    "language": "am",
+    "level": "RED",
+    "description": "Suicidal thoughts - immediate mental health crisis (Amharic)"
+  },
+  {
+    "keywords": [
+      "stroke",
+      "sudden weakness",
+      "face drooping",
+      "slurred speech",
+      "paralysis"
+    ],
+    "language": "en",
+    "level": "RED",
+    "description": "Stroke symptoms requiring immediate care"
+  },
+  {
+    "keywords": ["ስትሮክ", "ድንገተኛ ድክመት", "የፊት መዛባት", "የንግግር መዛባት"],
+    "language": "am",
+    "level": "RED",
+    "description": "Stroke symptoms requiring immediate care (Amharic)"
+  },
+  {
+    "keywords": ["infant", "baby", "newborn", "3 months old", "under 1 year"],
+    "language": "en",
+    "level": "RED",
+    "description": "Infant symptoms require immediate medical evaluation"
+  },
+  {
+    "keywords": ["ህፃን", "ጨቅላ ህፃን", "አዲስ የተወለደ", "ከ3 ወር በታች", "ከአንድ አመት በታች"],
+    "language": "am",
+    "level": "RED",
+    "description": "Infant symptoms require immediate medical evaluation (Amharic)"
+  }
+]
