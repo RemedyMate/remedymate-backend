@@ -11,6 +11,7 @@ import (
 	"github.com/RemedyMate/remedymate-backend/infrastructure/auth"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/content"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/database"
+	"github.com/RemedyMate/remedymate-backend/infrastructure/guidance"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/llm"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/triage"
 	"github.com/RemedyMate/remedymate-backend/repository"
@@ -70,11 +71,13 @@ func main() {
 	log.Printf("✅ Using Gemini LLM client (model=%s)", llmConfig.Model)
 
 	triageService := triage.NewTriageService(contentService, geminiClient)
+	guidanceComposer := guidance.NewGuidanceComposerService(contentService, geminiClient)
 
 	// Initialize RemedyMate usecase
 	remedyMateUsecase := usecase.NewRemedyMateUsecase(
 		triageService,
 		contentService,
+		guidanceComposer,
 	)
 
 	// Initialize controllers
@@ -82,11 +85,10 @@ func main() {
 	authController := controllers.NewAuthController(authUsecase, userUsecase) // Added userUsecase
 	userController := controllers.NewUserController(userUsecase)              // Re-added for profile management
 	remedyHandler := controllers.NewRemedyHandler(remedyUsecase)
-  remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
+	remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
 
 	// Setup router
 	r := routers.SetupRouter(oauthController, authController, userController, remedyHandler, remedyMateController) // Added userController back
-
 
 	// Get port from environment
 	port := os.Getenv("PORT")

@@ -36,3 +36,15 @@ type ErrorResponse struct {
 	Code    string `json:"code,omitempty"`
 	Details string `json:"details,omitempty"`
 }
+
+// ComposeRequest represents the request for guidance composition
+type ComposeRequest struct {
+	TopicKey string `json:"topic_key" binding:"required"`
+	Language string `json:"language" binding:"required" validate:"oneof=en am"`
+}
+
+// ComposeResponse represents the response from guidance composition
+type ComposeResponse struct {
+	GuidanceCard entities.GuidanceCard `json:"guidance_card"`
+	SessionID    string                `json:"session_id,omitempty"`
+}
