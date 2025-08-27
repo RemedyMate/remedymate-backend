@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/RemedyMate/remedymate-backend/domain/dto"
@@ -28,7 +28,7 @@ func (h *RemedyHandler) MapTopic(c *gin.Context) {
 	ctx := c.Request.Context()
 	topicKey, err := h.remedyUsecase.MapTopic(ctx, req.UserInput)
 	if err != nil {
-		fmt.Printf("Error from usecase: %v\n", err)
+		log.Printf("Error from usecase: %v\n", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to map symptom to topic."})
 		return
 	}

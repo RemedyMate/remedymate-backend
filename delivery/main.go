@@ -21,7 +21,7 @@ func main() {
 	}
 
 	// Connect to MongoDB
-	database.ConnectMongo() // commented because we don't need it currently
+	database.ConnectMongo()
 
 	// Load OAuth configuration
 	oauthConfig := config.LoadOAuthConfig()
@@ -60,9 +60,8 @@ func main() {
 		port = "8080"
 	}
 
-	log.Printf("🚀 Server starting on port %s", port)
-	log.Printf("✅ OAuth endpoints: /api/v1/auth/oauth/*")
-	log.Printf("✅ Login endpoint: /api/v1/auth/login")
-	log.Printf("✅ Protected endpoints: /api/v1/auth/* (with JWT)")
-	log.Fatal(r.Run(":" + port))
+	err := r.Run(":" + port)
+	if err != nil {
+		log.Fatalf("Failed to start server: %v", err)
+	}
 }

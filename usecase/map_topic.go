@@ -3,9 +3,6 @@ package usecase
 import (
 	"context"
 	"fmt"
-	// "encoding/json"
-	// "fmt"
-	// "net/http"
 )
 
 var validTopicKeys = []string{
