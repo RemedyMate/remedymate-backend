@@ -37,19 +37,22 @@ func main() {
 	// Initialize repositories
 	userRepo := repository.NewUserRepository()
 	oauthRepo := repository.NewOAuthRepository(database.GetCollection("users"))
+	llmRepo := repository.NewGeminiRemedyRepo(os.Getenv("GEMINI_API_KEY"), os.Getenv("GEMINI_MODEL"))
 
 	// Initialize usecases
 	userUsecase := usecase.NewUserUsecase(userRepo)
 	oauthUsecase := usecase.NewOAuthUsecase(oauthService, oauthRepo)
 	authUsecase := usecase.NewAuthUsecase(userRepo, passwordService, jwtService)
+	remedyUsecase := usecase.NewRemedyUsecase(llmRepo)
 
 	// Initialize controllers
 	oauthController := controllers.NewOAuthController(oauthUsecase)
 	authController := controllers.NewAuthController(authUsecase, userUsecase) // Added userUsecase
 	userController := controllers.NewUserController(userUsecase)              // Re-added for profile management
+	remedyHandler := controllers.NewRemedyHandler(remedyUsecase)
 
 	// Setup router
-	r := routers.SetupRouter(oauthController, authController, userController) // Added userController back
+	r := routers.SetupRouter(oauthController, authController, userController, remedyHandler) // Added userController back
 
 	// Get port from environment
 	port := os.Getenv("PORT")
