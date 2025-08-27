@@ -41,11 +41,13 @@ func main() {
 	// Initialize repositories
 	userRepo := repository.NewUserRepository()
 	oauthRepo := repository.NewOAuthRepository(database.GetCollection("users"))
+	llmRepo := repository.NewGeminiRemedyRepo(os.Getenv("GEMINI_API_KEY"), os.Getenv("GEMINI_MODEL"))
 
 	// Initialize usecases
 	userUsecase := usecase.NewUserUsecase(userRepo)
 	oauthUsecase := usecase.NewOAuthUsecase(oauthService, oauthRepo)
 	authUsecase := usecase.NewAuthUsecase(userRepo, passwordService, jwtService)
+	remedyUsecase := usecase.NewRemedyUsecase(llmRepo)
 
 	// Initialize RemedyMate services
 	contentService := content.NewContentService("./data")
@@ -77,12 +79,14 @@ func main() {
 
 	// Initialize controllers
 	oauthController := controllers.NewOAuthController(oauthUsecase)
-	authController := controllers.NewAuthController(authUsecase, userUsecase)
-	userController := controllers.NewUserController(userUsecase)
-	remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
+	authController := controllers.NewAuthController(authUsecase, userUsecase) // Added userUsecase
+	userController := controllers.NewUserController(userUsecase)              // Re-added for profile management
+	remedyHandler := controllers.NewRemedyHandler(remedyUsecase)
+  remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
 
 	// Setup router
-	r := routers.SetupRouter(oauthController, authController, userController, remedyMateController)
+	r := routers.SetupRouter(oauthController, authController, userController, remedyHandler, remedyMateController) // Added userController back
+
 
 	// Get port from environment
 	port := os.Getenv("PORT")
@@ -90,9 +94,8 @@ func main() {
 		port = "8080"
 	}
 
-	log.Printf("🚀 Server starting on port %s", port)
-	log.Printf("✅ OAuth endpoints: /api/v1/auth/oauth/*")
-	log.Printf("✅ Login endpoint: /api/v1/auth/login")
-	log.Printf("✅ Protected endpoints: /api/v1/auth/* (with JWT)")
-	log.Fatal(r.Run(":" + port))
+	err := r.Run(":" + port)
+	if err != nil {
+		log.Fatalf("Failed to start server: %v", err)
+	}
 }
