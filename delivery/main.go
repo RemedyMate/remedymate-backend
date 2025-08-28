@@ -10,6 +10,7 @@ import (
 	"github.com/RemedyMate/remedymate-backend/domain/dto"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/auth"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/content"
+	"github.com/RemedyMate/remedymate-backend/infrastructure/conversation"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/database"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/guidance"
 	"github.com/RemedyMate/remedymate-backend/infrastructure/llm"
@@ -42,13 +43,18 @@ func main() {
 	// Initialize repositories
 	userRepo := repository.NewUserRepository()
 	oauthRepo := repository.NewOAuthRepository(database.GetCollection("users"))
-	llmRepo := repository.NewGeminiRemedyRepo(os.Getenv("GEMINI_API_KEY"), os.Getenv("GEMINI_MODEL"))
+
+	// Initialize conversation repository
+	dbName := os.Getenv("DB_NAME")
+	if dbName == "" {
+		dbName = "remedymate" // default database name
+	}
+	conversationRepo := repository.NewConversationRepository(database.Client.Database(dbName))
 
 	// Initialize usecases
 	userUsecase := usecase.NewUserUsecase(userRepo)
 	oauthUsecase := usecase.NewOAuthUsecase(oauthService, oauthRepo)
 	authUsecase := usecase.NewAuthUsecase(userRepo, passwordService, jwtService)
-	remedyUsecase := usecase.NewRemedyUsecase(llmRepo)
 
 	// Initialize RemedyMate services
 	contentService := content.NewContentService("./data")
@@ -73,6 +79,9 @@ func main() {
 	triageService := triage.NewTriageService(contentService, geminiClient)
 	guidanceComposer := guidance.NewGuidanceComposerService(contentService, geminiClient)
 
+	conversationService := conversation.NewConversationService(geminiClient)
+
+
 	// Initialize RemedyMate usecase
 	remedyMateUsecase := usecase.NewRemedyMateUsecase(
 		triageService,
@@ -80,8 +89,15 @@ func main() {
 		guidanceComposer,
 	)
 
+	// Initialize Conversation usecase
+	conversationUsecase := usecase.NewConversationUsecase(
+		conversationService,
+		conversationRepo,
+	)
+
 	// Initialize controllers
 	oauthController := controllers.NewOAuthController(oauthUsecase)
+
 	authController := controllers.NewAuthController(authUsecase, userUsecase) // Added userUsecase
 	userController := controllers.NewUserController(userUsecase)              // Re-added for profile management
 	remedyHandler := controllers.NewRemedyHandler(remedyUsecase)
@@ -90,14 +106,17 @@ func main() {
 	// Setup router
 	r := routers.SetupRouter(oauthController, authController, userController, remedyHandler, remedyMateController) // Added userController back
 
+
 	// Get port from environment
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
 
-	err := r.Run(":" + port)
-	if err != nil {
-		log.Fatalf("Failed to start server: %v", err)
-	}
+	log.Printf("🚀 Server starting on port %s", port)
+	log.Printf("✅ OAuth endpoints: /api/v1/auth/oauth/*")
+	log.Printf("✅ Login endpoint: /api/v1/auth/login")
+	log.Printf("✅ Protected endpoints: /api/v1/auth/* (with JWT)")
+	log.Printf("✅ Conversation endpoints: /api/v1/conversation/*")
+	log.Fatal(r.Run(":" + port))
 }
