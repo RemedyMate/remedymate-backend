@@ -1,6 +1,8 @@
 package interfaces
 
-import "context"
+import (
+	"context"
+)
 
 // LLMClient defines the interface for LLM interactions
 type LLMClient interface {

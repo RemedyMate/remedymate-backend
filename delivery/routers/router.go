@@ -7,7 +7,9 @@ import (
 )
 
 // SetupRouter configures all application routes
-func SetupRouter(oauthController *controllers.OAuthController, authController *controllers.AuthController, userController *controllers.UserController, remedyMateController *controllers.RemedyMateController, conversationController *controllers.ConversationController) *gin.Engine {
+
+func SetupRouter(oauthController *controllers.OAuthController, authController *controllers.AuthController, userController *controllers.UserController, remedyHandler *controllers.RemedyHandler, remedyMateController *controllers.RemedyMateController) *gin.Engine {
+
 	r := gin.Default()
 
 	// Add CORS middleware for OAuth callbacks
@@ -70,6 +72,7 @@ func SetupRouter(oauthController *controllers.OAuthController, authController *c
 	remedymate := v1.Group("/remedymate")
 	{
 		remedymate.POST("/triage", remedyMateController.GetTriage)
+		remedymate.POST("/compose", remedyMateController.ComposeGuidance)
 	}
 
 	// Conversation routes (public access, no authentication required)

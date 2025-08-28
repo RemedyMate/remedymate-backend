@@ -74,7 +74,7 @@ func (rmc *RemedyMateController) GetContent(c *gin.Context) {
 			})
 			return
 		}
-		
+
 		// Check if it's a language not available error
 		if err.Error() == "language '"+language+"' not available for topic '"+topicKey+"'" {
 			c.JSON(http.StatusBadRequest, dto.ErrorResponse{
@@ -109,3 +109,26 @@ func (rmc *RemedyMateController) GetContent(c *gin.Context) {
 	})
 }
 
+// ComposeGuidance handles guidance composition requests
+func (rmc *RemedyMateController) ComposeGuidance(c *gin.Context) {
+	var req dto.ComposeRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, dto.ErrorResponse{
+			Error:   "Invalid request format",
+			Details: err.Error(),
+		})
+		return
+	}
+
+	response, err := rmc.remedyMateUsecase.ComposeGuidance(c.Request.Context(), req)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, dto.ErrorResponse{
+			Error:   "Guidance composition failed",
+			Details: err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, response)
+}

@@ -13,19 +13,21 @@ import (
 )
 
 type RemedyMateUsecase struct {
-	triageService  interfaces.TriageService
-	contentService interfaces.ContentService
+	triageService    interfaces.TriageService
+	contentService   interfaces.ContentService
+	guidanceComposer interfaces.GuidanceComposerService
 }
 
 // NewRemedyMateUsecase creates a new RemedyMate usecase
 func NewRemedyMateUsecase(
 	triageService interfaces.TriageService,
 	contentService interfaces.ContentService,
-
+	guidanceComposer interfaces.GuidanceComposerService,
 ) interfaces.RemedyMateUsecase {
 	return &RemedyMateUsecase{
 		triageService:  triageService,
 		contentService: contentService,
+		guidanceComposer: guidanceComposer,
 	}
 }
 
@@ -58,7 +60,7 @@ func (rmu *RemedyMateUsecase) GetContent(ctx context.Context, topicKey, language
 	if language == "" {
 		return nil, fmt.Errorf("language is required")
 	}
-	
+
 	// Validate language is supported
 	if language != "en" && language != "am" {
 		return nil, fmt.Errorf("unsupported language: %s. Supported languages: en, am", language)
@@ -82,4 +84,17 @@ func generateSessionID() string {
 		return fmt.Sprintf("session_%d", time.Now().UnixNano())
 	}
 	return "session_" + hex.EncodeToString(b)
+}
+
+// ComposeGuidance performs only guidance composition
+func (rmu *RemedyMateUsecase) ComposeGuidance(ctx context.Context, req dto.ComposeRequest) (*dto.ComposeResponse, error) {
+	guidanceCard, err := rmu.guidanceComposer.ComposeGuidance(ctx, req.TopicKey, req.Language)
+	if err != nil {
+		return nil, err
+	}
+
+	return &dto.ComposeResponse{
+		GuidanceCard: *guidanceCard,
+		SessionID:    generateSessionID(),
+	}, nil
 }
