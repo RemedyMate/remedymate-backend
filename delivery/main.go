@@ -42,6 +42,8 @@ func main() {
 	// Initialize repositories
 	userRepo := repository.NewUserRepository()
 	oauthRepo := repository.NewOAuthRepository(database.GetCollection("users"))
+
+	// Initialize conversation repository
 	dbName := os.Getenv("DB_NAME")
 	if dbName == "" {
 		dbName = "remedymate" // default database name
