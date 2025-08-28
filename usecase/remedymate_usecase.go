@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/RemedyMate/remedymate-backend/domain/dto"
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
-	"github.com/RemedyMate/remedymate-backend/domain/interfaces"
+	"remedymate-backend/domain/dto"
+	"remedymate-backend/domain/entities"
+	"remedymate-backend/domain/interfaces"
 )
 
 type RemedyMateUsecase struct {
@@ -25,8 +25,8 @@ func NewRemedyMateUsecase(
 	guidanceComposer interfaces.GuidanceComposerService,
 ) interfaces.RemedyMateUsecase {
 	return &RemedyMateUsecase{
-		triageService:  triageService,
-		contentService: contentService,
+		triageService:    triageService,
+		contentService:   contentService,
 		guidanceComposer: guidanceComposer,
 	}
 }

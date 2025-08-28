@@ -3,7 +3,7 @@ package interfaces
 import (
 	"context"
 
-	"github.com/RemedyMate/remedymate-backend/domain/dto"
+	"remedymate-backend/domain/dto"
 )
 
 // IAuthUsecase defines the contract for authentication business logic

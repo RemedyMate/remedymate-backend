@@ -5,9 +5,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
-	"github.com/RemedyMate/remedymate-backend/domain/interfaces"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/database"
+	"remedymate-backend/domain/entities"
+	"remedymate-backend/domain/interfaces"
+	"remedymate-backend/infrastructure/database"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

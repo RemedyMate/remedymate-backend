@@ -3,7 +3,7 @@ package interfaces
 import (
 	"context"
 
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
+	"remedymate-backend/domain/entities"
 )
 
 // IOAuthRepository defines the contract for OAuth-related data operations

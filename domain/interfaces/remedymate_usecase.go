@@ -3,8 +3,8 @@ package interfaces
 import (
 	"context"
 
-	"github.com/RemedyMate/remedymate-backend/domain/dto"
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
+	"remedymate-backend/domain/dto"
+	"remedymate-backend/domain/entities"
 )
 
 // TriageService defines the interface for symptom triage
@@ -30,4 +30,12 @@ type ContentService interface {
 type GuidanceComposerService interface {
 	ComposeGuidance(ctx context.Context, topicKey, language string) (*entities.GuidanceCard, error)
 	ComposeFromBlocks(ctx context.Context, topicKey, language string, blocks entities.ContentTranslation) (*entities.GuidanceCard, error)
+}
+
+type RemedyAIRepository interface {
+	MapSymptomToTopic(ctx context.Context, userInput string, availableTopics []string) (string, error)
+	BuildMapTopicPrompt(userInput string, availableTopics []string) string
+	CreatePayload(prompt string) map[string]any
+	ExecuteAPIRequest(ctx context.Context, body []byte) ([]byte, error)
+	ExtractTopicKeyResponse(respBody []byte) (string, error)
 }

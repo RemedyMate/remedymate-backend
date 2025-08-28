@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
-	"github.com/RemedyMate/remedymate-backend/domain/interfaces"
+	"remedymate-backend/domain/entities"
+	"remedymate-backend/domain/interfaces"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -14,14 +15,11 @@ import (
 )
 
 type ConversationRepositoryImpl struct {
-	db         *mongo.Database
 	collection *mongo.Collection
 }
 
 // NewConversationRepository creates a new conversation repository
-func NewConversationRepository(db *mongo.Database) interfaces.ConversationRepository {
-	collection := db.Collection("conversations")
-
+func NewConversationRepository(collection *mongo.Collection) interfaces.ConversationRepository {
 	// Create indexes for better performance
 	_, err := collection.Indexes().CreateMany(context.Background(), []mongo.IndexModel{
 		{
@@ -42,7 +40,6 @@ func NewConversationRepository(db *mongo.Database) interfaces.ConversationReposi
 	}
 
 	return &ConversationRepositoryImpl{
-		db:         db,
 		collection: collection,
 	}
 }

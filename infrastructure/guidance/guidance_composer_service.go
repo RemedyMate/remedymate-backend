@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
-	"github.com/RemedyMate/remedymate-backend/domain/interfaces"
+	"remedymate-backend/domain/entities"
+	"remedymate-backend/domain/interfaces"
 )
 
 type GuidanceComposerService struct {
@@ -42,13 +42,13 @@ func (gcs *GuidanceComposerService) ComposeFromBlocks(ctx context.Context, topic
 	}
 
 	guidanceCard := &entities.GuidanceCard{
-		TopicKey:  topicKey,
-		Language:  language,
-		SelfCare:  blocks.SelfCare,
+		TopicKey:      topicKey,
+		Language:      language,
+		SelfCare:      blocks.SelfCare,
 		OTCCategories: blocks.OTCCategories,
-		SeekCareIf: blocks.SeekCareIf,
-		Disclaimer: blocks.Disclaimer,
-		IsOffline: false,
+		SeekCareIf:    blocks.SeekCareIf,
+		Disclaimer:    blocks.Disclaimer,
+		IsOffline:     false,
 	}
 
 	return guidanceCard, nil

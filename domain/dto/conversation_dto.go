@@ -1,7 +1,7 @@
 package dto
 
 import (
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
+	"remedymate-backend/domain/entities"
 )
 
 // StartConversationRequest represents the request to start a new conversation

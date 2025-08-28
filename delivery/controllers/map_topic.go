@@ -4,8 +4,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/RemedyMate/remedymate-backend/domain/dto"
-	"github.com/RemedyMate/remedymate-backend/usecase"
+	"remedymate-backend/domain/dto"
+	"remedymate-backend/usecase"
+
 	"github.com/gin-gonic/gin"
 )
 

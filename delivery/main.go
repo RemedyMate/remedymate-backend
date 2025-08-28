@@ -4,19 +4,20 @@ import (
 	"log"
 	"os"
 
-	"github.com/RemedyMate/remedymate-backend/config"
-	"github.com/RemedyMate/remedymate-backend/delivery/controllers"
-	"github.com/RemedyMate/remedymate-backend/delivery/routers"
-	"github.com/RemedyMate/remedymate-backend/domain/dto"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/auth"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/content"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/conversation"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/database"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/guidance"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/llm"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/triage"
-	"github.com/RemedyMate/remedymate-backend/repository"
-	"github.com/RemedyMate/remedymate-backend/usecase"
+	"remedymate-backend/config"
+	"remedymate-backend/delivery/controllers"
+	"remedymate-backend/delivery/routers"
+	"remedymate-backend/domain/dto"
+	"remedymate-backend/infrastructure/auth"
+	"remedymate-backend/infrastructure/content"
+	"remedymate-backend/infrastructure/conversation"
+	"remedymate-backend/infrastructure/database"
+	"remedymate-backend/infrastructure/guidance"
+	"remedymate-backend/infrastructure/llm"
+	"remedymate-backend/infrastructure/triage"
+	"remedymate-backend/repository"
+	"remedymate-backend/usecase"
+
 	"github.com/joho/godotenv"
 )
 
@@ -43,13 +44,8 @@ func main() {
 	// Initialize repositories
 	userRepo := repository.NewUserRepository()
 	oauthRepo := repository.NewOAuthRepository(database.GetCollection("users"))
-
-	// Initialize conversation repository
-	dbName := os.Getenv("DB_NAME")
-	if dbName == "" {
-		dbName = "remedymate" // default database name
-	}
-	conversationRepo := repository.NewConversationRepository(database.Client.Database(dbName))
+	conversationRepo := repository.NewConversationRepository(database.GetCollection("conversation"))
+	remedyRepo := repository.NewGeminiRemedyRepo(os.Getenv("GEMINI_API_KEY"), os.Getenv("GEMINI_MODEL"))
 
 	// Initialize usecases
 	userUsecase := usecase.NewUserUsecase(userRepo)
@@ -81,13 +77,13 @@ func main() {
 
 	conversationService := conversation.NewConversationService(geminiClient)
 
-
 	// Initialize RemedyMate usecase
 	remedyMateUsecase := usecase.NewRemedyMateUsecase(
 		triageService,
 		contentService,
 		guidanceComposer,
 	)
+	remedyUsecase := usecase.NewRemedyUsecase(remedyRepo)
 
 	// Initialize Conversation usecase
 	conversationUsecase := usecase.NewConversationUsecase(
@@ -102,10 +98,10 @@ func main() {
 	userController := controllers.NewUserController(userUsecase)              // Re-added for profile management
 	remedyHandler := controllers.NewRemedyHandler(remedyUsecase)
 	remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
+	conversationController := controllers.NewConversationController(conversationUsecase)
 
 	// Setup router
-	r := routers.SetupRouter(oauthController, authController, userController, remedyHandler, remedyMateController) // Added userController back
-
+	r := routers.SetupRouter(oauthController, authController, userController, remedyHandler, remedyMateController, conversationController) // Added userController back
 
 	// Get port from environment
 	port := os.Getenv("PORT")

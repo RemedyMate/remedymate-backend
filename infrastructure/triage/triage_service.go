@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
-	"github.com/RemedyMate/remedymate-backend/domain/interfaces"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/content"
+	"remedymate-backend/domain/entities"
+	"remedymate-backend/domain/interfaces"
+	"remedymate-backend/infrastructure/content"
 )
 
 type TriageService struct {

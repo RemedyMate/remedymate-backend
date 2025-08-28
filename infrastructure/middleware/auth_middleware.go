@@ -5,7 +5,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/RemedyMate/remedymate-backend/infrastructure/auth"
+	"remedymate-backend/infrastructure/auth"
+
 	"github.com/gin-gonic/gin"
 )
 

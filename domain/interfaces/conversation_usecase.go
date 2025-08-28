@@ -3,7 +3,7 @@ package interfaces
 import (
 	"context"
 
-	"github.com/RemedyMate/remedymate-backend/domain/dto"
+	"remedymate-backend/domain/dto"
 )
 
 // ConversationUsecase defines the interface for conversation business logic

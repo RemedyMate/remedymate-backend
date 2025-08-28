@@ -6,7 +6,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
+	"remedymate-backend/domain/entities"
+
 	"github.com/golang-jwt/jwt/v5"
 )
 

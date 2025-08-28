@@ -1,14 +1,20 @@
 package routers
 
 import (
-	"github.com/RemedyMate/remedymate-backend/delivery/controllers"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/middleware"
+	"remedymate-backend/delivery/controllers"
+	"remedymate-backend/infrastructure/middleware"
+
 	"github.com/gin-gonic/gin"
 )
 
 // SetupRouter configures all application routes
 
-func SetupRouter(oauthController *controllers.OAuthController, authController *controllers.AuthController, userController *controllers.UserController, remedyHandler *controllers.RemedyHandler, remedyMateController *controllers.RemedyMateController) *gin.Engine {
+func SetupRouter(oauthController *controllers.OAuthController,
+	authController *controllers.AuthController,
+	userController *controllers.UserController,
+	remedyHandler *controllers.RemedyHandler,
+	remedyMateController *controllers.RemedyMateController,
+	conversationController *controllers.ConversationController) *gin.Engine {
 
 	r := gin.Default()
 

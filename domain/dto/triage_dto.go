@@ -1,6 +1,6 @@
 package dto
 
-import "github.com/RemedyMate/remedymate-backend/domain/entities"
+import "remedymate-backend/domain/entities"
 
 // TriageRequest represents the request for symptom triage
 type TriageRequest struct {

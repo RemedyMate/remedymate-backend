@@ -3,21 +3,18 @@ package usecase
 import (
 	"context"
 	"fmt"
+	"remedymate-backend/domain/interfaces"
 )
 
 var validTopicKeys = []string{
 	"indigestion", "headache", "sore_throat", "cough", "fever", "back_pain",
 }
 
-type RemedyAIRepository interface {
-	MapSymptomToTopic(ctx context.Context, userInput string, availableTopics []string) (string, error)
-}
-
 type RemedyUsecase struct {
-	remedyRepo RemedyAIRepository
+	remedyRepo interfaces.RemedyAIRepository
 }
 
-func NewRemedyUsecase(repo RemedyAIRepository) *RemedyUsecase {
+func NewRemedyUsecase(repo interfaces.RemedyAIRepository) *RemedyUsecase {
 	return &RemedyUsecase{remedyRepo: repo}
 }
 
