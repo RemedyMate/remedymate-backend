@@ -1,5 +1,4 @@
-// GeminiRemedyRepo communicates with the Google Gemini API for RemedyMate tasks.
-package repository
+package remedymate_services
 
 import (
 	"bytes"
@@ -12,15 +11,15 @@ import (
 	"strings"
 )
 
-type GeminiRemedyRepo struct {
+type MapTopicService struct {
 	apiKey  string
 	baseURL string
 	model   string
 }
 
 // NewGeminiRemedyRepo creates a new repository for Gemini interactions.
-func NewGeminiRemedyRepo(apiKey, model string) interfaces.RemedyAIRepository {
-	return &GeminiRemedyRepo{
+func NewMapTopicService(apiKey, model string) interfaces.MapTopicService {
+	return &MapTopicService{
 		apiKey:  apiKey,
 		baseURL: "https://generativelanguage.googleapis.com/v1beta/models/",
 		model:   model,
@@ -28,7 +27,7 @@ func NewGeminiRemedyRepo(apiKey, model string) interfaces.RemedyAIRepository {
 }
 
 // MapSymptomToTopic implements the Usecase interface method.
-func (r *GeminiRemedyRepo) MapSymptomToTopic(ctx context.Context, userInput string, availableTopics []string) (string, error) {
+func (r *MapTopicService) MapSymptomToTopic(ctx context.Context, userInput string, availableTopics []string) (string, error) {
 	prompt := r.BuildMapTopicPrompt(userInput, availableTopics)
 
 	payload := r.CreatePayload(prompt)
@@ -51,7 +50,7 @@ func (r *GeminiRemedyRepo) MapSymptomToTopic(ctx context.Context, userInput stri
 }
 
 // buildMapTopicPrompt creates the specific prompt for the classification task.
-func (r *GeminiRemedyRepo) BuildMapTopicPrompt(userInput string, availableTopics []string) string {
+func (r *MapTopicService) BuildMapTopicPrompt(userInput string, availableTopics []string) string {
 	// Convert the slice of topics into a formatted string for the prompt
 	topicListString := "[\n"
 	for _, topic := range availableTopics {
@@ -80,7 +79,7 @@ You are an expert AI assistant for a health advisory app. Your task is to analyz
 }
 
 // createPayload builds the JSON payload for the Gemini API call.
-func (r *GeminiRemedyRepo) CreatePayload(prompt string) map[string]any {
+func (r *MapTopicService) CreatePayload(prompt string) map[string]any {
 	return map[string]any{
 		"contents": []any{
 			map[string]any{
@@ -106,7 +105,7 @@ func (r *GeminiRemedyRepo) CreatePayload(prompt string) map[string]any {
 }
 
 // executeAPIRequest sends the request to the Gemini API.
-func (r *GeminiRemedyRepo) ExecuteAPIRequest(ctx context.Context, body []byte) ([]byte, error) {
+func (r *MapTopicService) ExecuteAPIRequest(ctx context.Context, body []byte) ([]byte, error) {
 	url := fmt.Sprintf("%s%s:generateContent?key=%s", r.baseURL, r.model, r.apiKey)
 	req, err := http.NewRequestWithContext(ctx, "POST", url, bytes.NewReader(body))
 	if err != nil {
@@ -129,7 +128,7 @@ func (r *GeminiRemedyRepo) ExecuteAPIRequest(ctx context.Context, body []byte) (
 }
 
 // extractTopicKeyResponse parses the Gemini API response to get the topic key.
-func (r *GeminiRemedyRepo) ExtractTopicKeyResponse(respBody []byte) (string, error) {
+func (r *MapTopicService) ExtractTopicKeyResponse(respBody []byte) (string, error) {
 	// Define structs to match the Gemini API response structure
 	type apiPart struct {
 		Text string `json:"text"`

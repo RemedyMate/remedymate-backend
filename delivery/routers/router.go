@@ -12,7 +12,6 @@ import (
 func SetupRouter(oauthController *controllers.OAuthController,
 	authController *controllers.AuthController,
 	userController *controllers.UserController,
-	remedyHandler *controllers.RemedyHandler,
 	remedyMateController *controllers.RemedyMateController,
 	conversationController *controllers.ConversationController) *gin.Engine {
 
@@ -35,6 +34,8 @@ func SetupRouter(oauthController *controllers.OAuthController,
 	// API version 1
 	v1 := r.Group("/api/v1")
 	{
+		// Remedy route which comprises /triage, /map_topic, and /compose
+		v1.POST("/remedy", remedyMateController.GetRemedy)
 		// Authentication routes
 		auth := v1.Group("/auth")
 		{
@@ -75,12 +76,6 @@ func SetupRouter(oauthController *controllers.OAuthController,
 		}
 	}
 
-	remedymate := v1.Group("/remedymate")
-	{
-		remedymate.POST("/triage", remedyMateController.GetTriage)
-		remedymate.POST("/compose", remedyMateController.ComposeGuidance)
-	}
-
 	// Conversation routes (public access, no authentication required)
 	conversation := v1.Group("/conversation")
 	{
@@ -91,12 +86,6 @@ func SetupRouter(oauthController *controllers.OAuthController,
 		conversation.POST("/start", conversationController.StartConversation)
 		conversation.POST("/answer", conversationController.SubmitAnswer)
 		conversation.GET("/:id/report", conversationController.GetReport)
-	}
-
-	// Content routes (public access, no authentication required)
-	content := v1.Group("/content")
-	{
-		content.GET("/:topic_key", remedyMateController.GetContent)
 	}
 
 	return r
