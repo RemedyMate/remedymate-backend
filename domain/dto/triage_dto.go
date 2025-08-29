@@ -8,14 +8,6 @@ type ChatRequest struct {
 	Language string `json:"language" binding:"required" validate:"oneof=en am"`
 }
 
-// ChatResponse represents a complete chat response
-type ChatResponse struct {
-	Triage       entities.TriageResult  `json:"triage"`
-	GuidanceCard *entities.GuidanceCard `json:"guidance_card,omitempty"`
-	SessionID    string                 `json:"session_id"`
-	IsOffline    bool                   `json:"is_offline"`
-}
-
 // ErrorResponse represents an error response
 type ErrorResponse struct {
 	Error   string `json:"error"`

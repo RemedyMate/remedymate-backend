@@ -18,6 +18,8 @@ type RemedyMateUsecase interface {
 	GetTriage(ctx context.Context, input, lang string) (*dto.TriageResponse, error)
 	MapTopic(ctx context.Context, input string) (string, error)
 	GetContent(ctx context.Context, topicKey, language string) (*entities.ContentTranslation, error)
+	// GetRemedy orchestrates the full flow and returns a consolidated RemedyResponse
+	GetRemedy(ctx context.Context, req dto.RemedyRequest) (*dto.RemedyResponse, error)
 	ComposeGuidance(ctx context.Context, req dto.ComposeRequest) (*dto.ComposeResponse, error)
 }
 

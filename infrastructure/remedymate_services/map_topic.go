@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 	"remedymate-backend/domain/interfaces"
+	"remedymate-backend/util"
 	"strings"
 )
 
@@ -171,9 +172,10 @@ func (r *MapTopicService) ExtractTopicKeyResponse(respBody []byte) (string, erro
 		return "", fmt.Errorf("failed to parse topic key JSON from LLM response: %w. Response text: %s", err, jsonText)
 	}
 
-	if finalResp.TopicKey == "" {
-		return "", fmt.Errorf("LLM returned an empty topic_key")
+	if err := util.ValidateTopicKey(finalResp.TopicKey); err != nil {
+		return "", err
 	}
+
 
 	return finalResp.TopicKey, nil
 }

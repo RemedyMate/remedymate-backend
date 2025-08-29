@@ -15,3 +15,9 @@ type TriageResponse struct {
 	Message   string               `json:"message"`
 	SessionID string               `json:"session_id,omitempty"` // ?
 }
+
+type RemedyResponse struct {
+	SessionID string                 `json:"session_id"`
+	Triage    TriageResponse         `json:"triage"`
+	Content   *entities.GuidanceCard `json:"guidance_card,omitempty"`
+}

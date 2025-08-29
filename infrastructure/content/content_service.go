@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 
 	"remedymate-backend/domain/entities"
+	derrors "remedymate-backend/domain/errors"
 	"remedymate-backend/domain/interfaces"
 )
 
@@ -69,10 +70,10 @@ func (cs *ContentService) GetContentByTopic(topicKey, language string) (*entitie
 			if content, exists := block.Translations[language]; exists {
 				return &content, nil
 			}
-			return nil, fmt.Errorf("language '%s' not available for topic '%s'", language, topicKey)
+			return nil, derrors.ErrLanguageNotAvailable
 		}
 	}
-	return nil, fmt.Errorf("topic '%s' not found", topicKey)
+	return nil, derrors.ErrTopicNotFound
 }
 
 // loads red flag rules from JSON file only

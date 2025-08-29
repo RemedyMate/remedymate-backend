@@ -6,6 +6,7 @@ import (
 
 	"remedymate-backend/domain/entities"
 	"remedymate-backend/domain/interfaces"
+	"remedymate-backend/util"
 )
 
 type GuidanceComposerService struct {
@@ -33,12 +34,12 @@ func (gcs *GuidanceComposerService) ComposeGuidance(ctx context.Context, topicKe
 
 // ComposeFromBlocks composes a guidance card from approved content blocks using LLM
 func (gcs *GuidanceComposerService) ComposeFromBlocks(ctx context.Context, topicKey, language string, blocks entities.ContentTranslation) (*entities.GuidanceCard, error) {
-	if topicKey == "" {
-		return nil, fmt.Errorf("topic key cannot be empty")
+	if err := util.ValidateTopicKey(topicKey); err != nil {
+		return nil, err
 	}
 
-	if language != "en" && language != "am" {
-		return nil, fmt.Errorf("unsupported language: %s", language)
+	if err := util.ValidateLanguage(language); err != nil {
+		return nil, err
 	}
 
 	guidanceCard := &entities.GuidanceCard{
