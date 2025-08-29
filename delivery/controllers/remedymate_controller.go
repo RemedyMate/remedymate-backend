@@ -46,7 +46,6 @@ func (rmc *RemedyMateController) GetRemedy(c *gin.Context) {
 	// PROCESS: Mapping
 	log.Print("Mapping process started")
 	if response.Level == "RED" {
-		// If RED, skip mapping and composition
 		c.JSON(http.StatusOK, response.Message)
 		return
 	}
