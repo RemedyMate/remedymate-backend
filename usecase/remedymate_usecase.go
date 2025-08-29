@@ -168,17 +168,10 @@ func (rmu *RemedyMateUsecase) GetRemedy(ctx context.Context, req dto.RemedyReque
 		return nil, err
 	}
 
-	// 4) Compose guidance using LLM
+	// 4) Compose guidance
 	guidanceCard, err := rmu.guidanceComposer.ComposeFromBlocks(ctx, topicKey, req.Language, *content)
 	if err != nil {
 		return nil, fmt.Errorf("failed to compose guidance: %w", err)
-	}
-
-	// Convert triage result to dto.TriageResponse for embedding
-	base.Triage = dto.TriageResponse{
-		Level:    triageRes.Level,
-		RedFlags: triageRes.RedFlags,
-		Message:  triageRes.Message,
 	}
 
 	base.Content = guidanceCard
