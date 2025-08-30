@@ -1,4 +1,4 @@
-package triage
+package remedymate_services
 
 import (
 	"context"
@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
-	"github.com/RemedyMate/remedymate-backend/domain/interfaces"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/content"
+	"remedymate-backend/domain/entities"
+	"remedymate-backend/domain/interfaces"
+	"remedymate-backend/infrastructure/content"
 )
 
 type TriageService struct {
@@ -24,12 +24,12 @@ func NewTriageService(contentService interfaces.ContentService, llmClient interf
 }
 
 // performs LLM-powered triage classification only (no fallback)
-func (ts *TriageService) ClassifySymptoms(ctx context.Context, input entities.SymptomInput) (*entities.TriageResult, error) {
-	if err := ts.ValidateInput(input); err != nil {
+func (ts *TriageService) ClassifySymptoms(ctx context.Context, textInput, lang string) (*entities.TriageResult, error) {
+	if err := ts.ValidateInput(textInput, lang); err != nil {
 		return nil, err
 	}
 
-	triageLevel, detectedFlags, err := ts.classifyWithLLM(ctx, input)
+	triageLevel, detectedFlags, err := ts.classifyWithLLM(ctx, textInput, lang)
 
 	if err != nil {
 		return nil, fmt.Errorf("triage classification failed: %w", err)
@@ -40,7 +40,7 @@ func (ts *TriageService) ClassifySymptoms(ctx context.Context, input entities.Sy
 		result := &entities.TriageResult{
 			Level:    entities.TriageLevelGreen, // Use green level but with clarification message
 			RedFlags: []string{},
-			Message:  ts.getClarificationMessage(input.Language),
+			Message:  ts.getClarificationMessage(lang),
 		}
 		return result, nil
 	}
@@ -48,7 +48,7 @@ func (ts *TriageService) ClassifySymptoms(ctx context.Context, input entities.Sy
 	result := &entities.TriageResult{
 		Level:    triageLevel,
 		RedFlags: detectedFlags,
-		Message:  ts.getTriageMessage(triageLevel, input.Language),
+		Message:  ts.getTriageMessage(triageLevel, lang),
 	}
 
 	return result, nil
@@ -69,27 +69,27 @@ func (ts *TriageService) getTriageMessage(level entities.TriageLevel, language s
 }
 
 // validates the symptom input
-func (ts *TriageService) ValidateInput(input entities.SymptomInput) error {
-	if strings.TrimSpace(input.Text) == "" {
+func (ts *TriageService) ValidateInput(inputText, lang string) error {
+	if strings.TrimSpace(inputText) == "" {
 		return fmt.Errorf("symptom text cannot be empty")
 	}
-	if len(input.Text) < 3 {
+	if len(inputText) < 3 {
 		return fmt.Errorf("symptom text too short (minimum 3 characters)")
 	}
-	if len(input.Text) > 500 {
+	if len(inputText) > 500 {
 		return fmt.Errorf("symptom text too long (maximum 500 characters)")
 	}
-	if input.Language != "en" && input.Language != "am" {
-		return fmt.Errorf("unsupported language: %s (supported: en, am)", input.Language)
+	if lang != "en" && lang != "am" {
+		return fmt.Errorf("unsupported language: %s (supported: en, am)", lang)
 	}
 	return nil
 }
 
 // performs LLM-based triage classification using data-driven prompts
-func (ts *TriageService) classifyWithLLM(ctx context.Context, input entities.SymptomInput) (entities.TriageLevel, []string, error) {
-	redFlagPrompt := ts.formatRedFlagRulesForPrompt(input.Language)
-	yellowFlagPrompt := ts.formatYellowFlagRulesForPrompt(input.Language)
-	approvedTopicsPrompt := ts.formatApprovedTopicsForPrompt(input.Language)
+func (ts *TriageService) classifyWithLLM(ctx context.Context, inputText, lang string) (entities.TriageLevel, []string, error) {
+	redFlagPrompt := ts.formatRedFlagRulesForPrompt(lang)
+	yellowFlagPrompt := ts.formatYellowFlagRulesForPrompt(lang)
+	approvedTopicsPrompt := ts.formatApprovedTopicsForPrompt(lang)
 
 	prompt := fmt.Sprintf(`
 You are a medical triage classifier. Analyze the user input and determine if it describes a medical emergency.
@@ -115,8 +115,8 @@ User Input (Language: %s): "%s"
 		redFlagPrompt,
 		yellowFlagPrompt,
 		approvedTopicsPrompt,
-		input.Language,
-		input.Text)
+		lang,
+		inputText)
 
 	response, err := ts.llmClient.ClassifyTriage(ctx, prompt)
 	if err != nil {

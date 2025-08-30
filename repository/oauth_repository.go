@@ -5,7 +5,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
+	"remedymate-backend/domain/entities"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"

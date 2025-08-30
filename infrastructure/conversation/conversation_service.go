@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
-	"github.com/RemedyMate/remedymate-backend/domain/interfaces"
+	"remedymate-backend/domain/entities"
+	"remedymate-backend/domain/interfaces"
 )
 
 type ConversationServiceImpl struct {

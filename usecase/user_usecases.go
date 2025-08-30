@@ -6,10 +6,10 @@ import (
 	"log"
 	"time"
 
-	"github.com/RemedyMate/remedymate-backend/domain/dto"
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
-	"github.com/RemedyMate/remedymate-backend/domain/interfaces"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/auth"
+	"remedymate-backend/domain/dto"
+	"remedymate-backend/domain/entities"
+	"remedymate-backend/domain/interfaces"
+	"remedymate-backend/infrastructure/auth"
 )
 
 type UserUsecase struct {

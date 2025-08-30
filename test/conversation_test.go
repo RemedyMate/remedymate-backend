@@ -4,9 +4,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/RemedyMate/remedymate-backend/domain/dto"
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/conversation"
+	"remedymate-backend/domain/dto"
+	"remedymate-backend/domain/entities"
+	"remedymate-backend/infrastructure/conversation"
+
 	"github.com/stretchr/testify/mock"
 )
 

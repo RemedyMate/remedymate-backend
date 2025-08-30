@@ -6,9 +6,9 @@ import (
 	"log"
 	"time"
 
-	"github.com/RemedyMate/remedymate-backend/domain/dto"
-	"github.com/RemedyMate/remedymate-backend/domain/interfaces"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/auth"
+	"remedymate-backend/domain/dto"
+	"remedymate-backend/domain/interfaces"
+	"remedymate-backend/infrastructure/auth"
 )
 
 // AuthUsecase implements IAuthUsecase interface

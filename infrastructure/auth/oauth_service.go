@@ -11,8 +11,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/RemedyMate/remedymate-backend/config"
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
+	"remedymate-backend/config"
+	"remedymate-backend/domain/entities"
+
 	"golang.org/x/oauth2"
 )
 
