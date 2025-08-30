@@ -24,34 +24,10 @@ func NewConversationController(conversationUsecase interfaces.ConversationUsecas
 	}
 }
 
-// ConversationRequest represents a unified request for both starting and continuing conversations
-type ConversationRequest struct {
-	ConversationID string `json:"conversation_id,omitempty"` // Required for continuing, optional for starting
-	Symptom        string `json:"symptom,omitempty"`         // Required for starting, optional for continuing
-	Language       string `json:"language,omitempty"`        // Required for starting, optional for continuing
-	Answer         string `json:"answer,omitempty"`          // Required for continuing, optional for starting
-	UserID         string `json:"user_id,omitempty"`         // Optional for both
-}
-
-// ConversationResponse represents a unified response for both starting and continuing conversations
-type ConversationResponse struct {
-	ConversationID    string                 `json:"conversation_id"`
-	Heading           string                 `json:"heading"`              // NEW: Main heading
-	Subheading        string                 `json:"subheading,omitempty"` // NEW: Subheading
-	Question          *entities.Question     `json:"question,omitempty"`   // Next question if available
-	Message           string                 `json:"message,omitempty"`    // Feedback message
-	IsComplete        bool                   `json:"is_complete"`          // Whether all questions are answered
-	CurrentStep       int                    `json:"current_step"`
-	TotalSteps        int                    `json:"total_steps"`
-	Report            *entities.HealthReport `json:"report,omitempty"`    // Final report if complete
-	Remedy            *dto.RemedyResponse    `json:"remedy,omitempty"`    // Remedy response if complete
-	IsNewConversation bool                   `json:"is_new_conversation"` // Whether this is a new conversation
-}
-
 // HandleConversation handles both starting and continuing conversations in a single endpoint
 // POST /api/v1/conversation
 func (cc *ConversationController) HandleConversation(c *gin.Context) {
-	var req ConversationRequest
+	var req dto.ConversationRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, dto.ErrorResponse{
 			Error:   "Invalid request format",
@@ -87,7 +63,7 @@ func (cc *ConversationController) HandleConversation(c *gin.Context) {
 		}
 
 		// Convert to unified response format
-		unifiedResponse := ConversationResponse{
+		unifiedResponse := dto.ConversationResponse{
 			ConversationID:    response.ConversationID,
 			Heading:           "Let's assess your symptoms",
 			Subheading:        "I'll ask you a few questions to understand your condition better",
@@ -141,7 +117,7 @@ func (cc *ConversationController) HandleConversation(c *gin.Context) {
 		}
 
 		// Convert to unified response format
-		unifiedResponse := ConversationResponse{
+		unifiedResponse := dto.ConversationResponse{
 			ConversationID:    response.ConversationID,
 			Heading:           fmt.Sprintf("Question %d of %d", response.CurrentStep, response.TotalSteps),
 			Subheading:        "Please provide more details",
@@ -155,32 +131,74 @@ func (cc *ConversationController) HandleConversation(c *gin.Context) {
 
 		// If conversation is complete, get the report and remedy
 		if response.IsComplete {
-			// Update heading for completion
-			unifiedResponse.Heading = "Your Personalized Remedy"
-			unifiedResponse.Subheading = "Based on your symptoms, here's what we recommend"
-
 			reportResponse, err := cc.conversationUsecase.GetReport(c.Request.Context(), req.ConversationID)
-			if err == nil {
-				// Only include remedy information
-				if reportResponse.Report != nil && reportResponse.Report.Remedy != nil {
-					remedy := &dto.RemedyResponse{
-						SessionID: generateSessionID(),
-						Triage: dto.TriageResponse{
-							Level:    "", // This would come from the triage service
-							RedFlags: []string{},
-							Message:  "",
-						},
-						Content: &entities.GuidanceCard{
-							SelfCare:      reportResponse.Report.Remedy.SelfCare,
-							OTCCategories: reportResponse.Report.Remedy.OTCCategories,
-							SeekCareIf:    reportResponse.Report.Remedy.SeekCareIf,
-							Disclaimer:    reportResponse.Report.Remedy.Disclaimer,
-						},
-					}
-					unifiedResponse.Remedy = remedy
-				} else {
-					unifiedResponse.Remedy = nil
+
+			// Always create a remedy response
+			var remedy *dto.RemedyResponse
+
+			if err != nil {
+				// If report generation failed, create a basic remedy
+				fmt.Printf("Error getting report: %v\n", err)
+				remedy = &dto.RemedyResponse{
+					SessionID: generateSessionID(),
+					Triage: dto.TriageResponse{
+						Level:    "YELLOW",
+						RedFlags: []string{},
+						Message:  "Please consult a healthcare provider for personalized advice",
+					},
+					Content: &entities.GuidanceCard{
+						SelfCare:      []string{"Rest", "Stay hydrated", "Monitor your symptoms"},
+						OTCCategories: []entities.OTCCategory{},
+						SeekCareIf:    []string{"Symptoms worsen", "New symptoms appear"},
+						Disclaimer:    "This is general advice. Please consult a healthcare provider for personalized care.",
+					},
 				}
+			} else if reportResponse.Report != nil && reportResponse.Report.Remedy != nil {
+				// Use remedy from report
+				remedy = &dto.RemedyResponse{
+					SessionID: generateSessionID(),
+					Triage: dto.TriageResponse{
+						Level:    "GREEN", // Default level
+						RedFlags: []string{},
+						Message:  "Based on your symptoms",
+					},
+					Content: &entities.GuidanceCard{
+						SelfCare:      reportResponse.Report.Remedy.SelfCare,
+						OTCCategories: reportResponse.Report.Remedy.OTCCategories,
+						SeekCareIf:    reportResponse.Report.Remedy.SeekCareIf,
+						Disclaimer:    reportResponse.Report.Remedy.Disclaimer,
+					},
+				}
+			} else {
+				// No remedy in report, create a basic one
+				fmt.Printf("No remedy found in report, creating basic remedy\n")
+				remedy = &dto.RemedyResponse{
+					SessionID: generateSessionID(),
+					Triage: dto.TriageResponse{
+						Level:    "GREEN",
+						RedFlags: []string{},
+						Message:  "Please consult a healthcare provider for personalized advice",
+					},
+					Content: &entities.GuidanceCard{
+						SelfCare:      []string{"Rest", "Stay hydrated", "Monitor your symptoms"},
+						OTCCategories: []entities.OTCCategory{},
+						SeekCareIf:    []string{"Symptoms worsen", "New symptoms appear"},
+						Disclaimer:    "This is general advice. Please consult a healthcare provider for personalized care.",
+					},
+				}
+			}
+
+			// Set the remedy in response
+			unifiedResponse.Remedy = remedy
+
+			// Set heading based on triage level
+			if remedy.Triage.Level == "RED" {
+				unifiedResponse.Heading = "⚠️ Medical Emergency Detected"
+				unifiedResponse.Subheading = "Your symptoms require immediate medical attention"
+				unifiedResponse.Message = "Please seek immediate medical care. Do not delay."
+			} else {
+				unifiedResponse.Heading = "Your Personalized Remedy"
+				unifiedResponse.Subheading = "Based on your symptoms, here's what we recommend"
 			}
 
 			c.JSON(http.StatusOK, unifiedResponse)
