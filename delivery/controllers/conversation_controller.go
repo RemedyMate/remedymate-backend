@@ -1,7 +1,11 @@
 package controllers
 
 import (
+	"crypto/rand"
+	"encoding/hex"
+	"fmt"
 	"net/http"
+	"time"
 
 	"remedymate-backend/domain/dto"
 	"remedymate-backend/domain/entities"
@@ -32,12 +36,15 @@ type ConversationRequest struct {
 // ConversationResponse represents a unified response for both starting and continuing conversations
 type ConversationResponse struct {
 	ConversationID    string                 `json:"conversation_id"`
-	Question          *entities.Question     `json:"question,omitempty"` // Next question if available
-	Message           string                 `json:"message,omitempty"`  // Feedback message
-	IsComplete        bool                   `json:"is_complete"`        // Whether all questions are answered
+	Heading           string                 `json:"heading"`              // NEW: Main heading
+	Subheading        string                 `json:"subheading,omitempty"` // NEW: Subheading
+	Question          *entities.Question     `json:"question,omitempty"`   // Next question if available
+	Message           string                 `json:"message,omitempty"`    // Feedback message
+	IsComplete        bool                   `json:"is_complete"`          // Whether all questions are answered
 	CurrentStep       int                    `json:"current_step"`
 	TotalSteps        int                    `json:"total_steps"`
 	Report            *entities.HealthReport `json:"report,omitempty"`    // Final report if complete
+	Remedy            *dto.RemedyResponse    `json:"remedy,omitempty"`    // Remedy response if complete
 	IsNewConversation bool                   `json:"is_new_conversation"` // Whether this is a new conversation
 }
 
@@ -82,6 +89,8 @@ func (cc *ConversationController) HandleConversation(c *gin.Context) {
 		// Convert to unified response format
 		unifiedResponse := ConversationResponse{
 			ConversationID:    response.ConversationID,
+			Heading:           "Let's assess your symptoms",
+			Subheading:        "I'll ask you a few questions to understand your condition better",
 			Question:          &response.Question,
 			IsComplete:        false,
 			CurrentStep:       response.CurrentStep,
@@ -134,6 +143,8 @@ func (cc *ConversationController) HandleConversation(c *gin.Context) {
 		// Convert to unified response format
 		unifiedResponse := ConversationResponse{
 			ConversationID:    response.ConversationID,
+			Heading:           fmt.Sprintf("Question %d of %d", response.CurrentStep, response.TotalSteps),
+			Subheading:        "Please provide more details",
 			Question:          response.Question,
 			Message:           response.Message,
 			IsComplete:        response.IsComplete,
@@ -142,15 +153,40 @@ func (cc *ConversationController) HandleConversation(c *gin.Context) {
 			IsNewConversation: false,
 		}
 
-		// If conversation is complete, get the report
+		// If conversation is complete, get the report and remedy
 		if response.IsComplete {
+			// Update heading for completion
+			unifiedResponse.Heading = "Your Personalized Remedy"
+			unifiedResponse.Subheading = "Based on your symptoms, here's what we recommend"
+
 			reportResponse, err := cc.conversationUsecase.GetReport(c.Request.Context(), req.ConversationID)
 			if err == nil {
-				unifiedResponse.Report = reportResponse.Report
+				// Only include remedy information
+				if reportResponse.Report != nil && reportResponse.Report.Remedy != nil {
+					remedy := &dto.RemedyResponse{
+						SessionID: generateSessionID(),
+						Triage: dto.TriageResponse{
+							Level:    "", // This would come from the triage service
+							RedFlags: []string{},
+							Message:  "",
+						},
+						Content: &entities.GuidanceCard{
+							SelfCare:      reportResponse.Report.Remedy.SelfCare,
+							OTCCategories: reportResponse.Report.Remedy.OTCCategories,
+							SeekCareIf:    reportResponse.Report.Remedy.SeekCareIf,
+							Disclaimer:    reportResponse.Report.Remedy.Disclaimer,
+						},
+					}
+					unifiedResponse.Remedy = remedy
+				} else {
+					unifiedResponse.Remedy = nil
+				}
 			}
-		}
 
-		c.JSON(http.StatusOK, unifiedResponse)
+			c.JSON(http.StatusOK, unifiedResponse)
+		} else {
+			c.JSON(http.StatusOK, unifiedResponse)
+		}
 	}
 }
 
@@ -266,4 +302,15 @@ func (cc *ConversationController) GetReport(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, response)
+}
+
+// generateSessionID generates a unique session ID
+func generateSessionID() string {
+	b := make([]byte, 16)
+	_, err := rand.Read(b)
+	if err != nil {
+		// fallback to timestamp if random fails
+		return fmt.Sprintf("session_%d", time.Now().UnixNano())
+	}
+	return "session_" + hex.EncodeToString(b)
 }
