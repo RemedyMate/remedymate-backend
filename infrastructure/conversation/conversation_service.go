@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"strings"
+	"time"
 
 	"remedymate-backend/domain/entities"
 	"remedymate-backend/domain/interfaces"
@@ -215,7 +216,20 @@ func (cs *ConversationServiceImpl) parseHealthReportFromResponse(response string
 	jsonEnd := strings.LastIndex(response, "}")
 
 	if jsonStart == -1 || jsonEnd == -1 {
-		return nil, fmt.Errorf("invalid response format")
+		// Create a basic report instead of failing
+		return &entities.HealthReport{
+			Symptom:            "Unknown",
+			Duration:           "Unknown",
+			Location:           "Unknown",
+			Severity:           "Unknown",
+			AssociatedSymptoms: []string{},
+			MedicalHistory:     "Unknown",
+			Triggers:           "Unknown",
+			PossibleConditions: []string{},
+			Recommendations:    []string{"Please consult a healthcare provider"},
+			UrgencyLevel:       "YELLOW",
+			GeneratedAt:        time.Now(),
+		}, nil
 	}
 
 	jsonStr := response[jsonStart : jsonEnd+1]

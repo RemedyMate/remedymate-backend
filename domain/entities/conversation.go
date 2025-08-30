@@ -47,6 +47,14 @@ type Answer struct {
 	AnsweredAt time.Time `json:"answered_at" bson:"answered_at"`
 }
 
+// Remedy represents remedy information from the GetRemedy usecase
+type Remedy struct {
+	SelfCare      []string      `json:"self_care" bson:"self_care"`
+	OTCCategories []OTCCategory `json:"otc_categories,omitempty" bson:"otc_categories,omitempty"`
+	SeekCareIf    []string      `json:"seek_care_if" bson:"seek_care_if"`
+	Disclaimer    string        `json:"disclaimer" bson:"disclaimer"`
+}
+
 // HealthReport represents the final structured health report
 type HealthReport struct {
 	Symptom            string    `json:"symptom" bson:"symptom"`
@@ -60,4 +68,5 @@ type HealthReport struct {
 	Recommendations    []string  `json:"recommendations" bson:"recommendations"`
 	UrgencyLevel       string    `json:"urgency_level" bson:"urgency_level"`
 	GeneratedAt        time.Time `json:"generated_at" bson:"generated_at"`
+	Remedy             *Remedy   `json:"remedy,omitempty" bson:"remedy,omitempty"`
 }
