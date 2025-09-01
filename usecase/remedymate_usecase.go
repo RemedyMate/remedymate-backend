@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"time"
 
+	derrors "remedymate-backend/domain/AppError"
 	"remedymate-backend/domain/dto"
 	"remedymate-backend/domain/entities"
-	derrors "remedymate-backend/domain/errors"
 	"remedymate-backend/domain/interfaces"
 	"remedymate-backend/util"
 )

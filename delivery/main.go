@@ -8,7 +8,7 @@ import (
 	"remedymate-backend/delivery/controllers"
 	"remedymate-backend/delivery/routers"
 	"remedymate-backend/domain/dto"
-	"remedymate-backend/infrastructure/auth"
+	"remedymate-backend/infrastructure/bootstrap"
 	"remedymate-backend/infrastructure/content"
 	"remedymate-backend/infrastructure/conversation"
 	"remedymate-backend/infrastructure/database"
@@ -17,6 +17,7 @@ import (
 	"remedymate-backend/infrastructure/remedymate_services"
 	"remedymate-backend/repository"
 	"remedymate-backend/usecase"
+	"remedymate-backend/usecase/user"
 
 	"github.com/joho/godotenv"
 )
@@ -36,20 +37,19 @@ func main() {
 		log.Fatalf("OAuth configuration error: %v", err)
 	}
 
-	// Initialize services
-	jwtService := auth.NewJWTService()
-	oauthService := auth.NewOAuthService(oauthConfig, jwtService)
-	passwordService := auth.NewPasswordService()
-
 	// Initialize repositories
 	userRepo := repository.NewUserRepository()
-	oauthRepo := repository.NewOAuthRepository(database.GetCollection("users"))
+	tokenRepo := repository.NewRefreshTokenRepository()
 	conversationRepo := repository.NewConversationRepository(database.GetCollection("conversation"))
 
+	// Seed superadmin user
+	if err := bootstrap.SeedSuperAdmin(userRepo); err != nil {
+		log.Fatalf("Failed to seed superadmin: %v", err)
+	}
+
 	// Initialize usecases
-	userUsecase := usecase.NewUserUsecase(userRepo)
-	oauthUsecase := usecase.NewOAuthUsecase(oauthService, oauthRepo)
-	authUsecase := usecase.NewAuthUsecase(userRepo, passwordService, jwtService)
+	userUsecase := user.NewUserUsecase(userRepo)
+	authUsecase := user.NewAuthUsecase(userRepo, tokenRepo)
 
 	// Initialize RemedyMate services
 	contentService := content.NewContentService("./data")
@@ -86,14 +86,13 @@ func main() {
 	)
 
 	// Initialize controllers
-	oauthController := controllers.NewOAuthController(oauthUsecase)
 	authController := controllers.NewAuthController(authUsecase, userUsecase) // Added userUsecase
-	userController := controllers.NewUserController(userUsecase)              // Re-added for profile management
+	// userController := controllers.NewUserController(userUsecase)              // Re-added for profile management
 	remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
 	conversationController := controllers.NewConversationController(conversationUsecase)
 
 	// Setup router
-	r := routers.SetupRouter(oauthController, authController, userController, remedyMateController, conversationController) // Added userController back
+	r := routers.SetupRouter(authController, remedyMateController, conversationController) // Added userController back
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"

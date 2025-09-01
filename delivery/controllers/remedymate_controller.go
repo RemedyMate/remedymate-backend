@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
+	derrors "remedymate-backend/domain/AppError"
 	"remedymate-backend/domain/dto"
-	derrors "remedymate-backend/domain/errors"
 	"remedymate-backend/domain/interfaces"
 
 	"github.com/gin-gonic/gin"
