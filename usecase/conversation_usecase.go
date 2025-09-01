@@ -137,6 +137,7 @@ func (cu *ConversationUsecaseImpl) SubmitAnswer(ctx context.Context, req dto.Sub
 			Language: conversation.Language,
 		}
 		remedyResponse, err := cu.remedyMateUsecase.GetRemedy(ctx, remedyReq)
+
 		if err != nil {
 			// Log the error but don't fail the conversation completion
 			// The conversation can still complete without remedy
@@ -148,6 +149,7 @@ func (cu *ConversationUsecaseImpl) SubmitAnswer(ctx context.Context, req dto.Sub
 		if remedyResponse != nil && remedyResponse.Content != nil {
 			// Add remedy information to the report
 			report.Remedy = &entities.Remedy{
+				Level:         remedyResponse.Triage.Level,
 				SelfCare:      remedyResponse.Content.SelfCare,
 				OTCCategories: remedyResponse.Content.OTCCategories,
 				SeekCareIf:    remedyResponse.Content.SeekCareIf,

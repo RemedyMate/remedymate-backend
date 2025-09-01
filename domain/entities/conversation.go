@@ -49,6 +49,7 @@ type Answer struct {
 
 // Remedy represents remedy information from the GetRemedy usecase
 type Remedy struct {
+	Level         TriageLevel   `json:"level" bson:"level"`
 	SelfCare      []string      `json:"self_care" bson:"self_care"`
 	OTCCategories []OTCCategory `json:"otc_categories,omitempty" bson:"otc_categories,omitempty"`
 	SeekCareIf    []string      `json:"seek_care_if" bson:"seek_care_if"`

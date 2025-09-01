@@ -158,7 +158,7 @@ func (cc *ConversationController) HandleConversation(c *gin.Context) {
 				remedy = &dto.RemedyResponse{
 					SessionID: generateSessionID(),
 					Triage: dto.TriageResponse{
-						Level:    "GREEN", // Default level
+						Level:    reportResponse.Report.Remedy.Level,
 						RedFlags: []string{},
 						Message:  "Based on your symptoms",
 					},
@@ -175,7 +175,7 @@ func (cc *ConversationController) HandleConversation(c *gin.Context) {
 				remedy = &dto.RemedyResponse{
 					SessionID: generateSessionID(),
 					Triage: dto.TriageResponse{
-						Level:    "GREEN",
+						Level:    "RED",
 						RedFlags: []string{},
 						Message:  "Please consult a healthcare provider for personalized advice",
 					},
