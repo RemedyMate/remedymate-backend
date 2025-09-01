@@ -8,6 +8,8 @@ var (
 	ErrLanguageNotAvailable = errors.New("language not available")
 	ErrUnsupportedLanguage  = errors.New("unsupported language")
 	ErrNoTopicMapped        = errors.New("no topic could be mapped from the provided symptoms")
+	ErrInvalidInput         = errors.New("invalid input")
+	ErrTopicAlreadyExists   = errors.New("topic already exists")
 
 	// user errors
 	ErrUserNotFound       = errors.New("user not found")

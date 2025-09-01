@@ -14,7 +14,9 @@ func SetupRouter(
 	authController *controllers.AuthController,
 	// userController *controllers.UserController,
 	remedyMateController *controllers.RemedyMateController,
-	conversationController *controllers.ConversationController) *gin.Engine {
+	conversationController *controllers.ConversationController,
+	topicController *controllers.TopicController,
+) *gin.Engine {
 
 	r := gin.Default()
 
@@ -52,6 +54,15 @@ func SetupRouter(
 			// 		users.PATCH("/profile", userController.EditProfile)
 			// 		users.DELETE("/profile", userController.DeleteProfile)
 			// 	}
+		}
+		admin := v1.Group("/admin")
+		// admin.Use(middleware.AdminOnlyMiddleware())
+		{
+			admin.GET("/topics", topicController.ListAllTopicsHandler)
+			admin.POST("/topic", topicController.CreateTopicHandler)
+			admin.PUT("/topics/:topic_key", topicController.UpdateTopicHandler)
+			admin.DELETE("/topics/:topic_key", topicController.DeleteTopicHandler)
+			admin.GET("/topic/:topic_key", topicController.GetTopicHandler)
 		}
 	}
 
