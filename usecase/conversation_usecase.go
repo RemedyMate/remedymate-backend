@@ -15,16 +15,19 @@ import (
 type ConversationUsecaseImpl struct {
 	conversationService interfaces.ConversationService
 	conversationRepo    interfaces.ConversationRepository
+	remedyMateUsecase   interfaces.RemedyMateUsecase
 }
 
 // NewConversationUsecase creates a new conversation usecase
 func NewConversationUsecase(
 	conversationService interfaces.ConversationService,
 	conversationRepo interfaces.ConversationRepository,
+	remedyMateUsecase interfaces.RemedyMateUsecase,
 ) interfaces.ConversationUsecase {
 	return &ConversationUsecaseImpl{
 		conversationService: conversationService,
 		conversationRepo:    conversationRepo,
+		remedyMateUsecase:   remedyMateUsecase,
 	}
 }
 
@@ -128,6 +131,32 @@ func (cu *ConversationUsecaseImpl) SubmitAnswer(ctx context.Context, req dto.Sub
 			return nil, fmt.Errorf("failed to generate health report: %w", err)
 		}
 
+		// Get remedy using the original symptom and language
+		remedyReq := dto.RemedyRequest{
+			Text:     conversation.Symptom,
+			Language: conversation.Language,
+		}
+		remedyResponse, err := cu.remedyMateUsecase.GetRemedy(ctx, remedyReq)
+
+		if err != nil {
+			// Log the error but don't fail the conversation completion
+			// The conversation can still complete without remedy
+			fmt.Printf("Warning: Failed to get remedy for conversation %s: %v\n", req.ConversationID, err)
+			remedyResponse = nil
+		}
+
+		// Save final report with remedy information
+		if remedyResponse != nil && remedyResponse.Content != nil {
+			// Add remedy information to the report
+			report.Remedy = &entities.Remedy{
+				Level:         remedyResponse.Triage.Level,
+				SelfCare:      remedyResponse.Content.SelfCare,
+				OTCCategories: remedyResponse.Content.OTCCategories,
+				SeekCareIf:    remedyResponse.Content.SeekCareIf,
+				Disclaimer:    remedyResponse.Content.Disclaimer,
+			}
+		}
+
 		// Save final report
 		err = cu.conversationRepo.SetFinalReport(ctx, req.ConversationID, report)
 		if err != nil {
@@ -143,7 +172,7 @@ func (cu *ConversationUsecaseImpl) SubmitAnswer(ctx context.Context, req dto.Sub
 		return &dto.SubmitAnswerResponse{
 			ConversationID: req.ConversationID,
 			Question:       nil,
-			Message:        "All questions completed. You can now view your health report.",
+			Message:        "All questions completed. You can now view your health report and remedy.",
 			IsComplete:     true,
 			CurrentStep:    conversation.TotalSteps,
 			TotalSteps:     conversation.TotalSteps,

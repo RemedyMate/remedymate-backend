@@ -83,6 +83,7 @@ func main() {
 	conversationUsecase := usecase.NewConversationUsecase(
 		conversationService,
 		conversationRepo,
+		remedyMateUsecase,
 	)
 
 	// Initialize controllers
