@@ -32,12 +32,38 @@ func NewUserRepository() interfaces.IUserRepository {
 		{Keys: bson.M{"userId": 1}, Options: options.Index().SetUnique(true)},
 	}
 
-	_, err := userColl.Indexes().CreateMany(context.Background(), userIndexModels)
+	// Ensure no incorrect index exists on users collection for userId
+	ctx := context.Background()
+	cursor, err := userColl.Indexes().List(ctx)
+	if err == nil {
+		for cursor.Next(ctx) {
+			var idxDoc bson.M
+			if err := cursor.Decode(&idxDoc); err == nil {
+				// Check by name first
+				if name, ok := idxDoc["name"].(string); ok && name == "userId_1" {
+					_, _ = userColl.Indexes().DropOne(ctx, name)
+					continue
+				}
+				// Check by key contents
+				if keyDoc, ok := idxDoc["key"].(bson.M); ok {
+					if _, exists := keyDoc["userId"]; exists {
+						if name, ok := idxDoc["name"].(string); ok {
+							_, _ = userColl.Indexes().DropOne(ctx, name)
+						}
+					}
+				}
+			}
+		}
+		_ = cursor.Close(ctx)
+	}
+
+	_, err = userColl.Indexes().CreateMany(ctx, userIndexModels)
 	if err != nil {
 		fmt.Println("Error creating indexes:", err)
 	}
 
-	_, err = userColl.Indexes().CreateMany(context.Background(), userStatusIndexModels)
+	// Create indexes on the correct user status collection
+	_, err = userStatColl.Indexes().CreateMany(ctx, userStatusIndexModels)
 	if err != nil {
 		fmt.Println("Error creating indexes:", err)
 	}
@@ -129,7 +155,8 @@ func (r *UserRepository) SoftDeleteUser(ctx context.Context, userID string) erro
 
 func (r *UserRepository) GetUserStatus(ctx context.Context, userID string) (*entities.UserStatus, error) {
 	var userStatus entities.UserStatus
-	err := r.UserStatusCollection.FindOne(ctx, bson.M{"_id": userID}).Decode(&userStatus)
+	// Look up by userId field (unique), not the document _id
+	err := r.UserStatusCollection.FindOne(ctx, bson.M{"userId": userID}).Decode(&userStatus)
 	if err != nil {
 		return nil, AppError.ErrUserStatusNotFound
 	}

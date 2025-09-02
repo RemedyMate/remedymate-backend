@@ -41,6 +41,8 @@ func main() {
 	userRepo := repository.NewUserRepository()
 	tokenRepo := repository.NewRefreshTokenRepository()
 	conversationRepo := repository.NewConversationRepository(database.GetCollection("conversation"))
+	redFlagRepo := repository.NewRedFlagRepository()
+	feedbackRepo := repository.NewFeedbackRepository()
 
 	// Seed superadmin user
 	if err := bootstrap.SeedSuperAdmin(userRepo); err != nil {
@@ -50,6 +52,7 @@ func main() {
 	// Initialize usecases
 	userUsecase := user.NewUserUsecase(userRepo)
 	authUsecase := user.NewAuthUsecase(userRepo, tokenRepo)
+	publicFeedbackUsecase := usecase.NewPublicFeedbackUsecase(feedbackRepo)
 
 	// Initialize RemedyMate services
 	contentService := content.NewContentService("./data")
@@ -85,14 +88,27 @@ func main() {
 		conversationRepo,
 	)
 
+	// Admin usecases
+	adminRedFlagUsecase := usecase.NewAdminRedFlagUsecase(redFlagRepo)
+	adminFeedbackUsecase := usecase.NewAdminFeedbackUsecase(feedbackRepo)
+
 	// Initialize controllers
-	authController := controllers.NewAuthController(authUsecase, userUsecase) // Added userUsecase
-	// userController := controllers.NewUserController(userUsecase)              // Re-added for profile management
+	authController := controllers.NewAuthController(authUsecase, userUsecase)
 	remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
 	conversationController := controllers.NewConversationController(conversationUsecase)
+	adminRedFlagController := controllers.NewAdminRedFlagController(adminRedFlagUsecase)
+	adminFeedbackController := controllers.NewAdminFeedbackController(adminFeedbackUsecase)
+	feedbackPublicController := controllers.NewFeedbackPublicController(publicFeedbackUsecase)
 
 	// Setup router
-	r := routers.SetupRouter(authController, remedyMateController, conversationController) // Added userController back
+	r := routers.SetupRouter(
+		authController,
+		remedyMateController,
+		conversationController,
+		adminRedFlagController,
+		adminFeedbackController,
+		feedbackPublicController,
+	)
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
