@@ -2,9 +2,12 @@ package bootstrap
 
 import (
 	"context"
+	"time"
+
 	"os"
 	"remedymate-backend/domain/entities"
 	"remedymate-backend/domain/interfaces"
+	"remedymate-backend/util/hash"
 )
 
 func SeedSuperAdmin(userRepo interfaces.IUserRepository) error {
@@ -24,13 +27,19 @@ func SeedSuperAdmin(userRepo interfaces.IUserRepository) error {
 	username := os.Getenv("SUPERADMIN_USERNAME")
 	email := os.Getenv("SUPERADMIN_EMAIL")
 	password := os.Getenv("SUPERADMIN_PASSWORD")
+	passwordHash, err := hash.HashPassword(password)
+	if err != nil {
+		return err
+	}
 
 	// call the normal CreateUser use case
 	err = userRepo.CreateUserWithStatus(ctx, &entities.User{
-		Username: username,
-		Email:    email,
-		Password: password,
-		Role:     "superadmin",
+		Username:     username,
+		Email:        email,
+		PasswordHash: passwordHash,
+		Role:         "superadmin",
+		CreatedAt:    time.Now(),
+		UpdatedAt:    time.Now(),
 	}, &entities.UserStatus{
 		IsActive:      true,
 		IsProfileFull: false,

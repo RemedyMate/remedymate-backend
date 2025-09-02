@@ -50,31 +50,29 @@ func (r *UserRepository) CreateUserWithStatus(ctx context.Context, user *entitie
 	userStatus.ID = primitive.NewObjectID().Hex()
 	userStatus.UserID = user.ID
 
-	session, err := database.Client.StartSession()
+	// TODO: create a transaction to ensure both user and user status are created
+	// session, err := database.Client.StartSession()
+	// if err != nil {
+	// 	return fmt.Errorf("failed to start session: %w", err)
+	// }
+	// defer session.EndSession(ctx)
+
+	_, err := r.UserCollection.InsertOne(ctx, user)
 	if err != nil {
-		return fmt.Errorf("failed to start session: %w", err)
+		return AppError.ErrInternalServer
 	}
-	defer session.EndSession(ctx)
-
-	callback := func(sessCtx mongo.SessionContext) (interface{}, error) {
-		// Create the user
-		_, err := r.UserCollection.InsertOne(sessCtx, user)
-		if err != nil {
-			return nil, AppError.ErrInternalServer
-		}
-
-		// Initialize user status
-		_, err = r.UserStatusCollection.InsertOne(sessCtx, userStatus)
-		if err != nil {
-			return nil, AppError.ErrInternalServer
-		}
-
-		return nil, nil
-	}
-	_, err = session.WithTransaction(ctx, callback)
+	_, err = r.UserStatusCollection.InsertOne(ctx, userStatus)
 	if err != nil {
-		return err
+		return AppError.ErrInternalServer
 	}
+
+	// callback := func(sessCtx mongo.SessionContext) (interface{}, error) {
+	// 	return nil, nil
+	// }
+	// _, err = session.WithTransaction(ctx, callback)
+	// if err != nil {
+	// 	return err
+	// }
 	return nil
 }
 
