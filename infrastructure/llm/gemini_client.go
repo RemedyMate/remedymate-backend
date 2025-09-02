@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/RemedyMate/remedymate-backend/domain/dto"
-	"github.com/RemedyMate/remedymate-backend/domain/interfaces"
+	"remedymate-backend/domain/dto"
+	"remedymate-backend/domain/interfaces"
 )
 
 // GeminiClient implements LLMClient using Google's Gemini API

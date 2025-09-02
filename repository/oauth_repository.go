@@ -1,138 +1,139 @@
 package repository
 
-import (
-	"context"
-	"log"
-	"time"
+// import (
+// 	"context"
+// 	"log"
+// 	"time"
 
-	"github.com/RemedyMate/remedymate-backend/domain/entities"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo"
-)
+// 	"remedymate-backend/domain/entities"
 
-// OAuthRepository implements IOAuthRepository interface
-type OAuthRepository struct {
-	collection *mongo.Collection
-}
+// 	"go.mongodb.org/mongo-driver/bson"
+// 	"go.mongodb.org/mongo-driver/bson/primitive"
+// 	"go.mongodb.org/mongo-driver/mongo"
+// )
 
-// NewOAuthRepository creates a new OAuth repository instance
-func NewOAuthRepository(collection *mongo.Collection) *OAuthRepository {
-	return &OAuthRepository{
-		collection: collection,
-	}
-}
+// // OAuthRepository implements IOAuthRepository interface
+// type OAuthRepository struct {
+// 	collection *mongo.Collection
+// }
 
-// FindByOAuthProvider finds a user by their OAuth provider and ID
-func (r *OAuthRepository) FindByOAuthProvider(ctx context.Context, provider, providerID string) (*entities.User, error) {
-	filter := bson.M{
-		"oauthProviders": bson.M{
-			"$elemMatch": bson.M{
-				"provider": provider,
-				"id":       providerID,
-			},
-		},
-	}
+// // NewOAuthRepository creates a new OAuth repository instance
+// func NewOAuthRepository(collection *mongo.Collection) *OAuthRepository {
+// 	return &OAuthRepository{
+// 		collection: collection,
+// 	}
+// }
 
-	var user entities.User
-	err := r.collection.FindOne(ctx, filter).Decode(&user)
-	if err != nil {
-		if err == mongo.ErrNoDocuments {
-			return nil, nil // User not found
-		}
-		return nil, err
-	}
+// // FindByOAuthProvider finds a user by their OAuth provider and ID
+// func (r *OAuthRepository) FindByOAuthProvider(ctx context.Context, provider, providerID string) (*entities.User, error) {
+// 	filter := bson.M{
+// 		"oauthProviders": bson.M{
+// 			"$elemMatch": bson.M{
+// 				"provider": provider,
+// 				"id":       providerID,
+// 			},
+// 		},
+// 	}
 
-	return &user, nil
-}
+// 	var user entities.User
+// 	err := r.collection.FindOne(ctx, filter).Decode(&user)
+// 	if err != nil {
+// 		if err == mongo.ErrNoDocuments {
+// 			return nil, nil // User not found
+// 		}
+// 		return nil, err
+// 	}
 
-// FindByEmail finds a user by email address
-func (r *OAuthRepository) FindByEmail(ctx context.Context, email string) (*entities.User, error) {
-	filter := bson.M{"email": email}
+// 	return &user, nil
+// }
 
-	var user entities.User
-	err := r.collection.FindOne(ctx, filter).Decode(&user)
-	if err != nil {
-		if err == mongo.ErrNoDocuments {
-			return nil, nil
-		}
-		return nil, err
-	}
+// // FindByEmail finds a user by email address
+// func (r *OAuthRepository) FindByEmail(ctx context.Context, email string) (*entities.User, error) {
+// 	filter := bson.M{"email": email}
 
-	return &user, nil
-}
+// 	var user entities.User
+// 	err := r.collection.FindOne(ctx, filter).Decode(&user)
+// 	if err != nil {
+// 		if err == mongo.ErrNoDocuments {
+// 			return nil, nil
+// 		}
+// 		return nil, err
+// 	}
 
-// InsertUser creates a new user in the database
-func (r *OAuthRepository) InsertUser(ctx context.Context, user entities.User) error {
-	log.Printf("💾 Inserting new user into database: %s (%s)", user.Username, user.Email)
+// 	return &user, nil
+// }
 
-	if user.ID == "" {
-		user.ID = primitive.NewObjectID().Hex()
-		log.Printf("🆔 Generated new ObjectID: %s", user.ID)
-	}
+// // InsertUser creates a new user in the database
+// func (r *OAuthRepository) InsertUser(ctx context.Context, user entities.User) error {
+// 	log.Printf("💾 Inserting new user into database: %s (%s)", user.Username, user.Email)
 
-	user.CreatedAt = time.Now()
-	user.UpdatedAt = time.Now()
+// 	if user.ID == "" {
+// 		user.ID = primitive.NewObjectID().Hex()
+// 		log.Printf("🆔 Generated new ObjectID: %s", user.ID)
+// 	}
 
-	_, err := r.collection.InsertOne(ctx, user)
-	if err != nil {
-		log.Printf("❌ Failed to insert user: %v", err)
-		return err
-	}
+// 	user.CreatedAt = time.Now()
+// 	user.UpdatedAt = time.Now()
 
-	log.Printf("✅ Successfully inserted user into database: %s (%s)", user.Username, user.ID)
-	return nil
-}
+// 	_, err := r.collection.InsertOne(ctx, user)
+// 	if err != nil {
+// 		log.Printf("❌ Failed to insert user: %v", err)
+// 		return err
+// 	}
 
-// UpdateUser updates an existing user
-func (r *OAuthRepository) UpdateUser(ctx context.Context, user entities.User) error {
-	log.Printf("🔄 Updating user in database: %s (%s)", user.Username, user.ID)
+// 	log.Printf("✅ Successfully inserted user into database: %s (%s)", user.Username, user.ID)
+// 	return nil
+// }
 
-	user.UpdatedAt = time.Now()
+// // UpdateUser updates an existing user
+// func (r *OAuthRepository) UpdateUser(ctx context.Context, user entities.User) error {
+// 	log.Printf("🔄 Updating user in database: %s (%s)", user.Username, user.ID)
 
-	filter := bson.M{"_id": user.ID}
-	update := bson.M{"$set": user}
+// 	user.UpdatedAt = time.Now()
 
-	_, err := r.collection.UpdateOne(ctx, filter, update)
-	if err != nil {
-		log.Printf("❌ Failed to update user: %v", err)
-		return err
-	}
+// 	filter := bson.M{"_id": user.ID}
+// 	update := bson.M{"$set": user}
 
-	log.Printf("✅ Successfully updated user in database: %s (%s)", user.Username, user.ID)
-	return nil
-}
+// 	_, err := r.collection.UpdateOne(ctx, filter, update)
+// 	if err != nil {
+// 		log.Printf("❌ Failed to update user: %v", err)
+// 		return err
+// 	}
 
-// UpsertOAuthProvider adds or updates an OAuth provider for a user
-func (r *OAuthRepository) UpsertOAuthProvider(ctx context.Context, userID string, oauthProvider entities.OAuthProvider) error {
-	filter := bson.M{"_id": userID}
+// 	log.Printf("✅ Successfully updated user in database: %s (%s)", user.Username, user.ID)
+// 	return nil
+// }
 
-	// Check if provider already exists
-	update := bson.M{
-		"$addToSet": bson.M{
-			"oauthProviders": oauthProvider,
-		},
-		"$set": bson.M{
-			"updatedAt": time.Now(),
-		},
-	}
+// // UpsertOAuthProvider adds or updates an OAuth provider for a user
+// func (r *OAuthRepository) UpsertOAuthProvider(ctx context.Context, userID string, oauthProvider entities.OAuthProvider) error {
+// 	filter := bson.M{"_id": userID}
 
-	_, err := r.collection.UpdateOne(ctx, filter, update)
-	return err
-}
+// 	// Check if provider already exists
+// 	update := bson.M{
+// 		"$addToSet": bson.M{
+// 			"oauthProviders": oauthProvider,
+// 		},
+// 		"$set": bson.M{
+// 			"updatedAt": time.Now(),
+// 		},
+// 	}
 
-// FindByID finds a user by their database ID
-func (r *OAuthRepository) FindByID(ctx context.Context, userID string) (*entities.User, error) {
-	filter := bson.M{"_id": userID}
+// 	_, err := r.collection.UpdateOne(ctx, filter, update)
+// 	return err
+// }
 
-	var user entities.User
-	err := r.collection.FindOne(ctx, filter).Decode(&user)
-	if err != nil {
-		if err == mongo.ErrNoDocuments {
-			return nil, nil
-		}
-		return nil, err
-	}
+// // FindByID finds a user by their database ID
+// func (r *OAuthRepository) FindByID(ctx context.Context, userID string) (*entities.User, error) {
+// 	filter := bson.M{"_id": userID}
 
-	return &user, nil
-}
+// 	var user entities.User
+// 	err := r.collection.FindOne(ctx, filter).Decode(&user)
+// 	if err != nil {
+// 		if err == mongo.ErrNoDocuments {
+// 			return nil, nil
+// 		}
+// 		return nil, err
+// 	}
+
+// 	return &user, nil
+// }

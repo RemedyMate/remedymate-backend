@@ -1,162 +1,163 @@
 package controllers
 
-import (
-	"log"
-	"net/http"
+// import (
+// 	"log"
+// 	"net/http"
 
-	"github.com/RemedyMate/remedymate-backend/domain/dto"
-	"github.com/RemedyMate/remedymate-backend/domain/interfaces"
-	"github.com/gin-gonic/gin"
-)
+// 	"remedymate-backend/domain/dto"
+// 	"remedymate-backend/domain/interfaces"
 
-type UserController struct {
-	UserUsecase interfaces.IUserUsecase
-}
+// 	"github.com/gin-gonic/gin"
+// )
 
-func NewUserController(usecase interfaces.IUserUsecase) *UserController {
-	return &UserController{UserUsecase: usecase}
-}
+// type UserController struct {
+// 	UserUsecase interfaces.IUserUsecase
+// }
 
-// GetProfile retrieves user profile
-// GET /api/v1/users/profile
-func (uc *UserController) GetProfile(c *gin.Context) {
-	userID, exists := c.Get("userID")
-	if !exists {
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"error": "User not authenticated",
-		})
-		return
-	}
+// func NewUserController(usecase interfaces.IUserUsecase) *UserController {
+// 	return &UserController{UserUsecase: usecase}
+// }
 
-	log.Printf("👤 Profile request for user: %s", userID)
+// // GetProfile retrieves user profile
+// // GET /api/v1/users/profile
+// func (uc *UserController) GetProfile(c *gin.Context) {
+// 	userID, exists := c.Get("userID")
+// 	if !exists {
+// 		c.JSON(http.StatusUnauthorized, gin.H{
+// 			"error": "User not authenticated",
+// 		})
+// 		return
+// 	}
 
-	profile, err := uc.UserUsecase.GetProfile(c.Request.Context(), userID.(string))
-	if err != nil {
-		log.Printf("❌ Get profile failed for user %s: %v", userID, err)
-		c.JSON(http.StatusNotFound, gin.H{
-			"error": err.Error(),
-		})
-		return
-	}
+// 	log.Printf("👤 Profile request for user: %s", userID)
 
-	log.Printf("✅ Profile retrieved for user: %s", userID)
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Profile retrieved successfully",
-		"profile": profile,
-	})
-}
+// 	profile, err := uc.UserUsecase.GetProfile(c.Request.Context(), userID.(string))
+// 	if err != nil {
+// 		log.Printf("❌ Get profile failed for user %s: %v", userID, err)
+// 		c.JSON(http.StatusNotFound, gin.H{
+// 			"error": err.Error(),
+// 		})
+// 		return
+// 	}
 
-// UpdateProfile updates user profile (basic update)
-// PUT /api/v1/users/profile
-func (uc *UserController) UpdateProfile(c *gin.Context) {
-	userID, exists := c.Get("userID")
-	if !exists {
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"error": "User not authenticated",
-		})
-		return
-	}
+// 	log.Printf("✅ Profile retrieved for user: %s", userID)
+// 	c.JSON(http.StatusOK, gin.H{
+// 		"message": "Profile retrieved successfully",
+// 		"profile": profile,
+// 	})
+// }
 
-	var updateData dto.UpdateProfileDTO
-	if err := c.ShouldBindJSON(&updateData); err != nil {
-		log.Printf("❌ Invalid update profile request: %v", err)
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error":   "Invalid request body",
-			"details": err.Error(),
-		})
-		return
-	}
+// // UpdateProfile updates user profile (basic update)
+// // PUT /api/v1/users/profile
+// func (uc *UserController) UpdateProfile(c *gin.Context) {
+// 	userID, exists := c.Get("userID")
+// 	if !exists {
+// 		c.JSON(http.StatusUnauthorized, gin.H{
+// 			"error": "User not authenticated",
+// 		})
+// 		return
+// 	}
 
-	log.Printf("🔄 Update profile request for user: %s", userID)
+// 	var updateData dto.UpdateProfileDTO
+// 	if err := c.ShouldBindJSON(&updateData); err != nil {
+// 		log.Printf("❌ Invalid update profile request: %v", err)
+// 		c.JSON(http.StatusBadRequest, gin.H{
+// 			"error":   "Invalid request body",
+// 			"details": err.Error(),
+// 		})
+// 		return
+// 	}
 
-	profile, err := uc.UserUsecase.UpdateProfile(c.Request.Context(), userID.(string), updateData)
-	if err != nil {
-		log.Printf("❌ Update profile failed for user %s: %v", userID, err)
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
-		})
-		return
-	}
+// 	log.Printf("🔄 Update profile request for user: %s", userID)
 
-	log.Printf("✅ Profile updated for user: %s", userID)
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Profile updated successfully",
-		"profile": profile,
-	})
-}
+// 	profile, err := uc.UserUsecase.UpdateProfile(c.Request.Context(), userID.(string), updateData)
+// 	if err != nil {
+// 		log.Printf("❌ Update profile failed for user %s: %v", userID, err)
+// 		c.JSON(http.StatusBadRequest, gin.H{
+// 			"error": err.Error(),
+// 		})
+// 		return
+// 	}
 
-// EditProfile edits user profile (comprehensive edit)
-// PATCH /api/v1/users/profile
-func (uc *UserController) EditProfile(c *gin.Context) {
-	userID, exists := c.Get("userID")
-	if !exists {
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"error": "User not authenticated",
-		})
-		return
-	}
+// 	log.Printf("✅ Profile updated for user: %s", userID)
+// 	c.JSON(http.StatusOK, gin.H{
+// 		"message": "Profile updated successfully",
+// 		"profile": profile,
+// 	})
+// }
 
-	var editData dto.EditProfileDTO
-	if err := c.ShouldBindJSON(&editData); err != nil {
-		log.Printf("❌ Invalid edit profile request: %v", err)
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error":   "Invalid request body",
-			"details": err.Error(),
-		})
-		return
-	}
+// // EditProfile edits user profile (comprehensive edit)
+// // PATCH /api/v1/users/profile
+// func (uc *UserController) EditProfile(c *gin.Context) {
+// 	userID, exists := c.Get("userID")
+// 	if !exists {
+// 		c.JSON(http.StatusUnauthorized, gin.H{
+// 			"error": "User not authenticated",
+// 		})
+// 		return
+// 	}
 
-	log.Printf("✏️ Edit profile request for user: %s", userID)
+// 	var editData dto.EditProfileDTO
+// 	if err := c.ShouldBindJSON(&editData); err != nil {
+// 		log.Printf("❌ Invalid edit profile request: %v", err)
+// 		c.JSON(http.StatusBadRequest, gin.H{
+// 			"error":   "Invalid request body",
+// 			"details": err.Error(),
+// 		})
+// 		return
+// 	}
 
-	profile, err := uc.UserUsecase.EditProfile(c.Request.Context(), userID.(string), editData)
-	if err != nil {
-		log.Printf("❌ Edit profile failed for user %s: %v", userID, err)
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
-		})
-		return
-	}
+// 	log.Printf("✏️ Edit profile request for user: %s", userID)
 
-	log.Printf("✅ Profile edited for user: %s", userID)
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Profile edited successfully",
-		"profile": profile,
-	})
-}
+// 	profile, err := uc.UserUsecase.EditProfile(c.Request.Context(), userID.(string), editData)
+// 	if err != nil {
+// 		log.Printf("❌ Edit profile failed for user %s: %v", userID, err)
+// 		c.JSON(http.StatusBadRequest, gin.H{
+// 			"error": err.Error(),
+// 		})
+// 		return
+// 	}
 
-// DeleteProfile soft deletes user profile
-// DELETE /api/v1/users/profile
-func (uc *UserController) DeleteProfile(c *gin.Context) {
-	userID, exists := c.Get("userID")
-	if !exists {
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"error": "User not authenticated",
-		})
-		return
-	}
+// 	log.Printf("✅ Profile edited for user: %s", userID)
+// 	c.JSON(http.StatusOK, gin.H{
+// 		"message": "Profile edited successfully",
+// 		"profile": profile,
+// 	})
+// }
 
-	var deleteData dto.DeleteProfileDTO
-	if err := c.ShouldBindJSON(&deleteData); err != nil {
-		log.Printf("❌ Invalid delete profile request: %v", err)
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error":   "Invalid request body",
-			"details": err.Error(),
-		})
-		return
-	}
+// // DeleteProfile soft deletes user profile
+// // DELETE /api/v1/users/profile
+// func (uc *UserController) DeleteProfile(c *gin.Context) {
+// 	userID, exists := c.Get("userID")
+// 	if !exists {
+// 		c.JSON(http.StatusUnauthorized, gin.H{
+// 			"error": "User not authenticated",
+// 		})
+// 		return
+// 	}
 
-	log.Printf("🗑️ Delete profile request for user: %s", userID)
+// 	var deleteData dto.DeleteProfileDTO
+// 	if err := c.ShouldBindJSON(&deleteData); err != nil {
+// 		log.Printf("❌ Invalid delete profile request: %v", err)
+// 		c.JSON(http.StatusBadRequest, gin.H{
+// 			"error":   "Invalid request body",
+// 			"details": err.Error(),
+// 		})
+// 		return
+// 	}
 
-	if err := uc.UserUsecase.DeleteProfile(c.Request.Context(), userID.(string), deleteData); err != nil {
-		log.Printf("❌ Delete profile failed for user %s: %v", userID, err)
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
-		})
-		return
-	}
+// 	log.Printf("🗑️ Delete profile request for user: %s", userID)
 
-	log.Printf("✅ Profile deleted for user: %s", userID)
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Profile deleted successfully",
-	})
-}
+// 	if err := uc.UserUsecase.DeleteProfile(c.Request.Context(), userID.(string), deleteData); err != nil {
+// 		log.Printf("❌ Delete profile failed for user %s: %v", userID, err)
+// 		c.JSON(http.StatusBadRequest, gin.H{
+// 			"error": err.Error(),
+// 		})
+// 		return
+// 	}
+
+// 	log.Printf("✅ Profile deleted for user: %s", userID)
+// 	c.JSON(http.StatusOK, gin.H{
+// 		"message": "Profile deleted successfully",
+// 	})
+// }

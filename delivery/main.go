@@ -4,17 +4,21 @@ import (
 	"log"
 	"os"
 
-	"github.com/RemedyMate/remedymate-backend/config"
-	"github.com/RemedyMate/remedymate-backend/delivery/controllers"
-	"github.com/RemedyMate/remedymate-backend/delivery/routers"
-	"github.com/RemedyMate/remedymate-backend/domain/dto"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/auth"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/content"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/database"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/llm"
-	"github.com/RemedyMate/remedymate-backend/infrastructure/triage"
-	"github.com/RemedyMate/remedymate-backend/repository"
-	"github.com/RemedyMate/remedymate-backend/usecase"
+	"remedymate-backend/config"
+	"remedymate-backend/delivery/controllers"
+	"remedymate-backend/delivery/routers"
+	"remedymate-backend/domain/dto"
+	"remedymate-backend/infrastructure/bootstrap"
+	"remedymate-backend/infrastructure/content"
+	"remedymate-backend/infrastructure/conversation"
+	"remedymate-backend/infrastructure/database"
+	"remedymate-backend/infrastructure/guidance"
+	"remedymate-backend/infrastructure/llm"
+	"remedymate-backend/infrastructure/remedymate_services"
+	"remedymate-backend/repository"
+	"remedymate-backend/usecase"
+	"remedymate-backend/usecase/user"
+
 	"github.com/joho/godotenv"
 )
 
@@ -33,19 +37,19 @@ func main() {
 		log.Fatalf("OAuth configuration error: %v", err)
 	}
 
-	// Initialize services
-	jwtService := auth.NewJWTService()
-	oauthService := auth.NewOAuthService(oauthConfig, jwtService)
-	passwordService := auth.NewPasswordService()
-
 	// Initialize repositories
 	userRepo := repository.NewUserRepository()
-	oauthRepo := repository.NewOAuthRepository(database.GetCollection("users"))
+	tokenRepo := repository.NewRefreshTokenRepository()
+	conversationRepo := repository.NewConversationRepository(database.GetCollection("conversation"))
+
+	// Seed superadmin user
+	if err := bootstrap.SeedSuperAdmin(userRepo); err != nil {
+		log.Fatalf("Failed to seed superadmin: %v", err)
+	}
 
 	// Initialize usecases
-	userUsecase := usecase.NewUserUsecase(userRepo)
-	oauthUsecase := usecase.NewOAuthUsecase(oauthService, oauthRepo)
-	authUsecase := usecase.NewAuthUsecase(userRepo, passwordService, jwtService)
+	userUsecase := user.NewUserUsecase(userRepo)
+	authUsecase := user.NewAuthUsecase(userRepo, tokenRepo)
 
 	// Initialize RemedyMate services
 	contentService := content.NewContentService("./data")
@@ -67,32 +71,34 @@ func main() {
 	geminiClient := llm.NewGeminiClient(llmConfig)
 	log.Printf("✅ Using Gemini LLM client (model=%s)", llmConfig.Model)
 
-	triageService := triage.NewTriageService(contentService, geminiClient)
+	triageService := remedymate_services.NewTriageService(contentService, geminiClient)
+	guidanceComposer := guidance.NewGuidanceComposerService(contentService, geminiClient)
+	mapService := remedymate_services.NewMapTopicService(gemKey, os.Getenv("GEMINI_MODEL"))
+	conversationService := conversation.NewConversationService(geminiClient)
 
 	// Initialize RemedyMate usecase
-	remedyMateUsecase := usecase.NewRemedyMateUsecase(
-		triageService,
-		contentService,
+	remedyMateUsecase := usecase.NewRemedyMateUsecase(triageService, contentService, guidanceComposer, mapService)
+
+	// Initialize Conversation usecase
+	conversationUsecase := usecase.NewConversationUsecase(
+		conversationService,
+		conversationRepo,
 	)
 
 	// Initialize controllers
-	oauthController := controllers.NewOAuthController(oauthUsecase)
-	authController := controllers.NewAuthController(authUsecase, userUsecase)
-	userController := controllers.NewUserController(userUsecase)
+	authController := controllers.NewAuthController(authUsecase, userUsecase) // Added userUsecase
+	// userController := controllers.NewUserController(userUsecase)              // Re-added for profile management
 	remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
+	conversationController := controllers.NewConversationController(conversationUsecase)
 
 	// Setup router
-	r := routers.SetupRouter(oauthController, authController, userController, remedyMateController)
-
-	// Get port from environment
+	r := routers.SetupRouter(authController, remedyMateController, conversationController) // Added userController back
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
 
-	log.Printf("🚀 Server starting on port %s", port)
-	log.Printf("✅ OAuth endpoints: /api/v1/auth/oauth/*")
-	log.Printf("✅ Login endpoint: /api/v1/auth/login")
-	log.Printf("✅ Protected endpoints: /api/v1/auth/* (with JWT)")
-	log.Fatal(r.Run(":" + port))
+	if err := r.Run(":" + port); err != nil {
+		log.Fatal("Unable to start the server: ", err)
+	}
 }

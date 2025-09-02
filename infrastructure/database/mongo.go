@@ -5,16 +5,17 @@ import (
 	"log"
 	"os"
 
-	"github.com/RemedyMate/remedymate-backend/util"
+	"remedymate-backend/util"
+
 	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-var Client *mongo.Client
+var Client *mongo.Client // will be initialized after ConnectMongo run
 
-func ConnectMongo() *mongo.Client {
+func ConnectMongo() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Println("No .env file found")
@@ -36,8 +37,6 @@ func ConnectMongo() *mongo.Client {
 
 	fmt.Println("MongoDB connected Seccussfully!")
 	Client = client
-
-	return client
 }
 
 // GetCollection returns a MongoDB collection by name
