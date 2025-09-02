@@ -86,6 +86,7 @@ func main() {
 	conversationUsecase := usecase.NewConversationUsecase(
 		conversationService,
 		conversationRepo,
+		remedyMateUsecase,
 	)
 
 	// Admin usecases

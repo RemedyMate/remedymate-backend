@@ -49,11 +49,6 @@ func SetupRouter(
 	{
 		// Unified conversation endpoint (handles both start and continue)
 		conversation.POST("/", conversationController.HandleConversation)
-
-		// Legacy endpoints (for backward compatibility)
-		conversation.POST("/start", conversationController.StartConversation)
-		conversation.POST("/answer", conversationController.SubmitAnswer)
-		conversation.GET("/:id/report", conversationController.GetReport)
 	}
 
 	// Admin routes (auth required; all users are admins per requirement)

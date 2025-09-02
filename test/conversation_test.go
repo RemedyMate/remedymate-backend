@@ -27,7 +27,9 @@ func TestConversationFlow(t *testing.T) {
 	mockLLM := &MockLLMClient{}
 
 	// Mock responses for question generation
-	mockLLM.On("ClassifyTriage", mock.Anything, mock.Anything).Return(`[
+	mockLLM.On("ClassifyTriage", mock.Anything, mock.MatchedBy(func(prompt string) bool {
+		return len(prompt) > 0 && len(prompt) < 1000 // Question generation prompts are typically shorter
+	})).Return(`[
 		{"id": 1, "text": "How long have you had this headache?", "type": "duration", "required": true},
 		{"id": 2, "text": "Where is the pain located?", "type": "location", "required": true},
 		{"id": 3, "text": "How severe is the pain?", "type": "severity", "required": true},
@@ -36,10 +38,14 @@ func TestConversationFlow(t *testing.T) {
 	]`, nil)
 
 	// Mock responses for answer validation
-	mockLLM.On("ClassifyTriage", mock.Anything, mock.Anything).Return(`{"valid": true, "feedback": ""}`, nil)
+	mockLLM.On("ClassifyTriage", mock.Anything, mock.MatchedBy(func(prompt string) bool {
+		return len(prompt) > 0 && len(prompt) < 500 // Validation prompts are shorter
+	})).Return(`{"valid": true, "feedback": ""}`, nil)
 
 	// Mock response for health report generation
-	mockLLM.On("ClassifyTriage", mock.Anything, mock.Anything).Return(`{
+	mockLLM.On("ClassifyTriage", mock.Anything, mock.MatchedBy(func(prompt string) bool {
+		return len(prompt) > 1000 // Report generation prompts are longer
+	})).Return(`{
 		"symptom": "Headache",
 		"duration": "3 days",
 		"location": "Front of head",
