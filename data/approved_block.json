@@ -15,7 +15,7 @@
             "category_name": "antacid",
             "safety_note": "You can ask a pharmacist about antacids to reduce stomach acid. Always follow the dosage instructions on the label and do not use them for too long without medical advice."
           }
-        ], 
+        ],
         "seek_care_if": [
           "You experience severe or persistent stomach pain.",
           "You have black, tarry, or bloody stools.",
@@ -134,7 +134,7 @@
         "otc_categories": [
           {
             "category_name": "ህመም ማስታገሻ",
-            "safety_note": "ህመምን ለመርዳት ስለ ፓራሲታሞል ወይም አይቡፕሮፌን ያሉ አማራጮችን ፋርማሲስት መጠየቅ ይችላሉ። ሁልጊዜ በጥቅሉ ላይ ያለውን የመድሃኒት መጠን ይከተሉ። ከ16 አመት በታች ለሆኑ ህፃናት አስፕሪን አይስጡ።"
+            "safety_note": "ህመምን ለመርዳት ስለ ፓራሲታሞል ወይም አይቡፕሮፌን ያሉ አማራጮችን ፋርማሲስት መጠየቅ ይችላሉ። ሁልጊዜ በጥቅሉ ላይ ያለውን የመድሀኒት መጠን ይከተሉ። ከ16 አመት በታች ለሆኑ ህፃናት አስፕሪን አይስጡ።"
           }
         ],
         "seek_care_if": [
@@ -302,6 +302,3584 @@
           "ፊኛዎን ወይም አንጀትዎን ለመቆጣጠር ከተቸገሩ።",
           "ህመሙ ከጥቂት ሳምንታት የራስ እንክብካቤ በኋላ ካልተሻሻለ።",
           "ከህመሙ ጋር ትኩሳት፣ ብርድ ብርድ ማለት ወይም ያልታወቀ ክብደት መቀነስ ካለብዎ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_diarrhea",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Drink plenty of clear fluids like water, broth, or oral rehydration solution (ORS) to prevent dehydration.",
+          "Eat bland, low-fiber foods such as rice, bananas, applesauce, and toast (BRAT diet).",
+          "Avoid dairy products, fatty, spicy, or high-fiber foods, and caffeine.",
+          "Get plenty of rest."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "anti-diarrheal medication",
+            "safety_note": "You can ask a pharmacist about anti-diarrheal medications like loperamide for adults. Do not use for children unless directed by a doctor. Always follow label instructions."
+          },
+          {
+            "category_name": "oral rehydration salts (ORS)",
+            "safety_note": "ORS are crucial for rehydration, especially for children and the elderly. Mix with clean water as directed."
+          }
+        ],
+        "seek_care_if": [
+          "You have signs of severe dehydration (dizziness, very dry mouth, little or no urine, sunken eyes).",
+          "You have a high fever (above 38.3°C / 101°F).",
+          "You see blood or black, tarry material in your stool.",
+          "The diarrhea lasts for more than 2 days in adults, or 24 hours in children.",
+          "You experience severe abdominal pain.",
+          "You are pregnant or have underlying chronic conditions."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "የሰውነት ፈሳሽ እንዳይቀንስ ለመከላከል እንደ ውሃ፣ ሾርባ ወይም የቃል የሰውነት ፈሳሽ ማሟያ (ORS) ያሉ ብዙ ፈሳሾችን ይጠጡ።",
+          "እንደ ሩዝ፣ ሙዝ፣ የአፕል ሶስ እና ቶስት (BRAT diet) ያሉ ፋይበር የሌላቸውን ምግቦች ይመገቡ።",
+          "የወተት ተዋጽኦዎችን፣ ቅባት የበዛባቸውን፣ ቅመም የበዛባቸውን ወይም ከፍተኛ ፋይበር ያላቸውን ምግቦች እና ካፌይን ያስወግዱ።",
+          "በቂ እረፍት ያግኙ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ተቅማጥ ማቆሚያ መድሃኒት",
+            "safety_note": "ለአዋቂዎች እንደ ሎፔራሚድ ያሉ ተቅማጥ ማቆሚያ መድሃኒቶችን ፋርማሲስት መጠየቅ ይችላሉ። በሀኪም ካልታዘዘ በስተቀር ለህፃናት አይጠቀሙ። ሁልጊዜ የመድሃኒቱን መመሪያ ይከተሉ።"
+          },
+          {
+            "category_name": "የቃል የሰውነት ፈሳሽ ማሟያ (ORS)",
+            "safety_note": "ORS በተለይ ለህፃናት እና ለአረጋውያን የሰውነት ፈሳሽ ለመተካት ወሳኝ ነው። እንደተመከረው በንጹህ ውሃ ይቀላቅሉ።"
+          }
+        ],
+        "seek_care_if": [
+          "የከባድ የሰውነት ፈሳሽ እጥረት ምልክቶች (ማዞር፣ በጣም የደረቀ አፍ፣ አነስተኛ ወይም ምንም ሽንት አለመኖር፣ የገቡ አይኖች) ካሉዎት።",
+          "ከፍተኛ ትኩሳት (ከ38.3°C / 101°F በላይ) ካለብዎ።",
+          "በሰገራዎ ውስጥ ደም ወይም ጥቁር፣ ሬንጅ የሚመስል ነገር ካዩ።",
+          "ተቅማጡ ለአዋቂዎች ከ2 ቀናት በላይ፣ ወይም ለህፃናት ከ24 ሰአት በላይ ከቆየ።",
+          "ከባድ የሆድ ህመም ካለብዎ።",
+          "ነፍሰ ጡር ከሆኑ ወይም መሰረታዊ የሆኑ ሥር የሰደዱ በሽታዎች ካለብዎት።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "constipation",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Increase your fiber intake by eating more fruits, vegetables, and whole grains.",
+          "Drink plenty of water and other fluids throughout the day.",
+          "Get regular physical activity.",
+          "Establish a regular time for bowel movements and don't rush."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "fiber supplement or stool softener",
+            "safety_note": "You can ask a pharmacist about fiber supplements or stool softeners. Always follow the label instructions and do not overuse laxatives, which can lead to dependence."
+          }
+        ],
+        "seek_care_if": [
+          "You have severe abdominal pain or cramping.",
+          "You have blood in your stool.",
+          "Constipation is new and persistent, especially if you are over 50.",
+          "You have unexplained weight loss.",
+          "You are unable to pass gas or have vomiting along with constipation."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ብዙ ፍራፍሬዎችን፣ አትክልቶችን እና ሙሉ እህሎችን በመመገብ የፋይበር መጠንዎን ይጨምሩ።",
+          "ቀኑን ሙሉ ብዙ ውሃ እና ሌሎች ፈሳሾችን ይጠጡ።",
+          "በየጊዜው የአካል ብቃት እንቅስቃሴ ያድርጉ።",
+          "ለሰገራ መውጫ መደበኛ ሰዓት ያውጡ እና አይቸኩሉ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ፋይበር ማሟያ ወይም የሰገራ ማለስለሻ",
+            "safety_note": "ስለ ፋይበር ማሟያዎች ወይም የሰገራ ማለስለሻዎች ፋርማሲስት መጠየቅ ይችላሉ። ሁልጊዜ የመድሃኒቱን መመሪያ ይከተሉ እና ወደ ጥገኝነት ሊያመራ ስለሚችል የላክሳቲቭ (laxatives) መድሃኒቶችን ከመጠን በላይ አይጠቀሙ።"
+          }
+        ],
+        "seek_care_if": [
+          "ከባድ የሆድ ህመም ወይም ቁርጠት ካለብዎ።",
+          "በሰገራዎ ውስጥ ደም ካለብዎ።",
+          "ሆድ ድርቀት አዲስ እና የማያቋርጥ ከሆነ፣ በተለይም ከ50 አመት በላይ ከሆኑ።",
+          "ያልታወቀ ክብደት መቀነስ ካለብዎ።",
+          "ጋዝ ማስወጣት ካልቻሉ ወይም ከሆድ ድርቀት ጋር ማስታወክ ካለብዎ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_nausea",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Sip on clear, cold liquids slowly.",
+          "Eat bland, light foods like crackers, toast, or bananas.",
+          "Avoid greasy, spicy, or sweet foods.",
+          "Rest with your head elevated.",
+          "Try ginger (ginger ale, ginger tea, or small pieces of fresh ginger)."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "anti-nausea medication",
+            "safety_note": "You can ask a pharmacist about anti-nausea medications. Always follow the dosage instructions on the label. Consult a doctor if pregnant."
+          }
+        ],
+        "seek_care_if": [
+          "You are unable to keep any fluids down for 12-24 hours.",
+          "You have signs of severe dehydration (dizziness, very dry mouth, little or no urine).",
+          "You have severe abdominal pain.",
+          "You are vomiting blood or black, tarry material.",
+          "Nausea is accompanied by a severe headache and stiff neck.",
+          "Nausea is persistent and unexplained, especially if pregnant."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ቀዝቃዛ ፈሳሾችን ቀስ ብለው ይጎንጩ።",
+          "እንደ ብስኩት (crackers)፣ ቶስት ወይም ሙዝ ያሉ ቀላል ምግቦችን ይመገቡ።",
+          "ቅባት የበዛባቸው፣ ቅመም የበዛባቸው ወይም ጣፋጭ ምግቦችን ያስወግዱ።",
+          "ራስዎን ከፍ አድርገው ያርፉ።",
+          "ዝንጅብል ይሞክሩ (ዝንጅብል አሌ፣ ዝንጅብል ሻይ ወይም ትናንሽ የዝንጅብል ቁርጥራጮች)።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ማቅለሽለሽ ማስታገሻ መድሃኒት",
+            "safety_note": "ስለ ማቅለሽለሽ ማስታገሻ መድሃኒቶች ፋርማሲስት መጠየቅ ይችላሉ። ሁልጊዜ የመድሃኒቱን መመሪያ ይከተሉ። እርጉዝ ከሆኑ ሐኪም ያማክሩ።"
+          }
+        ],
+        "seek_care_if": [
+          "ከ12-24 ሰአታት ምንም አይነት ፈሳሽ ማቆየት ካልቻሉ።",
+          "የከባድ የሰውነት ፈሳሽ እጥረት ምልክቶች (ማዞር፣ በጣም የደረቀ አፍ፣ አነስተኛ ወይም ምንም ሽንት አለመኖር) ካለዎት።",
+          "ከባድ የሆድ ህመም ካለብዎ።",
+          "ደም ወይም ጥቁር፣ ሬንጅ የሚመስል ነገር ካስታወኩ።",
+          "ማቅለሽለሽው ከባድ ራስ ምታት እና የአንገት ጥንካሬ ጋር አብሮ ከመጣ።",
+          "ማቅለሽለሽው የማያቋርጥ እና ያልታወቀ ከሆነ፣ በተለይም እርጉዝ ከሆኑ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "motion_sickness",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Look at the horizon or a fixed point outside the vehicle.",
+          "Sit in the front seat of a car or near a wing on a plane, where motion is felt least.",
+          "Get fresh air if possible.",
+          "Avoid reading or looking at screens during travel.",
+          "Eat small, bland meals before and during travel. Avoid heavy or greasy foods."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "antiemetic medication (motion sickness)",
+            "safety_note": "You can ask a pharmacist about over-the-counter motion sickness medications like dimenhydrinate (Dramamine). Take before travel and follow dosage instructions. May cause drowsiness."
+          },
+          {
+            "category_name": "ginger supplements",
+            "safety_note": "Ginger can help with nausea. Consult a pharmacist about appropriate forms and dosages, especially if pregnant or on other medications."
+          }
+        ],
+        "seek_care_if": [
+          "Symptoms are severe and lead to significant dehydration (unable to keep fluids down).",
+          "Motion sickness is a new problem, especially in adults, without an obvious cause.",
+          "You experience other unusual symptoms like severe headache, vision changes, or confusion."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "አድማስን ወይም ከተሽከርካሪው ውጭ ያለውን ቋሚ ነጥብ ይመልከቱ።",
+          "በመኪና ፊት ለፊት ወንበር ላይ ወይም በአውሮፕላን ውስጥ ከክንፍ አጠገብ ይቀመጡ፣ እንቅስቃሴው በጣም ትንሽ የሚሰማበት ቦታ።",
+          "የሚቻል ከሆነ ንጹህ አየር ያግኙ።",
+          "በጉዞ ወቅት ከማንበብ ወይም ስክሪን ከመመልከት ይቆጠቡ።",
+          "ከጉዞ በፊት እና በጉዞ ወቅት ትንሽና ያልቦኩ ምግቦችን ይመገቡ። ከባድ ወይም ቅባት የበዛባቸው ምግቦችን ያስወግዱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "እንቅስቃሴ ሲሆን ማቅለሽለሽ ማስታገሻ መድሃኒት",
+            "safety_note": "ስለ ያለሀኪም ማዘዣ የእንቅስቃሴ ሲሆን ማቅለሽለሽ መድሃኒቶች እንደ ዲመንሃይድሪኔት (Dramamine) ያሉ ፋርማሲስት መጠየቅ ይችላሉ። ከጉዞ በፊት ይውሰዱ እና የመድሃኒቱን መመሪያ ይከተሉ። እንቅልፍ ሊያመጣ ይችላል።"
+          },
+          {
+            "category_name": "ዝንጅብል ማሟያዎች",
+            "safety_note": "ዝንጅብል ማቅለሽለሽ ለመቀነስ ይረዳል። በተለይም እርጉዝ ከሆኑ ወይም ሌሎች መድሃኒቶችን የሚወስዱ ከሆነ ስለ ተገቢው ቅርፅ እና የመድሃኒት መጠን ፋርማሲስት ያማክሩ።"
+          }
+        ],
+        "seek_care_if": [
+          "ምልክቶች ከባድ ከሆኑ እና ከፍተኛ የሰውነት ፈሳሽ እጥረት ካስከተሉ (ፈሳሾችን ማቆየት ካልቻሉ)።",
+          "የእንቅስቃሴ ሲሆን ማቅለሽለሽ አዲስ ችግር ከሆነ፣ በተለይም በአዋቂዎች ላይ፣ ግልጽ የሆነ ምክንያት ከሌለው።",
+          "ሌሎች ያልተለመዱ ምልክቶች እንደ ከባድ ራስ ምታት፣ የእይታ ለውጦች ወይም ግራ መጋባት ካጋጠመዎት።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_allergy_symptoms",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Avoid allergens (e.g., pollen, dust, pet dander) that trigger your symptoms.",
+          "Rinse your nose with saline solution to clear allergens and mucus.",
+          "Use a cool compress on itchy eyes.",
+          "Stay hydrated.",
+          "Keep windows closed during high pollen counts."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "antihistamine",
+            "safety_note": "You can ask a pharmacist about over-the-counter antihistamines (e.g., cetirizine, loratadine). Follow label instructions. Some may cause drowsiness."
+          },
+          {
+            "category_name": "nasal spray (saline or corticosteroid)",
+            "safety_note": "Saline nasal sprays are generally safe. For corticosteroid nasal sprays, use as directed and consult a pharmacist or doctor."
+          }
+        ],
+        "seek_care_if": [
+          "You experience difficulty breathing, wheezing, or tightness in your chest.",
+          "You have swelling of your face, lips, or tongue.",
+          "You develop hives all over your body with severe itching.",
+          "Symptoms do not improve with self-care or worsen.",
+          "You have a known severe allergy (anaphylaxis risk)."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ምልክቶችዎን የሚያስነሱትን አለርጂዎችን (ለምሳሌ የአበባ ዱቄት፣ አቧራ፣ የእንስሳት ፀጉር) ያስወግዱ።",
+          "አለርጂዎችን እና ንፍጥን ለማጽዳት አፍንጫዎን በጨው ውሃ ያጠቡ።",
+          "በሚያሳክክ አይኖችዎ ላይ ቀዝቃዛ ጨርቅ ይጠቀሙ።",
+          "በቂ ፈሳሽ ይጠጡ።",
+          "ብዙ የአበባ ዱቄት በሚኖርበት ጊዜ መስኮቶችን ዝጉ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ፀረ-ሂስታሚን (Antihistamine)",
+            "safety_note": "ስለ ያለሀኪም ማዘዣ ፀረ-ሂስታሚኖች (ለምሳሌ ሴቲሪዚን፣ ሎራታዲን) ፋርማሲስት መጠየቅ ይችላሉ። የመድሃኒቱን መመሪያ ይከተሉ። አንዳንዶቹ እንቅልፍ ሊያመጡ ይችላሉ።"
+          },
+          {
+            "category_name": "የአፍንጫ ስፕሬይ (ጨው የያዘ ወይም ኮርቲኮስቴሮይድ)",
+            "safety_note": "የጨው የአፍንጫ ስፕሬይዎች በአጠቃላይ ደህና ናቸው። ለኮርቲኮስቴሮይድ የአፍንጫ ስፕሬይዎች፣ እንደተመከረው ይጠቀሙ እና ፋርማሲስት ወይም ሐኪም ያማክሩ።"
+          }
+        ],
+        "seek_care_if": [
+          "ለመተንፈስ ከተቸገሩ፣ ጩኸት (wheezing) ወይም የደረት መጨናነቅ ካለብዎት።",
+          "ፊትዎ፣ ከንፈርዎ ወይም ምላስዎ ካበጠ።",
+          "በከፍተኛ ማሳከክ በመላ ሰውነትዎ ላይ ሽፍታ (hives) ካጋጠመዎት።",
+          "ምልክቶች በራስ እንክብካቤ ካልተሻሻሉ ወይም ከተባባሱ።",
+          "ከባድ አለርጂ (አናፊላክሲስ ስጋት) እንዳለብዎ ከታወቀ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "muscle_strain_sprain",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Rest: Avoid activities that cause pain.",
+          "Ice: Apply an ice pack wrapped in a cloth for 15-20 minutes every 2-3 hours.",
+          "Compression: Use an elastic bandage to reduce swelling (don't wrap too tightly).",
+          "Elevation: Raise the injured limb above your heart if possible.",
+          "Gentle stretching and movement after the initial pain subsides."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "pain reliever",
+            "safety_note": "You can ask a pharmacist about options like paracetamol or ibuprofen to help with pain and inflammation. Follow dosage instructions. Do not use ibuprofen if pregnant without consulting a doctor."
+          },
+          {
+            "category_name": "topical pain relief cream",
+            "safety_note": "Ask a pharmacist about creams or gels for muscle pain. Apply as directed to the affected area."
+          }
+        ],
+        "seek_care_if": [
+          "You cannot bear weight on the injured limb or it's severely deformed.",
+          "You have severe pain that doesn't improve with self-care.",
+          "Numbness, tingling, or coldness in the injured area.",
+          "The swelling or bruising is rapidly worsening.",
+          "Pain persists for more than a few days despite R.I.C.E. treatment."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "እረፍት፡ ህመም የሚያስከትሉ እንቅስቃሴዎችን ያስወግዱ።",
+          "በረዶ፡ በጨርቅ የተጠቀለለ በረዶ በየ2-3 ሰአቱ ለ15-20 ደቂቃ ያድርጉ።",
+          "መጠቅለል፡ እብጠትን ለመቀነስ የመለጠጥ ባንዴጅ ይጠቀሙ (በጣም አጥብቀው አይጠቅልሉ)።",
+          "ከፍ ማድረግ፡ የተጎዳውን እግርዎ ወይም ክንድዎ ከልብዎ ከፍ ያለ እንዲሆን ያድርጉ።",
+          "የመጀመሪያው ህመም ከቀዘቀዘ በኋላ በቀስታ መለጠጥ እና መንቀሳቀስ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ህመም ማስታገሻ",
+            "safety_note": "ህመም እና እብጠትን ለመርዳት ስለ ፓራሲታሞል ወይም አይቡፕሮፌን ያሉ አማራጮችን ፋርማሲስት መጠየቅ ይችላሉ። የመድሃኒቱን መመሪያ ይከተሉ። እርጉዝ ከሆኑ ሀኪም ሳያማክሩ አይቡፕሮፌን አይጠቀሙ።"
+          },
+          {
+            "category_name": "ለቆዳ የሚቀባ የህመም ማስታገሻ ክሬም",
+            "safety_note": "ስለ ጡንቻ ህመም ክሬም ወይም ጄል ፋርማሲስት ይጠይቁ። በተጎዳው አካባቢ እንደታዘዘው ይቀቡ።"
+          }
+        ],
+        "seek_care_if": [
+          "በተጎዳው እግር/ክንድዎ ላይ መቆም ካልቻሉ ወይም በጣም ከተበላሸ።",
+          "በራስ እንክብካቤ የማይሻሻል ከባድ ህመም ካለብዎት።",
+          "በተጎዳው አካባቢ መደንዘዝ፣ መኮማተር ወይም ቅዝቃዜ ከተሰማዎት።",
+          "እብጠቱ ወይም መሰንጠቁ በፍጥነት እየባሰ ከሄደ።",
+          "ህመሙ R.I.C.E. ህክምና ቢደረግለትም ከጥቂት ቀናት በላይ ከቆየ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_acne",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Wash affected skin areas twice daily with a mild cleanser.",
+          "Use non-comedogenic (won't clog pores) moisturizers and makeup.",
+          "Avoid picking or squeezing pimples, as this can worsen acne and cause scarring.",
+          "Keep hair clean and off your face.",
+          "Shower after sweating or exercise."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "topical acne treatment (e.g., benzoyl peroxide, salicylic acid)",
+            "safety_note": "Ask a pharmacist about creams or gels containing benzoyl peroxide or salicylic acid. Start with lower strengths to avoid irritation. Follow product instructions carefully."
+          }
+        ],
+        "seek_care_if": [
+          "Your acne is severe (large, painful cysts and nodules).",
+          "Over-the-counter treatments are not effective after several weeks of consistent use.",
+          "Acne is causing significant emotional distress or scarring.",
+          "You suspect a medication or underlying health condition is causing your acne."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "የተጎዳውን የቆዳ አካባቢ በቀን ሁለት ጊዜ ለስላሳ ማጽጃ ይታጠቡ።",
+          "ቀዳዳዎችን የማይዘጉ (non-comedogenic) እርጥበት ማድረቂያዎችን እና ሜካፕን ይጠቀሙ።",
+          "ብጉርን ከመቆንጠጥ ወይም ከመጭመቅ ይቆጠቡ፣ ምክንያቱም ይህ ብጉርን ሊያባብስ እና ጠባሳ ሊያስከትል ይችላል።",
+          "ፀጉርዎን ንጹህ ያድርጉት እና ከፊትዎ ያርቁት።",
+          "ካላብዎ ወይም ከአካል ብቃት እንቅስቃሴ በኋላ ይታጠቡ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ለብጉር የሚቀባ ህክምና (ለምሳሌ ቤንዞይል ፔሮክሳይድ፣ ሳሊሲሊክ አሲድ)",
+            "safety_note": "ስለ ቤንዞይል ፔሮክሳይድ ወይም ሳሊሲሊክ አሲድ የያዙ ክሬሞች ወይም ጄልዎች ፋርማሲስት ይጠይቁ። ብስጭትን ለማስወገድ በዝቅተኛ ጥንካሬ ይጀምሩ። የምርቱን መመሪያ በጥንቃቄ ይከተሉ።"
+          }
+        ],
+        "seek_care_if": [
+          "ብጉርዎ በጣም ከባድ ከሆነ (ትልቅ፣ የሚያሰቃዩ ኪስቶች እና እብጠቶች)።",
+          "ያለሀኪም ማዘዣ የሚገኙ ህክምናዎች በተከታታይ ለብዙ ሳምንታት ከተጠቀሙ በኋላ ውጤታማ ካልሆኑ።",
+          "ብጉርዎ ከፍተኛ ስሜታዊ ጭንቀት ወይም ጠባሳ የሚያስከትል ከሆነ።",
+          "መድሃኒት ወይም ሌላ የጤና ችግር ብጉርዎን እያስከተለ እንደሆነ ከጠረጠሩ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "dry_skin",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Moisturize your skin immediately after bathing or showering while skin is still damp.",
+          "Use gentle, fragrance-free cleansers and moisturizers.",
+          "Avoid hot baths and long showers, which can strip natural oils from your skin.",
+          "Drink plenty of water to stay hydrated from within.",
+          "Use a humidifier in your home, especially during dry seasons."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "emollient cream or lotion",
+            "safety_note": "Ask a pharmacist about fragrance-free, hypoallergenic moisturizers or creams designed for dry, sensitive skin. Apply generously and regularly."
+          }
+        ],
+        "seek_care_if": [
+          "Your dry skin is accompanied by redness, swelling, or open sores that could be infected.",
+          "You have severe itching that interferes with sleep or daily activities.",
+          "Large areas of your skin are peeling or flaking.",
+          "Dry skin persists or worsens despite consistent self-care efforts."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ከገላ መታጠብ በኋላ ቆዳዎ እርጥብ እያለ ወዲያውኑ እርጥበት ማድረቂያ (moisturizer) ይጠቀሙ።",
+          "ለስላሳ፣ ሽቶ የሌላቸው ማጽጃዎችን እና እርጥበት ማድረቂያዎችን ይጠቀሙ።",
+          "የቆዳዎትን የተፈጥሮ ዘይቶች ሊያስወግዱ ስለሚችሉ ከሞቃት ውሃ ጋር ከመታጠብ እና ለረጅም ጊዜ ገላዎን ከመታጠብ ይቆጠቡ።",
+          "ከውስጥ እንዲረጡ ብዙ ውሃ ይጠጡ።",
+          "በቤትዎ ውስጥ በተለይም በደረቅ ወቅቶች እርጥበት ማድረቂያ (humidifier) ይጠቀሙ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የቆዳ ማለስለሻ ክሬም ወይም ሎሽን",
+            "safety_note": "ስለ ሽቶ የሌላቸው፣ የአለርጂ ምላሽ የማያስከትሉ እርጥበት ማድረቂያዎች ወይም ለደረቅና ስሜታዊ ቆዳ የተሰሩ ክሬሞች ፋርማሲስት ይጠይቁ። በልግስና እና በመደበኛነት ይጠቀሙ።"
+          }
+        ],
+        "seek_care_if": [
+          "ደረቅ ቆዳዎ ከቀይነት፣ ከእብጠት ወይም ከበሽታ ሊበከሉ ከሚችሉ ክፍት ቁስሎች ጋር አብሮ ከመጣ።",
+          "ከባድ ማሳከክ እንቅልፍዎን ወይም የዕለት ተዕለት እንቅስቃሴዎን የሚረብሽ ከሆነ።",
+          "የቆዳዎ ትልቅ ክፍል እየተላጠ ወይም እየተሰነጣጠቀ ከሆነ።",
+          "ደረቅ ቆዳዎ በቋሚ የራስ እንክብካቤ ጥረቶች ቢደረግለትም ከቀጠለ ወይም ከተባባሰ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "insect_bites_stings",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Clean the area gently with soap and water.",
+          "Apply a cold pack or ice wrapped in a cloth to reduce swelling and itching.",
+          "Avoid scratching the bite, which can lead to infection.",
+          "Elevate the affected limb if swelling is present."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "topical anti-itch cream (e.g., hydrocortisone, calamine lotion)",
+            "safety_note": "You can ask a pharmacist about hydrocortisone cream or calamine lotion to relieve itching. Follow product instructions and avoid use on broken skin without advice."
+          },
+          {
+            "category_name": "oral antihistamine",
+            "safety_note": "For widespread itching, an oral antihistamine may help. Consult a pharmacist for suitable options and dosage, especially for children or if pregnant."
+          }
+        ],
+        "seek_care_if": [
+          "You have signs of a severe allergic reaction (difficulty breathing, swelling of the face/lips/throat, dizziness, widespread rash). Seek emergency care immediately.",
+          "The bite area becomes infected (pus, increasing pain, redness, warmth).",
+          "The swelling is rapidly worsening or spreading far from the bite site.",
+          "You have a fever, body aches, or headache after a bite.",
+          "You were bitten by a venomous spider or stung by a scorpion (seek emergency care)."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "አካባቢውን በሳሙና እና በውሃ በቀስታ ያጽዱ።",
+          "እብጠትን እና ማሳከክን ለመቀነስ በጨርቅ የተጠቀለለ ቀዝቃዛ ጥቅል ወይም በረዶ ያድርጉ።",
+          "ንክሻውን ከመቧጨር ይቆጠቡ፣ ይህም ኢንፌክሽን ሊያስከትል ይችላል።",
+          "እብጠት ካለበት የተጎዳውን እግር ከፍ ያድርጉ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ለቆዳ የሚቀባ የፀረ-ማሳከክ ክሬም (ለምሳሌ ሃይድሮኮርቲሶን፣ ካላሚን ሎሽን)",
+            "safety_note": "ስለ ሃይድሮኮርቲሶን ክሬም ወይም ካላሚን ሎሽን ማሳከክን ለማስታገስ ፋርማሲስት መጠየቅ ይችላሉ። የምርቱን መመሪያ ይከተሉ እና በቁስል ላይ ያለ ምክር ከመጠቀም ይቆጠቡ።"
+          },
+          {
+            "category_name": "የአፍ ውስጥ ፀረ-ሂስታሚን",
+            "safety_note": "ለተስፋፋ ማሳከክ፣ የአፍ ውስጥ ፀረ-ሂስታሚን ሊረዳ ይችላል። ለህፃናት ወይም እርጉዝ ከሆኑ ለተገቢ አማራጮች እና የመድሃኒት መጠን ፋርማሲስት ያማክሩ።"
+          }
+        ],
+        "seek_care_if": [
+          "የከባድ የአለርጂ ምላሽ ምልክቶች (ለመተንፈስ መቸገር፣ የፊት/ከንፈር/ጉሮሮ እብጠት፣ ማዞር፣ የተስፋፋ ሽፍታ) ካለብዎ። ወዲያውኑ የድንገተኛ ህክምና ይፈልጉ።",
+          "የንክሻው አካባቢ ከተበከለ (መግል፣ እየጨመረ የሚሄድ ህመም፣ መቅላት፣ ሙቀት)።",
+          "እብጠቱ በፍጥነት እየባሰ ከሄደ ወይም ከንክሻው ቦታ ርቆ እየተስፋፋ ከሆነ።",
+          "ከንክሻ በኋላ ትኩሳት፣ የሰውነት ህመም ወይም ራስ ምታት ካለብዎ።",
+          "መርዛማ ሸረሪት ከተነከሱ ወይም ጊንጥ ከተወጉ (ወዲያውኑ የድንገተኛ ህክምና ይፈልጉ)።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_sunburn",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Take cool baths or showers to soothe the skin.",
+          "Apply aloe vera gel or a mild moisturizer to the affected areas.",
+          "Drink plenty of water to prevent dehydration.",
+          "Avoid further sun exposure until the sunburn has healed.",
+          "Do not break any blisters."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "pain reliever",
+            "safety_note": "You can ask a pharmacist about paracetamol or ibuprofen to help relieve pain. Always follow dosage instructions."
+          },
+          {
+            "category_name": "aloe vera gel or after-sun lotion",
+            "safety_note": "Choose products without alcohol or strong fragrances, as these can irritate already sunburnt skin. Apply gently."
+          }
+        ],
+        "seek_care_if": [
+          "You have large blisters covering a significant portion of your body.",
+          "You experience fever, chills, severe pain, or confusion.",
+          "Signs of infection develop (pus, increasing redness, streaks).",
+          "You have severe swelling.",
+          "Sunburn is in a baby or young child (seek medical attention immediately)."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ቆዳዎን ለማረጋጋት በቀዝቃዛ ውሃ ይታጠቡ ወይም ሻወር ይውሰዱ።",
+          "የአሎ ቬራ ጄል ወይም ለስላሳ እርጥበት ማድረቂያ በተጎዱት አካባቢዎች ላይ ይለብሱ።",
+          "የሰውነት ፈሳሽ እንዳይቀንስ ለመከላከል ብዙ ውሃ ይጠጡ።",
+          "የፀሐይ ቃጠሎ እስኪድን ድረስ ለፀሐይ ከመጋለጥ ይቆጠቡ።",
+          "ምንም ዓይነት አረፋ አያፍስሱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ህመም ማስታገሻ",
+            "safety_note": "ህመምን ለመቀነስ ስለ ፓራሲታሞል ወይም አይቡፕሮፌን ፋርማሲስት መጠየቅ ይችላሉ። ሁልጊዜ የመድሃኒቱን መመሪያ ይከተሉ።"
+          },
+          {
+            "category_name": "አሎ ቬራ ጄል ወይም ከፀሐይ በኋላ የሚቀባ ሎሽን",
+            "safety_note": "ቆዳዎትን ሊያበሳጩ ስለሚችሉ አልኮል ወይም ጠንካራ ሽታ የሌላቸው ምርቶችን ይምረጡ። በቀስታ ይለብሱ።"
+          }
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "chapped_lips",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Apply a moisturizing lip balm frequently throughout the day.",
+          "Choose lip balms with ingredients like petroleum jelly, beeswax, or shea butter.",
+          "Avoid licking your lips, which can worsen dryness.",
+          "Stay hydrated by drinking plenty of water.",
+          "Protect your lips from sun and wind exposure with a balm containing SPF."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "medicated lip balm",
+            "safety_note": "If very sore or cracked, ask a pharmacist about medicated lip balms that contain ingredients like hydrocortisone (for short-term use only) or gentle antiseptics."
+          }
+        ],
+        "seek_care_if": [
+          "Chapped lips are very severe, painful, and do not improve with consistent self-care.",
+          "You develop signs of infection (redness, swelling, pus, painful sores that don't heal).",
+          "Cracks are deep and bleeding frequently.",
+          "You suspect an allergic reaction to a lip product."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "በቀን ውስጥ ብዙ ጊዜ እርጥበት የሚያመጣ የከንፈር ቅባት ይጠቀሙ።",
+          "ፔትሮሊየም ጄሊ፣ የንብ ሰም ወይም የሺአ ቅቤ የያዙ የከንፈር ቅባቶችን ይምረጡ።",
+          "ከንፈርዎን ከመላስ ይቆጠቡ፣ ይህም ድርቀትን ሊያባብስ ይችላል።",
+          "ብዙ ውሃ በመጠጣት ሰውነትዎ እርጥበት እንዲኖረው ያድርጉ።",
+          "ከፀሐይ እና ከነፋስ ለመከላከል SPF የያዘ የከንፈር ቅባት ይጠቀሙ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የመድሃኒት የከንፈር ቅባት",
+            "safety_note": "በጣም ህመም ወይም ስንጥቅ ካለ፣ ስለ ሃይድሮኮርቲሶን (ለአጭር ጊዜ አገልግሎት ብቻ) ወይም ለስላሳ ፀረ-ተባይ መድሃኒቶች የያዙ የከንፈር ቅባቶችን ፋርማሲስት መጠየቅ ይችላሉ።"
+          }
+        ],
+        "seek_care_if": [
+          "የተሰነጠቀ ከንፈር በጣም ከባድ፣ የሚያሰቃይ እና በቋሚ የራስ እንክብካቤ የማይሻሻል ከሆነ።",
+          "የኢንፌክሽን ምልክቶች (መቅላት፣ እብጠት፣ መግል፣ የማይድኑ የሚያሰቃዩ ቁስሎች) ካጋጠመዎት።",
+          "ስንጥቆቹ ጥልቅ እና ደም የሚፈሱ ከሆነ።",
+          "ለከንፈር ምርት የአለርጂ ምላሽ እንደሆነ ከጠረጠሩ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "minor_cuts_scrapes",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Wash your hands thoroughly before treating the wound.",
+          "Clean the cut or scrape gently with mild soap and water.",
+          "Apply gentle pressure with a clean cloth to stop any bleeding.",
+          "Apply a thin layer of petroleum jelly or antibiotic ointment to keep the wound moist.",
+          "Cover the wound with a sterile bandage to keep it clean and protected."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "antiseptic solution (e.g., povidone-iodine, chlorhexidine) or antibiotic ointment",
+            "safety_note": "Ask a pharmacist about appropriate antiseptics or antibiotic ointments. Follow product instructions. Do not use hydrogen peroxide or alcohol on open wounds, as they can damage tissue."
+          },
+          {
+            "category_name": "sterile bandages and tape",
+            "safety_note": "Ensure bandages are clean and changed daily or when wet/dirty."
+          }
+        ],
+        "seek_care_if": [
+          "The bleeding is heavy or does not stop after 10 minutes of direct pressure.",
+          "The cut is deep, wide, or gaping open.",
+          "You can see fat, muscle, or bone.",
+          "The wound is caused by a dirty or rusty object, or an animal/human bite.",
+          "Signs of infection develop (redness, swelling, pus, increasing pain, fever).",
+          "The wound is on the face or near a joint and might affect function or appearance."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ቁስሉን ከማከምዎ በፊት እጅዎን በደንብ ይታጠቡ።",
+          "ቁስሉን ወይም መፋቅዎን ለስላሳ ሳሙና እና ውሃ በቀስታ ያጽዱ።",
+          "ደም መፍሰስን ለማቆም በንጹህ ጨርቅ በቀስታ ይጫኑ።",
+          "ቁስሉን እርጥብ ለማድረግ ቀጭን የፔትሮሊየም ጄሊ ወይም አንቲባዮቲክ ቅባት ይለብሱ።",
+          "ቁስሉን ንፁህ እና የተጠበቀ እንዲሆን በንፁህ ማሰሪያ ይሸፍኑ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ፀረ-ተባይ መፍትሄ (ለምሳሌ ፖቪዶን-አዮዲን፣ ክሎርሄክሲዲን) ወይም አንቲባዮቲክ ቅባት",
+            "safety_note": "ስለ ተገቢ ፀረ-ተባይ መድሃኒቶች ወይም አንቲባዮቲክ ቅባቶች ፋርማሲስት ይጠይቁ። የምርቱን መመሪያ ይከተሉ። በክፍት ቁስሎች ላይ ሃይድሮጂን ፔሮክሳይድ ወይም አልኮል አይጠቀሙ፣ ምክንያቱም ህብረ ህዋሳትን ሊጎዱ ይችላሉ።"
+          },
+          {
+            "category_name": "ንጹህ ማሰሪያዎች እና ቴፕ",
+            "safety_note": "ማሰሪያዎች ንጹህ መሆናቸውን ያረጋግጡ እና በየቀኑ ወይም እርጥብ/ቆሻሻ ሲሆኑ ይቀይሩ።"
+          }
+        ],
+        "seek_care_if": [
+          "ደም መፍሰሱ ከባድ ከሆነ ወይም ለ10 ደቂቃ በቀጥታ ከተጫኑ በኋላ ካልቆመ።",
+          "ቁስሉ ጥልቅ፣ ሰፊ ወይም ክፍት ከሆነ።",
+          "ስብ፣ ጡንቻ ወይም አጥንት ማየት ከቻሉ።",
+          "ቁስሉ በቆሻሻ ወይም ዝገት ባለው ነገር፣ ወይም በእንስሳ/በሰው ንክሻ የተከሰተ ከሆነ።",
+          "የኢንፌክሽን ምልክቶች ከታዩ (መቅላት፣ እብጠት፣ መግል፣ እየጨመረ የሚሄድ ህመም፣ ትኩሳት)።",
+          "ቁስሉ ፊት ላይ ወይም በመገጣጠሚያ አቅራቢያ ከሆነ እና ተግባርን ወይም መልክን ሊጎዳ ይችላል።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "blisters_foot",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Clean the blister and surrounding skin with soap and water.",
+          "Protect the blister with a soft, clean bandage or blister plaster.",
+          "Avoid popping blisters, as the skin acts as a natural barrier to infection.",
+          "Wear comfortable, well-fitting shoes to prevent further irritation.",
+          "If the blister breaks naturally, gently clean the area and apply an antibiotic ointment before bandaging."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "blister plaster or hydrocolloid dressing",
+            "safety_note": "Ask a pharmacist about specialized blister plasters which can cushion the area and promote healing. Follow product instructions."
+          },
+          {
+            "category_name": "antiseptic wipes or mild soap",
+            "safety_note": "Use these to keep the area clean before applying a dressing."
+          }
+        ],
+        "seek_care_if": [
+          "The blister shows signs of infection (pus, increased redness, warmth, increasing pain).",
+          "The blister is very large, extremely painful, or deep.",
+          "You have multiple blisters without a clear cause.",
+          "You have diabetes or a compromised immune system (seek medical attention for any blisters)."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "አረፋውን እና በዙሪያው ያለውን ቆዳ በሳሙና እና በውሃ ያጽዱ።",
+          "አረፋውን ለስላሳ፣ ንጹህ ማሰሪያ ወይም የአረፋ ፕላስተር ይከላከሉ።",
+          "የቆዳው ኢንፌክሽንን የሚከላከል የተፈጥሮ መከላከያ ስለሆነ አረፋዎችን ከመፍረስ ይቆጠቡ።",
+          "ተጨማሪ ብስጭትን ለመከላከል ምቹ፣ በሚገባ የሚገጥሙ ጫማዎችን ይልበሱ።",
+          "አረፋው በራሱ ከተሰበረ፣ ቦታውን በቀስታ ያጽዱ እና ማሰሪያ ከማድረግዎ በፊት አንቲባዮቲክ ቅባት ይለብሱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የአረፋ ፕላስተር ወይም ሃይድሮኮሎይድ ማሰሪያ",
+            "safety_note": "ቦታውን ሊያለሰልሱ እና ፈውስ ሊያፋጥኑ ስለሚችሉ ልዩ የአረፋ ፕላስተሮች ፋርማሲስት ይጠይቁ። የምርቱን መመሪያ ይከተሉ።"
+          },
+          {
+            "category_name": "ፀረ-ተባይ ማጽጃዎች ወይም ለስላሳ ሳሙና",
+            "safety_note": "አለባበስ ከማድረግዎ በፊት ቦታውን ንጹህ ለማድረግ እነዚህን ይጠቀሙ።"
+          }
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      },
+      "en": {
+        "self_care": [
+          "Clean the blister and surrounding skin with soap and water.",
+          "Protect the blister with a soft, clean bandage or blister plaster.",
+          "Avoid popping blisters, as the skin acts as a natural barrier to infection.",
+          "Wear comfortable, well-fitting shoes to prevent further irritation.",
+          "If the blister breaks naturally, gently clean the area and apply an antibiotic ointment before bandaging."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "blister plaster or hydrocolloid dressing",
+            "safety_note": "Ask a pharmacist about specialized blister plasters which can cushion the area and promote healing. Follow product instructions."
+          },
+          {
+            "category_name": "antiseptic wipes or mild soap",
+            "safety_note": "Use these to keep the area clean before applying a dressing."
+          }
+        ],
+        "seek_care_if": [
+          "The blister shows signs of infection (pus, increased redness, warmth, increasing pain).",
+          "The blister is very large, extremely painful, or deep.",
+          "You have multiple blisters without a clear cause.",
+          "You have diabetes or a compromised immune system (seek medical attention for any blisters)."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      }
+    }
+  },
+  {
+    "topic_key": "heartburn",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Avoid trigger foods like fatty, spicy, acidic foods, caffeine, and chocolate.",
+          "Eat smaller, more frequent meals.",
+          "Don't lie down immediately after eating; wait at least 2-3 hours.",
+          "Elevate the head of your bed by 6-8 inches.",
+          "Avoid tight clothing around your waist."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "antacid",
+            "safety_note": "Ask a pharmacist about antacids for temporary relief. Follow dosage instructions. Do not use them for long periods without consulting a doctor."
+          },
+          {
+            "category_name": "H2 blocker or proton pump inhibitor (PPI)",
+            "safety_note": "For more persistent heartburn, a pharmacist may suggest H2 blockers or PPIs. These should be used as directed and not as a long-term solution without medical advice."
+          }
+        ],
+        "seek_care_if": [
+          "You experience severe chest pain, especially if it spreads to your arm, neck, or jaw (could be a heart attack). Seek emergency care immediately.",
+          "Heartburn is frequent (more than twice a week) or severe, despite lifestyle changes and OTC medications.",
+          "You have difficulty swallowing, unexplained weight loss, or black/bloody stools.",
+          "Symptoms are new and you are over 50 years old.",
+          "You are pregnant and heartburn is severe or persistent (consult your doctor)."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ቅባት የበዛባቸው፣ ቅመም የበዛባቸው፣ አሲዳማ የሆኑ ምግቦችን፣ ካፌይን እና ቸኮሌት የመሳሰሉ ቀስቃሽ ምግቦችን ያስወግዱ።",
+          "አነስተኛ እና ደጋግመው ይመገቡ።",
+          "ከበሉ በኋላ ወዲያውኑ አይተኛ; ቢያንስ 2-3 ሰአታት ይጠብቁ።",
+          "የአልጋዎን ራስ ከ6-8 ኢንች ከፍ ያድርጉ።",
+          "በወገብዎ ላይ ጥብቅ ልብሶችን ከመልበስ ይቆጠቡ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "አንታሲድ (Antacid)",
+            "safety_note": "ስለ አንታሲድ ለጊዜያዊ እፎይታ ፋርማሲስት ይጠይቁ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ። የህክምና ምክር ሳያገኙ ለረጅም ጊዜ አይጠቀሙባቸው።"
+          },
+          {
+            "category_name": "H2 ማገጃ ወይም ፕሮቶን ፓምፕ ኢንቢሂቢተር (PPI)",
+            "safety_note": "ለማያቋርጥ የልብ ህመም፣ ፋርማሲስት H2 ማገጃዎችን ወይም PPIs ሊጠቁሙ ይችላሉ። እነዚህ እንደተመከረው ጥቅም ላይ መዋል አለባቸው እና ያለህክምና ምክር ለረጅም ጊዜ መፍትሄ ተደርጎ መወሰድ የለበትም።"
+          }
+        ],
+        "seek_care_if": [
+          "ከባድ የደረት ህመም ካጋጠመዎት፣ በተለይም ወደ ክንድዎ፣ አንገትዎ ወይም መንጋጋዎ ከተሰራጨ (የልብ ድካም ሊሆን ይችላል)። ወዲያውኑ የድንገተኛ ህክምና ይፈልጉ።",
+          "የልብ ህመም በተደጋጋሚ (በሳምንት ከሁለት ጊዜ በላይ) ወይም ከባድ ከሆነ፣ የህይወት ዘይቤ ለውጦች እና ያለሀኪም ማዘዣ መድሃኒቶች ቢኖሩም።",
+          "ለመዋጥ ከተቸገሩ፣ ያልታወቀ ክብደት መቀነስ፣ ወይም ጥቁር/ደም የያዘ ሰገራ ካለብዎ።",
+          "ምልክቶቹ አዲስ ከሆኑ እና ከ50 አመት በላይ ከሆኑ።",
+          "ነፍሰ ጡር ከሆኑ እና የልብ ህመምዎ ከባድ ወይም የማያቋርጥ ከሆነ (ሐኪምዎን ያማክሩ)።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "common_cold",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Get plenty of rest.",
+          "Drink warm fluids like tea with honey (honey is not for children under 1 year) or broth to soothe your throat.",
+          "Use saline nasal sprays or rinses to clear nasal congestion.",
+          "Humidify the air in your room, especially at night.",
+          "Avoid smoke and other irritants."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "decongestant nasal spray or oral decongestant",
+            "safety_note": "Ask a pharmacist about decongestants for adults. Nasal sprays should not be used for more than 3 days to avoid rebound congestion. Oral decongestants may not be suitable for people with high blood pressure."
+          },
+          {
+            "category_name": "pain reliever / fever reducer",
+            "safety_note": "Paracetamol or ibuprofen can help with body aches and fever. Follow dosage instructions. Do not give aspirin to children."
+          }
+        ],
+        "seek_care_if": [
+          "Your fever is very high (above 39.4°C / 103°F) or lasts longer than 3 days.",
+          "You have difficulty breathing, wheezing, or shortness of breath.",
+          "Severe sore throat or headache that does not improve.",
+          "Chest pain.",
+          "Symptoms worsen or do not improve after 7-10 days.",
+          "You develop new symptoms like severe sinus pain or earache."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "በቂ እረፍት ያግኙ።",
+          "ጉሮሮዎን ለማረጋጋት እንደ ማር ያለ ሻይ (ማር ከአንድ አመት በታች ለሆኑ ህፃናት አይሰጥም) ወይም ሾርባ ያሉ ሞቅ ያሉ ፈሳሾችን ይጠጡ።",
+          "የአፍንጫ መጨናነቅን ለማስወገድ ጨው የያዙ የአፍንጫ ስፕሬይዎችን ወይም ማጠቢያዎችን ይጠቀሙ።",
+          "የክፍልዎን አየር እርጥብ ያድርጉት፣ በተለይም በምሽት።",
+          "ጭስ እና ሌሎች የሚያበሳጩ ነገሮችን ያስወግዱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የአፍንጫ መጨናነቅ ማስታገሻ ስፕሬይ ወይም የአፍ ውስጥ ማስታገሻ",
+            "safety_note": "ስለ አዋቂዎች የአፍንጫ መጨናነቅ ማስታገሻዎች ፋርማሲስት ይጠይቁ። የመርዘኛ መጨናነቅን (rebound congestion) ለማስወገድ የአፍንጫ ስፕሬይዎችን ከ 3 ቀናት በላይ መጠቀም የለብዎትም። የአፍ ውስጥ ማስታገሻዎች የደም ግፊት ላለባቸው ሰዎች ተስማሚ ላይሆኑ ይችላሉ።"
+          },
+          {
+            "category_name": "ህመም ማስታገሻ / ትኩሳት መቀነሻ",
+            "safety_note": "ፓራሲታሞል ወይም አይቡፕሮፌን የሰውነት ህመም እና ትኩሳትን ለመርዳት ይችላሉ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ። አስፕሪን ለህፃናት አይስጡ።"
+          }
+        ],
+        "seek_care_if": [
+          "ትኩሳትዎ በጣም ከፍተኛ (ከ39.4°C / 103°F በላይ) ከሆነ ወይም ከ3 ቀናት በላይ ከቆየ።",
+          "ለመተንፈስ ከተቸገሩ፣ ጩኸት (wheezing) ወይም ትንፋሽ ማጠር ካለብዎ።",
+          "ከባድ የጉሮሮ ህመም ወይም ራስ ምታት የማይሻሻል ከሆነ።",
+          "የደረት ህመም ካለብዎ።",
+          "ምልክቶች ከ7-10 ቀናት በኋላ ካልተሻሻሉ ወይም ከተባባሱ።",
+          "እንደ ከባድ የሳይነስ ህመም ወይም የጆሮ ህመም ያሉ አዲስ ምልክቶች ካጋጠመዎት።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "nasal_congestion",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Use a saline nasal spray or rinse (neti pot) to help clear nasal passages.",
+          "Inhale steam from a hot shower or a bowl of hot water (carefully).",
+          "Use a humidifier in your room, especially at night.",
+          "Drink plenty of fluids to thin mucus.",
+          "Elevate your head with extra pillows while sleeping."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "decongestant nasal spray or oral decongestant",
+            "safety_note": "Ask a pharmacist about decongestants for adults. Nasal sprays should not be used for more than 3 days to avoid rebound congestion. Oral decongestants may not be suitable for people with high blood pressure."
+          }
+        ],
+        "seek_care_if": [
+          "Congestion is accompanied by a high fever (above 38.3°C / 101°F).",
+          "Symptoms do not improve after 7-10 days or worsen.",
+          "You experience severe facial pain or pressure, especially around your eyes or forehead.",
+          "You have green or yellow nasal discharge for several days.",
+          "You have difficulty breathing or severe shortness of breath."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "የአፍንጫ ቀዳዳዎችን ለማጽዳት ጨው የያዘ የአፍንጫ ስፕሬይ ወይም ማጠቢያ (ኔቲ ፖት) ይጠቀሙ።",
+          "ከሞቃት ሻወር ወይም ከሞቀ ውሃ እንፋሎት ይተንፍሱ (በጥንቃቄ)።",
+          "የክፍልዎን አየር እርጥብ ያድርጉት፣ በተለይም በምሽት።",
+          "አክታን ለማቅጠን ብዙ ፈሳሾችን ይጠጡ።",
+          "ሲተኙ ጭንቅላትዎን ተጨማሪ ትራሶች በማድረግ ከፍ ያድርጉ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የአፍንጫ መጨናነቅ ማስታገሻ ስፕሬይ ወይም የአፍ ውስጥ ማስታገሻ",
+            "safety_note": "ስለ አዋቂዎች የአፍንጫ መጨናነቅ ማስታገሻዎች ፋርማሲስት ይጠይቁ። የመርዘኛ መጨናነቅን (rebound congestion) ለማስወገድ የአፍንጫ ስፕሬይዎችን ከ 3 ቀናት በላይ መጠቀም የለብዎትም። የአፍ ውስጥ ማስታገሻዎች የደም ግፊት ላለባቸው ሰዎች ተስማሚ ላይሆኑ ይችላሉ።"
+          }
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "seasonal_allergies",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Stay indoors when pollen counts are high, especially in the morning.",
+          "Keep windows and doors closed.",
+          "Shower and wash your hair before bed to remove pollen.",
+          "Rinse your nasal passages with saline solution.",
+          "Wear sunglasses when outdoors to protect your eyes from pollen."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "antihistamine",
+            "safety_note": "Ask a pharmacist about non-drowsy antihistamines like cetirizine or loratadine. Follow label instructions carefully."
+          },
+          {
+            "category_name": "nasal corticosteroid spray",
+            "safety_note": "These sprays can reduce inflammation. Use as directed by a pharmacist or doctor for optimal results."
+          }
+        ],
+        "seek_care_if": [
+          "Symptoms are severe and significantly interfere with daily life or sleep.",
+          "Over-the-counter medications are not providing adequate relief.",
+          "You experience difficulty breathing, wheezing, or tightness in your chest.",
+          "You have frequent sinus infections or ear infections associated with your allergies."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "የአበባ ዱቄት ብዛት ከፍ ባለበት ጊዜ፣ በተለይም በማለዳ፣ ቤት ውስጥ ይቆዩ።",
+          "መስኮቶችን እና በሮችን ዝጉ።",
+          "ከመተኛትዎ በፊት የአበባ ዱቄትን ለማስወገድ ሻወር ይውሰዱ እና ፀጉርዎን ይታጠቡ።",
+          "የአፍንጫዎን ቀዳዳዎች በጨው ውሃ ያጠቡ።",
+          "ከቤት ውጭ ሲሆኑ ዓይኖችዎን ከእበባ ዱቄት ለመከላከል የፀሐይ መነጽር ያድርጉ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ፀረ-ሂስታሚን (Antihistamine)",
+            "safety_note": "ስለ እንቅልፍ የማያስከትሉ ፀረ-ሂስታሚኖች እንደ ሴቲሪዚን ወይም ሎራታዲን ያሉ ፋርማሲስት ይጠይቁ። የመድሃኒቱን መመሪያ በጥንቃቄ ይከተሉ።"
+          },
+          {
+            "category_name": "የአፍንጫ ኮርቲኮስቴሮይድ ስፕሬይ",
+            "safety_note": "እነዚህ ስፕሬይዎች እብጠትን ሊቀንሱ ይችላሉ። ለተሻለ ውጤት በፋርማሲስት ወይም በሐኪም እንደታዘዘው ይጠቀሙ።"
+          }
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "canker_sore",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Avoid spicy, salty, or acidic foods and drinks that can irritate the sore.",
+          "Rinse your mouth with warm salt water several times a day.",
+          "Practice good oral hygiene with a soft toothbrush.",
+          "Avoid irritating the sore with your tongue or fingers.",
+          "Try a honey application for soothing (for adults)."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "topical oral pain reliever or protective paste",
+            "safety_note": "Ask a pharmacist about over-the-counter gels or pastes designed to relieve canker sore pain and protect the area. Follow product instructions. Not for children under 2 without advice."
+          }
+        ],
+        "seek_care_if": [
+          "Canker sores are unusually large or painful.",
+          "New sores develop before old ones heal.",
+          "The sores last for more than 2 weeks.",
+          "You have a high fever with the sores.",
+          "Difficulty eating or drinking due to the pain."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ቁስሉን ሊያበሳጩ የሚችሉ ቅመም የበዛባቸው፣ ጨዋማ የሆኑ ወይም አሲዳማ ምግቦችን እና መጠጦችን ያስወግዱ።",
+          "በቀን ውስጥ ብዙ ጊዜ አፍዎን በሞቀ ጨዋማ ውሃ ያጠቡ።",
+          "በለስላሳ የጥርስ ብሩሽ ጥሩ የአፍ ንፅህናን ይጠብቁ።",
+          "ቁስሉን በምላስዎ ወይም በጣቶችዎ ከመነካት ይቆጠቡ።",
+          "ለማረጋጋት ማርን ይሞክሩ (ለአዋቂዎች)።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ለአፍ የሚቀባ የህመም ማስታገሻ ወይም የመከላከያ ለጥፍ",
+            "safety_note": "ስለ አፍ ቁስል ህመምን ለማስታገስ እና ቦታውን ለመከላከል የተሰሩ ያለሀኪም ማዘዣ ጄልዎች ወይም ለጥፎች ፋርማሲስት ይጠይቁ። የምርቱን መመሪያ ይከተሉ። ያለ ምክር ከ2 አመት በታች ለሆኑ ህፃናት አይጠቀሙ።"
+          }
+        ],
+        "seek_care_if": [
+          "የአፍ ቁስሎች ባልተለመደ ሁኔታ ትልቅ ወይም የሚያሰቃዩ ከሆኑ።",
+          "አሮጌዎቹ ከመዳናቸው በፊት አዲስ ቁስሎች ከታዩ።",
+          "ቁስሎቹ ከ2 ሳምንታት በላይ ከቆዩ።",
+          "ከቁስሎቹ ጋር ከፍተኛ ትኩሳት ካለብዎ።",
+          "በህመሙ ምክንያት ለመብላት ወይም ለመጠጣት ከተቸገሩ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "bad_breath",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Brush your teeth and tongue at least twice a day.",
+          "Floss daily to remove food particles and plaque between teeth.",
+          "Use a mouthwash that kills bacteria, if desired.",
+          "Drink plenty of water to keep your mouth moist.",
+          "Avoid foods known to cause bad breath like garlic and onions."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "antiseptic mouthwash",
+            "safety_note": "Ask a pharmacist about antiseptic mouthwashes. Use as directed. Mouthwash is not a substitute for brushing and flossing."
+          }
+        ],
+        "seek_care_if": [
+          "Bad breath persists despite consistent good oral hygiene.",
+          "You also have painful or swollen gums, loose teeth, or other signs of gum disease.",
+          "You have difficulty swallowing or pain in your mouth/throat.",
+          "You suspect an underlying medical condition (e.g., sinus infection, diabetes) is causing the bad breath."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ጥርሶችዎን እና ምላስዎን በቀን ቢያንስ ሁለት ጊዜ ይቦርሹ።",
+          "በጥርስ መካከል ያለውን የምግብ ቅሪት እና የጥርስ ንጣፍ ለማስወገድ በየቀኑ ፍሎስ ይጠቀሙ።",
+          "ከፈለጉ ባክቴሪያዎችን የሚገድል የአፍ ማጠቢያ (mouthwash) ይጠቀሙ።",
+          "አፍዎን እርጥብ ለማድረግ ብዙ ውሃ ይጠጡ።",
+          "መጥፎ የአፍ ጠረን የሚያስከትሉ እንደ ነጭ ሽንኩርት እና ቀይ ሽንኩርት ያሉ ምግቦችን ያስወግዱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ፀረ-ተባይ የአፍ ማጠቢያ",
+            "safety_note": "ስለ ፀረ-ተባይ የአፍ ማጠቢያዎች ፋርማሲስት ይጠይቁ። እንደተመከረው ይጠቀሙ። የአፍ ማጠቢያ ጥርስን ከመቦረሽ እና ፍሎስ ከመጠቀም አይተካም።"
+          }
+        ],
+        "seek_care_if": [
+          "መጥፎ የአፍ ጠረን በቋሚ ጥሩ የአፍ ንፅህና ቢደረግለትም ከቀጠለ።",
+          "አስጨናቂ ወይም ያበጡ ድድ፣ የላላ ጥርሶች፣ ወይም ሌሎች የድድ በሽታ ምልክቶች ካለብዎ።",
+          "ለመዋጥ ከተቸገሩ ወይም በአፍዎ/ጉሮሮዎ ላይ ህመም ካለብዎ።",
+          "መጥፎ የአፍ ጠረንን የሚያስከትል መሰረታዊ የህክምና ችግር (ለምሳሌ የሳይነስ ኢንፌክሽን፣ የስኳር በሽታ) እንደሆነ ከጠረጠሩ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_eye_irritation",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Rinse your eyes gently with clean, lukewarm water or saline solution.",
+          "Avoid rubbing your eyes, which can worsen irritation.",
+          "Remove contact lenses if you wear them.",
+          "Use a cool compress over your closed eyes to soothe discomfort.",
+          "Avoid makeup or eye creams until irritation subsides."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "lubricating eye drops (artificial tears)",
+            "safety_note": "Ask a pharmacist about preservative-free lubricating eye drops to relieve dryness and irritation. Do not use drops if they cause increased pain or redness."
+          }
+        ],
+        "seek_care_if": [
+          "You experience severe eye pain or sensitivity to light.",
+          "You have sudden vision changes or loss of vision.",
+          "There is discharge (pus or thick mucus) from your eye.",
+          "Your eye is red, swollen, or feels like something is stuck in it after rinsing.",
+          "The irritation is due to a chemical splash or foreign object that cannot be rinsed out (seek emergency care immediately).",
+          "Symptoms do not improve within 24-48 hours."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ዓይንዎን በንጹህ፣ ለብ ባለ ውሃ ወይም በጨው መፍትሄ በቀስታ ያጠቡ።",
+          "ብስጭትን ሊያባብስ ስለሚችል አይኖችዎን ከመነካት ይቆጠቡ።",
+          "የሚለብሱ ከሆነ የመገናኛ ሌንሶችን ያስወግዱ።",
+          "አለመመቸትን ለማስታገስ በዐይንዎ ላይ ቀዝቃዛ ጨርቅ ይጠቀሙ።",
+          "ብስጭቱ እስኪቀንስ ድረስ ሜካፕ ወይም የአይን ክሬም ከመጠቀም ይቆጠቡ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "እርጥበት አድራጊ የአይን ጠብታ (ሰው ሰራሽ እንባ)",
+            "safety_note": "ስለ መከላከያ የሌላቸው እርጥበት አድራጊ የአይን ጠብታዎች ድርቀትን እና ብስጭትን ለማስታገስ ፋርማሲስት ይጠይቁ። ህመም ወይም መቅላት ካስከተሉ ጠብታዎችን አይጠቀሙ።"
+          }
+        ],
+        "seek_care_if": [
+          "ከባድ የአይን ህመም ወይም ለብርሃን የመደንዘዝ ስሜት ካጋጠመዎት።",
+          "ድንገተኛ የእይታ ለውጥ ወይም የእይታ መጥፋት ካለብዎ።",
+          "ከዐይንዎ ውስጥ መግል (pus) ወይም ወፍራም ፈሳሽ (mucus) ካለ።",
+          "ዓይንዎ ቀይ፣ ያበጠ ወይም ካጠቡ በኋላ የሆነ ነገር የተጣበቀበት መስሎ ከተሰማዎት።",
+          "ብስጭቱ በኬሚካል መርጨት ወይም ሊታጠብ በማይችል የውጭ ነገር ምክንያት ከሆነ (ወዲያውኑ የድንገተኛ ህክምና ይፈልጉ)።",
+          "ምልክቶች በ24-48 ሰአታት ውስጥ ካልተሻሻሉ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "earwax_buildup",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Do not insert cotton swabs or other objects into your ear canal, as this can push wax deeper.",
+          "Use a few drops of mineral oil, baby oil, glycerin, or hydrogen peroxide to soften earwax.",
+          "After a few days, gently flush the ear with lukewarm water using a rubber-bulb syringe.",
+          "Dry your ear thoroughly after showering or swimming."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "earwax removal drops",
+            "safety_note": "Ask a pharmacist about over-the-counter earwax removal kits. Follow product instructions carefully. Do not use if you have a perforated eardrum or ear infection."
+          }
+        ],
+        "seek_care_if": [
+          "You experience sudden hearing loss, severe ear pain, or discharge from your ear.",
+          "You suspect an ear infection (fever, pain, redness).",
+          "Home remedies do not resolve the issue, or symptoms worsen.",
+          "You have a perforated eardrum (a hole in your eardrum) or ear tubes (do not use drops).",
+          "Dizziness or ringing in your ears becomes persistent."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "የጥጥ ሳሙናዎችን ወይም ሌሎች ነገሮችን ወደ ጆሮዎ ውስጥ አያስገቡ፣ ይህ ሰም ወደ ውስጥ ሊገፋው ይችላል።",
+          "የጆሮ ሰምን ለማለስለስ ጥቂት ጠብታዎች የማዕድን ዘይት፣ የህፃናት ዘይት፣ ግሊሰሪን ወይም ሃይድሮጂን ፔሮክሳይድ ይጠቀሙ።",
+          "ከጥቂት ቀናት በኋላ፣ ጎማ-አምፖል መርፌን በመጠቀም ጆሮዎን ለብ ባለ ውሃ በቀስታ ያጠቡ።",
+          "ገላዎን ከታጠቡ ወይም ከዋኙ በኋላ ጆሮዎን በደንብ ያድርቁ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የጆሮ ሰም ማስወገጃ ጠብታዎች",
+            "safety_note": "ስለ ያለሀኪም ማዘዣ የጆሮ ሰም ማስወገጃ ኪቶች ፋርማሲስት ይጠይቁ። የምርቱን መመሪያ በጥንቃቄ ይከተሉ። የጆሮ ታምቡርዎ የተበሳ ከሆነ ወይም የጆሮ ኢንፌክሽን ካለብዎ አይጠቀሙ።"
+          }
+        ],
+        "seek_care_if": [
+          "ድንገተኛ የመስማት ችግር፣ ከባድ የጆሮ ህመም ወይም ከጆሮዎ የሚወጣ ፈሳሽ ካጋጠመዎት።",
+          "የጆሮ ኢንፌክሽን እንደሆነ ከጠረጠሩ (ትኩሳት፣ ህመም፣ መቅላት)።",
+          "የቤት ውስጥ መፍትሄዎች ችግሩን ካልፈቱት ወይም ምልክቶቹ ከተባባሱ።",
+          "የጆሮ ታምቡርዎ የተበሳ ከሆነ (በጆሮ ታምቡርዎ ላይ ቀዳዳ) ወይም የጆሮ ቱቦዎች ካለዎት (ጠብታዎችን አይጠቀሙ)።",
+          "ማዞር ወይም ጆሮዎ ውስጥ ጩኸት የማያቋርጥ ከሆነ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_head_cold",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Get adequate rest to allow your body to heal.",
+          "Drink plenty of warm fluids like tea, water, or broth to keep hydrated and soothe your throat.",
+          "Use saline nasal sprays to help clear stuffy nose and reduce dryness.",
+          "Gargle with warm salt water to relieve a sore throat.",
+          "Use a humidifier in your bedroom at night."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "decongestant or pain reliever",
+            "safety_note": "Ask a pharmacist about suitable options for congestion (decongestant) or body aches/fever (pain reliever). Read labels carefully, especially for decongestants if you have high blood pressure."
+          }
+        ],
+        "seek_care_if": [
+          "Symptoms worsen or do not improve after 7-10 days.",
+          "You have a high fever (above 38.3°C / 101°F) that lasts more than 3 days.",
+          "You experience difficulty breathing or severe shortness of breath.",
+          "Severe ear pain or sinus pressure develops.",
+          "You have a chronic medical condition that could be worsened by a cold."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ሰውነትዎ እንዲድን በቂ እረፍት ያግኙ።",
+          "እርጥበት እንዲኖርዎ እና ጉሮሮዎን ለማረጋጋት እንደ ሻይ፣ ውሃ ወይም ሾርባ ያሉ ብዙ ሞቅ ያሉ ፈሳሾችን ይጠጡ።",
+          "የአፍንጫ መዘጋትን ለማስወገድ እና ድርቀትን ለመቀነስ ጨው የያዙ የአፍንጫ ስፕሬይዎችን ይጠቀሙ።",
+          "የጉሮሮ ህመምን ለማስታገስ በሞቀ ጨው ውሃ ይጉመጥመጡ።",
+          "በምሽት በመኝታ ክፍልዎ ውስጥ እርጥበት ማድረቂያ ይጠቀሙ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የአፍንጫ መጨናነቅ ማስታገሻ ወይም ህመም ማስታገሻ",
+            "safety_note": "ስለ መጨናነቅ (የአፍንጫ መጨናነቅ ማስታገሻ) ወይም የሰውነት ህመም/ትኩሳት (ህመም ማስታገሻ) ተገቢ አማራጮች ፋርማሲስት ይጠይቁ። በተለይም የደም ግፊት ካለብዎ የአፍንጫ መጨናነቅ ማስታገሻዎችን መመሪያ በጥንቃቄ ያንብቡ።"
+          }
+        ],
+        "seek_care_if": [
+          "ምልክቶች ከ7-10 ቀናት በኋላ ካልተሻሻሉ ወይም ከተባባሱ።",
+          "ከፍተኛ ትኩሳት (ከ38.3°C / 101°F በላይ) ከ3 ቀናት በላይ የሚቆይ ከሆነ።",
+          "ለመተንፈስ ከተቸገሩ ወይም ከባድ የትንፋሽ ማጠር ካለብዎ።",
+          "ከባድ የጆሮ ህመም ወይም የሳይነስ ግፊት ከታየ።",
+          "በጉንፋን ሊባባስ የሚችል ሥር የሰደደ የጤና እክል ካለብዎት።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "sleep_difficulties",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Establish a regular sleep schedule, going to bed and waking up at the same time daily, even on weekends.",
+          "Create a relaxing bedtime routine (e.g., warm bath, reading, light stretching).",
+          "Ensure your bedroom is dark, quiet, and cool.",
+          "Avoid caffeine and alcohol, especially in the evening.",
+          "Limit naps during the day or keep them short (20-30 minutes)."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "sleep aid (e.g., antihistamine-based)",
+            "safety_note": "Ask a pharmacist about short-term sleep aids. These are not for long-term use and can have side effects like drowsiness the next day. Always follow label instructions."
+          },
+          {
+            "category_name": "melatonin supplement",
+            "safety_note": "Melatonin can help reset your sleep-wake cycle. Consult a pharmacist about appropriate dosage and use. Not suitable for everyone."
+          }
+        ],
+        "seek_care_if": [
+          "Sleep difficulties are persistent and significantly affect your daily life and well-being.",
+          "You experience symptoms of sleep apnea (loud snoring, gasping for air during sleep).",
+          "You frequently fall asleep during the day, even after adequate sleep.",
+          "You suspect an underlying medical or mental health condition is causing your sleep problems."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "መደበኛ የእንቅልፍ መርሃ ግብር ያውጡ፤ በየቀኑ በተመሳሳይ ሰዓት ይተኛሉ እና ይነሳሉ፣ ቅዳሜና እሁድም ጨምሮ።",
+          "ዘና የሚያደርግ የመኝታ ሰዓት ልምምድ ያድርጉ (ለምሳሌ ሞቅ ያለ ገላ መታጠብ፣ ማንበብ፣ ቀላል ዝርጋታ)።",
+          "መኝታ ቤትዎ ጨለማ፣ ጸጥ ያለ እና ቀዝቃዛ መሆኑን ያረጋግጡ።",
+          "ካፌይን እና አልኮልን ያስወግዱ፣ በተለይም ምሽት ላይ።",
+          "በቀን ውስጥ እንቅልፍን ይገድቡ ወይም አጭር ያድርጉት (ከ20-30 ደቂቃ)።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የእንቅልፍ ማሟያ (ለምሳሌ ፀረ-ሂስታሚን ላይ የተመሰረተ)",
+            "safety_note": "ስለ አጭር ጊዜ የእንቅልፍ ማሟያዎች ፋርማሲስት ይጠይቁ። እነዚህ ለረጅም ጊዜ አገልግሎት የሚውሉ አይደሉም እና በሚቀጥለው ቀን እንደ እንቅልፍ የመሳሰሉ የጎንዮሽ ጉዳቶች ሊኖራቸው ይችላል። ሁልጊዜ የመድሃኒቱን መመሪያ ይከተሉ።"
+          },
+          {
+            "category_name": "ሜላቶኒን ማሟያ",
+            "safety_note": "ሜላቶኒን የእንቅልፍ-መነቃቃት ዑደትዎን ለማስተካከል ይረዳል። ስለ ተገቢው መጠን እና አጠቃቀም ፋርማሲስት ያማክሩ። ለሁሉም ሰው ተስማሚ አይደለም።"
+          }
+        ],
+        "seek_care_if": [
+          "የእንቅልፍ ችግሮች የማያቋርጡ እና የዕለት ተዕለት ኑሮዎን እና ጤናዎን በእጅጉ የሚነኩ ከሆኑ።",
+          "የእንቅልፍ አፕኒያ ምልክቶች (ጮክ ያለ ማንኮራፋት፣ በእንቅልፍ ወቅት ለአየር መታገል) ካጋጠመዎት።",
+          "በቂ እንቅልፍ ካገኙ በኋላም በቀን ውስጥ ብዙ ጊዜ እንቅልፍ የሚወስድዎት ከሆነ።",
+          "መሰረታዊ የህክምና ወይም የአእምሮ ጤና ችግር የእንቅልፍ ችግሮችዎን እያስከተለ እንደሆነ ከጠረጠሩ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_stress_anxiety",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Practice deep breathing exercises or meditation techniques.",
+          "Engage in regular physical activity, like walking or light exercise.",
+          "Ensure you are getting enough sleep.",
+          "Limit caffeine and alcohol intake.",
+          "Connect with friends and family, and talk about your feelings."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "herbal supplements (e.g., chamomile tea, lavender)",
+            "safety_note": "Some herbal remedies like chamomile tea or lavender oil may promote relaxation. Consult a pharmacist or doctor, especially if pregnant, breastfeeding, or on other medications."
+          }
+        ],
+        "seek_care_if": [
+          "Anxiety or stress is persistent, overwhelming, and interferes with your daily activities.",
+          "You experience panic attacks (sudden, intense fear with physical symptoms like racing heart, shortness of breath).",
+          "You have thoughts of harming yourself or others (seek immediate professional help).",
+          "Your stress or anxiety is new, worsening, or without an apparent cause.",
+          "You are using alcohol or drugs to cope with stress or anxiety."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ጥልቅ የአተነፋፈስ ልምምዶችን ወይም የማሰላሰል ዘዴዎችን ይለማመዱ።",
+          "በየጊዜው የአካል ብቃት እንቅስቃሴ ያድርጉ፣ ለምሳሌ በእግር መሄድ ወይም ቀላል የአካል ብቃት እንቅስቃሴ።",
+          "በቂ እንቅልፍ ማግኘታችሁን ያረጋግጡ።",
+          "የካፌይን እና የአልኮል መጠጥን ይገድቡ።",
+          "ከጓደኞች እና ቤተሰብ ጋር ይገናኙ እና ስለ ስሜትዎ ይነጋገሩ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ከዕፅዋት የተቀመሙ ማሟያዎች (ለምሳሌ የካሞሜል ሻይ፣ ላቬንደር)",
+            "safety_note": "እንደ ካሞሜል ሻይ ወይም ላቬንደር ዘይት ያሉ አንዳንድ ከዕፅዋት የተቀመሙ መድኃኒቶች ዘና ለማለት ሊረዱ ይችላሉ። በተለይም እርጉዝ ከሆኑ፣ ጡት የሚያጠቡ ከሆኑ ወይም ሌሎች መድሃኒቶችን የሚወስዱ ከሆነ ፋርማሲስት ወይም ሐኪም ያማክሩ።"
+          }
+        ],
+        "seek_care_if": [
+          "ጭንቀት ወይም ጭንቀት የማያቋርጥ፣ ከልክ ያለፈ እና የዕለት ተዕለት እንቅስቃሴዎን የሚረብሽ ከሆነ።",
+          "የድንጋጤ ጥቃቶች (ድንገተኛ፣ ከባድ ፍርሃት እንደ የልብ ምት መጨመር፣ የትንፋሽ ማጠር ባሉ አካላዊ ምልክቶች) ካጋጠመዎት።",
+          "ራስዎን ወይም ሌሎችን የመጉዳት ሀሳብ ካለብዎት (ወዲያውኑ የባለሙያ እርዳታ ይፈልጉ)።",
+          "ጭንቀትዎ አዲስ ከሆነ፣ እየባሰ ከሄደ፣ ወይም ግልጽ የሆነ ምክንያት ከሌለው።",
+          "ጭንቀትን ወይም ጭንቀትን ለመቋቋም አልኮል ወይም አደንዛዥ እፅ የሚጠቀሙ ከሆነ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "dehydration_mild",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Drink plenty of water throughout the day.",
+          "Sip on oral rehydration solutions (ORS) or clear broths, especially if you've been sweating a lot or have had diarrhea/vomiting.",
+          "Eat water-rich foods like fruits and vegetables.",
+          "Avoid sugary drinks, caffeine, and alcohol, as they can worsen dehydration.",
+          "Rest in a cool place."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "oral rehydration salts (ORS)",
+            "safety_note": "ORS are highly effective for replacing lost fluids and electrolytes. Mix with clean water as directed. Essential for infants, children, and the elderly during illness."
+          }
+        ],
+        "seek_care_if": [
+          "You have signs of severe dehydration (dizziness, extreme thirst, confusion, very little or no urine, sunken eyes, rapid heart rate). Seek emergency care immediately.",
+          "You are unable to keep any fluids down.",
+          "Symptoms do not improve after a few hours of consistent fluid intake.",
+          "You are an infant, young child, elderly, or have a chronic illness."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ቀኑን ሙሉ ብዙ ውሃ ይጠጡ።",
+          "የሰውነት ፈሳሽ ማሟያ (ORS) ወይም ንጹህ ሾርባዎች ይጠጡ፣ በተለይም ብዙ ላብ ከለበሱ ወይም ተቅማጥ/ማስታወክ ከነበረዎት።",
+          "ውሃ የበዛባቸውን ምግቦች እንደ ፍራፍሬዎችና አትክልቶች ይመገቡ።",
+          "ጣፋጭ መጠጦችን፣ ካፌይን እና አልኮልን ያስወግዱ፣ ምክንያቱም የሰውነት ፈሳሽ እጥረት ሊያባብሱ ይችላሉ።",
+          "በቀዝቃዛ ቦታ ያርፉ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የቃል የሰውነት ፈሳሽ ማሟያ (ORS)",
+            "safety_note": "ORS የጠፉ ፈሳሾችን እና ኤሌክትሮላይቶችን ለመተካት በጣም ውጤታማ ናቸው። እንደተመከረው በንጹህ ውሃ ይቀላቅሉ። ለጨቅላ ህፃናት፣ ለህፃናት እና ለአረጋውያን በህመም ጊዜ ወሳኝ ናቸው።"
+          }
+        ],
+        "seek_care_if": [
+          "የከባድ የሰውነት ፈሳሽ እጥረት ምልክቶች (ማዞር፣ ከፍተኛ ጥማት፣ ግራ መጋባት፣ አነስተኛ ወይም ምንም ሽንት አለመኖር፣ የገቡ አይኖች፣ ፈጣን የልብ ምት) ካሉዎት። ወዲያውኑ የድንገተኛ ህክምና ይፈልጉ።",
+          "ምንም አይነት ፈሳሽ ማቆየት ካልቻሉ።",
+          "ምልክቶቹ ለጥቂት ሰአታት ተከታታይ ፈሳሽ ከወሰዱ በኋላ ካልተሻሻሉ።",
+          "ጨቅላ ህፃን፣ ትንሽ ህፃን፣ አዛውንት ወይም ሥር የሰደደ ህመም ካለብዎት።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_fever_adults",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Get plenty of rest.",
+          "Drink plenty of fluids like water, broth, or juice to prevent dehydration.",
+          "Wear light clothing and avoid heavy blankets.",
+          "Take a lukewarm bath or use a cool, damp cloth on your forehead or body (do not use cold water or ice).",
+          "Keep the room temperature comfortable, not too hot or too cold."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "fever reducer / pain reliever",
+            "safety_note": "You can ask a pharmacist about over-the-counter options like paracetamol or ibuprofen to help reduce fever and pain. Always follow the dosage instructions on the label. Do not give aspirin to children or teenagers as it can cause a serious condition called Reye's syndrome."
+          }
+        ],
+        "seek_care_if": [
+          "Your fever is 39°C (102°F) or higher for adults.",
+          "The fever lasts for more than 3 days, or keeps returning.",
+          "You have a stiff neck, severe headache, confusion, or unusual sensitivity to light.",
+          "You experience difficulty breathing or severe chest pain.",
+          "You have a new rash.",
+          "You have severe pain anywhere in your body."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "በቂ እረፍት ያግኙ።",
+          "የሰውነት ፈሳሽ እንዳይቀንስ ለመከላከል እንደ ውሃ፣ ሾርባ ወይም ጭማቂ ያሉ ብዙ ፈሳሾችን ይጠጡ።",
+          "ቀላል ልብስ ይልበሱ እና ወፍራም ብርድ ልብሶችን ያስወግዱ።",
+          "ለብ ባለ ውሃ ገላዎን ይታጠቡ ወይም ግንባርዎ ላይ እና ሰውነትዎ ላይ ቀዝቃዛና እርጥብ ጨርቅ ያድርጉ። (ቀዝቃዛ ውሃ ወይም በረዶ አይጠቀሙ።)",
+          "የክፍሉን የሙቀት መጠን ምቹ ያድርጉት፣ በጣም ሞቃት ወይም በጣም ቀዝቃዛ እንዳይሆን።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ትኩሳት መቀነሻ / ህመም ማስታገሻ",
+            "safety_note": "ትኩሳትን እና ህመምን ለመቀነስ ስለ ፓራሲታሞል ወይም አይቡፕሮፌን ያሉ በፋርማሲ የሚገኙ መድኃኒቶችን ፋርማሲስትዎን መጠየቅ ይችላሉ። ሁልጊዜም በጥቅሉ ላይ ያለውን የአጠቃቀም መመሪያ ይከተሉ። አስፕሪን ሬይ ሲንድሮም የሚባል ከባድ ህመም ሊያስከትል ስለሚችል ለህጻናት ወይም ለታዳጊዎች አይስጡ።"
+          }
+        ],
+        "seek_care_if": [
+          "የአዋቂዎች ትኩሳት 39°C (102°F) ወይም ከዚያ በላይ ከሆነ።",
+          "ትኩሳቱ ከ3 ቀናት በላይ ከቆየ፣ ወይም ደግሞ እየተመለሰ ከመጣ።",
+          "የአንገት ጥንካሬ፣ ከባድ ራስ ምታት፣ ግራ መጋባት ወይም ለብርሃን ያልተለመደ ስሜት አለብዎት።",
+          "ለመተንፈስ ከተቸገሩ ወይም ከባድ የደረት ህመም ካለብዎት።",
+          "አዲስ የቆዳ ሽፍታ ካለብዎ።",
+          "በሰውነትዎ ውስጥ በማንኛውም ቦታ ከባድ ህመም ካለብዎት።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "menstrual_cramps",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Apply a heating pad or hot water bottle to your lower abdomen or back.",
+          "Take a warm bath.",
+          "Engage in light exercise, such as walking or gentle stretching.",
+          "Ensure you are getting adequate rest and sleep.",
+          "Avoid caffeine and salty foods, which can worsen bloating and discomfort."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "pain reliever (NSAID)",
+            "safety_note": "Ask a pharmacist about non-steroidal anti-inflammatory drugs (NSAIDs) like ibuprofen or naproxen, which are effective for menstrual pain. Start taking them at the first sign of pain and follow dosage instructions. Consult a doctor if pregnant or have other medical conditions."
+          }
+        ],
+        "seek_care_if": [
+          "Menstrual cramps are unusually severe and interfere with daily activities.",
+          "Pain suddenly worsens or becomes unbearable.",
+          "You experience heavy bleeding (soaking through more than one pad/tampon per hour for several hours).",
+          "You develop new or different symptoms with your period (e.g., fever, unusual discharge).",
+          "Over-the-counter pain relievers do not provide relief."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "በታችኛው ሆድዎ ወይም ጀርባዎ ላይ ማሞቂያ ፓድ ወይም ሙቅ ውሃ ጠርሙስ ያድርጉ።",
+          "ሞቅ ባለ ውሃ ይታጠቡ።",
+          "እንደ የእግር ጉዞ ወይም ቀላል ዝርጋታ ያሉ ቀላል የአካል ብቃት እንቅስቃሴዎችን ያድርጉ።",
+          "በቂ እረፍት እና እንቅልፍ ማግኘታችሁን ያረጋግጡ።",
+          "እብጠትን እና ምቾት ማጣትን ሊያባብሱ ስለሚችሉ ካፌይን እና ጨዋማ ምግቦችን ያስወግዱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ህመም ማስታገሻ (NSAID)",
+            "safety_note": "ስለ ኢቡፕሮፌን ወይም ናፕሮክሰን ያሉ ስቴሮይድ ያልሆኑ ፀረ-ብግነት መድኃኒቶችን (NSAIDs) ፋርማሲስት ይጠይቁ፣ እነዚህ የወር አበባ ህመምን ለማስታገስ ውጤታማ ናቸው። ህመም ሲሰማዎት ወዲያውኑ መውሰድ ይጀምሩ እና የመድሃኒቱን መመሪያ ይከተሉ። እርጉዝ ከሆኑ ወይም ሌሎች የጤና ችግሮች ካለብዎ ሐኪም ያማክሩ።"
+          }
+        ],
+        "seek_care_if": [
+          "የወር አበባ ቁርጠት ባልተለመደ ሁኔታ ከባድ ከሆነ እና የዕለት ተዕለት እንቅስቃሴዎን የሚረብሽ ከሆነ።",
+          "ህመሙ በድንገት ከተባባሰ ወይም ሊቋቋሙት የማይችሉት ከሆነ።",
+          "ከባድ ደም መፍሰስ (ለብዙ ሰዓታት በየሰዓቱ ከአንድ በላይ ንጣፍ/ታምፖን መጥበቅ) ካጋጠመዎት።",
+          "ከወር አበባዎ ጋር አዲስ ወይም የተለዩ ምልክቶች (ለምሳሌ ትኩሳት፣ ያልተለመደ ፈሳሽ) ካጋጠመዎት።",
+          "ያለሀኪም ማዘዣ የሚገኙ የህመም ማስታገሻዎች እፎይታ ካልሰጡ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_joint_pain",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Rest the affected joint and avoid activities that worsen the pain.",
+          "Apply ice packs (wrapped in cloth) for 15-20 minutes several times a day to reduce inflammation.",
+          "Apply heat (warm bath or heating pad) to relax muscles around the joint after the initial acute pain has subsided.",
+          "Gentle range-of-motion exercises can help maintain flexibility.",
+          "Maintain a healthy weight to reduce stress on joints."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "oral pain reliever (e.g., paracetamol, ibuprofen)",
+            "safety_note": "Ask a pharmacist about paracetamol or NSAIDs like ibuprofen for pain relief. Follow dosage instructions. Consult a doctor if you have other medical conditions or are pregnant."
+          },
+          {
+            "category_name": "topical pain relief cream/gel",
+            "safety_note": "Creams or gels containing ingredients like menthol or capsaicin can provide localized relief. Apply as directed to the affected joint."
+          }
+        ],
+        "seek_care_if": [
+          "Joint pain is severe, sudden, or caused by a significant injury.",
+          "The joint is visibly deformed, red, swollen, or hot to the touch.",
+          "You cannot move the joint normally or bear weight on it.",
+          "Pain is accompanied by fever, chills, or unexplained weight loss.",
+          "Joint pain persists for more than a few days or worsens despite self-care."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "የተጎዳውን መገጣጠሚያ ያሳርፉ እና ህመሙን የሚያባብሱ እንቅስቃሴዎችን ያስወግዱ።",
+          "እብጠትን ለመቀነስ በቀን ውስጥ ብዙ ጊዜ ለ15-20 ደቂቃዎች በረዶ ጥቅል (በጨርቅ የተጠቀለለ) ያድርጉ።",
+          "የመጀመሪያው ከፍተኛ ህመም ከቀዘቀዘ በኋላ ጡንቻዎችን ለማዝናናት ሙቀት (ሞቅ ያለ ገላ መታጠብ ወይም ማሞቂያ ፓድ) በመገጣጠሚያው ዙሪያ ያድርጉ።",
+          "ቀላል የእንቅስቃሴ ልምምዶች ተለዋዋጭነትን ለመጠበቅ ይረዳሉ።",
+          "በመገጣጠሚያዎች ላይ ያለውን ጫና ለመቀነስ ጤናማ ክብደትን ይጠብቁ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የአፍ ውስጥ ህመም ማስታገሻ (ለምሳሌ ፓራሲታሞል፣ አይቡፕሮፌን)",
+            "safety_note": "ስለ ፓራሲታሞል ወይም እንደ አይቡፕሮፌን ያሉ NSAIDs ለህመም ማስታገሻ ፋርማሲስት ይጠይቁ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ። ሌሎች የጤና እክሎች ካለብዎ ወይም እርጉዝ ከሆኑ ሐኪም ያማክሩ።"
+          },
+          {
+            "category_name": "ለቆዳ የሚቀባ የህመም ማስታገሻ ክሬም/ጄል",
+            "safety_note": "እንደ ሜንቶል ወይም ካፕሳይሲን ያሉ ንጥረ ነገሮችን የያዙ ክሬሞች ወይም ጄልዎች የአካባቢ እፎይታ ሊሰጡ ይችላሉ። በተጎዳው መገጣጠሚያ ላይ እንደተመከረው ይቀቡ።"
+          }
+        ],
+        "seek_care_if": [
+          "የመገጣጠሚያ ህመም ከባድ፣ ድንገተኛ ወይም በከባድ ጉዳት የተከሰተ ከሆነ።",
+          "መገጣጠሚያው በግልጽ የተበላሸ፣ ቀይ፣ ያበጠ ወይም ሲነኩት ትኩስ ከሆነ።",
+          "መገጣጠሚያውን በመደበኛነት ማንቀሳቀስ ካልቻሉ ወይም በእሱ ላይ ክብደት መሸከም ካልቻሉ።",
+          "ህመሙ ከትኩሳት፣ ከብርድ ብርድ ማለት ወይም ባልታወቀ ክብደት መቀነስ ጋር አብሮ ከመጣ።",
+          "የመገጣጠሚያ ህመም ከጥቂት ቀናት በላይ ከቀጠለ ወይም በራስ እንክብካቤ ቢደረግለትም ከተባባሰ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "minor_burns",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Cool the burn immediately with cool (not cold) running water for 10-20 minutes.",
+          "Gently wash the area with mild soap and water.",
+          "Apply a thin layer of petroleum jelly or aloe vera gel.",
+          "Cover the burn with a sterile, non-stick bandage.",
+          "Do not apply ice, butter, or other home remedies not recommended by professionals."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "aloe vera gel or petroleum jelly",
+            "safety_note": "These can help soothe the burn and keep it moist. Ensure products are sterile and free from irritating additives. Avoid products with alcohol."
+          },
+          {
+            "category_name": "pain reliever",
+            "safety_note": "Paracetamol or ibuprofen can help manage pain. Follow dosage instructions."
+          }
+        ],
+        "seek_care_if": [
+          "The burn is larger than your palm.",
+          "The burn is on the face, hands, feet, genitals, or over a major joint.",
+          "The skin is blistered, charred, or appears white/leathery (second- or third-degree burn).",
+          "Signs of infection develop (pus, increasing redness, fever).",
+          "The burn is caused by chemicals or electricity (seek emergency care immediately).",
+          "You are uncertain about the severity of the burn or if it's a child/elderly person."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ቃጠሎውን ወዲያውኑ ለ10-20 ደቂቃ በቀዝቃዛ (ቀዝቃዛ ሳይሆን) በሚፈስ ውሃ ያቀዘቅዙት።",
+          "ቦታውን በለስላሳ ሳሙና እና ውሃ በቀስታ ይታጠቡ።",
+          "ቀጭን የፔትሮሊየም ጄሊ ወይም የአሎ ቬራ ጄል ይለብሱ።",
+          "ቃጠሎውን በንፁህ፣ የማይጣበቅ ማሰሪያ ይሸፍኑ።",
+          "በረዶ፣ ቅቤ ወይም በባለሙያዎች ያልተመከሩ ሌሎች የቤት ውስጥ መፍትሄዎችን አይጠቀሙ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "አሎ ቬራ ጄል ወይም ፔትሮሊየም ጄሊ",
+            "safety_note": "እነዚህ ቃጠሎውን ለማረጋጋት እና እርጥብ እንዲሆን ለማድረግ ይረዳሉ። ምርቶች ንጹህ እና የሚያበሳጩ ተጨማሪዎች የሌሉባቸው መሆናቸውን ያረጋግጡ። አልኮል የያዙ ምርቶችን ያስወግዱ።"
+          },
+          {
+            "category_name": "ህመም ማስታገሻ",
+            "safety_note": "ፓራሲታሞል ወይም አይቡፕሮፌን ህመምን ለመቆጣጠር ይረዳሉ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ።"
+          }
+        ],
+        "seek_care_if": [
+          "ቃጠሎው ከዘንባባዎ የሚበልጥ ከሆነ።",
+          "ቃጠሎው ፊት ላይ፣ እጆች ላይ፣ እግሮች ላይ፣ ብልት ላይ ወይም ዋና መገጣጠሚያ ላይ ከሆነ።",
+          "ቆዳው አረፋ የወጣበት፣ የተቃጠለ ወይም ነጭ/ቆዳ የመሰለ የሚመስል ከሆነ (ሁለተኛ ወይም ሶስተኛ ዲግሪ ቃጠሎ)።",
+          "የኢንፌክሽን ምልክቶች ከታዩ (መግል፣ እየጨመረ የሚሄድ መቅላት፣ ትኩሳት)።",
+          "ቃጠሎው በኬሚካሎች ወይም በኤሌክትሪክ የተከሰተ ከሆነ (ወዲያውኑ የድንገተኛ ህክምና ይፈልጉ)።",
+          "የቃጠሎውን ክብደት እርግጠኛ ካልሆኑ ወይም ህፃን/አዛውንት ከሆነ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "muscle_cramps",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Gently stretch and massage the cramping muscle.",
+          "Apply heat (warm towel or heating pad) to relax the muscle, or cold (ice pack wrapped in cloth) to numb the pain.",
+          "Drink plenty of fluids, especially water, to stay hydrated.",
+          "Consider sports drinks if cramping is due to heavy sweating.",
+          "Avoid strenuous activity on the affected muscle."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "pain reliever (e.g., ibuprofen)",
+            "safety_note": "For associated soreness, ask a pharmacist about ibuprofen or paracetamol. Follow dosage instructions."
+          },
+          {
+            "category_name": "magnesium supplement",
+            "safety_note": "Some people find magnesium supplements helpful for muscle cramps. Consult a pharmacist or doctor before starting any new supplement, especially if you have kidney problems."
+          }
+        ],
+        "seek_care_if": [
+          "Muscle cramps are severe, frequent, or do not improve with self-care.",
+          "Cramps are accompanied by leg swelling, redness, or skin changes (could indicate a blood clot).",
+          "You experience muscle weakness or numbness in the affected limb.",
+          "Cramps are associated with significant muscle loss.",
+          "You have a known medical condition (e.g., thyroid disorder, nerve disorder) that might cause cramps."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "የተጨናነቀውን ጡንቻ በቀስታ ይዘርጉትና ማሳጅ ያድርጉ።",
+          "ጡንቻን ለማዝናናት ሙቀት (ሞቅ ያለ ፎጣ ወይም ማሞቂያ ፓድ) ያድርጉ፣ ወይም ህመምን ለማደንዘዝ ቅዝቃዜ (በረዶ በጨርቅ ጠቅልሎ) ይጠቀሙ።",
+          "እርጥበት እንዲኖርዎ ብዙ ፈሳሾችን፣ በተለይም ውሃ ይጠጡ።",
+          "ቁርጠት በከፍተኛ ላብ ምክንያት ከሆነ የስፖርት መጠጦችን ያስቡ።",
+          "በተጎዳው ጡንቻ ላይ ከባድ እንቅስቃሴን ያስወግዱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ህመም ማስታገሻ (ለምሳሌ አይቡፕሮፌን)",
+            "safety_note": "ለተያያዘ ህመም፣ ስለ አይቡፕሮፌን ወይም ፓራሲታሞል ፋርማሲስት ይጠይቁ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ።"
+          },
+          {
+            "category_name": "ማግኒዥየም ማሟያ",
+            "safety_note": "አንዳንድ ሰዎች ለማግኒዥየም ማሟያዎች ለጡንቻ ቁርጠት ጠቃሚ እንደሆኑ ይገነዘባሉ። ማንኛውንም አዲስ ማሟያ ከመጀመርዎ በፊት ፋርማሲስት ወይም ሐኪም ያማክሩ፣ በተለይም የኩላሊት ችግሮች ካለብዎ።"
+          }
+        ],
+        "seek_care_if": [
+          "የጡንቻ ቁርጠት ከባድ፣ ተደጋጋሚ ወይም በራስ እንክብካቤ የማይሻሻል ከሆነ።",
+          "ቁርጠት ከእግር እብጠት፣ መቅላት ወይም የቆዳ ለውጦች ጋር አብሮ ከመጣ (የደም መርጋት ምልክት ሊሆን ይችላል)።",
+          "በተጎዳው እግር/ክንድ ላይ የጡንቻ ድክመት ወይም የመደንዘዝ ስሜት ካጋጠመዎት።",
+          "ቁርጠት ከከፍተኛ የጡንቻ መጥፋት ጋር የተያያዘ ከሆነ።",
+          "ቁርጠት ሊያስከትል የሚችል የታወቀ የጤና እክል (ለምሳሌ የታይሮይድ ችግር፣ የነርቭ ችግር) ካለብዎት።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "fatigue_mild",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Ensure you are getting enough quality sleep (7-9 hours for adults).",
+          "Maintain a balanced diet with regular meals and healthy snacks.",
+          "Engage in regular, moderate physical activity.",
+          "Manage stress through relaxation techniques or hobbies.",
+          "Limit caffeine and alcohol, as they can disrupt sleep and energy levels."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "multivitamin or iron supplement",
+            "safety_note": "If you suspect nutritional deficiencies, a multivitamin might help. For iron deficiency, consult a pharmacist or doctor before taking iron supplements, as too much iron can be harmful."
+          }
+        ],
+        "seek_care_if": [
+          "Fatigue is persistent and severe, lasting for several weeks or months.",
+          "It significantly interferes with your daily activities and quality of life.",
+          "Fatigue is accompanied by other concerning symptoms (e.g., unexplained weight loss, fever, abnormal bleeding).",
+          "You suspect an underlying medical condition (e.g., anemia, thyroid issues, sleep apnea, depression).",
+          "Self-care measures do not improve your energy levels."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "በቂ ጥራት ያለው እንቅልፍ ማግኘታችሁን ያረጋግጡ (ለአዋቂዎች ከ7-9 ሰአታት)።",
+          "መደበኛ ምግቦችን እና ጤናማ መክሰስን ጨምሮ የተመጣጠነ ምግብ ይመገቡ።",
+          "በየጊዜው መጠነኛ የአካል ብቃት እንቅስቃሴ ያድርጉ።",
+          "በመዝናኛ ዘዴዎች ወይም የትርፍ ጊዜ ማሳለፊያዎች ውጥረትን ያስተዳድሩ።",
+          "ካፌይን እና አልኮልን ይገድቡ፣ ምክንያቱም እንቅልፍን እና የኃይል ደረጃዎችን ሊያበላሹ ይችላሉ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ብዙ ቫይታሚን ወይም የብረት ማሟያ",
+            "safety_note": "የአመጋገብ እጥረት እንደሆነ ከጠረጠሩ፣ ብዙ ቫይታሚን ሊረዳ ይችላል። ለብረት እጥረት፣ ከመጠን በላይ ብረት ጎጂ ሊሆን ስለሚችል የብረት ማሟያዎችን ከመውሰድዎ በፊት ፋርማሲስት ወይም ሐኪም ያማክሩ።"
+          }
+        ],
+        "seek_care_if": [
+          "ድካም የማያቋርጥ እና ከባድ ከሆነ፣ ለብዙ ሳምንታት ወይም ወራት የሚቆይ ከሆነ።",
+          "የዕለት ተዕለት እንቅስቃሴዎን እና የህይወት ጥራትዎን በእጅጉ የሚረብሽ ከሆነ።",
+          "ድካም ከሌሎች አሳሳቢ ምልክቶች (ለምሳሌ ያልታወቀ ክብደት መቀነስ፣ ትኩሳት፣ ያልተለመደ ደም መፍሰስ) ጋር አብሮ ከመጣ።",
+          "መሰረታዊ የህክምና ችግር (ለምሳሌ የደም ማነስ፣ የታይሮይድ ችግሮች፣ የእንቅልፍ አፕኒያ፣ ድብርት) እንደሆነ ከጠረጠሩ።",
+          "የራስ እንክብካቤ እርምጃዎች የኃይል ደረጃዎችዎን ካልጨመሩ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "gas_bloating",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Eat slowly and chew your food thoroughly.",
+          "Avoid fizzy drinks, chewing gum, and eating fast, which can cause you to swallow air.",
+          "Identify and avoid foods that commonly cause gas, such as beans, lentils, cabbage, and certain dairy products.",
+          "Engage in light physical activity after meals to aid digestion.",
+          "Drink peppermint or ginger tea."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "anti-gas medication (e.g., simethicone)",
+            "safety_note": "Ask a pharmacist about anti-gas medications containing simethicone to help break up gas bubbles. Follow label instructions."
+          },
+          {
+            "category_name": "digestive enzymes",
+            "safety_note": "For difficulty digesting certain foods (e.g., lactose for dairy), a pharmacist might suggest digestive enzymes. Use as directed."
+          }
+        ],
+        "seek_care_if": [
+          "Bloating is severe, persistent, and accompanied by significant pain.",
+          "You have unexplained weight loss, changes in bowel habits, or blood in your stool.",
+          "Bloating is accompanied by a fever, nausea, or vomiting.",
+          "You have trouble passing gas or having bowel movements.",
+          "Symptoms are new, worsening, or significantly interfere with daily life."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ቀስ ብለው ይበሉ እና ምግብዎን በደንብ ያኝኩ።",
+          "ጋዝ ያላቸውን መጠጦች፣ ማስቲካ ማኘክ እና በፍጥነት መብላትን ያስወግዱ፣ ይህም አየር እንዲውጡ ሊያደርግ ይችላል።",
+          "እንደ ባቄላ፣ ምስር፣ ጎመን እና አንዳንድ የወተት ተዋጽኦዎች ያሉ በብዛት ጋዝ የሚያስከትሉ ምግቦችን ይለዩ እና ያስወግዱ።",
+          "ምግብን ለማዋሃድ ከምግብ በኋላ ቀላል የአካል ብቃት እንቅስቃሴ ያድርጉ።",
+          "ሚንት ወይም ዝንጅብል ሻይ ይጠጡ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ፀረ-ጋዝ መድሃኒት (ለምሳሌ ሲሜቲኮን)",
+            "safety_note": "ጋዝ አረፋዎችን ለመበተን ስለ ሲሜቲኮን የያዙ ፀረ-ጋዝ መድሃኒቶች ፋርማሲስት ይጠይቁ። የመድሃኒቱን መመሪያ ይከተሉ።"
+          },
+          {
+            "category_name": "የምግብ መፈጨት ኢንዛይሞች",
+            "safety_note": "አንዳንድ ምግቦችን (ለምሳሌ ለወተት ላክቶስ) ለመዋሃድ ከተቸገሩ፣ ፋርማሲስት የምግብ መፈጨት ኢንዛይሞችን ሊጠቁም ይችላል። እንደተመከረው ይጠቀሙ።"
+          }
+        ],
+        "seek_care_if": [
+          "እብጠት ከባድ፣ የማያቋርጥ እና ከከፍተኛ ህመም ጋር አብሮ ከመጣ።",
+          "ያልታወቀ ክብደት መቀነስ፣ በአንጀት ልምዶች ላይ ለውጦች፣ ወይም በሰገራዎ ውስጥ ደም ካለብዎ።",
+          "እብጠት ከትኩሳት፣ ማቅለሽለሽ ወይም ማስታወክ ጋር አብሮ ከመጣ።",
+          "ጋዝ ለማስወጣት ወይም የሰገራ እንቅስቃሴ ለማድረግ ከተቸገሩ።",
+          "ምልክቶች አዲስ ከሆኑ፣ እየባሱ ከሄዱ ወይም የዕለት ተዕለት ኑሮዎን በእጅጉ የሚረብሹ ከሆኑ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "dry_cough",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Drink plenty of fluids to keep your throat moist and prevent irritation.",
+          "Sip on warm honey and lemon tea (honey not for children under 1 year).",
+          "Use a humidifier in your bedroom to add moisture to the air.",
+          "Avoid irritants like smoke, dust, and strong perfumes.",
+          "Suck on lozenges or hard candies to stimulate saliva production."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "cough suppressant",
+            "safety_note": "Ask a pharmacist about over-the-counter cough suppressants for dry coughs. Read the label carefully for age restrictions and dosage. Not for children under 6 years unless advised by a doctor."
+          }
+        ],
+        "seek_care_if": [
+          "Your dry cough lasts longer than 2-3 weeks.",
+          "The cough is accompanied by difficulty breathing, chest pain, or wheezing.",
+          "You have a high fever (above 38.3°C / 101°F) with the cough.",
+          "You are coughing up blood or pink-tinged mucus.",
+          "You experience unexplained weight loss or night sweats with the cough."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ጉሮሮዎን እርጥብ ለማድረግ እና ብስጭትን ለመከላከል ብዙ ፈሳሾችን ይጠጡ።",
+          "ሞቅ ያለ ማርና ሎሚ ሻይ ይጎንጩ (ማር ከአንድ አመት በታች ለሆኑ ህፃናት አይሰጥም)።",
+          "በመኝታ ክፍልዎ ውስጥ አየርን እርጥበት ለማድረግ እርጥበት ማድረቂያ ይጠቀሙ።",
+          "እንደ ጭስ፣ አቧራ እና ጠንካራ ሽቶ ያሉ የሚያበሳጩ ነገሮችን ያስወግዱ።",
+          "ምራቅን ለማነቃቃት የጉሮሮ ከረሜላ (ሎዘንጅ) ወይም ጠንካራ ከረሜላ ይመጥምጡ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የሳል ማስታገሻ",
+            "safety_note": "ስለ ደረቅ ሳል ያለሀኪም ማዘዣ የሳል ማስታገሻዎች ፋርማሲስት ይጠይቁ። ለዕድሜ ገደቦች እና ለመድሃኒት መጠን በጥንቃቄ መመሪያውን ያንብቡ። ሀኪም ካልመከረዎት በስተቀር ከ6 አመት በታች ለሆኑ ህፃናት አይስጡ።"
+          }
+        ],
+        "seek_care_if": [
+          "ደረቅ ሳልዎ ከ2-3 ሳምንታት በላይ ከቆየ።",
+          "ሳልው ከመተንፈስ ችግር፣ የደረት ህመም ወይም ጩኸት (wheezing) ጋር አብሮ ከመጣ።",
+          "ከሳልው ጋር ከፍተኛ ትኩሳት (ከ38.3°C / 101°F በላይ) ካለብዎ።",
+          "ደም ወይም ሮዝ ቀለም ያለው አክታ እየሳሉ ከሆነ።",
+          "ከሳልው ጋር ያልታወቀ ክብደት መቀነስ ወይም በሌሊት ላብ ካጋጠመዎት።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "wet_cough",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Drink plenty of fluids like water, juice, or broth to thin mucus and make it easier to cough up.",
+          "Use a humidifier in your room to loosen phlegm.",
+          "Sip on warm liquids like honey and lemon tea (honey not for children under 1 year).",
+          "Take a steamy shower or sit in a steamy bathroom.",
+          "Avoid smoke and other respiratory irritants."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "expectorant",
+            "safety_note": "Ask a pharmacist about over-the-counter expectorants (e.g., guaifenesin) to help thin mucus. Follow dosage instructions. Not for children under 6 years unless advised by a doctor."
+          }
+        ],
+        "seek_care_if": [
+          "You are coughing up thick, green, or yellow mucus for several days.",
+          "The cough is accompanied by difficulty breathing, chest pain, or wheezing.",
+          "You are coughing up blood or pink-tinged mucus.",
+          "You have a high fever (above 38.3°C / 101°F) with the cough.",
+          "Symptoms do not improve after 2-3 weeks or worsen."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "አክታን ለማቅጠን እና በቀላሉ ለማስሳል እንደ ውሃ፣ ጭማቂ ወይም ሾርባ ያሉ ብዙ ፈሳሾችን ይጠጡ።",
+          "አክታን ለማላቀቅ በመኝታ ክፍልዎ ውስጥ እርጥበት ማድረቂያ ይጠቀሙ።",
+          "እንደ ማርና ሎሚ ሻይ ያሉ ሞቅ ያሉ ፈሳሾችን ይጎንጩ (ማር ከአንድ አመት በታች ለሆኑ ህፃናት አይሰጥም)።",
+          "እንፋሎት ባለው ሻወር ይታጠቡ ወይም በእንፋሎት ባለው መታጠቢያ ቤት ውስጥ ይቀመጡ።",
+          "ጭስ እና ሌሎች የመተንፈሻ አካላት የሚያበሳጩ ነገሮችን ያስወግዱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "አክታ ማውጫ",
+            "safety_note": "አክታን ለማቅጠን ስለ ያለሀኪም ማዘዣ አክታ ማውጫዎች (ለምሳሌ ጉዋይፈኔሲን) ፋርማሲስት ይጠይቁ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ። ሀኪም ካልመከረዎት በስተቀር ከ6 አመት በታች ለሆኑ ህፃናት አይስጡ።"
+          }
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mouth_odor",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Brush your teeth and tongue thoroughly twice a day.",
+          "Floss daily to remove food particles and plaque.",
+          "Use an antimicrobial mouthwash to reduce bacteria.",
+          "Stay hydrated by drinking plenty of water.",
+          "Avoid foods known to cause strong odors like garlic and onions."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "antiseptic mouthwash",
+            "safety_note": "Ask a pharmacist about antiseptic mouthwashes. Use as directed. Mouthwash should complement, not replace, brushing and flossing."
+          }
+        ],
+        "seek_care_if": [
+          "Bad breath persists despite consistent good oral hygiene.",
+          "You have painful, bleeding, or swollen gums.",
+          "You notice loose teeth or other signs of gum disease.",
+          "You have difficulty swallowing or pain in your mouth/throat.",
+          "You suspect an underlying medical condition (e.g., sinus infection, diabetes, tonsil stones) is causing the odor."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ጥርሶችዎን እና ምላስዎን በቀን ሁለት ጊዜ በደንብ ይቦርሹ።",
+          "የምግብ ቅሪቶችን እና ንጣፎችን ለማስወገድ በየቀኑ ፍሎስ ይጠቀሙ።",
+          "ባክቴሪያዎችን ለመቀነስ ፀረ-ተህዋሲያን የአፍ ማጠቢያ ይጠቀሙ።",
+          "ብዙ ውሃ በመጠጣት እርጥበት ይኑርዎት።",
+          "እንደ ነጭ ሽንኩርት እና ቀይ ሽንኩርት ያሉ ጠንካራ ሽታ የሚያስከትሉ ምግቦችን ያስወግዱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ፀረ-ተባይ የአፍ ማጠቢያ",
+            "safety_note": "ስለ ፀረ-ተባይ የአፍ ማጠቢያዎች ፋርማሲስት ይጠይቁ። እንደተመከረው ይጠቀሙ። የአፍ ማጠቢያ ጥርስን ከመቦረሽ እና ፍሎስ ከመጠቀም በተጨማሪ መሆን አለበት እንጂ የሚተካ መሆን የለበትም።"
+          }
+        ],
+        "seek_care_if": [
+          "መጥፎ የአፍ ጠረን በቋሚ ጥሩ የአፍ ንፅህና ቢደረግለትም ከቀጠለ።",
+          "የሚያሰቃዩ፣ ደም የሚፈሱ ወይም ያበጡ ድድ ካለብዎ።",
+          "የላላ ጥርሶች ወይም ሌሎች የድድ በሽታ ምልክቶችን ካስተዋሉ።",
+          "ለመዋጥ ከተቸገሩ ወይም በአፍዎ/ጉሮሮዎ ላይ ህመም ካለብዎ።",
+          "የመጥፎ ጠረኑ መንስኤ መሰረታዊ የህክምና ችግር (ለምሳሌ የሳይነስ ኢንፌክሽን፣ የስኳር በሽታ፣ የቶንሲል ድንጋዮች) እንደሆነ ከጠረጠሩ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "general_fatigue",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Prioritize 7-9 hours of quality sleep nightly.",
+          "Eat balanced meals regularly to maintain energy levels.",
+          "Incorporate moderate exercise into your routine (e.g., walking, light jogging).",
+          "Practice stress-reduction techniques like meditation or yoga.",
+          "Limit screen time, especially before bed."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "multivitamin or B-complex vitamin",
+            "safety_note": "If dietary intake is insufficient, a multivitamin or B-complex might help. Consult a pharmacist before starting any supplements to ensure they are appropriate for you."
+          }
+        ],
+        "seek_care_if": [
+          "Fatigue is severe, persistent for more than a few weeks, and interferes with daily life.",
+          "It's accompanied by unexplained weight loss, fever, or pain.",
+          "You feel depressed, anxious, or have thoughts of self-harm.",
+          "You suspect an underlying medical condition (e.g., anemia, thyroid problems, diabetes).",
+          "You are experiencing significant changes in sleep patterns or appetite."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "በየምሽቱ ከ7-9 ሰዓታት ጥራት ያለው እንቅልፍ ቅድሚያ ይስጡ።",
+          "የኃይል ደረጃዎችን ለመጠበቅ በመደበኛነት የተመጣጠነ ምግብ ይመገቡ።",
+          "በመደበኛ እንቅስቃሴዎችዎ ውስጥ መጠነኛ የአካል ብቃት እንቅስቃሴን ያካትቱ (ለምሳሌ በእግር መሄድ፣ ቀላል ሩጫ)።",
+          "እንደ ማሰላሰል ወይም ዮጋ ባሉ የመዝናኛ ዘዴዎች ውጥረትን ይቀንሱ።",
+          "በተለይም ከመተኛትዎ በፊት የስክሪን ጊዜን ይገድቡ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ብዙ ቫይታሚን ወይም ቢ-ኮምፕሌክስ ቫይታሚን",
+            "safety_note": "የአመጋገብ ስርዓትዎ በቂ ካልሆነ፣ ብዙ ቫይታሚን ወይም ቢ-ኮምፕሌክስ ሊረዳ ይችላል። ለእርስዎ ተገቢ መሆናቸውን ለማረጋገጥ ማንኛውንም ማሟያ ከመጀመርዎ በፊት ፋርማሲስት ያማክሩ።"
+          }
+        ],
+        "seek_care_if": [
+          "ድካም ከባድ፣ ለብዙ ሳምንታት የሚቆይ እና የዕለት ተዕለት ኑሮዎን የሚረብሽ ከሆነ።",
+          "ያልታወቀ ክብደት መቀነስ፣ ትኩሳት ወይም ህመም አብሮ ከመጣ።",
+          "የድብርት ስሜት፣ ጭንቀት ወይም ራስን የመጉዳት ሀሳቦች ካለብዎ።",
+          "መሰረታዊ የህክምና ችግር (ለምሳሌ የደም ማነስ፣ የታይሮይድ ችግሮች፣ የስኳር በሽታ) እንደሆነ ከጠረጠሩ።",
+          "በእንቅልፍ ሁኔታዎ ወይም በምግብ ፍላጎትዎ ላይ ጉልህ ለውጦች ካጋጠሙዎት።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "stuffy_nose",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Use a saline nasal spray or rinse to moisturize nasal passages and clear mucus.",
+          "Breathe in steam from a hot shower or a bowl of hot water (carefully) to loosen congestion.",
+          "Use a humidifier in your bedroom to add moisture to the air.",
+          "Drink plenty of fluids to thin mucus.",
+          "Elevate your head with extra pillows while sleeping."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "decongestant nasal spray or oral decongestant",
+            "safety_note": "Ask a pharmacist about decongestants for adults. Nasal sprays should not be used for more than 3 days to avoid rebound congestion. Oral decongestants may not be suitable for people with high blood pressure."
+          }
+        ],
+        "seek_care_if": [
+          "Stuffy nose persists for more than 10 days or worsens after 7 days.",
+          "It's accompanied by a high fever (above 38.3°C / 101°F).",
+          "You experience severe facial pain or pressure.",
+          "There is green or yellow discharge from your nose, especially with fever.",
+          "You have difficulty breathing."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "የአፍንጫ ቀዳዳዎችን ለማራስ እና ንፍጥን ለማጽዳት ጨው የያዘ የአፍንጫ ስፕሬይ ወይም ማጠቢያ ይጠቀሙ።",
+          "የአፍንጫ መጨናነቅን ለማላቀቅ ከሞቃት ሻወር ወይም ከሞቀ ውሃ እንፋሎት ይተንፍሱ (በጥንቃቄ)።",
+          "በመኝታ ክፍልዎ ውስጥ አየርን እርጥበት ለማድረግ እርጥበት ማድረቂያ ይጠቀሙ።",
+          "አክታን ለማቅጠን ብዙ ፈሳሾችን ይጠጡ።",
+          "ሲተኙ ጭንቅላትዎን ተጨማሪ ትራሶች በማድረግ ከፍ ያድርጉ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የአፍንጫ መጨናነቅ ማስታገሻ ስፕሬይ ወይም የአፍ ውስጥ ማስታገሻ",
+            "safety_note": "ስለ አዋቂዎች የአፍንጫ መጨናነቅ ማስታገሻዎች ፋርማሲስት ይጠይቁ። የመርዘኛ መጨናነቅን (rebound congestion) ለማስወገድ የአፍንጫ ስፕሬይዎችን ከ 3 ቀናት በላይ መጠቀም የለብዎትም። የአፍ ውስጥ ማስታገሻዎች የደም ግፊት ላለባቸው ሰዎች ተስማሚ ላይሆኑ ይችላሉ።"
+          }
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_sore_muscles",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Apply heat (warm bath, heating pad) to relax muscles and improve blood flow.",
+          "Gentle stretching can help relieve muscle tightness.",
+          "Light massage to the affected muscles.",
+          "Rest the sore muscles and avoid strenuous activities.",
+          "Stay hydrated by drinking plenty of water."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "pain reliever (e.g., paracetamol, ibuprofen)",
+            "safety_note": "Ask a pharmacist about over-the-counter pain relievers to manage discomfort. Follow dosage instructions."
+          },
+          {
+            "category_name": "topical pain relief cream",
+            "safety_note": "Creams or gels with ingredients like menthol or capsaicin can provide localized relief. Apply as directed."
+          }
+        ],
+        "seek_care_if": [
+          "Muscle pain is severe, sudden, and unrelated to recent activity.",
+          "It's accompanied by redness, swelling, or warmth around the muscles.",
+          "You experience numbness, tingling, or weakness in the limb.",
+          "Pain persists for more than a few days, worsens, or is accompanied by fever.",
+          "You suspect an injury (e.g., strain, sprain) or an underlying medical condition."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ሙቀት (ሞቅ ያለ ገላ መታጠብ፣ ማሞቂያ ፓድ) ጡንቻዎችን ለማዝናናት እና የደም ዝውውርን ለማሻሻል ይጠቀሙ።",
+          "ቀላል ዝርጋታ የጡንቻ ጥንካሬን ለማስታገስ ይረዳል።",
+          "በተጎዱት ጡንቻዎች ላይ ቀላል ማሳጅ ያድርጉ።",
+          "የሚያሰቃዩትን ጡንቻዎች ያሳርፉ እና ከባድ እንቅስቃሴዎችን ያስወግዱ።",
+          "ብዙ ውሃ በመጠጣት እርጥበት ይኑርዎት።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ህመም ማስታገሻ (ለምሳሌ ፓራሲታሞል፣ አይቡፕሮፌን)",
+            "safety_note": "ምቾት ማጣትን ለመቆጣጠር ስለ ያለሀኪም ማዘዣ የህመም ማስታገሻዎች ፋርማሲስት ይጠይቁ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ።"
+          },
+          {
+            "category_name": "ለቆዳ የሚቀባ የህመም ማስታገሻ ክሬም",
+            "safety_note": "እንደ ሜንቶል ወይም ካፕሳይሲን ያሉ ንጥረ ነገሮችን የያዙ ክሬሞች ወይም ጄልዎች የአካባቢ እፎይታ ሊሰጡ ይችላሉ። እንደተመከረው ይጠቀሙ።"
+          }
+        ],
+        "seek_care_if": [
+          "የጡንቻ ህመም ከባድ፣ ድንገተኛ እና ከቅርብ ጊዜ እንቅስቃሴ ጋር ያልተገናኘ ከሆነ።",
+          "ከጡንቻዎች ዙሪያ መቅላት፣ እብጠት ወይም ሙቀት ጋር አብሮ ከመጣ።",
+          "በእግር/ክንድ ላይ የመደንዘዝ፣ የመኮማተር ወይም የመድከም ስሜት ካጋጠመዎት።",
+          "ህመሙ ከጥቂት ቀናት በላይ ከቀጠለ፣ ከተባባሰ ወይም ከትኩሳት ጋር አብሮ ከመጣ።",
+          "ጉዳት (ለምሳሌ መሰንጠቅ፣ መጣመም) ወይም መሰረታዊ የህክምና ችግር እንደሆነ ከጠረጠሩ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "bloating_mild",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Eat slowly and chew your food thoroughly.",
+          "Avoid fizzy drinks, chewing gum, and eating quickly, which can lead to swallowing air.",
+          "Identify and avoid foods that commonly cause bloating, such as beans, lentils, broccoli, and certain dairy products.",
+          "Engage in light physical activity after meals to aid digestion.",
+          "Try peppermint or ginger tea to help relieve discomfort."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "anti-gas medication (e.g., simethicone)",
+            "safety_note": "Ask a pharmacist about anti-gas medications containing simethicone to help break up gas bubbles. Follow label instructions."
+          },
+          {
+            "category_name": "digestive enzymes",
+            "safety_note": "For difficulty digesting certain foods (e.g., lactose), a pharmacist might suggest digestive enzymes. Use as directed."
+          }
+        ],
+        "seek_care_if": [
+          "Bloating is severe, persistent, and accompanied by significant pain.",
+          "You have unexplained weight loss, changes in bowel habits, or blood in your stool.",
+          "Bloating is accompanied by a fever, nausea, or vomiting.",
+          "You have trouble passing gas or having bowel movements.",
+          "Symptoms are new, worsening, or significantly interfere with daily life."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ቀስ ብለው ይበሉ እና ምግብዎን በደንብ ያኝኩ።",
+          "ጋዝ ያላቸውን መጠጦች፣ ማስቲካ ማኘክ እና በፍጥነት መብላትን ያስወግዱ፣ ይህም አየር እንዲውጡ ሊያደርግ ይችላል።",
+          "እንደ ባቄላ፣ ምስር፣ ብሮኮሊ እና አንዳንድ የወተት ተዋጽኦዎች ያሉ በብዛት ጋዝ የሚያስከትሉ ምግቦችን ይለዩ እና ያስወግዱ።",
+          "ምግብን ለማዋሃድ ከምግብ በኋላ ቀላል የአካል ብቃት እንቅስቃሴ ያድርጉ።",
+          "ምቾት ማጣትን ለመቀነስ ሚንት ወይም ዝንጅብል ሻይ ይሞክሩ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ፀረ-ጋዝ መድሃኒት (ለምሳሌ ሲሜቲኮን)",
+            "safety_note": "ጋዝ አረፋዎችን ለመበተን ስለ ሲሜቲኮን የያዙ ፀረ-ጋዝ መድሃኒቶች ፋርማሲስት ይጠይቁ። የመድሃኒቱን መመሪያ ይከተሉ።"
+          },
+          {
+            "category_name": "የምግብ መፈጨት ኢንዛይሞች",
+            "safety_note": "አንዳንድ ምግቦችን (ለምሳሌ ላክቶስ) ለመዋሃድ ከተቸገሩ፣ ፋርማሲስት የምግብ መፈጨት ኢንዛይሞችን ሊጠቁም ይችላል። እንደተመከረው ይጠቀሙ።"
+          }
+        ],
+        "seek_care_if": [
+          "እብጠት ከባድ፣ የማያቋርጥ እና ከከፍተኛ ህመም ጋር አብሮ ከመጣ።",
+          "ያልታወቀ ክብደት መቀነስ፣ በአንጀት ልምዶች ላይ ለውጦች፣ ወይም በሰገራዎ ውስጥ ደም ካለብዎ።",
+          "እብጠት ከትኩሳት፣ ማቅለሽለሽ ወይም ማስታወክ ጋር አብሮ ከመጣ።",
+          "ጋዝ ለማስወጣት ወይም የሰገራ እንቅስቃሴ ለማድረግ ከተቸገሩ።",
+          "ምልክቶች አዲስ ከሆኑ፣ እየባሱ ከሄዱ ወይም የዕለት ተዕለት ኑሮዎን በእጅጉ የሚረብሹ ከሆኑ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "minor_head_bumps",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Apply a cold compress (ice pack wrapped in a cloth) to the affected area for 15-20 minutes.",
+          "Rest and avoid strenuous activity for a day or two.",
+          "Monitor for any worsening symptoms or new concerns.",
+          "Avoid alcohol and pain relievers that can thin blood (like aspirin) initially, if advised.",
+          "Ensure someone checks on you regularly for the first 24 hours."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "pain reliever (e.g., paracetamol)",
+            "safety_note": "You can ask a pharmacist about paracetamol to manage pain. Avoid ibuprofen or aspirin initially, as they can increase bleeding risk. Follow dosage instructions."
+          }
+        ],
+        "seek_care_if": [
+          "Loss of consciousness, even briefly.",
+          "A headache that gets worse or does not go away.",
+          "Weakness, numbness, decreased coordination, or slurred speech.",
+          "Repeated vomiting or nausea.",
+          "One pupil (the black center of the eye) is larger than the other.",
+          "Convulsions or seizures.",
+          "Confusion, restlessness, agitation, or unusual behavior.",
+          "Drowsiness or inability to wake up.",
+          "Clear fluid or blood coming from the ears or nose.",
+          "Difficulty recognizing people or places."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional. For head injuries, always monitor closely for red flags."
+      },
+      "am": {
+        "self_care": [
+          "ለ15-20 ደቂቃዎች የተጎዳው ቦታ ላይ ቀዝቃዛ ጨርቅ (በረዶ በጨርቅ የተጠቀለለ) ያድርጉ።",
+          "ለአንድ ወይም ለሁለት ቀን ያህል ያርፉ እና ከባድ እንቅስቃሴን ያስወግዱ።",
+          "ምልክቶች እየባሱ ከሄዱ ወይም አዲስ ችግሮች ካሉ ይከታተሉ።",
+          "በመጀመሪያ አልኮልን እና ደምን የሚያቀጥኑ የህመም ማስታገሻዎችን (እንደ አስፕሪን) ያስወግዱ።",
+          "በመጀመሪያዎቹ 24 ሰዓታት ውስጥ አንድ ሰው በየጊዜው እርስዎን እየተከታተለ መሆኑን ያረጋግጡ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ህመም ማስታገሻ (ለምሳሌ ፓራሲታሞል)",
+            "safety_note": "ስለ ፓራሲታሞል ለህመም ማስታገሻ ፋርማሲስት መጠየቅ ይችላሉ። አይቡፕሮፌን ወይም አስፕሪንን በመጀመሪያ ያስወግዱ፣ ምክንያቱም የደም መፍሰስ ስጋትን ሊጨምሩ ይችላሉ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ።"
+          }
+        ],
+        "seek_care_if": [
+          "የንቃተ ህሊና ማጣት፣ ለአጭር ጊዜም ቢሆን።",
+          "የሚባባስ ወይም የማይጠፋ ራስ ምታት።",
+          "ድክመት፣ የመደንዘዝ ስሜት፣ ቅንጅት ማጣት፣ ወይም የተዘበራረቀ ንግግር።",
+          "ተደጋጋሚ ማስታወክ ወይም ማቅለሽለሽ።",
+          "አንድ ተማሪ (የዓይን ጥቁር ክፍል) ከሌላው የሚበልጥ ከሆነ።",
+          "የሚጥል በሽታ ወይም መናድ።",
+          "ግራ መጋባት፣ እረፍት ማጣት፣ መረበሽ ወይም ያልተለመደ ባህሪ።",
+          "እንቅልፍ ማጣት ወይም መንቃት አለመቻል።",
+          "ከጆሮ ወይም ከአፍንጫ ንጹህ ፈሳሽ ወይም ደም መውጣት።",
+          "ሰዎችን ወይም ቦታዎችን ለመለየት መቸገር።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ። ለጭንቅላት ጉዳቶች፣ ሁልጊዜ ቀይ ባንዲራዎችን በጥንቃቄ ይከታተሉ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_joint_stiffness",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Gently move the stiff joint through its full range of motion.",
+          "Apply warmth (warm bath, heating pad) to the joint to relax muscles and improve blood flow.",
+          "Light stretching exercises can help improve flexibility.",
+          "Stay active with low-impact exercises like swimming or cycling.",
+          "Maintain good posture to reduce strain on joints."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "topical pain relief cream/gel",
+            "safety_note": "Creams or gels with ingredients like menthol or capsaicin can help with localized discomfort. Apply as directed to the affected joint."
+          },
+          {
+            "category_name": "oral pain reliever",
+            "safety_note": "For general discomfort, ask a pharmacist about paracetamol or ibuprofen. Follow dosage instructions."
+          }
+        ],
+        "seek_care_if": [
+          "Joint stiffness is accompanied by severe pain, swelling, redness, or warmth.",
+          "Stiffness is sudden and affects multiple joints.",
+          "You have a fever, chills, or unexplained weight loss with joint stiffness.",
+          "Stiffness lasts for more than a few days, worsens, or significantly interferes with daily activities.",
+          "You suspect an injury or an underlying medical condition (e.g., arthritis)."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "የጠነከረውን መገጣጠሚያ በሙሉ የእንቅስቃሴ ክልሉ ውስጥ በቀስታ ያንቀሳቅሱት።",
+          "ጡንቻዎችን ለማዝናናት እና የደም ዝውውርን ለማሻሻል ሙቀት (ሞቅ ያለ ገላ መታጠብ፣ ማሞቂያ ፓድ) በመገጣጠሚያው ላይ ያድርጉ።",
+          "ቀላል የመለጠጥ ልምምዶች ተለዋዋጭነትን ለማሻሻል ይረዳሉ።",
+          "እንደ ዋና ወይም ብስክሌት መንዳት ባሉ ዝቅተኛ ተጽዕኖ ያላቸውን እንቅስቃሴዎች ንቁ ይሁኑ።",
+          "በመገጣጠሚያዎች ላይ ያለውን ጫና ለመቀነስ ጥሩ አቋም ይኑርዎት።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ለቆዳ የሚቀባ የህመም ማስታገሻ ክሬም/ጄል",
+            "safety_note": "እንደ ሜንቶል ወይም ካፕሳይሲን ያሉ ንጥረ ነገሮችን የያዙ ክሬሞች ወይም ጄልዎች የአካባቢ ምቾት ማጣትን ለመርዳት ይችላሉ። በተጎዳው መገጣጠሚያ ላይ እንደተመከረው ይቀቡ።"
+          },
+          {
+            "category_name": "የአፍ ውስጥ ህመም ማስታገሻ",
+            "safety_note": "ለአጠቃላይ ምቾት ማጣት፣ ስለ ፓራሲታሞል ወይም አይቡፕሮፌን ፋርማሲስት ይጠይቁ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ።"
+          }
+        ],
+        "seek_care_if": [
+          "የመገጣጠሚያ ጥንካሬ ከከባድ ህመም፣ እብጠት፣ መቅላት ወይም ሙቀት ጋር አብሮ ከመጣ።",
+          "ጥንካሬው ድንገተኛ ከሆነ እና ብዙ መገጣጠሚያዎችን የሚጎዳ ከሆነ።",
+          "ከትኩሳት፣ ከብርድ ብርድ ማለት ወይም ባልታወቀ ክብደት መቀነስ ከመገጣጠሚያ ጥንካሬ ጋር ካለብዎት።",
+          "ጥንካሬው ከጥቂት ቀናት በላይ ከቆየ፣ ከተባባሰ ወይም የዕለት ተዕለት እንቅስቃሴዎችን በእጅጉ የሚረብሽ ከሆነ።",
+          "ጉዳት ወይም መሰረታዊ የህክምና ችግር (ለምሳሌ አርትራይተስ) እንደሆነ ከጠረጠሩ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "heart_palpitations_mild",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Reduce or avoid caffeine and alcohol intake.",
+          "Manage stress through relaxation techniques like deep breathing or meditation.",
+          "Stay hydrated by drinking plenty of water.",
+          "Get adequate sleep.",
+          "Avoid stimulating activities or sudden movements that trigger palpitations."
+        ],
+        "otc_categories": [],
+        "seek_care_if": [
+          "Palpitations are frequent, persistent, or worsen.",
+          "They are accompanied by chest pain, shortness of breath, dizziness, or fainting.",
+          "You have a history of heart disease or other serious medical conditions.",
+          "Palpitations cause significant anxiety or interfere with your daily life.",
+          "You notice other unusual symptoms with the palpitations."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional. For heart-related concerns, it's always best to seek medical advice."
+      },
+      "am": {
+        "self_care": [
+          "የካፌይን እና የአልኮል መጠጥን ይቀንሱ ወይም ያስወግዱ።",
+          "ጥልቅ የአተነፋፈስ ልምምዶች ወይም ማሰላሰል በመሳሰሉ የመዝናኛ ዘዴዎች ውጥረትን ያስተዳድሩ።",
+          "ብዙ ውሃ በመጠጣት እርጥበት ይኑርዎት።",
+          "በቂ እንቅልፍ ያግኙ።",
+          "የልብ ምት መጨመርን የሚያስከትሉ የሚያነቃቁ እንቅስቃሴዎችን ወይም ድንገተኛ እንቅስቃሴዎችን ያስወግዱ።"
+        ],
+        "otc_categories": [],
+        "seek_care_if": [
+          "የልብ ምት መጨመር ተደጋጋሚ፣ የማያቋርጥ ወይም እየባሰ ከሄደ።",
+          "ከደረት ህመም፣ ትንፋሽ ማጠር፣ ማዞር ወይም መሳት ጋር አብሮ ከመጣ።",
+          "የልብ ህመም ወይም ሌሎች ከባድ የጤና ችግሮች ታሪክ ካለብዎት።",
+          "የልብ ምት መጨመር ከፍተኛ ጭንቀት የሚያስከትል ከሆነ ወይም የዕለት ተዕለት ኑሮዎን የሚረብሽ ከሆነ።",
+          "ከ palpitations ጋር ሌሎች ያልተለመዱ ምልክቶችን ካስተዋሉ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ። ከልብ ጋር ለተያያዙ ችግሮች፣ ሁልጊዜ የህክምና ምክር መፈለግ የተሻለ ነው።"
+      }
+    }
+  },
+  {
+    "topic_key": "light_headedness",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Sit or lie down immediately to prevent falls.",
+          "Drink water or an oral rehydration solution (ORS) to stay hydrated.",
+          "Eat a small, bland snack if you haven't eaten recently.",
+          "Avoid sudden changes in position (e.g., standing up too quickly).",
+          "Get adequate rest."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "oral rehydration salts (ORS)",
+            "safety_note": "ORS can help restore fluid and electrolyte balance if dehydration is suspected. Mix with clean water as directed."
+          }
+        ],
+        "seek_care_if": [
+          "Lightheadedness is persistent, severe, or causes you to faint.",
+          "It's accompanied by chest pain, shortness of breath, severe headache, or vision changes.",
+          "You experience weakness, numbness, or difficulty speaking.",
+          "Lightheadedness occurs after a head injury.",
+          "You have a known heart condition or other serious medical illness."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "መውደቅን ለመከላከል ወዲያውኑ ይቀመጡ ወይም ይተኛሉ።",
+          "እርጥበት ለመኖር ውሃ ወይም የቃል የሰውነት ፈሳሽ ማሟያ (ORS) ይጠጡ።",
+          "በቅርቡ ካልበሉ ትንሽ፣ ያልቦካ መክሰስ ይመገቡ።",
+          "በቦታ አቀማመጥ ላይ ድንገተኛ ለውጦችን ያስወግዱ (ለምሳሌ በጣም በፍጥነት መቆም።",
+          "በቂ እረፍት ያግኙ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የቃል የሰውነት ፈሳሽ ማሟያ (ORS)",
+            "safety_note": "ORS የሰውነት ፈሳሽ እጥረት እንደሆነ ከተጠረጠረ ፈሳሽ እና ኤሌክትሮላይት ሚዛንን ለመመለስ ይረዳል። እንደተመከረው በንጹህ ውሃ ይቀላቅሉ።"
+          }
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "minor_swelling_bruising",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Rest: Rest the injured part.",
+          "Ice: Apply an ice pack wrapped in a cloth for 15-20 minutes every 2-3 hours.",
+          "Compression: Gently wrap the area with an elastic bandage.",
+          "Elevation: Elevate the injured area above your heart if possible.",
+          "Avoid heat for the first 24-48 hours after injury."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "pain reliever (e.g., paracetamol, ibuprofen)",
+            "safety_note": "Ask a pharmacist about pain relievers to manage discomfort. Follow dosage instructions. Ibuprofen can help with swelling."
+          },
+          {
+            "category_name": "topical arnica cream",
+            "safety_note": "Arnica cream may help reduce bruising and swelling. Apply as directed to unbroken skin."
+          }
+        ],
+        "seek_care_if": [
+          "Swelling or bruising is severe, rapidly worsening, or involves a large area.",
+          "You cannot move the injured limb or put weight on it.",
+          "You suspect a broken bone or severe sprain/strain.",
+          "Numbness, tingling, or coldness develops below the injury.",
+          "You have a fever with swelling, or signs of infection (redness, pus, warmth).",
+          "The swelling is in a joint and prevents normal movement."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "እረፍት፡ የተጎዳውን ክፍል ያሳርፉ።",
+          "በረዶ፡ በጨርቅ የተጠቀለለ በረዶ በየ2-3 ሰአቱ ለ15-20 ደቂቃ ያድርጉ።",
+          "መጠቅለል፡ አካባቢውን በላስቲክ ባንዴጅ በቀስታ ይጠቅልሉ (በጣም አጥብቀው አይጠቅልሉ)።",
+          "ከፍ ማድረግ፡ የተጎዳውን አካባቢ ከልብዎ ከፍ ያለ እንዲሆን ያድርጉ።",
+          "ከጉዳት በኋላ በመጀመሪያዎቹ 24-48 ሰዓታት ውስጥ ሙቀትን ያስወግዱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ህመም ማስታገሻ (ለምሳሌ ፓራሲታሞል፣ አይቡፕሮፌን)",
+            "safety_note": "ምቾት ማጣትን ለመቆጣጠር ስለ ህመም ማስታገሻዎች ፋርማሲስት ይጠይቁ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ። አይቡፕሮፌን እብጠትን ለመቀነስ ይረዳል።"
+          },
+          {
+            "category_name": "ለቆዳ የሚቀባ የአርኒካ ክሬም",
+            "safety_note": "የአርኒካ ክሬም መሰንጠቅን እና እብጠትን ለመቀነስ ይረዳል። ባልተሰበረ ቆዳ ላይ እንደተመከረው ይቀቡ።"
+          }
+        ],
+        "seek_care_if": [
+          "እብጠት ወይም መሰንጠቅ ከባድ፣ በፍጥነት እየባሰ የሚሄድ ወይም ትልቅ ቦታ የሚሸፍን ከሆነ።",
+          "የተጎዳውን እግር/ክንድ ማንቀሳቀስ ወይም በእሱ ላይ ክብደት መጫን ካልቻሉ።",
+          "የተሰበረ አጥንት ወይም ከባድ መሰንጠቅ/መጣመም እንደሆነ ከጠረጠሩ።",
+          "ከጉዳቱ በታች የመደንዘዝ፣ የመኮማተር ወይም ቅዝቃዜ ከታየ።",
+          "ከትኩሳት ጋር እብጠት ካለብዎ፣ ወይም የኢንፌክሽን ምልክቶች (መቅላት፣ መግል፣ ሙቀት) ካለብዎ።",
+          "እብጠቱ በመገጣጠሚያ ውስጥ ከሆነ እና መደበኛ እንቅስቃሴን የሚከለክል ከሆነ።"
+        ],
+        "disclaimer": "ይህ አጠቃላዩ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "sore_feet_tired_feet",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Soak your feet in warm water with Epsom salts for 15-20 minutes.",
+          "Elevate your feet when resting.",
+          "Massage your feet to relieve tension.",
+          "Wear comfortable, supportive shoes with good arch support.",
+          "Stretch your feet and calves regularly."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "topical pain relief cream/gel",
+            "safety_note": "Ask a pharmacist about creams or gels for muscle and joint pain. Apply as directed to your feet."
+          },
+          {
+            "category_name": "foot spray or powder",
+            "safety_note": "These can help with discomfort, odor, and keeping feet dry. Follow product instructions."
+          }
+        ],
+        "seek_care_if": [
+          "Foot pain is severe, sudden, or caused by a specific injury.",
+          "You have signs of infection (redness, warmth, pus, fever).",
+          "Swelling is severe or does not improve with rest and elevation.",
+          "You have diabetes or poor circulation, and foot problems are new or worsening.",
+          "Pain persists for more than a few days despite self-care."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "እግርዎን ለ15-20 ደቂቃዎች በሙቅ ውሃ እና በኤፕሰም ጨው ያጠቡ።",
+          "ሲያርፉ እግርዎን ከፍ ያድርጉ።",
+          "ውጥረትን ለማስታገስ እግርዎን ማሳጅ ያድርጉ።",
+          "ምቹ፣ ጥሩ ድጋፍ ያላቸው ጫማዎችን ይልበሱ።",
+          "እግርዎን እና ጥጃዎን በየጊዜው ዘርጋ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ለቆዳ የሚቀባ የህመም ማስታገሻ ክሬም/ጄል",
+            "safety_note": "ስለ ጡንቻ እና መገጣጠሚያ ህመም ክሬም ወይም ጄል ፋርማሲስት ይጠይቁ። እንደተመከረው በእግርዎ ላይ ይለብሱ።"
+          },
+          {
+            "category_name": "የእግር ስፕሬይ ወይም ፓውደር",
+            "safety_note": "እነዚህ ምቾት ማጣትን፣ ሽታን እና እግርን ደረቅ ለማድረግ ይረዳሉ። የምርቱን መመሪያ ይከተሉ።"
+          }
+        ],
+        "seek_care_if": [
+          "የእግር ህመም ከባድ፣ ድንገተኛ ወይም በተለየ ጉዳት የተከሰተ ከሆነ።",
+          "የኢንፌክሽን ምልክቶች (መቅላት፣ ሙቀት፣ መግል፣ ትኩሳት) ካለብዎ።",
+          "እብጠት ከባድ ከሆነ ወይም በእረፍት እና ከፍ በማድረግ ካልተሻሻለ።",
+          "የስኳር በሽታ ወይም ደካማ የደም ዝውውር ካለብዎ፣ እና የእግር ችግሮች አዲስ ወይም እየባሱ ከሄዱ።",
+          "ህመሙ በራስ እንክብካቤ ቢደረግለትም ከጥቂት ቀናት በላይ ከቀጠለ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "dry_eyes",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Use over-the-counter artificial tears frequently throughout the day.",
+          "Avoid direct air conditioning, heaters, and fans.",
+          "Take breaks when reading or using digital screens and blink frequently.",
+          "Use a humidifier in your home or office.",
+          "Wear wraparound sunglasses outdoors to protect from wind and sun."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "artificial tears (lubricating eye drops)",
+            "safety_note": "Ask a pharmacist about preservative-free artificial tears for better comfort, especially if used frequently. Do not use drops if they cause increased pain or redness."
+          }
+        ],
+        "seek_care_if": [
+          "You experience severe eye pain, blurred vision, or light sensitivity.",
+          "Your dry eyes are accompanied by redness, swelling, or discharge.",
+          "Artificial tears do not provide relief, or symptoms worsen.",
+          "You have a known autoimmune condition (e.g., Sjogren's syndrome) that could cause dry eyes.",
+          "Symptoms are persistent and significantly affect your vision or daily life."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ያለሀኪም ማዘዣ የሚገኙ ሰው ሰራሽ እንባዎችን በቀን ውስጥ ብዙ ጊዜ ይጠቀሙ።",
+          "ቀጥተኛ የአየር ማቀዝቀዣዎችን፣ ማሞቂያዎችን እና አድናቂዎችን ያስወግዱ።",
+          "ሲያነቡ ወይም ዲጂታል ስክሪኖችን ሲጠቀሙ እረፍት ይውሰዱ እና ብዙ ጊዜ ብልጭ ድርግም ይበሉ።",
+          "በቤትዎ ወይም በቢሮዎ ውስጥ እርጥበት ማድረቂያ ይጠቀሙ።",
+          "ከነፋስ እና ከፀሐይ ለመከላከል ከቤት ውጭ ከጎን የተሸፈኑ የፀሐይ መነጽሮችን ይልበሱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ሰው ሰራሽ እንባ (እርጥበት አድራጊ የአይን ጠብታዎች)",
+            "safety_note": "በተለይም ብዙ ጊዜ የሚጠቀሙ ከሆነ ስለ መከላከያ የሌላቸው ሰው ሰራሽ እንባዎች ለተሻለ ምቾት ፋርማሲስት ይጠይቁ። ህመም ወይም መቅላት ካስከተሉ ጠብታዎችን አይጠቀሙ።"
+          }
+        ],
+        "seek_care_if": [
+          "ከባድ የአይን ህመም፣ የእይታ ብዥታ ወይም ለብርሃን የመደንዘዝ ስሜት ካጋጠመዎት።",
+          "ደረቅ አይኖችዎ ከመቅላት፣ እብጠት ወይም ፈሳሽ ጋር አብሮ ከመጣ።",
+          "ሰው ሰራሽ እንባዎች እፎይታ ካልሰጡ፣ ወይም ምልክቶቹ ከተባባሱ።",
+          "ደረቅ አይኖች ሊያስከትል የሚችል የታወቀ የሰውነት በሽታ መከላከል ስርዓት ችግር (ለምሳሌ ሾግሬን ሲንድሮም) ካለብዎት።",
+          "ምልክቶቹ የማያቋርጡ እና እይታዎን ወይም የዕለት ተዕለት ኑሮዎን በእጅጉ የሚነኩ ከሆኑ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "gingivitis_mild",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Brush your teeth at least twice a day with a soft-bristled brush.",
+          "Floss daily to remove plaque and food particles between teeth and under the gumline.",
+          "Use an antiseptic mouthwash as recommended by a dentist or pharmacist.",
+          "Replace your toothbrush every 3-4 months or sooner if bristles are frayed.",
+          "Avoid sugary foods and drinks."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "antiseptic mouthwash",
+            "safety_note": "Ask a pharmacist about mouthwashes containing chlorhexidine or other antiseptics for gingivitis. Use as directed, but note some can stain teeth with prolonged use."
+          }
+        ],
+        "seek_care_if": [
+          "Gum bleeding is severe or persistent despite consistent oral hygiene.",
+          "You have significant gum pain, swelling, or pus around your teeth.",
+          "Your gums are receding, or teeth feel loose.",
+          "Bad breath is persistent even with good oral hygiene.",
+          "Symptoms do not improve after a few weeks of diligent self-care."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional, preferably a dentist."
+      },
+      "am": {
+        "self_care": [
+          "ጥርሶችዎን በቀን ቢያንስ ሁለት ጊዜ በለስላሳ የጥርስ ብሩሽ ይቦርሹ።",
+          "በጥርሶች እና በድድ መስመር ስር ያለውን ንጣፍ እና የምግብ ቅሪቶችን ለማስወገድ በየቀኑ ፍሎስ ይጠቀሙ።",
+          "በጥርስ ሀኪም ወይም ፋርማሲስት እንደተመከረው ፀረ-ተህዋሲያን የአፍ ማጠቢያ ይጠቀሙ።",
+          "የጥርስ ብሩሽዎን በየ3-4 ወሩ ወይም ብሩሾቹ ከደከሙ ከዚያ ቀደም ብለው ይለውጡ።",
+          "ጣፋጭ ምግቦችን እና መጠጦችን ያስወግዱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ፀረ-ተባይ የአፍ ማጠቢያ",
+            "safety_note": "ስለ ጂንጂቪቲስ ክሎርሄክሲዲን ወይም ሌሎች ፀረ-ተህዋሲያንን የያዙ የአፍ ማጠቢያዎች ፋርማሲስት ይጠይቁ። እንደተመከረው ይጠቀሙ፣ ነገር ግን አንዳንዶቹ ለረጅም ጊዜ ጥቅም ላይ ከዋሉ ጥርስን ሊያበላሹ እንደሚችሉ ልብ ይበሉ።"
+          }
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ፣ በተለይም የጥርስ ሀኪም።"
+      }
+    }
+  },
+  {
+    "topic_key": "stomach_rumbling",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Eat regular, balanced meals and snacks to avoid extreme hunger.",
+          "Stay hydrated by drinking plenty of water throughout the day.",
+          "Avoid foods known to cause excessive gas (e.g., beans, fizzy drinks).",
+          "Eat slowly and chew your food thoroughly to avoid swallowing air.",
+          "Consider peppermint or ginger tea to settle your stomach."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "anti-gas medication (e.g., simethicone)",
+            "safety_note": "If rumbling is due to excessive gas, ask a pharmacist about simethicone products. Follow label instructions."
+          }
+        ],
+        "seek_care_if": [
+          "Stomach rumbling is accompanied by severe abdominal pain, bloating, or cramping.",
+          "You have changes in bowel habits (e.g., new constipation or diarrhea).",
+          "You experience unexplained weight loss, fever, or vomiting.",
+          "The rumbling is constant, loud, and significantly bothers you.",
+          "You suspect an underlying digestive issue or food intolerance."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ከፍተኛ ረሃብን ለማስወገድ በመደበኛነት የተመጣጠነ ምግብ እና መክሰስ ይመገቡ።",
+          "ቀኑን ሙሉ ብዙ ውሃ በመጠጣት እርጥበት ይኑርዎት።",
+          "ከመጠን በላይ ጋዝ የሚያስከትሉ ምግቦችን (ለምሳሌ ባቄላ፣ ጋዝ ያላቸው መጠጦች) ያስወግዱ።",
+          "አየር እንዳይውጡ ቀስ ብለው ይበሉ እና ምግብዎን በደንብ ያኝኩ።",
+          "ሆድዎን ለማረጋጋት ሚንት ወይም ዝንጅብል ሻይ ያስቡ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ፀረ-ጋዝ መድሃኒት (ለምሳሌ ሲሜቲኮን)",
+            "safety_note": "ጩኸቱ ከመጠን በላይ በሆነ ጋዝ ምክንያት ከሆነ፣ ስለ ሲሜቲኮን ምርቶች ፋርማሲስት ይጠይቁ። የመድሃኒቱን መመሪያ ይከተሉ።"
+          }
+        ],
+        "seek_care_if": [
+          "የሆድ ጩኸት ከከባድ የሆድ ህመም፣ እብጠት ወይም ቁርጠት ጋር አብሮ ከመጣ።",
+          "በአንጀት ልምዶች ላይ ለውጦች (ለምሳሌ አዲስ የሆድ ድርቀት ወይም ተቅማጥ) ካለብዎ።",
+          "ያልታወቀ ክብደት መቀነስ፣ ትኩሳት ወይም ማስታወክ ካጋጠመዎት።",
+          "ጩኸቱ የማያቋርጥ፣ ጮክ ያለ እና በእጅጉ የሚያስጨንቅ ከሆነ።",
+          "መሰረታዊ የምግብ መፈጨት ችግር ወይም የምግብ አለመቻቻል እንደሆነ ከጠረጠሩ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "chafing",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Keep the affected skin clean and dry.",
+          "Wear loose-fitting, breathable clothing (e.g., cotton) to reduce friction.",
+          "Apply a protective balm or cream to areas prone to chafing before activity.",
+          "Avoid irritating fabrics and rough seams.",
+          "Shower immediately after sweating and thoroughly dry skin folds."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "petroleum jelly, zinc oxide cream, or anti-chafing balm",
+            "safety_note": "Ask a pharmacist about products to protect skin from friction and moisture. Apply to clean, dry skin as directed. Avoid on broken or infected skin unless advised."
+          }
+        ],
+        "seek_care_if": [
+          "Chafing develops into open sores, blisters, or signs of infection (redness, warmth, pus, increasing pain).",
+          "The chafing is severe and significantly painful, interfering with walking or daily activities.",
+          "It persists for more than a few days despite self-care measures.",
+          "You have diabetes or compromised circulation, as skin issues can be more serious."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "የተጎዳውን ቆዳ ንጹህ እና ደረቅ ያድርጉት።",
+          "ግጭትን ለመቀነስ የላላ፣ አየር የሚያሳልፍ ልብስ (ለምሳሌ ጥጥ) ይልበሱ።",
+          "ከእንቅስቃሴ በፊት ለብስጭት ተጋላጭ በሆኑ ቦታዎች ላይ መከላከያ ቅባት ወይም ክሬም ይለብሱ።",
+          "የሚያበሳጩ ጨርቆችን እና ሻካራ ስፌቶችን ያስወግዱ።",
+          "ካላብዎ በኋላ ወዲያውኑ ገላዎን ይታጠቡ እና የቆዳዎን መታጠፊያዎች በደንብ ያድርቁ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ፔትሮሊየም ጄሊ፣ ዚንክ ኦክሳይድ ክሬም ወይም ፀረ-ብስጭት ቅባት",
+            "safety_note": "ቆዳን ከግጭት እና ከእርጥበት ለመከላከል ስለሚረዱ ምርቶች ፋርማሲስት ይጠይቁ። በንጹህ፣ ደረቅ ቆዳ ላይ እንደተመከረው ይለብሱ። ምክር ካልተሰጠዎት በስተቀር በተሰበረ ወይም በተበከለ ቆዳ ላይ ያስወግዱ።"
+          }
+        ],
+        "seek_care_if": [
+          "ብስጭት ወደ ክፍት ቁስሎች፣ አረፋዎች ወይም የኢንፌክሽን ምልክቶች (መቅላት፣ ሙቀት፣ መግል፣ እየጨመረ የሚሄድ ህመም) ከተቀየረ።",
+          "ብስጭቱ ከባድ እና በእጅጉ የሚያሰቃይ ከሆነ፣ በእግር መሄድን ወይም የዕለት ተዕለት እንቅስቃሴዎችን የሚረብሽ ከሆነ።",
+          "በራስ እንክብካቤ እርምጃዎች ቢደረግለትም ከጥቂት ቀናት በላይ ከቀጠለ።",
+          "የስኳር በሽታ ወይም ደካማ የደም ዝውውር ካለብዎ፣ የቆዳ ችግሮች የበለጠ ከባድ ሊሆኑ ይችላሉ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "minor_headache_tension",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Rest in a quiet, dark room.",
+          "Apply a warm or cool compress to your forehead or neck.",
+          "Gently massage your temples and neck muscles.",
+          "Practice relaxation techniques like deep breathing or meditation.",
+          "Stay hydrated and ensure regular meals to avoid hunger-related headaches."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "pain reliever (e.g., paracetamol, ibuprofen)",
+            "safety_note": "You can ask a pharmacist about over-the-counter pain relievers to ease tension headache pain. Follow dosage instructions carefully. Avoid overuse, which can lead to medication overuse headaches."
+          }
+        ],
+        "seek_care_if": [
+          "The headache is severe, sudden, or the 'worst headache of your life'.",
+          "You also have a high fever, stiff neck, confusion, or vision changes.",
+          "It occurs after a head injury.",
+          "The headache is accompanied by weakness, numbness, or difficulty speaking.",
+          "Pain is persistent and does not improve with self-care or OTC medicine."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "በጸጥታ እና ጨለማ ክፍል ውስጥ ዕረፍት ይውሰዱ።",
+          "በግንባርዎ ወይም በአንገትዎ ላይ ሙቅ ወይም ቀዝቃዛ ጨርቅ ያድርጉ።",
+          "ቤተመቅደስዎን እና የአንገት ጡንቻዎችዎን በቀስታ ማሳጅ ያድርጉ።",
+          "ጥልቅ የአተነፋፈስ ልምምዶችን ወይም ማሰላሰልን የመሳሰሉ የመዝናኛ ዘዴዎችን ይለማመዱ።",
+          "እርጥበት ይኑርዎት እና በረሃብ ምክንያት የሚመጡ ራስ ምታትን ለማስወገድ መደበኛ ምግቦችን ይመገቡ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ህመም ማስታገሻ (ለምሳሌ ፓራሲታሞል፣ አይቡፕሮፌን)",
+            "safety_note": "ውጥረት ያለበትን ራስ ምታት ህመምን ለማስታገስ ስለ ያለሀኪም ማዘዣ የህመም ማስታገሻዎች ፋርማሲስት መጠየቅ ይችላሉ። የመድሃኒት መጠን መመሪያዎችን በጥንቃቄ ይከተሉ። ከመጠን በላይ ከመጠቀም ይቆጠቡ፣ ይህም ወደ መድሃኒት ከመጠን በላይ መጠቀም ራስ ምታት ሊያስከትል ይችላል።"
+          }
+        ],
+        "seek_care_if": [
+          "የራስ ምታት ከባድ፣ ድንገተኛ ወይም 'በሕይወትዎ ውስጥ እጅግ የከፋ የራስ ምታት' ከሆነ።",
+          "ከፍተኛ ትኩሳት፣ የአንገት መጠንከር፣ ግራ መጋባት ወይም የእይታ ለውጥ አለዎት።",
+          "ከጭንቅላት ጉዳት በኋላ ተከስቷል።",
+          "የራስ ምታት ከድክመት፣ ከመደንዘዝ ስሜት ወይም ለመናገር መቸገር ጋር አብሮ ከመጣ።",
+          "ህመሙ የማያቋርጥ እና በራስ እንክብካቤ ወይም ያለሀኪም ማዘዣ መድሃኒት የማይሻሻል ከሆነ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_dizziness_vertigo",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Sit or lie down immediately when feeling dizzy to prevent falls.",
+          "Avoid sudden changes in position, especially standing up quickly.",
+          "Stay hydrated by drinking plenty of water.",
+          "Avoid driving or operating machinery until dizziness subsides.",
+          "Ensure adequate rest and manage stress."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "motion sickness medication (e.g., dimenhydrinate)",
+            "safety_note": "For dizziness associated with vertigo or motion sickness, a pharmacist might suggest medications like dimenhydrinate. Use as directed; may cause drowsiness."
+          }
+        ],
+        "seek_care_if": [
+          "Dizziness is severe, persistent, or causes fainting or loss of consciousness.",
+          "It's accompanied by chest pain, shortness of breath, severe headache, vision changes, or difficulty speaking.",
+          "You experience weakness or numbness on one side of your body.",
+          "Dizziness occurs after a head injury.",
+          "You have a known heart condition, stroke risk, or other serious medical illness."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ማዞር ሲሰማዎት ወዲያውኑ ይቀመጡ ወይም ይተኛሉ፣ መውደቅን ለመከላከል።",
+          "በቦታ አቀማመጥ ላይ ድንገተኛ ለውጦችን ያስወግዱ፣ በተለይም በፍጥነት መቆም።",
+          "ብዙ ውሃ በመጠጣት እርጥበት ይኑርዎት።",
+          "ማዞር እስኪቀንስ ድረስ ከመንዳት ወይም ማሽነሪዎችን ከመጠቀም ይቆጠቡ።",
+          "በቂ እረፍት ያግኙ እና ውጥረትን ያስተዳድሩ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የእንቅስቃሴ ሲሆን ማቅለሽለሽ መድሃኒት (ለምሳሌ ዲመንሃይድሪኔት)",
+            "safety_note": "ከ vertigo ወይም የእንቅስቃሴ ሲሆን ማቅለሽለሽ ጋር ለተያያዘ ማዞር፣ ፋርማሲስት እንደ ዲመንሃይድሪኔት ያሉ መድሃኒቶችን ሊጠቁም ይችላል። እንደተመከረው ይጠቀሙ፤ እንቅልፍ ሊያመጣ ይችላል።"
+          }
+        ],
+        "seek_care_if": [
+          "ማዞር ከባድ፣ የማያቋርጥ ወይም መሳት ወይም ንቃተ ህሊና ማጣት የሚያስከትል ከሆነ።",
+          "ከደረት ህመም፣ ትንፋሽ ማጠር፣ ከባድ ራስ ምታት፣ የእይታ ለውጦች ወይም ለመናገር መቸገር ጋር አብሮ ከመጣ።",
+          "በሰውነትዎ በአንደኛው ጎን የመድከም ወይም የመደንዘዝ ስሜት ካጋጠመዎት።",
+          "ማዞር ከጭንቅላት ጉዳት በኋላ የተከሰተ ከሆነ።",
+          "የታወቀ የልብ ህመም፣ የስትሮክ ስጋት ወይም ሌሎች ከባድ የህክምና ችግሮች ካለብዎት።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "minor_toothache",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Rinse your mouth thoroughly with warm salt water.",
+          "Floss gently to remove any food particles stuck between teeth.",
+          "Apply a cold compress to the outside of your cheek near the painful area for 20 minutes at a time.",
+          "Avoid very hot, cold, sweet, or acidic foods and drinks.",
+          "Maintain good oral hygiene with regular brushing."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "oral pain reliever (e.g., paracetamol, ibuprofen)",
+            "safety_note": "Ask a pharmacist about suitable pain relievers. Follow dosage instructions. Do not place aspirin directly on the tooth or gum, as it can cause a burn."
+          },
+          {
+            "category_name": "topical toothache gel (e.g., benzocaine)",
+            "safety_note": "These gels can temporarily numb the area. Use as directed; not for prolonged use or on young children without advice."
+          }
+        ],
+        "seek_care_if": [
+          "Toothache is severe, persistent, and not relieved by self-care or OTC medicine.",
+          "You have signs of infection (fever, swelling of the face/jaw, pus around the tooth).",
+          "There is difficulty swallowing or breathing.",
+          "You notice swelling or redness in your gums that spreads.",
+          "The tooth is loose, cracked, or severely damaged.",
+          "Pain radiates to your ear or jaw, or you experience headache."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional, preferably a dentist."
+      },
+      "am": {
+        "self_care": [
+          "አፍዎን በሞቀ ጨው ውሃ በደንብ ያጠቡ።",
+          "በጥርሶች መካከል የተጣበቁ የምግብ ቅሪቶችን ለማስወገድ በቀስታ ፍሎስ ይጠቀሙ።",
+          "ለ20 ደቂቃዎች ያህል በጉንጭዎ ውጭኛው ክፍል ላይ፣ በህመሙ አቅራቢያ ቀዝቃዛ ጨርቅ ያድርጉ።",
+          "በጣም ትኩስ፣ ቀዝቃዛ፣ ጣፋጭ ወይም አሲዳማ ምግቦችን እና መጠጦችን ያስወግዱ።",
+          "በመደበኛ መቦረሽ ጥሩ የአፍ ንፅህናን ይጠብቁ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የአፍ ውስጥ ህመም ማስታገሻ (ለምሳሌ ፓራሲታሞል፣ አይቡፕሮፌን)",
+            "safety_note": "ስለ ተገቢ የህመም ማስታገሻዎች ፋርማሲስት ይጠይቁ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ። አስፕሪን በቀጥታ በጥርስ ወይም በድድ ላይ አያስቀምጡ፣ ምክንያቱም ሊያቃጥል ይችላል።"
+          },
+          {
+            "category_name": "ለጥርስ ህመም የሚቀባ ጄል (ለምሳሌ ቤንዞካይን)",
+            "safety_note": "እነዚህ ጄልዎች ቦታውን ለጊዜው ሊያደነዝዙ ይችላሉ። እንደተመከረው ይጠቀሙ፤ ለረጅም ጊዜ አገልግሎት ወይም ያለ ምክር ለትንንሽ ህፃናት አይጠቀሙ።"
+          }
+        ],
+        "seek_care_if": [
+          "የጥርስ ህመም ከባድ፣ የማያቋርጥ እና በራስ እንክብካቤ ወይም ያለሀኪም ማዘዣ መድሃኒት የማይሻሻል ከሆነ።",
+          "የኢንፌክሽን ምልክቶች (ትኩሳት፣ የፊት/መንጋጋ እብጠት፣ በጥርስ ዙሪያ መግል) ካለብዎ።",
+          "ለመዋጥ ወይም ለመተንፈስ ከተቸገሩ።",
+          "በድድዎ ላይ የሚሰራጭ እብጠት ወይም መቅላት ካስተዋሉ።",
+          "ጥርሱ የላላ፣ የተሰነጠቀ ወይም በጣም የተጎዳ ከሆነ።",
+          "ህመሙ ወደ ጆሮዎ ወይም መንጋጋዎ ከተሰራጨ፣ ወይም ራስ ምታት ካጋጠመዎት።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ፣ በተለይም የጥርስ ሀኪም።"
+      }
+    }
+  },
+  {
+    "topic_key": "cold_sore",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Apply a cold compress to the sore to reduce pain and swelling.",
+          "Avoid touching the sore to prevent spreading the virus.",
+          "Keep the area clean and moist.",
+          "Avoid acidic or salty foods that can irritate the sore.",
+          "Wash your hands thoroughly after touching your face."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "topical antiviral cream (e.g., acyclovir, docosanol)",
+            "safety_note": "Ask a pharmacist about over-the-counter antiviral creams. Apply at the first sign of a cold sore (tingling) for best results. Follow product instructions carefully."
+          },
+          {
+            "category_name": "topical pain relief cream",
+            "safety_note": "For pain relief, a cream containing lidocaine or benzocaine can be used. Use as directed for temporary relief."
+          }
+        ],
+        "seek_care_if": [
+          "Cold sores are unusually large, painful, or do not heal within 2 weeks.",
+          "You have cold sores that spread to your eyes or inside your mouth (beyond the lips).",
+          "You have a weakened immune system (e.g., due to illness or medication).",
+          "Cold sores are frequent or accompanied by fever and other severe symptoms."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ህመምን እና እብጠትን ለመቀነስ በቀዝቃዛ ጨርቅ ቁስሉ ላይ ያድርጉ።",
+          "ቫይረሱን እንዳይሰራጭ ቁስሉን ከመነካት ይቆጠቡ።",
+          "ቦታውን ንጹህ እና እርጥብ ያድርጉት።",
+          "ቁስሉን ሊያበሳጩ የሚችሉ አሲዳማ ወይም ጨዋማ ምግቦችን ያስወግዱ።",
+          "ፊትዎን ከነኩ በኋላ እጅዎን በደንብ ይታጠቡ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ለቆዳ የሚቀባ ፀረ-ቫይረስ ክሬም (ለምሳሌ አሲክሎቪር፣ ዶኮሳኖል)",
+            "safety_note": "ስለ ያለሀኪም ማዘዣ ፀረ-ቫይረስ ክሬሞች ፋርማሲስት ይጠይቁ። ለተሻለ ውጤት የጉንፋን ቁስል የመጀመሪያ ምልክት (መኮማተር) ሲታይ ይለብሱ። የምርቱን መመሪያ በጥንቃቄ ይከተሉ።"
+          },
+          {
+            "category_name": "ለቆዳ የሚቀባ የህመም ማስታገሻ ክሬም",
+            "safety_note": "ለህመም ማስታገሻ፣ ሊዶካይን ወይም ቤንዞካይን የያዘ ክሬም መጠቀም ይቻላል። ለጊዜያዊ እፎይታ እንደተመከረው ይጠቀሙ።"
+          }
+        ],
+        "seek_care_if": [
+          "የጉንፋን ቁስሎች ባልተለመደ ሁኔታ ትልቅ፣ የሚያሰቃዩ ወይም በ2 ሳምንታት ውስጥ የማይድኑ ከሆኑ።",
+          "የጉንፋን ቁስሎች ወደ ዓይኖችዎ ወይም ከአፍዎ ውስጥ (ከከንፈሮች ባሻገር) ከተሰራጩ።",
+          "የተዳከመ የበሽታ መከላከል ስርዓት ካለብዎት (ለምሳሌ በህመም ወይም በመድሃኒት ምክንያት)።",
+          "የጉንፋን ቁስሎች ተደጋጋሚ ከሆኑ ወይም ከትኩሳት እና ሌሎች ከባድ ምልክቶች ጋር አብሮ ከመጣ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "minor_allergies",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Identify and avoid known allergens.",
+          "Use saline nasal rinses to clear nasal passages of allergens.",
+          "Take cool showers or baths to soothe itchy skin.",
+          "Keep windows closed during high pollen seasons.",
+          "Wash bedding frequently to reduce dust mites."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "antihistamine",
+            "safety_note": "Ask a pharmacist about non-drowsy antihistamines like cetirizine or loratadine for allergy symptoms. Follow dosage instructions."
+          },
+          {
+            "category_name": "nasal corticosteroid spray",
+            "safety_note": "For persistent nasal allergy symptoms, these sprays can be effective. Use as directed by a pharmacist or doctor."
+          }
+        ],
+        "seek_care_if": [
+          "You experience difficulty breathing, wheezing, or tightness in your chest.",
+          "You have swelling of your face, lips, or tongue (angioedema).",
+          "You develop a widespread, rapidly spreading rash or hives.",
+          "Symptoms do not improve with self-care or worsen significantly.",
+          "You have a known history of severe allergic reactions (anaphylaxis)."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "የታወቁ አለርጂዎችን ይለዩ እና ያስወግዱ።",
+          "የአፍንጫ ቀዳዳዎችን ከአለርጂዎች ለማጽዳት ጨው የያዙ የአፍንጫ ማጠቢያዎችን ይጠቀሙ።",
+          "የሚያሳክክ ቆዳን ለማረጋጋት በቀዝቃዛ ውሃ ይታጠቡ።",
+          "ብዙ የአበባ ዱቄት በሚኖርበት ወቅት መስኮቶችን ዝጉ።",
+          "የአቧራ ብናኞችን ለመቀነስ የአልጋ ልብሶችን በየጊዜው ይታጠቡ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ፀረ-ሂስታሚን (Antihistamine)",
+            "safety_note": "ስለ አለርጂ ምልክቶች የማያስተኛ ፀረ-ሂስታሚኖች እንደ ሴቲሪዚን ወይም ሎራታዲን ያሉ ፋርማሲስት ይጠይቁ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ።"
+          },
+          {
+            "category_name": "የአፍንጫ ኮርቲኮስቴሮይድ ስፕሬይ",
+            "safety_note": "ለማያቋርጥ የአፍንጫ አለርጂ ምልክቶች፣ እነዚህ ስፕሬይዎች ውጤታማ ሊሆኑ ይችላሉ። በፋርማሲስት ወይም በሐኪም እንደተመከረው ይጠቀሙ።"
+          }
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "tired_eyes",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Take regular breaks from digital screens (e.g., 20-20-20 rule: every 20 minutes, look at something 20 feet away for 20 seconds).",
+          "Blink frequently to keep your eyes moist.",
+          "Apply a warm or cool compress to your closed eyes for a few minutes.",
+          "Ensure adequate lighting when reading or working.",
+          "Get enough sleep."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "artificial tears (lubricating eye drops)",
+            "safety_note": "Ask a pharmacist about lubricating eye drops to relieve dryness and fatigue. Choose preservative-free options if used frequently. Do not use drops if they cause increased pain or redness."
+          }
+        ],
+        "seek_care_if": [
+          "Eye fatigue is accompanied by severe eye pain, blurred vision, or light sensitivity.",
+          "You have persistent redness, swelling, or discharge from your eyes.",
+          "Symptoms do not improve after consistent self-care and rest.",
+          "You suspect an underlying eye condition or vision problem.",
+          "You experience double vision or other significant vision changes."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ከዲጂታል ስክሪኖች በመደበኛነት እረፍት ይውሰዱ (ለምሳሌ 20-20-20 ህግ፡ በየ20 ደቂቃው፣ ለ20 ሰከንድ ከ20 ጫማ ርቀት ያለውን ነገር ይመልከቱ)።",
+          "ዓይኖችዎን እርጥብ ለማድረግ ብዙ ጊዜ ብልጭ ድርግም ይበሉ።",
+          "ለጥቂት ደቂቃዎች በዐይንዎ ላይ ሙቅ ወይም ቀዝቃዛ ጨርቅ ያድርጉ።",
+          "ሲያነቡ ወይም ሲሰሩ በቂ ብርሃን መኖሩን ያረጋግጡ።",
+          "በቂ እንቅልፍ ያግኙ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ሰው ሰራሽ እንባ (እርጥበት አድራጊ የአይን ጠብታዎች)",
+            "safety_note": "ስለ እርጥበት አድራጊ የአይን ጠብታዎች ድርቀትን እና ድካምን ለማስታገስ ፋርማሲስት ይጠይቁ። በተለይም ብዙ ጊዜ የሚጠቀሙ ከሆነ መከላከያ የሌላቸውን አማራጮች ይምረጡ። ህመም ወይም መቅላት ካስከተሉ ጠብታዎችን አይጠቀሙ።"
+          }
+        ],
+        "seek_care_if": [
+          "የዓይን ድካም ከከባድ የአይን ህመም፣ የእይታ ብዥታ ወይም ለብርሃን የመደንዘዝ ስሜት ጋር አብሮ ከመጣ።",
+          "ከዓይንዎ ላይ የማያቋርጥ መቅላት፣ እብጠት ወይም ፈሳሽ ካለብዎ።",
+          "ምልክቶች በቋሚ የራስ እንክብካቤ እና እረፍት በኋላ ካልተሻሻሉ።",
+          "መሰረታዊ የአይን ችግር ወይም የእይታ ችግር እንደሆነ ከጠረጠሩ።",
+          "ድርብ እይታ ወይም ሌሎች ጉልህ የእይታ ለውጦች ካጋጠሙዎት።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "minor_cuts_scratches",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Wash your hands thoroughly before treating the wound.",
+          "Clean the cut or scratch gently with mild soap and water.",
+          "Apply gentle pressure with a clean cloth to stop any bleeding.",
+          "Apply a thin layer of petroleum jelly or antibiotic ointment.",
+          "Cover the wound with a sterile bandage to keep it clean and protected."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "antiseptic solution or antibiotic ointment",
+            "safety_note": "Ask a pharmacist about appropriate antiseptics or antibiotic ointments. Follow product instructions. Avoid hydrogen peroxide or alcohol on open wounds."
+          },
+          {
+            "category_name": "sterile bandages",
+            "safety_note": "Ensure bandages are clean and changed daily or when wet/dirty."
+          }
+        ],
+        "seek_care_if": [
+          "The bleeding is heavy or does not stop after 10 minutes of direct pressure.",
+          "The cut is deep, wide, or gaping open.",
+          "The wound is caused by a dirty or rusty object, or an animal/human bite.",
+          "Signs of infection develop (redness, swelling, pus, increasing pain, fever).",
+          "The wound is on the face or near a joint and might affect function or appearance."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "ቁስሉን ከማከምዎ በፊት እጅዎን በደንብ ይታጠቡ።",
+          "ቁስሉን ወይም መፋቅዎን ለስላሳ ሳሙና እና ውሃ በቀስታ ያጽዱ።",
+          "ደም መፍሰስን ለማቆም በንጹህ ጨርቅ በቀስታ ይጫኑ።",
+          "ቀጭን የፔትሮሊየም ጄሊ ወይም አንቲባዮቲክ ቅባት ይለብሱ።",
+          "ቁስሉን ንፁህ እና የተጠበቀ እንዲሆን በንፁህ ማሰሪያ ይሸፍኑ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ፀረ-ተባይ መፍትሄ ወይም አንቲባዮቲክ ቅባት",
+            "safety_note": "ስለ ተገቢ ፀረ-ተባይ መድሃኒቶች ወይም አንቲባዮቲክ ቅባቶች ፋርማሲስት ይጠይቁ። የምርቱን መመሪያ ይከተሉ። በክፍት ቁስሎች ላይ ሃይድሮጂን ፔሮክሳይድ ወይም አልኮልን ያስወግዱ።"
+          },
+          {
+            "category_name": "ንጹህ ማሰሪያዎች",
+            "safety_note": "ማሰሪያዎች ንጹህ መሆናቸውን ያረጋግጡ እና በየቀኑ ወይም እርጥብ/ቆሻሻ ሲሆኑ ይቀይሩ።"
+          }
+        ],
+        "seek_care_if": [
+          "ደም መፍሰሱ ከባድ ከሆነ ወይም ለ10 ደቂቃ በቀጥታ ከተጫኑ በኋላ ካልቆመ።",
+          "ቁስሉ ጥልቅ፣ ሰፊ ወይም ክፍት ከሆነ።",
+          "ቁስሉ በቆሻሻ ወይም ዝገት ባለው ነገር፣ ወይም በእንስሳ/በሰው ንክሻ የተከሰተ ከሆነ።",
+          "የኢንፌክሽን ምልክቶች ከታዩ (መቅላት፣ እብጠት፣ መግል፣ እየጨመረ የሚሄድ ህመም፣ ትኩሳት)።",
+          "ቁስሉ ፊት ላይ ወይም በመገጣጠሚያ አቅራቢያ ከሆነ እና ተግባርን ወይም መልክን ሊጎዳ ይችላል።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "sun_exposure_prevention",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Seek shade, especially during peak sun hours (10 AM to 4 PM).",
+          "Wear protective clothing, including long-sleeved shirts, pants, and wide-brimmed hats.",
+          "Use sunscreen with an SPF of 30 or higher, reapplying every two hours or after swimming/sweating.",
+          "Wear UV-blocking sunglasses.",
+          "Be extra careful near water, sand, or snow, as they reflect sunlight and increase exposure."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "sunscreen (SPF 30+)",
+            "safety_note": "Choose a broad-spectrum sunscreen that protects against both UVA and UVB rays. Apply liberally and reapply frequently. Check expiration dates."
+          },
+          {
+            "category_name": "after-sun lotion",
+            "safety_note": "If you do get some sun exposure, after-sun lotions with aloe vera can help soothe skin. Avoid products with alcohol."
+          }
+        ],
+        "seek_care_if": [
+          "You develop severe sunburn with blistering, fever, or chills (see mild_sunburn topic for more details).",
+          "You notice unusual or changing moles on your skin.",
+          "You have a history of skin cancer or precancerous lesions.",
+          "Severe skin reactions (e.g., rash, swelling) to sunscreen or sun exposure."
+        ],
+        "disclaimer": "This is general information, not medical advice. Preventing excessive sun exposure is key for long-term skin health. If you have concerns about your skin, consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "በተለይም ከፍተኛ የፀሐይ ሰአት (ከጠዋቱ 10 ሰአት እስከ ከሰዓት በኋላ 4 ሰአት) ጥላ ይፈልጉ።",
+          "ረዥም እጅጌ ያላቸው ሸሚዞችን፣ ሱሪዎችን እና ሰፊ ጫፍ ያላቸውን ኮፍያዎችን ጨምሮ መከላከያ ልብሶችን ይልበሱ።",
+          "SPF 30 ወይም ከዚያ በላይ የሆነ የፀሐይ መከላከያ (sunscreen) ይጠቀሙ፣ በየሁለት ሰአቱ ወይም ከዋኙ/ካላብዎ በኋላ እንደገና ይለብሱ።",
+          "UV ጨረሮችን የሚከለክሉ የፀሐይ መነጽሮችን ይልበሱ።",
+          "ውሃ፣ አሸዋ ወይም በረዶ አጠገብ ተጨማሪ ጥንቃቄ ያድርጉ፣ ምክንያቱም የፀሐይ ብርሃንን ስለሚያንፀባርቁ እና ለፀሐይ የመጋለጥ እድልን ስለሚጨምሩ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የፀሐይ መከላከያ (SPF 30+)",
+            "safety_note": "ሁለቱንም UVA እና UVB ጨረሮችን የሚከላከል ሰፊ ስፔክትረም የፀሐይ መከላከያ ይምረጡ። በልግስና ይለብሱ እና በተደጋጋሚ እንደገና ይለብሱ። የማለቂያ ቀኖችን ያረጋግጡ።"
+          },
+          {
+            "category_name": "ከፀሐይ በኋላ የሚቀባ ሎሽን",
+            "safety_note": "ለፀሐይ ከተጋለጡ፣ አሎ ቬራ የያዙ ከፀሐይ በኋላ የሚቀቡ ሎሽኖች ቆዳን ለማረጋጋት ይረዳሉ። አልኮል የያዙ ምርቶችን ያስወግዱ።"
+          }
+        ],
+        "seek_care_if": [
+          "በአረፋ፣ ትኩሳት ወይም ብርድ ብርድ ማለት ከባድ የፀሐይ ቃጠሎ ካጋጠመዎት (ለበለጠ ዝርዝር የ mild_sunburn ርዕስን ይመልከቱ)።",
+          "በቆዳዎ ላይ ያልተለመዱ ወይም የሚለዋወጡ የሞሎች (moles) ካስተዋሉ።",
+          "የቆዳ ካንሰር ወይም ቅድመ-ካንሰር ያለባቸው ቁስሎች ታሪክ ካለብዎት።",
+          "ለፀሐይ መከላከያ ወይም ለፀሐይ መጋለጥ ከባድ የቆዳ ምላሾች (ለምሳሌ ሽፍታ፣ እብጠት)።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ከመጠን በላይ ለፀሐይ ከመጋለጥ መከላከል ለረጅም ጊዜ የቆዳ ጤና ቁልፍ ነው። ስለ ቆዳዎ ስጋት ካለብዎ የጤና ባለሙያ ያማክሩ።"
+      }
+    }
+  },
+  {
+    "topic_key": "hangover_relief",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Drink plenty of water and electrolyte-rich fluids (e.g., coconut water, oral rehydration solutions).",
+          "Eat bland foods like toast, crackers, or bananas.",
+          "Get plenty of rest.",
+          "Avoid more alcohol, and limit caffeine.",
+          "Take a multivitamin to replenish lost nutrients."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "pain reliever (e.g., paracetamol, ibuprofen)",
+            "safety_note": "For headache and body aches, ask a pharmacist about paracetamol or ibuprofen. Avoid aspirin, as it can irritate the stomach already upset by alcohol. Follow dosage instructions."
+          },
+          {
+            "category_name": "antacid or H2 blocker",
+            "safety_note": "For an upset stomach, an antacid or H2 blocker might help. Consult a pharmacist for suitable options and always follow label directions."
+          }
+        ],
+        "seek_care_if": [
+          "You experience severe vomiting and cannot keep fluids down (risk of severe dehydration).",
+          "You have severe abdominal pain.",
+          "You experience confusion, seizures, or loss of consciousness.",
+          "You suspect alcohol poisoning (seek emergency care immediately).",
+          "Symptoms are unusually severe or persistent, or you have underlying health conditions."
+        ],
+        "disclaimer": "This is general information, not medical advice. Responsible alcohol consumption is important. If you frequently experience severe hangovers or rely on alcohol, please consult a healthcare professional for advice on alcohol use."
+      },
+      "am": {
+        "self_care": [
+          "ብዙ ውሃ እና ኤሌክትሮላይት የበዛባቸው ፈሳሾች (ለምሳሌ የኮኮናት ውሃ፣ የቃል የሰውነት ፈሳሽ ማሟያ) ይጠጡ።",
+          "እንደ ቶስት፣ ብስኩት ወይም ሙዝ ያሉ ያልቦኩ ምግቦችን ይመገቡ።",
+          "በቂ እረፍት ያግኙ።",
+          "ተጨማሪ አልኮል ከመጠጣት ይቆጠቡ እና ካፌይን ይገድቡ።",
+          "የጠፉ ንጥረ ምግቦችን ለመሙላት መልቲ ቫይታሚን ይውሰዱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ህመም ማስታገሻ (ለምሳሌ ፓራሲታሞል፣ አይቡፕሮፌን)",
+            "safety_note": "ለራስ ምታት እና ለሰውነት ህመም፣ ስለ ፓራሲታሞል ወይም አይቡፕሮፌን ፋርማሲስት ይጠይቁ። አስፕሪን ከአልኮል በተጎዳ ሆድ ላይ ብስጭት ሊያስከትል ስለሚችል ያስወግዱ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ።"
+          },
+          {
+            "category_name": "አንታሲድ ወይም H2 ማገጃ",
+            "safety_note": "ለተበሳጨ ሆድ፣ አንታሲድ ወይም H2 ማገጃ ሊረዳ ይችላል። ለተገቢ አማራጮች ፋርማሲስት ያማክሩ እና ሁልጊዜ የመድሃኒቱን መመሪያ ይከተሉ።"
+          }
+        ],
+        "seek_care_if": [
+          "ከባድ ማስታወክ ካጋጠመዎት እና ፈሳሾችን ማቆየት ካልቻሉ (ለከባድ የሰውነት ፈሳሽ እጥረት ስጋት)።",
+          "ከባድ የሆድ ህመም ካለብዎት።",
+          "ግራ መጋባት፣ የሚጥል በሽታ ወይም ንቃተ ህሊና ማጣት ካጋጠመዎት።",
+          "የአልኮል መመረዝ እንደሆነ ከጠረጠሩ (ወዲያውኑ የድንገተኛ ህክምና ይፈልጉ)።",
+          "ምልክቶቹ ባልተለመደ ሁኔታ ከባድ ወይም የማያቋርጥ ከሆኑ፣ ወይም መሰረታዊ የጤና ችግሮች ካለብዎት።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። የአልኮል መጠጥን በኃላፊነት መውሰድ አስፈላጊ ነው። በተደጋጋሚ ከባድ የሃንግኦቨር ስሜት ከተሰማዎት ወይም በአልኮል ላይ ጥገኛ ከሆኑ፣ የአልኮል አጠቃቀምን በተመለከተ ምክር ለማግኘት የጤና ባለሙያ ያማክሩ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_joint_swelling",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Rest: Avoid activities that worsen the swelling.",
+          "Ice: Apply an ice pack wrapped in a cloth for 15-20 minutes every 2-3 hours.",
+          "Compression: Gently wrap the joint with an elastic bandage (not too tightly).",
+          "Elevation: Elevate the swollen joint above your heart if possible.",
+          "Avoid heat for the first 24-48 hours after swelling appears."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "oral pain reliever (e.g., ibuprofen)",
+            "safety_note": "Ask a pharmacist about NSAIDs like ibuprofen to reduce swelling and pain. Follow dosage instructions. Consult a doctor if you have other medical conditions or are pregnant."
+          },
+          {
+            "category_name": "topical anti-inflammatory gel",
+            "safety_note": "Gels containing ingredients like diclofenac (if available OTC) can provide localized anti-inflammatory effects. Use as directed."
+          }
+        ],
+        "seek_care_if": [
+          "Swelling is severe, sudden, and accompanied by intense pain.",
+          "The joint is visibly deformed or cannot bear weight.",
+          "You have a fever, chills, or unexplained rash with joint swelling.",
+          "Swelling occurs after a significant injury or trauma.",
+          "You cannot move the joint normally, or it locks up.",
+          "Swelling persists for more than a few days or worsens despite R.I.C.E. treatment."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "እረፍት፡ እብጠትን የሚያባብሱ እንቅስቃሴዎችን ያስወግዱ።",
+          "በረዶ፡ በጨርቅ የተጠቀለለ በረዶ በየ2-3 ሰአቱ ለ15-20 ደቂቃ ያድርጉ።",
+          "መጠቅለል፡ መገጣጠሚያውን በላስቲክ ባንዴጅ በቀስታ ይጠቅልሉ (በጣም አጥብቀው አይጠቅልሉ)።",
+          "ከፍ ማድረግ፡ ያበጠውን መገጣጠሚያ ከልብዎ ከፍ ያለ እንዲሆን ያድርጉ።",
+          "እብጠት ከታየ በኋላ በመጀመሪያዎቹ 24-48 ሰዓታት ውስጥ ሙቀትን ያስወግዱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የአፍ ውስጥ ህመም ማስታገሻ (ለምሳሌ አይቡፕሮፌን)",
+            "safety_note": "እብጠትን እና ህመምን ለመቀነስ ስለ አይቡፕሮፌን ያሉ NSAIDs ፋርማሲስት ይጠይቁ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ። ሌሎች የጤና እክሎች ካለብዎ ወይም እርጉዝ ከሆኑ ሐኪም ያማክሩ።"
+          },
+          {
+            "category_name": "ለቆዳ የሚቀባ ፀረ-ብግነት ጄል",
+            "safety_note": "እንደ ዳይክሎፌናክ (ያለሀኪም ማዘዣ የሚገኝ ከሆነ) ያሉ ንጥረ ነገሮችን የያዙ ጄልዎች የአካባቢ ፀረ-ብግነት ውጤቶችን ሊሰጡ ይችላሉ። እንደተመከረው ይጠቀሙ።"
+          }
+        ],
+        "seek_care_if": [
+          "እብጠት ከባድ፣ ድንገተኛ እና ከከፍተኛ ህመም ጋር አብሮ ከመጣ።",
+          "መገጣጠሚያው በግልጽ የተበላሸ ወይም ክብደት መሸከም የማይችል ከሆነ።",
+          "ከትኩሳት፣ ከብርድ ብርድ ማለት ወይም ባልታወቀ ሽፍታ ከመገጣጠሚያ እብጠት ጋር ካለብዎት።",
+          "እብጠት ከከባድ ጉዳት ወይም አደጋ በኋላ የተከሰተ ከሆነ።",
+          "መገጣጠሚያውን በመደበኛነት ማንቀሳቀስ ካልቻሉ ወይም ከታገደ።",
+          "እብጠት ከጥቂት ቀናት በላይ ከቀጠለ ወይም R.I.C.E. ህክምና ቢደረግለትም ከተባባሰ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "dry_cough_irritant",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Identify and avoid irritants (e.g., smoke, dust, strong chemical fumes).",
+          "Drink plenty of fluids to keep your throat moist and prevent irritation.",
+          "Sip on warm honey and lemon tea (honey not for children under 1 year).",
+          "Use a humidifier in your bedroom to add moisture to the air.",
+          "Suck on lozenges or hard candies to soothe your throat."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "cough suppressant",
+            "safety_note": "Ask a pharmacist about over-the-counter cough suppressants for dry, irritating coughs. Read the label carefully for age restrictions and dosage. Not for children under 6 unless advised by a doctor."
+          }
+        ],
+        "seek_care_if": [
+          "Your dry cough lasts longer than 2-3 weeks, or appears to be worsening.",
+          "The cough is accompanied by difficulty breathing, chest pain, or wheezing.",
+          "You are coughing up blood or pink-tinged mucus.",
+          "You have a high fever (above 38.3°C / 101°F) with the cough.",
+          "You experience unexplained weight loss or night sweats with the cough."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "የሚያበሳጩ ነገሮችን (ለምሳሌ ጭስ፣ አቧራ፣ ጠንካራ ኬሚካል ጭስ) ይለዩ እና ያስወግዱ።",
+          "ጉሮሮዎን እርጥብ ለማድረግ እና ብስጭትን ለመከላከል ብዙ ፈሳሾችን ይጠጡ።",
+          "ሞቅ ያለ ማርና ሎሚ ሻይ ይጎንጩ (ማር ከአንድ አመት በታች ለሆኑ ህፃናት አይሰጥም)።",
+          "በመኝታ ክፍልዎ ውስጥ አየርን እርጥበት ለማድረግ እርጥበት ማድረቂያ ይጠቀሙ።",
+          "ጉሮሮዎን ለማረጋጋት የጉሮሮ ከረሜላ (ሎዘንጅ) ወይም ጠንካራ ከረሜላ ይመጥምጡ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የሳል ማስታገሻ",
+            "safety_note": "ስለ ደረቅ፣ የሚያበሳጭ ሳል ያለሀኪም ማዘዣ የሳል ማስታገሻዎች ፋርማሲስት ይጠይቁ። ለዕድሜ ገደቦች እና ለመድሃኒት መጠን በጥንቃቄ መመሪያውን ያንብቡ። ሀኪም ካልመከረዎት በስተቀር ከ6 አመት በታች ለሆኑ ህፃናት አይስጡ።"
+          }
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_skin_itch",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Apply a cool, damp cloth or ice pack to the itchy area.",
+          "Use a fragrance-free moisturizer regularly to keep skin hydrated.",
+          "Take lukewarm baths with oatmeal or baking soda to soothe itchy skin.",
+          "Avoid hot showers or baths, which can dry out skin.",
+          "Wear loose-fitting, cotton clothing to prevent irritation."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "topical anti-itch cream (e.g., hydrocortisone, calamine lotion)",
+            "safety_note": "Ask a pharmacist about creams or lotions to relieve itching. Follow product instructions and avoid use on broken or infected skin without advice."
+          },
+          {
+            "category_name": "oral antihistamine",
+            "safety_note": "For widespread itching, an oral antihistamine may help. Consult a pharmacist for suitable options and dosage, especially for children or if pregnant."
+          }
+        ],
+        "seek_care_if": [
+          "Itching is severe, persistent, and interferes with sleep or daily activities.",
+          "You develop a widespread rash, hives, or signs of infection (redness, warmth, pus).",
+          "Itching is accompanied by fever, night sweats, or unexplained weight loss.",
+          "The itching has no obvious cause and persists despite self-care.",
+          "You have diabetes or compromised immune system, as skin issues can be more serious."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "በሚያሳክክ ቦታ ላይ ቀዝቃዛ፣ እርጥብ ጨርቅ ወይም በረዶ ጥቅል ያድርጉ።",
+          "ቆዳን እርጥብ ለማድረግ ሽቶ የሌለው እርጥበት ማድረቂያ በየጊዜው ይጠቀሙ።",
+          "የሚያሳክክ ቆዳን ለማረጋጋት ኦትሜል ወይም ቤኪንግ ሶዳ በያዘ ለብ ባለ ውሃ ይታጠቡ።",
+          "ቆዳን ሊያደርቁ ስለሚችሉ ከሞቃት ሻወር ወይም ገላ ከመታጠብ ይቆጠቡ።",
+          "ብስጭትን ለመከላከል የላላ፣ የጥጥ ልብሶችን ይልበሱ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ለቆዳ የሚቀባ ፀረ-ማሳከክ ክሬም (ለምሳሌ ሃይድሮኮርቲሶን፣ ካላሚን ሎሽን)",
+            "safety_note": "ማሳከክን ለማስታገስ ስለ ክሬሞች ወይም ሎሽኖች ፋርማሲስት ይጠይቁ። የምርቱን መመሪያ ይከተሉ እና በቁስል ወይም በተበከለ ቆዳ ላይ ያለ ምክር ከመጠቀም ይቆጠቡ።"
+          },
+          {
+            "category_name": "የአፍ ውስጥ ፀረ-ሂስታሚን",
+            "safety_note": "ለተስፋፋ ማሳከክ፣ የአፍ ውስጥ ፀረ-ሂስታሚን ሊረዳ ይችላል። ለህፃናት ወይም እርጉዝ ከሆኑ ለተገቢ አማራጮች እና የመድሃኒት መጠን ፋርማሲስት ያማክሩ።"
+          }
+        ],
+        "seek_care_if": [
+          "ማሳከክ ከባድ፣ የማያቋርጥ እና እንቅልፍን ወይም የዕለት ተዕለት እንቅስቃሴዎችን የሚረብሽ ከሆነ።",
+          "የተስፋፋ ሽፍታ፣ ቀፎዎች (hives) ወይም የኢንፌክሽን ምልክቶች (መቅላት፣ ሙቀት፣ መግል) ካጋጠመዎት።",
+          "ማሳከክ ከትኩሳት፣ በሌሊት ላብ ወይም ያልታወቀ ክብደት መቀነስ ጋር አብሮ ከመጣ።",
+          "ማሳከኩ ግልጽ የሆነ ምክንያት ከሌለው እና በራስ እንክብካቤ ቢደረግለትም ከቀጠለ።",
+          "የስኳር በሽታ ወይም የተዳከመ የበሽታ መከላከል ስርዓት ካለብዎ፣ የቆዳ ችግሮች የበለጠ ከባድ ሊሆኑ ይችላሉ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "foot_odor",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Wash your feet daily with soap and water, paying attention to between the toes.",
+          "Dry your feet thoroughly, especially between the toes.",
+          "Wear clean, moisture-wicking socks (e.g., cotton, wool) daily.",
+          "Wear breathable shoes and alternate shoes to allow them to dry out.",
+          "Use foot powder or cornstarch to absorb moisture."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "antifungal foot powder or spray",
+            "safety_note": "If foot odor is accompanied by itching, redness, or peeling (suggesting athlete's foot), ask a pharmacist about antifungal powders or sprays. Follow product instructions."
+          },
+          {
+            "category_name": "odor-absorbing insoles",
+            "safety_note": "These can help reduce odor in shoes. Replace regularly."
+          }
+        ],
+        "seek_care_if": [
+          "Foot odor is persistent and severe despite diligent hygiene and self-care.",
+          "You notice redness, swelling, peeling, or sores on your feet (signs of infection or athlete's foot).",
+          "You have diabetes or poor circulation, and develop new foot concerns.",
+          "The odor is accompanied by other unusual symptoms or discomfort."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "እግርዎን በየቀኑ በሳሙና እና በውሃ ይታጠቡ፣ በተለይም በጣቶች መካከል ያለውን ቦታ።",
+          "እግርዎን በተለይም በጣቶች መካከል በደንብ ያድርቁ።",
+          "ንጹህ፣ እርጥበትን የሚስቡ ካልሲዎችን (ለምሳሌ ጥጥ፣ ሱፍ) በየቀኑ ይልበሱ።",
+          "አየር የሚያሳልፉ ጫማዎችን ይልበሱ እና እንዲደርቁ ለማድረግ ጫማዎችን ይቀያይሩ።",
+          "እርጥበትን ለመምጠጥ የእግር ፓውደር ወይም የበቆሎ ስታርች ይጠቀሙ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ፀረ-ፈንገስ የእግር ፓውደር ወይም ስፕሬይ",
+            "safety_note": "የእግር ጠረን ከማሳከክ፣ መቅላት ወይም መላጥ (የአትሌት እግርን የሚያመለክት ከሆነ) ጋር አብሮ ከመጣ፣ ስለ ፀረ-ፈንገስ ፓውደሮች ወይም ስፕሬይዎች ፋርማሲስት ይጠይቁ። የምርቱን መመሪያ ይከተሉ።"
+          },
+          {
+            "category_name": "ሽታን የሚስቡ የእግር ሶል (insoles)",
+            "safety_note": "እነዚህ በጫማዎች ውስጥ ያለውን ሽታ ለመቀነስ ይረዳሉ። በየጊዜው ይለውጡ።"
+          }
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "mild_joint_aches",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Rest the affected joint and avoid activities that aggravate the pain.",
+          "Apply heat (warm bath, heating pad) or cold (ice pack wrapped in cloth) to ease discomfort.",
+          "Perform gentle range-of-motion exercises to maintain flexibility.",
+          "Stay active with low-impact exercises suitable for your condition.",
+          "Maintain a healthy weight to reduce stress on joints."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "oral pain reliever (e.g., paracetamol, ibuprofen)",
+            "safety_note": "Ask a pharmacist about over-the-counter pain relievers to manage joint aches. Follow dosage instructions. Ibuprofen can also help with inflammation."
+          },
+          {
+            "category_name": "topical pain relief cream/gel",
+            "safety_note": "Creams or gels with ingredients like menthol or capsaicin can provide localized relief. Apply as directed to the affected joint."
+          }
+        ],
+        "seek_care_if": [
+          "Joint aches are severe, sudden, or caused by a specific injury.",
+          "The joint is visibly swollen, red, or hot to the touch.",
+          "You cannot move the joint normally or bear weight on it.",
+          "Aches are accompanied by fever, chills, or unexplained weight loss.",
+          "Joint aches persist for more than a few days or worsen despite self-care."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "የተጎዳውን መገጣጠሚያ ያሳርፉ እና ህመሙን የሚያባብሱ እንቅስቃሴዎችን ያስወግዱ።",
+          "ምቾት ማጣትን ለማስታገስ ሙቀት (ሞቅ ያለ ገላ መታጠብ፣ ማሞቂያ ፓድ) ወይም ቅዝቃዜ (በረዶ በጨርቅ የተጠቀለለ) ያድርጉ።",
+          "ተለዋዋጭነትን ለመጠበቅ ቀላል የእንቅስቃሴ ልምምዶችን ያድርጉ።",
+          "ለጤና ሁኔታዎ ተስማሚ በሆኑ ዝቅተኛ ተጽዕኖ ያላቸውን እንቅስቃሴዎች ንቁ ይሁኑ።",
+          "በመገጣጠሚያዎች ላይ ያለውን ጫና ለመቀነስ ጤናማ ክብደትን ይጠብቁ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "የአፍ ውስጥ ህመም ማስታገሻ (ለምሳሌ ፓራሲታሞል፣ አይቡፕሮፌን)",
+            "safety_note": "የመገጣጠሚያ ህመምን ለመቆጣጠር ስለ ያለሀኪም ማዘዣ የህመም ማስታገሻዎች ፋርማሲስት ይጠይቁ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ። አይቡፕሮፌን እብጠትን ለመቀነስም ይረዳል።"
+          },
+          {
+            "category_name": "ለቆዳ የሚቀባ የህመም ማስታገሻ ክሬም/ጄል",
+            "safety_note": "እንደ ሜንቶል ወይም ካፕሳይሲን ያሉ ንጥረ ነገሮችን የያዙ ክሬሞች ወይም ጄልዎች የአካባቢ እፎይታ ሊሰጡ ይችላሉ። በተጎዳው መገጣጠሚያ ላይ እንደተመከረው ይቀቡ።"
+          }
+        ],
+        "seek_care_if": [
+          "የመገጣጠሚያ ህመም ከባድ፣ ድንገተኛ ወይም በተለየ ጉዳት የተከሰተ ከሆነ።",
+          "መገጣጠሚያው በግልጽ ያበጠ፣ ቀይ ወይም ሲነኩት ትኩስ ከሆነ።",
+          "መገጣጠሚያውን በመደበኛነት ማንቀሳቀስ ካልቻሉ ወይም በእሱ ላይ ክብደት መጫን ካልቻሉ።",
+          "ህመም ከትኩሳት፣ ከብርድ ብርድ ማለት ወይም ባልታወቀ ክብደት መቀነስ ጋር አብሮ ከመጣ።",
+          "የመገጣጠሚያ ህመም ከጥቂት ቀናት በላይ ከቀጠለ ወይም በራስ እንክብካቤ ቢደረግለትም ከተባባሰ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+  {
+    "topic_key": "minor_skin_rash",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Identify and avoid anything that might be causing the rash (e.g., new soaps, jewelry, fabrics).",
+          "Apply a cool, damp cloth to the rash to reduce itching and discomfort.",
+          "Use a fragrance-free moisturizer or calamine lotion to soothe the skin.",
+          "Wear loose, soft, cotton clothing over the affected area.",
+          "Avoid scratching the rash, which can lead to infection."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "topical anti-itch cream (e.g., hydrocortisone, calamine lotion)",
+            "safety_note": "Ask a pharmacist about over-the-counter hydrocortisone cream or calamine lotion for temporary relief of itching. Follow product instructions carefully. Do not use on infected or broken skin without advice."
+          },
+          {
+            "category_name": "oral antihistamine",
+            "safety_note": "For widespread itching or hives, an oral antihistamine may help. Consult a pharmacist for suitable options and dosage, especially for children or if pregnant."
+          }
+        ],
+        "seek_care_if": [
+          "The rash spreads rapidly, covers large areas of the body, or is accompanied by blisters.",
+          "You have a fever, chills, or difficulty breathing with the rash.",
+          "The rash is painful, has pus, or shows other signs of infection (redness, warmth).",
+          "Itching is severe and interferes with sleep or daily activities.",
+          "The rash affects your eyes, mouth, or genitals.",
+          "You suspect a severe allergic reaction (anaphylaxis) or a serious underlying condition."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional. For any new or spreading rash, medical evaluation is important."
+      },
+      "am": {
+        "self_care": [
+          "ሽፍታውን ሊያስከትሉ የሚችሉ ማንኛውንም ነገሮችን (ለምሳሌ አዲስ ሳሙናዎች፣ ጌጣጌጦች፣ ጨርቆች) ይለዩ እና ያስወግዱ።",
+          "ማሳከክን እና ምቾት ማጣትን ለመቀነስ በቀዝቃዛ፣ እርጥብ ጨርቅ በሽፍታው ላይ ያድርጉ።",
+          "ቆዳን ለማረጋጋት ሽቶ የሌለው እርጥበት ማድረቂያ ወይም ካላሚን ሎሽን ይጠቀሙ።",
+          "በተጎዳው አካባቢ ላይ የላላ፣ ለስላሳ የጥጥ ልብሶችን ይልበሱ።",
+          "ኢንፌክሽን ሊያስከትል ስለሚችል ሽፍታውን ከመቧጨር ይቆጠቡ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ለቆዳ የሚቀባ ፀረ-ማሳከክ ክሬም (ለምሳሌ ሃይድሮኮርቲሶን፣ ካላሚን ሎሽን)",
+            "safety_note": "ስለ ያለሀኪም ማዘዣ ሃይድሮኮርቲሶን ክሬም ወይም ካላሚን ሎሽን ለጊዜያዊ ማሳከክ እፎይታ ፋርማሲስት ይጠይቁ። የምርቱን መመሪያ በጥንቃቄ ይከተሉ። ያለ ምክር በተበከለ ወይም በተሰበረ ቆዳ ላይ ከመጠቀም ይቆጠቡ።"
+          },
+          {
+            "category_name": "የአፍ ውስጥ ፀረ-ሂስታሚን",
+            "safety_note": "ለተስፋፋ ማሳከክ ወይም ቀፎዎች (hives)፣ የአፍ ውስጥ ፀረ-ሂስታሚን ሊረዳ ይችላል። ለህፃናት ወይም እርጉዝ ከሆኑ ለተገቢ አማራጮች እና የመድሃኒት መጠን ፋርማሲስት ያማክሩ።"
+          }
+        ],
+        "seek_care_if": [
+          "ሽፍታው በፍጥነት ከተሰራጨ፣ ትልቅ የሰውነት ክፍሎችን የሚሸፍን ከሆነ ወይም ከአረፋዎች ጋር አብሮ ከመጣ።",
+          "ከትኩሳት፣ ከብርድ ብርድ ማለት ወይም ሽፍታው ጋር ለመተንፈስ ከተቸገሩ።",
+          "ሽፍታው የሚያሰቃይ ከሆነ፣ መግል ካለበት፣ ወይም ሌሎች የኢንፌክሽን ምልክቶች (መቅላት፣ ሙቀት) ካሳየ።",
+          "ማሳከክ ከባድ ከሆነ እና እንቅልፍን ወይም የዕለት ተዕለት እንቅስቃሴዎችን የሚረብሽ ከሆነ።",
+          "ሽፍታው ዓይኖችዎን፣ አፍዎን ወይም ብልትዎን የሚጎዳ ከሆነ።",
+          "ከባድ የአለርጂ ምላሽ (አናፊላክሲስ) ወይም ከባድ መሰረታዊ የጤና ችግር እንደሆነ ከጠረጠሩ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ። ለአዲስ ወይም እየተስፋፋ ያለ ሽፍታ፣ የህክምና ምርመራ አስፈላጊ ነው።"
+      }
+    }
+  },
+  {
+    "topic_key": "minor_joint_sprains",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Rest: Rest the sprained joint and avoid putting weight on it.",
+          "Ice: Apply an ice pack wrapped in a cloth for 15-20 minutes every 2-3 hours.",
+          "Compression: Gently wrap the joint with an elastic bandage (not too tightly) to reduce swelling.",
+          "Elevation: Elevate the injured joint above your heart if possible.",
+          "Start gentle movement as pain allows after initial swelling subsides."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "pain reliever (e.g., ibuprofen)",
+            "safety_note": "Ask a pharmacist about NSAIDs like ibuprofen to reduce pain and inflammation. Follow dosage instructions. Consult a doctor if pregnant or have other medical conditions."
+          },
+          {
+            "category_name": "topical anti-inflammatory gel",
+            "safety_note": "Gels containing diclofenac (if available OTC) can provide localized relief and reduce inflammation. Use as directed."
+          }
+        ],
+        "seek_care_if": [
+          "You cannot bear weight on the joint or it's severely deformed.",
+          "Pain is severe, sudden, and does not improve with R.I.C.E. treatment.",
+          "The joint is visibly red, hot, or has severe swelling.",
+          "Numbness, tingling, or coldness develops below the injury.",
+          "You hear a 'pop' sound at the time of injury, which might indicate a more severe injury.",
+          "Symptoms do not improve within a few days to a week."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "እረፍት፡ የተጣመመውን መገጣጠሚያ ያሳርፉ እና በእሱ ላይ ክብደት ከመጫን ይቆጠቡ።",
+          "በረዶ፡ በጨርቅ የተጠቀለለ በረዶ በየ2-3 ሰአቱ ለ15-20 ደቂቃ ያድርጉ።",
+          "መጠቅለል፡ እብጠትን ለመቀነስ መገጣጠሚያውን በላስቲክ ባንዴጅ በቀስታ ይጠቅልሉ (በጣም አጥብቀው አይጠቅልሉ)።",
+          "ከፍ ማድረግ፡ የተጎዳውን መገጣጠሚያ ከልብዎ ከፍ ያለ እንዲሆን ያድርጉ።",
+          "የመጀመሪያው እብጠት ከቀዘቀዘ በኋላ ህመሙ እንደፈቀደው በቀስታ መንቀሳቀስ ይጀምሩ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ህመም ማስታገሻ (ለምሳሌ አይቡፕሮፌን)",
+            "safety_note": "ህመምን እና እብጠትን ለመቀነስ ስለ አይቡፕሮፌን ያሉ NSAIDs ፋርማሲስት ይጠይቁ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ። እርጉዝ ከሆኑ ወይም ሌሎች የጤና ችግሮች ካለብዎ ሐኪም ያማክሩ።"
+          },
+          {
+            "category_name": "ለቆዳ የሚቀባ ፀረ-ብግነት ጄል",
+            "safety_note": "ዳይክሎፌናክ (ያለሀኪም ማዘዣ የሚገኝ ከሆነ) የያዙ ጄልዎች የአካባቢ እፎይታ እና እብጠትን ሊቀንሱ ይችላሉ። እንደተመከረው ይጠቀሙ።"
+          }
+        ],
+        "seek_care_if": [
+          "በመገጣጠሚያው ላይ ክብደት መሸከም ካልቻሉ ወይም በጣም ከተበላሸ።",
+          "ህመም ከባድ፣ ድንገተኛ እና በ R.I.C.E. ህክምና የማይሻሻል ከሆነ።",
+          "መገጣጠሚያው በግልጽ ቀይ፣ ትኩስ ወይም ከባድ እብጠት ካለበት።",
+          "ከጉዳቱ በታች የመደንዘዝ፣ የመኮማተር ወይም ቅዝቃዜ ከተሰማዎት።",
+          "በጉዳቱ ጊዜ 'ፖፕ' የሚል ድምጽ ከሰሙ፣ ይህም የበለጠ ከባድ ጉዳትን ሊያመለክት ይችላል።",
+          "ምልክቶች ከጥቂት ቀናት እስከ አንድ ሳምንት ውስጥ ካልተሻሻሉ።"
+        ],
+        "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
+      }
+    }
+  },
+{
+    "topic_key": "bruises",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Apply a cold compress (ice pack wrapped in a cloth) to the bruise for 15-20 minutes several times a day for the first 24-48 hours.",
+          "Elevate the bruised area above your heart if possible.",
+          "Rest the injured area and avoid activities that might worsen the bruise.",
+          "Gentle massage around the bruise (not directly on it) after a few days may help."
+        ],
+        "otc_categories": [
+          {
+            "category_name": "pain reliever (e.g., paracetamol)",
+            "safety_note": "Ask a pharmacist about paracetamol to manage pain. Avoid aspirin or ibuprofen immediately after injury as they can increase bleeding. Follow dosage instructions."
+          },
+          {
+            "category_name": "topical arnica cream",
+            "safety_note": "Arnica cream may help reduce bruising. Apply as directed to unbroken skin."
+          }
+        ],
+        "seek_care_if": [
+          "Bruises are very large, extremely painful, or appear without an obvious cause.",
+          "You have a fever with a bruise.",
+          "Bruising occurs around your eyes or head after an injury (could indicate a more serious head injury).",
+          "You have bleeding problems or are on blood-thinning medication.",
+          "Bruises persist for more than 2 weeks or worsen.",
+          "You cannot move the bruised limb normally."
+        ],
+        "disclaimer": "This is general information, not medical advice. If your symptoms are severe or persistent, please consult a healthcare professional."
+      },
+      "am": {
+        "self_care": [
+          "በመጀመሪያዎቹ 24-48 ሰዓታት ውስጥ በቀን ውስጥ ብዙ ጊዜ ለ15-20 ደቂቃዎች በጨርቅ የተጠቀለለ ቀዝቃዛ ጨርቅ (በረዶ ጥቅል) በቁስሉ ላይ ያድርጉ።",
+          "የተጎዳውን አካባቢ ከልብዎ ከፍ ያለ እንዲሆን ያድርጉ።",
+          "የተጎዳውን ቦታ ያሳርፉ እና ቁስሉን ሊያባብሱ የሚችሉ እንቅስቃሴዎችን ያስወግዱ።",
+          "ከጥቂት ቀናት በኋላ በቁስሉ ዙሪያ (በቀጥታ ሳይሆን) በቀስታ ማሳጅ ያድርጉ።"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "ህመም ማስታገሻ (ለምሳሌ ፓራሲታሞል)",
+            "safety_note": "ህመምን ለመቆጣጠር ስለ ፓራሲታሞል ፋርማሲስት ይጠይቁ። ከአደጋው በኋላ ወዲያውኑ አስፕሪን ወይም አይቡፕሮፌን ያስወግዱ ምክንያቱም ደም መፍሰስን ሊጨምሩ ይችላሉ። የመድሃኒት መጠን መመሪያዎችን ይከተሉ።"
+          },
+          {
+            "category_name": "ለቆዳ የሚቀባ የአርኒካ ክሬም",
+            "safety_note": "የአርኒካ ክሬም መሰንጠቅን ለመቀነስ ይረዳል። ባልተሰበረ ቆዳ ላይ እንደተመከረው ይቀቡ።"
+          }
+        ],
+        "seek_care_if": [
+          "ቁስሎች በጣም ትልቅ፣ እጅግ የሚያሰቃዩ ወይም ግልጽ የሆነ ምክንያት ሳይኖር ከታዩ።",
+          "ከቁስሉ ጋር ትኩሳት ካለብዎት።",
+          "ከጉዳት በኋላ በአይንዎ ወይም በጭንቅላትዎ ዙሪያ ቁስል ከታየ (የበለጠ ከባድ የጭንቅላት ጉዳት ሊያመለክት ይችላል)።",
+          "የደም መፍሰስ ችግሮች ካለብዎ ወይም ደምን የሚያቀጥን መድሃኒት የሚወስዱ ከሆነ።",
+          "ቁስሎች ከ2 ሳምንታት በላይ ከቆዩ ወይም ከተባባሱ።",
+          "የተጎዳውን እግር/ክንድ በመደበኛነት ማንቀሳቀስ ካልቻሉ።"
         ],
         "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
       }
