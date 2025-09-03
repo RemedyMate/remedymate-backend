@@ -25,15 +25,6 @@ type RegisterDTO struct {
 // REGISTER: response
 type RegisterResponseDTO struct {
 	Message string `json:"message" example:"User registered successfully"`
-	// ID           string           `json:"id" example:"64f3b8e2d5c123456789abcd"`
-	// Username     string           `json:"username" example:"john_admin"`
-	// Email        string           `json:"email" example:"john.admin@example.com"`
-	// Role         string           `json:"role" example:"admin"`
-	// PersonalInfo *PersonalInfoDTO `json:"personalInfo,omitempty"`
-	// CreatedBy    string           `json:"createdBy" example:"64f3a9d1e4b123456789abcd"`
-	// CreatedAt    time.Time        `json:"createdAt" example:"2025-09-01T11:30:00Z"`
-	// UpdatedAt    time.Time        `json:"updatedAt" example:"2025-09-01T11:30:00Z"`
-	// LastLogin    *time.Time       `json:"lastLogin,omitempty" example:"null"`
 }
 
 // LOGIN: request

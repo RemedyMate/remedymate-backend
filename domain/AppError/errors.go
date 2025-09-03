@@ -2,7 +2,7 @@ package AppError
 
 import "errors"
 
-// sentinel errors for content/topic mapping
+// sentinel errors for the application
 var (
 	ErrTopicNotFound        = errors.New("topic not found")
 	ErrLanguageNotAvailable = errors.New("language not available")

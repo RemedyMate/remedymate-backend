@@ -37,7 +37,7 @@ func NewUserRepository() interfaces.IUserRepository {
 		fmt.Println("Error creating indexes:", err)
 	}
 
-	_, err = userColl.Indexes().CreateMany(context.Background(), userStatusIndexModels)
+	_, err = userStatColl.Indexes().CreateMany(context.Background(), userStatusIndexModels)
 	if err != nil {
 		fmt.Println("Error creating indexes:", err)
 	}
@@ -59,10 +59,12 @@ func (r *UserRepository) CreateUserWithStatus(ctx context.Context, user *entitie
 
 	_, err := r.UserCollection.InsertOne(ctx, user)
 	if err != nil {
+		log.Printf("Error inserting user: %v", err)
 		return AppError.ErrInternalServer
 	}
 	_, err = r.UserStatusCollection.InsertOne(ctx, userStatus)
 	if err != nil {
+		log.Printf("Error inserting user: %v", err)
 		return AppError.ErrInternalServer
 	}
 
@@ -129,7 +131,7 @@ func (r *UserRepository) SoftDeleteUser(ctx context.Context, userID string) erro
 
 func (r *UserRepository) GetUserStatus(ctx context.Context, userID string) (*entities.UserStatus, error) {
 	var userStatus entities.UserStatus
-	err := r.UserStatusCollection.FindOne(ctx, bson.M{"_id": userID}).Decode(&userStatus)
+	err := r.UserStatusCollection.FindOne(ctx, bson.M{"userId": userID}).Decode(&userStatus)
 	if err != nil {
 		return nil, AppError.ErrUserStatusNotFound
 	}

@@ -26,18 +26,8 @@ func SetupRouter(
 		// Authentication routes
 		auth := v1.Group("/auth")
 		{
-			auth.POST("/register", authController.Register)
 			auth.POST("/login", authController.Login)
 			auth.POST("/refresh", authController.Refresh)
-
-			// TODO: Enable OAuth routes when ready
-			// oauth := auth.Group("/oauth")
-			// {
-			// 	oauth.GET("/:provider/url", oauthController.GetAuthURL)
-			// 	oauth.GET("/:provider/callback", oauthController.HandleCallback)
-			// 	oauth.POST("/:provider/callback", oauthController.HandleCallback)
-			// 	oauth.POST("/validate", oauthController.ValidateToken)
-			// }
 
 			// Protected routes (require authentication)
 			protected := auth.Group("/")
@@ -48,19 +38,21 @@ func SetupRouter(
 			}
 		}
 
-		// // Protected API routes (require authentication)
-		// protectedAPI := v1.Group("/")
-		// protectedAPI.Use(middleware.AuthMiddleware())
-		// {
-		// 	// User profile routes
-		// 	users := protectedAPI.Group("/users")
-		// 	{
-		// 		users.GET("/profile", userController.GetProfile)
-		// 		users.PUT("/profile", userController.UpdateProfile)
-		// 		users.PATCH("/profile", userController.EditProfile)
-		// 		users.DELETE("/profile", userController.DeleteProfile)
-		// 	}
-		// }
+		// Protected API routes (require authentication)
+		protectedAPI := v1.Group("/")
+		protectedAPI.Use(middleware.AuthMiddleware())
+		{
+			// superadmin routes
+			protectedAPI.POST("/register", middleware.SuperAdminMiddleware(), authController.Register)
+			// 	// User profile routes
+			// 	users := protectedAPI.Group("/users")
+			// 	{
+			// 		users.GET("/profile", userController.GetProfile)
+			// 		users.PUT("/profile", userController.UpdateProfile)
+			// 		users.PATCH("/profile", userController.EditProfile)
+			// 		users.DELETE("/profile", userController.DeleteProfile)
+			// 	}
+		}
 	}
 
 	// Conversation routes (public access, no authentication required)
