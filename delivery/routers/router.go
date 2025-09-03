@@ -56,7 +56,7 @@ func SetupRouter(
 			// 	}
 		}
 		admin := v1.Group("/admin")
-		// admin.Use(middleware.AdminOnlyMiddleware())
+		admin.Use(middleware.AuthMiddleware())
 		{
 			admin.GET("/topics", topicController.ListAllTopicsHandler)
 			admin.POST("/topic", topicController.CreateTopicHandler)

@@ -12,12 +12,13 @@ var (
 	ErrTopicAlreadyExists   = errors.New("topic already exists")
 
 	// user errors
-	ErrUserNotFound       = errors.New("user not found")
-	ErrUserStatusNotFound = errors.New("user status not found")
-	ErrEmailAlreadyExist  = errors.New("email already exist")
-	ErrIncorrectPassword  = errors.New("incorrect password")
-	ErrInactiveAccount    = errors.New("account is inactive")
-	ErrInvalidToken       = errors.New("invalid token")
+	ErrUserNotFound         = errors.New("user not found")
+	ErrUserNotAuthenticated = errors.New("user not authenticated")
+	ErrUserStatusNotFound   = errors.New("user status not found")
+	ErrEmailAlreadyExist    = errors.New("email already exist")
+	ErrIncorrectPassword    = errors.New("incorrect password")
+	ErrInactiveAccount      = errors.New("account is inactive")
+	ErrInvalidToken         = errors.New("invalid token")
 
 	// server errors
 	ErrInternalServer = errors.New("internal server error")

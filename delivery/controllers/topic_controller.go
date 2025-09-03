@@ -33,12 +33,8 @@ func (tc *TopicController) CreateTopicHandler(c *gin.Context) {
 		return
 	}
 
-	ctx, cancel := context.WithTimeout(c.Request.Context(), defaultControllerTimeout)
+	ctx, cancel := context.WithTimeout(c, defaultControllerTimeout)
 	defer cancel()
-
-	// Temporary: inject a hard-coded user id until admin/auth is implemented.
-	testUserID := "64f1a3b2c4d5e6f7890ab1cd"
-	ctx = context.WithValue(ctx, "user_id", testUserID)
 
 	topic, err := tc.topicUsecase.CreateTopic(ctx, req)
 	if err != nil {
@@ -64,10 +60,8 @@ func (tc *TopicController) UpdateTopicHandler(c *gin.Context) {
 		return
 	}
 
-	ctx, cancel := context.WithTimeout(c.Request.Context(), defaultControllerTimeout)
+	ctx, cancel := context.WithTimeout(c, defaultControllerTimeout)
 	defer cancel()
-	testUserID := "64f1a3b2c4d5e6f7890ab1cd"
-	ctx = context.WithValue(ctx, "user_id", testUserID)
 
 	updatedTopic, err := tc.topicUsecase.UpdateTopic(ctx, topicKey, req)
 	if err != nil {
@@ -92,7 +86,7 @@ func (tc *TopicController) GetTopicHandler(c *gin.Context) {
 		return
 	}
 
-	ctx, cancel := context.WithTimeout(c.Request.Context(), defaultControllerTimeout)
+	ctx, cancel := context.WithTimeout(c, defaultControllerTimeout)
 	defer cancel()
 
 	topic, err := tc.topicUsecase.GetTopicByKey(ctx, topicKey)
@@ -111,21 +105,10 @@ func (tc *TopicController) GetTopicHandler(c *gin.Context) {
 // DeleteTopicHandler soft-deletes a topic (uses test user id when no user in context)
 func (tc *TopicController) DeleteTopicHandler(c *gin.Context) {
 	topicKey := c.Param("topic_key")
-	userID := ""
-	if v, ok := c.Get("user_id"); ok {
-		if s, ok := v.(string); ok {
-			userID = s
-		}
-	}
-	if userID == "" {
-		userID = "64f1a3b2c4d5e6f7890ab1cd"
-	}
-
-	ctx, cancel := context.WithTimeout(c.Request.Context(), defaultControllerTimeout)
+	ctx, cancel := context.WithTimeout(c, defaultControllerTimeout)
 	defer cancel()
-	ctx = context.WithValue(ctx, "user_id", userID)
 
-	if err := tc.topicUsecase.SoftDeleteTopic(ctx, topicKey, userID); err != nil {
+	if err := tc.topicUsecase.SoftDeleteTopic(ctx, topicKey); err != nil {
 		switch {
 		case errors.Is(err, AppError.ErrTopicNotFound):
 			c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
@@ -151,7 +134,7 @@ func (tc *TopicController) ListAllTopicsHandler(c *gin.Context) {
 		SortQueryParams:       dto.SortQueryParams{SortBy: sortBy, Order: sortOrder},
 	}
 
-	ctx, cancel := context.WithTimeout(c.Request.Context(), defaultControllerTimeout)
+	ctx, cancel := context.WithTimeout(c, defaultControllerTimeout)
 	defer cancel()
 
 	log.Printf("ListAllTopics called page=%d limit=%d", params.Page, params.Limit)

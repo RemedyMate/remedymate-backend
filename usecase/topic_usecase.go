@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"context"
+	"log"
 	"time"
 
 	"remedymate-backend/domain/AppError"
@@ -25,10 +26,14 @@ func NewTopicUsecase(topicRepo interfaces.TopicRepository) *TopicUsecase {
 func (tu *TopicUsecase) CreateTopic(ctx context.Context, request dto.TopicCreateRequest) (*entities.Topic, error) {
 	// Validate required fields
 	if request.TopicKey == "" || request.NameEN == "" || request.NameAM == "" {
+		log.Println("Created by User ID:", "createdByUserID")
 		return nil, AppError.ErrInvalidInput
 	}
 
-	createdByUserID := extractUserID(ctx)
+	createdByUserID, err := extractUserID(ctx)
+	if err != nil {
+		return nil, err
+	}
 	// ensure createdBy is a valid ObjectID
 	createdByOID, err := primitive.ObjectIDFromHex(createdByUserID)
 	if err != nil {
@@ -108,17 +113,19 @@ func (tu *TopicUsecase) ListAllTopics(ctx context.Context, params dto.TopicListQ
 	}, nil
 }
 
-// extractUserID extracts the user ID from context, expecting "user_id" key.
-func extractUserID(ctx context.Context) string {
+// extractUserID extracts the user ID from context, expecting "userID" key.
+func extractUserID(ctx context.Context) (string, error) {
 	if ctx == nil {
-		return ""
+		return "", AppError.ErrUserNotAuthenticated
 	}
-	if v := ctx.Value("user_id"); v != nil {
+	if v := ctx.Value("userID"); v != nil {
 		if s, ok := v.(string); ok {
-			return s
+			if s != "" {
+				return s, nil
+			}
 		}
 	}
-	return ""
+	return "", AppError.ErrUserNotAuthenticated
 }
 
 func (tu *TopicUsecase) UpdateTopic(ctx context.Context, topicKey string, request dto.TopicUpdateRequest) (*entities.Topic, error) {
@@ -126,7 +133,10 @@ func (tu *TopicUsecase) UpdateTopic(ctx context.Context, topicKey string, reques
 	if topicKey == "" {
 		return nil, AppError.ErrInvalidInput
 	}
-	updatedByUserID := extractUserID(ctx)
+	updatedByUserID, err := extractUserID(ctx)
+	if err != nil {
+		return nil, err
+	}
 	updatedByOID, err := primitive.ObjectIDFromHex(updatedByUserID)
 	if err != nil {
 		return nil, AppError.ErrInvalidInput
@@ -164,12 +174,13 @@ func (tu *TopicUsecase) UpdateTopic(ctx context.Context, topicKey string, reques
 	return updated, nil
 }
 
-func (tu *TopicUsecase) SoftDeleteTopic(ctx context.Context, topicKey string, deletedByUserID string) error {
-	if topicKey == "" || deletedByUserID == "" {
-		return AppError.ErrInvalidInput
+func (tu *TopicUsecase) SoftDeleteTopic(ctx context.Context, topicKey string) error {
+	deletedByUserID, err := extractUserID(ctx)
+	if err != nil {
+		return err
 	}
 	// verify existence
-	_, err := tu.topicRepository.GetTopicByKey(ctx, topicKey)
+	_, err = tu.topicRepository.GetTopicByKey(ctx, topicKey)
 	if err != nil {
 		return err
 	}

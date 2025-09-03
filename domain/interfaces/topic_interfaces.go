@@ -40,5 +40,5 @@ type TopicUsecase interface {
 	UpdateTopic(ctx context.Context, topicKey string, request dto.TopicUpdateRequest) (*entities.Topic, error)
 
 	// SoftDeleteTopic performs a soft delete, marking a topic as inactive but retaining its data.
-	SoftDeleteTopic(ctx context.Context, topicKey string, deletedByUserID string) error
+	SoftDeleteTopic(ctx context.Context, topicKey string) error
 }
