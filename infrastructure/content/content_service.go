@@ -6,8 +6,8 @@ import (
 	"os"
 	"path/filepath"
 
+	derrors "remedymate-backend/domain/AppError"
 	"remedymate-backend/domain/entities"
-	derrors "remedymate-backend/domain/errors"
 	"remedymate-backend/domain/interfaces"
 )
 
