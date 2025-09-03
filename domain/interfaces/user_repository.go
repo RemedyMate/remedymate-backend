@@ -22,4 +22,5 @@ type IUserRepository interface {
 
 type IRefreshTokenRepository interface {
 	StoreRefreshToken(ctx context.Context, refreshToken *entities.RefreshToken) error
+	DeleteRefreshToken(ctx context.Context, tokenId string) error
 }

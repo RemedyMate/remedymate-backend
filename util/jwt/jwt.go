@@ -9,9 +9,11 @@ import (
 	"remedymate-backend/domain/entities"
 
 	"github.com/golang-jwt/jwt/v5"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Claims struct {
+	TokenID  string        `json:"id"`
 	UserID   string        `json:"user_id"`
 	Username string        `json:"username"`
 	Email    string        `json:"email"`
@@ -60,6 +62,7 @@ func getJWTSecret(isAccessToken bool) string {
 
 func GenerateAccessToken(user *entities.User) (string, error) {
 	claims := &Claims{
+		TokenID:  primitive.NewObjectID().Hex(),
 		UserID:   user.ID,
 		Username: user.Username,
 		Email:    user.Email,
@@ -84,6 +87,7 @@ func GenerateAccessToken(user *entities.User) (string, error) {
 
 func GenerateRefreshToken(user *entities.User) (*entities.RefreshToken, error) {
 	claims := &Claims{
+		TokenID:  primitive.NewObjectID().Hex(),
 		UserID:   user.ID,
 		Username: user.Username,
 		Email:    user.Email,
@@ -104,6 +108,7 @@ func GenerateRefreshToken(user *entities.User) (*entities.RefreshToken, error) {
 	}
 
 	return &entities.RefreshToken{
+		ID:        claims.TokenID,
 		Token:     tokenString,
 		UserID:    user.ID,
 		ExpiresAt: claims.ExpiresAt.Time,
@@ -122,7 +127,7 @@ func ValidateToken(tokenString string, isAccessToken bool) (*Claims, error) {
 
 	if err != nil {
 		log.Printf("error parsing token: %v", err)
-		return nil, AppError.ErrInternalServer
+		return nil, AppError.ErrInvalidToken
 	}
 
 	if claims, ok := token.Claims.(*Claims); ok && token.Valid {

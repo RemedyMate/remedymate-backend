@@ -48,7 +48,6 @@ func main() {
 	}
 
 	// Initialize usecases
-	userUsecase := user.NewUserUsecase(userRepo)
 	authUsecase := user.NewAuthUsecase(userRepo, tokenRepo)
 
 	// Initialize RemedyMate services
@@ -87,7 +86,7 @@ func main() {
 	)
 
 	// Initialize controllers
-	authController := controllers.NewAuthController(authUsecase, userUsecase) // Added userUsecase
+	authController := controllers.NewAuthController(authUsecase)
 	// userController := controllers.NewUserController(userUsecase)              // Re-added for profile management
 	remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
 	conversationController := controllers.NewConversationController(conversationUsecase)

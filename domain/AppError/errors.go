@@ -17,6 +17,9 @@ var (
 	ErrInactiveAccount    = errors.New("account is inactive")
 	ErrInvalidToken       = errors.New("invalid token")
 
+	// Token
+	ErrRefreshTokenNotFound = errors.New("refresh token not found")
+
 	// server errors
 	ErrInternalServer = errors.New("internal server error")
 )

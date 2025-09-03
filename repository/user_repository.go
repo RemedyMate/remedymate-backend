@@ -51,12 +51,6 @@ func (r *UserRepository) CreateUserWithStatus(ctx context.Context, user *entitie
 	userStatus.UserID = user.ID
 
 	// TODO: create a transaction to ensure both user and user status are created
-	// session, err := database.Client.StartSession()
-	// if err != nil {
-	// 	return fmt.Errorf("failed to start session: %w", err)
-	// }
-	// defer session.EndSession(ctx)
-
 	_, err := r.UserCollection.InsertOne(ctx, user)
 	if err != nil {
 		log.Printf("Error inserting user: %v", err)
@@ -68,13 +62,6 @@ func (r *UserRepository) CreateUserWithStatus(ctx context.Context, user *entitie
 		return AppError.ErrInternalServer
 	}
 
-	// callback := func(sessCtx mongo.SessionContext) (interface{}, error) {
-	// 	return nil, nil
-	// }
-	// _, err = session.WithTransaction(ctx, callback)
-	// if err != nil {
-	// 	return err
-	// }
 	return nil
 }
 

@@ -16,14 +16,12 @@ import (
 // AuthController handles authentication-related HTTP requests
 type AuthController struct {
 	authUsecase interfaces.IAuthUsecase
-	userUsecase interfaces.IUserUsecase // Added for registration
 }
 
 // NewAuthController creates a new Auth controller instance
-func NewAuthController(authUsecase interfaces.IAuthUsecase, userUsecase interfaces.IUserUsecase) *AuthController {
+func NewAuthController(authUsecase interfaces.IAuthUsecase) *AuthController {
 	return &AuthController{
 		authUsecase: authUsecase,
-		userUsecase: userUsecase,
 	}
 }
 
@@ -60,7 +58,7 @@ func (ac *AuthController) Register(c *gin.Context) {
 		LastLogin: time.Now(),
 	}
 
-	if err := ac.userUsecase.RegisterUser(context.Background(), user); err != nil {
+	if err := ac.authUsecase.Register(context.Background(), &user); err != nil {
 		HandleHTTPError(c, err)
 		return
 	}

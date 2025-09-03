@@ -33,6 +33,10 @@ func HandleHTTPError(c *gin.Context, err error) {
 	case errors.Is(err, AppError.ErrInvalidToken):
 		c.JSON(401, gin.H{"error": err.Error()})
 
+	// token-related
+	case errors.Is(err, AppError.ErrRefreshTokenNotFound):
+		c.JSON(404, gin.H{"error": err.Error()})
+
 	// server errors
 	case errors.Is(err, AppError.ErrInternalServer):
 		c.JSON(500, gin.H{"error": err.Error()})

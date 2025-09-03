@@ -22,11 +22,40 @@ type AuthUsecase struct {
 }
 
 // NewAuthUsecase creates a new Auth usecase instance
-func NewAuthUsecase(userRepo interfaces.IUserRepository, tokenRepo interfaces.IRefreshTokenRepository) *AuthUsecase {
+func NewAuthUsecase(userRepo interfaces.IUserRepository, tokenRepo interfaces.IRefreshTokenRepository) interfaces.IAuthUsecase {
 	return &AuthUsecase{
 		userRepo:  userRepo,
 		tokenRepo: tokenRepo,
 	}
+}
+
+func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User) error {
+	// Check if email exists
+	existing, _ := uc.userRepo.FindByEmail(ctx, user.Email)
+	if existing != nil {
+		return AppError.ErrEmailAlreadyExist
+	}
+
+	// Hash password using the password service
+	hashed, err := hash.HashPassword(user.Password)
+	if err != nil {
+		return err
+	}
+	user.PasswordHash = hashed
+
+	// Initialize user status
+	userStatus := &entities.UserStatus{
+		IsActive:      false,
+		IsProfileFull: false,
+		IsVerified:    true,
+	}
+
+	err = uc.userRepo.CreateUserWithStatus(ctx, user, userStatus)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // Login authenticates a user with email and password
@@ -102,8 +131,13 @@ func (uc *AuthUsecase) RefreshToken(ctx context.Context, tokenString string) (*d
 		return nil, err
 	}
 
+	err = uc.tokenRepo.DeleteRefreshToken(ctx, claims.TokenID)
+	if err != nil {
+		return nil, err
+	}
+
 	newAccessTokenString, err := jwtutil.GenerateAccessToken(&entities.User{
-		ID:       claims.ID,
+		ID:       claims.UserID,
 		Username: claims.Username,
 		Email:    claims.Email,
 		Role:     claims.Role})
@@ -112,7 +146,7 @@ func (uc *AuthUsecase) RefreshToken(ctx context.Context, tokenString string) (*d
 	}
 
 	newRefreshToken, err := jwtutil.GenerateRefreshToken(&entities.User{
-		ID:       claims.ID,
+		ID:       claims.UserID,
 		Username: claims.Username,
 		Email:    claims.Email,
 		Role:     claims.Role})
