@@ -26,7 +26,6 @@ func NewTopicUsecase(topicRepo interfaces.TopicRepository) *TopicUsecase {
 func (tu *TopicUsecase) CreateTopic(ctx context.Context, request dto.TopicCreateRequest) (*entities.Topic, error) {
 	// Validate required fields
 	if request.TopicKey == "" || request.NameEN == "" || request.NameAM == "" {
-		log.Println("Created by User ID:", "createdByUserID")
 		return nil, AppError.ErrInvalidInput
 	}
 

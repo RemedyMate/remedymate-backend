@@ -83,15 +83,12 @@ func (tr *TopicRepository) UpdateTopic(ctx context.Context, topicKey string, upd
 		"updated_by": update.UpdatedBy,
 	}
 
-	if update.NameEN != "" {
-		updateFields["name_en"] = update.NameEN
-	}
-	if update.NameAM != "" {
-		updateFields["name_am"] = update.NameAM
-	}
-	if update.Status != "" {
-		updateFields["status"] = update.Status
-	}
+	updateFields["name_en"] = update.NameEN  
+    updateFields["name_am"] = update.NameAM  
+    updateFields["description_en"] = update.DescriptionEN  
+    updateFields["description_am"] = update.DescriptionAM  
+    updateFields["status"] = update.Status 
+	
 	if update.Translations != nil {
 		updateFields["translations"] = update.Translations
 	}

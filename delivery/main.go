@@ -98,7 +98,7 @@ func main() {
 	topicController := controllers.NewTopicController(topicUsecase)
 
 	// Setup router
-	r := routers.SetupRouter(authController, remedyMateController, conversationController,topicController) // Added userController back
+	r := routers.SetupRouter(authController, remedyMateController, conversationController, topicController) // Added userController back
 
 	port := os.Getenv("PORT")
 	if port == "" {
