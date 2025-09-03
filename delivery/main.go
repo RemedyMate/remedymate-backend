@@ -41,6 +41,10 @@ func main() {
 	userRepo := repository.NewUserRepository()
 	tokenRepo := repository.NewRefreshTokenRepository()
 	conversationRepo := repository.NewConversationRepository(database.GetCollection("conversation"))
+	topicRepo, err := repository.NewTopicRepository()
+	if err != nil {
+		log.Fatalf("Failed to initialize TopicRepository: %v", err)
+	}
 
 	// Seed superadmin user
 	if err := bootstrap.SeedSuperAdmin(userRepo); err != nil {
@@ -50,6 +54,7 @@ func main() {
 	// Initialize usecases
 	userUsecase := user.NewUserUsecase(userRepo)
 	authUsecase := user.NewAuthUsecase(userRepo, tokenRepo)
+	topicUsecase := usecase.NewTopicUsecase(topicRepo)
 
 	// Initialize RemedyMate services
 	contentService := content.NewContentService("./data")
@@ -88,12 +93,13 @@ func main() {
 
 	// Initialize controllers
 	authController := controllers.NewAuthController(authUsecase, userUsecase) // Added userUsecase
-	// userController := controllers.NewUserController(userUsecase)              // Re-added for profile management
 	remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
 	conversationController := controllers.NewConversationController(conversationUsecase)
+	topicController := controllers.NewTopicController(topicUsecase)
 
 	// Setup router
-	r := routers.SetupRouter(authController, remedyMateController, conversationController) // Added userController back
+	r := routers.SetupRouter(authController, remedyMateController, conversationController, topicController) // Added userController back
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
