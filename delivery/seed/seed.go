@@ -135,7 +135,7 @@ func main() {
 			var err error
 			updatedAt, err = time.Parse(time.RFC3339, raw.UpdatedAt.Date)
 			if err != nil {
-				log.Println("❌ Invalid updated_at for topic", raw.TopicKey+":", err)
+				log.Printf("❌ Invalid updated_at for topic %s: %v\n", raw.TopicKey, err)
 				continue
 			}
 		}
