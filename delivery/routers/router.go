@@ -12,7 +12,9 @@ import (
 func SetupRouter(
 	authController *controllers.AuthController,
 	remedyMateController *controllers.RemedyMateController,
-	conversationController *controllers.ConversationController) *gin.Engine {
+	conversationController *controllers.ConversationController,
+	topicController *controllers.TopicController,
+) *gin.Engine {
 
 	r := gin.Default()
 
@@ -53,6 +55,15 @@ func SetupRouter(
 			// 		users.DELETE("/profile", userController.DeleteProfile)
 			// 	}
 		}
+		admin := v1.Group("/admin")
+		admin.Use(middleware.AuthMiddleware())
+		{
+			admin.GET("/topics", topicController.ListAllTopicsHandler)
+			admin.POST("/topic", topicController.CreateTopicHandler)
+			admin.PUT("/topics/:topic_key", topicController.UpdateTopicHandler)
+			admin.DELETE("/topics/:topic_key", topicController.DeleteTopicHandler)
+			admin.GET("/topic/:topic_key", topicController.GetTopicHandler)
+		}
 	}
 
 	// Conversation routes (public access, no authentication required)
@@ -60,6 +71,7 @@ func SetupRouter(
 	{
 		// Unified conversation endpoint (handles both start and continue)
 		conversation.POST("/", conversationController.HandleConversation)
+		conversation.GET("/offline-topics", conversationController.GetOfflineHealthTopics)
 	}
 
 	return r

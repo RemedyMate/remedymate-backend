@@ -233,3 +233,7 @@ func generateConversationID() string {
 	}
 	return "conv_" + hex.EncodeToString(b)
 }
+
+func (cu *ConversationUsecaseImpl) GetOfflineHealthTopics(ctx context.Context) ([]entities.HealthTopic, error) {
+	return cu.conversationRepo.GetOfflineHealthTopics(ctx)
+}

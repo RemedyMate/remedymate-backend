@@ -8,7 +8,10 @@ import (
 	"remedymate-backend/delivery/controllers"
 	"remedymate-backend/delivery/routers"
 	"remedymate-backend/domain/dto"
+
+
 	"remedymate-backend/infrastructure/bootstrap"
+
 	"remedymate-backend/infrastructure/content"
 	"remedymate-backend/infrastructure/conversation"
 	"remedymate-backend/infrastructure/database"
@@ -43,6 +46,10 @@ func main() {
 	tokenRepo := repository.NewRefreshTokenRepository()
 	activationRepo := repository.NewActivationTokenRepository()
 	conversationRepo := repository.NewConversationRepository(database.GetCollection("conversation"))
+	topicRepo, err := repository.NewTopicRepository()
+	if err != nil {
+		log.Fatalf("Failed to initialize TopicRepository: %v", err)
+	}
 
 	// Seed superadmin user
 	if err := bootstrap.SeedSuperAdmin(userRepo); err != nil {
@@ -53,7 +60,10 @@ func main() {
 	mailService := mailInfra.NewSMTPMailService()
 
 	// Initialize usecases
+
 	authUsecase := user.NewAuthUsecase(userRepo, tokenRepo, mailService, activationRepo)
+	userUsecase := user.NewUserUsecase(userRepo)
+	topicUsecase := usecase.NewTopicUsecase(topicRepo)
 
 	// Initialize RemedyMate services
 	contentService := content.NewContentService("./data")
@@ -91,13 +101,15 @@ func main() {
 	)
 
 	// Initialize controllers
-	authController := controllers.NewAuthController(authUsecase)
-	// userController := controllers.NewUserController(userUsecase)              // Re-added for profile management
+	authController := controllers.NewAuthController(authUsecase, userUsecase) // Added userUsecase
+
 	remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
 	conversationController := controllers.NewConversationController(conversationUsecase)
+	topicController := controllers.NewTopicController(topicUsecase)
 
 	// Setup router
-	r := routers.SetupRouter(authController, remedyMateController, conversationController) // Added userController back
+	r := routers.SetupRouter(authController, remedyMateController, conversationController, topicController) // Added userController back
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
