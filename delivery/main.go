@@ -62,9 +62,7 @@ func main() {
 	mailService := mailInfra.NewSMTPMailService()
 
 	// Initialize usecases
-
 	authUsecase := user.NewAuthUsecase(userRepo, tokenRepo, mailService, activationRepo)
-	userUsecase := user.NewUserUsecase(userRepo)
 	publicFeedbackUsecase := usecase.NewPublicFeedbackUsecase(feedbackRepo)
 	topicUsecase := usecase.NewTopicUsecase(topicRepo)
 
@@ -109,10 +107,10 @@ func main() {
 	adminFeedbackUsecase := usecase.NewAdminFeedbackUsecase(feedbackRepo)
 
 	// Initialize controllers
-	authController := controllers.NewAuthController(authUsecase, userUsecase)
+	authController := controllers.NewAuthController(authUsecase)
 	remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
 	conversationController := controllers.NewConversationController(conversationUsecase)
-  topicController := controllers.NewTopicController(topicUsecase)
+  	topicController := controllers.NewTopicController(topicUsecase)
 	adminRedFlagController := controllers.NewAdminRedFlagController(adminRedFlagUsecase)
 	adminFeedbackController := controllers.NewAdminFeedbackController(adminFeedbackUsecase)
 	feedbackPublicController := controllers.NewFeedbackPublicController(publicFeedbackUsecase)
@@ -122,7 +120,7 @@ func main() {
 		authController,
 		remedyMateController,
 		conversationController,
-    topicController
+    topicController,
 		adminRedFlagController,
 		adminFeedbackController,
 		feedbackPublicController,
