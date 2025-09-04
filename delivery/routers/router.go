@@ -10,9 +10,7 @@ import (
 // SetupRouter configures all application routes
 
 func SetupRouter(
-	// oauthController *controllers.OAuthController,
 	authController *controllers.AuthController,
-	// userController *controllers.UserController,
 	remedyMateController *controllers.RemedyMateController,
 	conversationController *controllers.ConversationController) *gin.Engine {
 
@@ -28,6 +26,8 @@ func SetupRouter(
 		{
 			auth.POST("/login", authController.Login)
 			auth.POST("/refresh", authController.Refresh)
+			auth.POST("/activate", authController.Activate)
+			auth.GET("/verify", authController.Verify)
 
 			// Protected routes (require authentication)
 			protected := auth.Group("/")

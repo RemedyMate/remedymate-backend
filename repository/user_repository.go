@@ -133,3 +133,23 @@ func (r *UserRepository) CreateUserStatus(ctx context.Context, userStatus *entit
 	}
 	return nil
 }
+
+// ActivateByEmail sets a user's status IsActive=true by email
+func (r *UserRepository) ActivateByEmail(ctx context.Context, email string) error {
+	// Find user by email to get userID
+	var user entities.User
+	if err := r.UserCollection.FindOne(ctx, bson.M{"email": email}).Decode(&user); err != nil {
+		return AppError.ErrUserNotFound
+	}
+
+	filter := bson.M{"userId": user.ID}
+	update := bson.M{"$set": bson.M{"isActive": true, "isVerified": true}}
+	result, err := r.UserStatusCollection.UpdateOne(ctx, filter, update)
+	if err != nil {
+		return AppError.ErrInternalServer
+	}
+	if result.MatchedCount == 0 {
+		return AppError.ErrUserStatusNotFound
+	}
+	return nil
+}

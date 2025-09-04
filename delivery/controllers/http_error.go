@@ -32,6 +32,12 @@ func HandleHTTPError(c *gin.Context, err error) {
 		c.JSON(403, gin.H{"error": err.Error()})
 	case errors.Is(err, AppError.ErrInvalidToken):
 		c.JSON(401, gin.H{"error": err.Error()})
+	case errors.Is(err, AppError.ErrActivationFailed):
+		c.JSON(400, gin.H{"error": err.Error()})
+	case errors.Is(err, AppError.ErrVerificationFailed):
+		c.JSON(400, gin.H{"error": err.Error()})
+	case errors.Is(err, AppError.ErrEmailSendFailed):
+		c.JSON(500, gin.H{"error": err.Error()})
 
 	// token-related
 	case errors.Is(err, AppError.ErrRefreshTokenNotFound):

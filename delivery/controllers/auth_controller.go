@@ -120,6 +120,35 @@ func (ac *AuthController) Refresh(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+// Verify handles GET /api/v1/auth/verify?token=...
+func (ac *AuthController) Verify(c *gin.Context) {
+	token := c.Query("token")
+	if token == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "token is required"})
+		return
+	}
+	if err := ac.authUsecase.VerifyAccount(c.Request.Context(), token); err != nil {
+		HandleHTTPError(c, err)
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "Account verified"})
+}
+
+// Activate activates an account using the email
+// POST /api/v1/auth/activate
+func (ac *AuthController) Activate(c *gin.Context) {
+	var req dto.ActivateDTO
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
+		return
+	}
+	if err := ac.authUsecase.Activate(c.Request.Context(), req.Email); err != nil {
+		HandleHTTPError(c, err)
+		return
+	}
+	c.JSON(http.StatusOK, dto.ActivateResponseDTO{Message: "Account activated"})
+}
+
 // Logout logs out a user
 // POST /api/v1/auth/logout
 func (ac *AuthController) Logout(c *gin.Context) {

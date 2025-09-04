@@ -21,6 +21,12 @@ type IAuthUsecase interface {
 	// Logout invalidates a user's session
 	Logout(ctx context.Context, userID string) error
 
+	// Activate activates a user account by email
+	Activate(ctx context.Context, email string) error
+
+	// VerifyAccount verifies token and activates
+	VerifyAccount(ctx context.Context, token string) error
+
 	// ChangePassword changes a user's password
 	// ChangePassword(ctx context.Context, userID, oldPassword, newPassword string) error
 }

@@ -2,30 +2,34 @@ package user
 
 import (
 	"context"
-
-	// "errors"
 	"log"
+	"os"
 	"time"
 
 	AppError "remedymate-backend/domain/AppError"
 	"remedymate-backend/domain/dto"
 	"remedymate-backend/domain/entities"
 	"remedymate-backend/domain/interfaces"
+	apputil "remedymate-backend/util"
 	"remedymate-backend/util/hash"
 	jwtutil "remedymate-backend/util/jwt"
 )
 
 // AuthUsecase implements IAuthUsecase interface
 type AuthUsecase struct {
-	userRepo  interfaces.IUserRepository
-	tokenRepo interfaces.IRefreshTokenRepository
+	userRepo       interfaces.IUserRepository
+	tokenRepo      interfaces.IRefreshTokenRepository
+	mailer         interfaces.IMailService
+	activationRepo interfaces.IActivationTokenRepository
 }
 
 // NewAuthUsecase creates a new Auth usecase instance
-func NewAuthUsecase(userRepo interfaces.IUserRepository, tokenRepo interfaces.IRefreshTokenRepository) interfaces.IAuthUsecase {
+func NewAuthUsecase(userRepo interfaces.IUserRepository, tokenRepo interfaces.IRefreshTokenRepository, mailer interfaces.IMailService, activationRepo interfaces.IActivationTokenRepository) interfaces.IAuthUsecase {
 	return &AuthUsecase{
-		userRepo:  userRepo,
-		tokenRepo: tokenRepo,
+		userRepo:       userRepo,
+		tokenRepo:      tokenRepo,
+		mailer:         mailer,
+		activationRepo: activationRepo,
 	}
 }
 
@@ -47,12 +51,38 @@ func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User) error 
 	userStatus := &entities.UserStatus{
 		IsActive:      false,
 		IsProfileFull: false,
-		IsVerified:    true,
+		IsVerified:    false,
 	}
 
 	err = uc.userRepo.CreateUserWithStatus(ctx, user, userStatus)
 	if err != nil {
 		return err
+	}
+
+	// If mailer and activationRepo are configured, send verification email
+	if uc.mailer != nil && uc.activationRepo != nil {
+		// generate token and save
+		tokenStr, genErr := apputil.GenerateToken(32)
+		if genErr == nil {
+			at := &entities.ActivationToken{
+				Token:     tokenStr,
+				UserID:    user.ID,
+				Email:     user.Email,
+				ExpiresAt: time.Now().Add(24 * time.Hour),
+				CreatedAt: time.Now(),
+			}
+			if err := uc.activationRepo.Create(ctx, at); err != nil {
+				return AppError.ErrInternalServer
+			}
+			// send email
+			baseURL := getenvDefault("APP_BASE_URL", "http://localhost:8080")
+			link := baseURL + "/api/v1/auth/verify?token=" + tokenStr
+			subject := "Verify your RemedyMate account"
+			body := "<p>Hello,</p><p>Please verify your account by clicking the link below:</p><p><a href='" + link + "'>Activate Account</a></p>"
+			if err := uc.mailer.Send(user.Email, subject, body); err != nil {
+				return AppError.ErrEmailSendFailed
+			}
+		}
 	}
 
 	return nil
@@ -168,6 +198,41 @@ func (uc *AuthUsecase) RefreshToken(ctx context.Context, tokenString string) (*d
 func (uc *AuthUsecase) Logout(ctx context.Context, userID string) error {
 	// TODO: Implement the logout
 	return nil
+}
+
+// Activate activates a user account by email
+func (uc *AuthUsecase) Activate(ctx context.Context, email string) error {
+	// Ensure user exists
+	_, err := uc.userRepo.FindByEmail(ctx, email)
+	if err != nil {
+		return err
+	}
+	return uc.userRepo.ActivateByEmail(ctx, email)
+}
+
+// VerifyAccount verifies using a token and activates the user account
+func (uc *AuthUsecase) VerifyAccount(ctx context.Context, token string) error {
+	if uc.activationRepo == nil {
+		return AppError.ErrInternalServer
+	}
+	at, err := uc.activationRepo.FindValidByToken(ctx, token)
+	if err != nil {
+		return err
+	}
+	if err := uc.userRepo.ActivateByEmail(ctx, at.Email); err != nil {
+		return err
+	}
+	_ = uc.activationRepo.MarkUsed(ctx, at.ID)
+	return nil
+}
+
+// helper to read env with default
+func getenvDefault(key, def string) string {
+	v := os.Getenv(key)
+	if v == "" {
+		return def
+	}
+	return v
 }
 
 // ChangePassword changes a user's password

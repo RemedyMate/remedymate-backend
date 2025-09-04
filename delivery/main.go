@@ -14,6 +14,7 @@ import (
 	"remedymate-backend/infrastructure/database"
 	"remedymate-backend/infrastructure/guidance"
 	"remedymate-backend/infrastructure/llm"
+	mailInfra "remedymate-backend/infrastructure/mail"
 	"remedymate-backend/infrastructure/remedymate_services"
 	"remedymate-backend/repository"
 	"remedymate-backend/usecase"
@@ -40,6 +41,7 @@ func main() {
 	// Initialize repositories
 	userRepo := repository.NewUserRepository()
 	tokenRepo := repository.NewRefreshTokenRepository()
+	activationRepo := repository.NewActivationTokenRepository()
 	conversationRepo := repository.NewConversationRepository(database.GetCollection("conversation"))
 
 	// Seed superadmin user
@@ -47,8 +49,11 @@ func main() {
 		log.Fatalf("Failed to seed superadmin: %v", err)
 	}
 
+	// Initialize mail service
+	mailService := mailInfra.NewSMTPMailService()
+
 	// Initialize usecases
-	authUsecase := user.NewAuthUsecase(userRepo, tokenRepo)
+	authUsecase := user.NewAuthUsecase(userRepo, tokenRepo, mailService, activationRepo)
 
 	// Initialize RemedyMate services
 	contentService := content.NewContentService("./data")

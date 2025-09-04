@@ -16,6 +16,9 @@ var (
 	ErrIncorrectPassword  = errors.New("incorrect password")
 	ErrInactiveAccount    = errors.New("account is inactive")
 	ErrInvalidToken       = errors.New("invalid token")
+	ErrActivationFailed   = errors.New("activation failed")
+	ErrVerificationFailed = errors.New("verification failed")
+	ErrEmailSendFailed    = errors.New("failed to send email")
 
 	// Token
 	ErrRefreshTokenNotFound = errors.New("refresh token not found")
