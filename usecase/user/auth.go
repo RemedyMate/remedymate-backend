@@ -76,7 +76,11 @@ func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User) error 
 				return AppError.ErrInternalServer
 			}
 			// send email using template
-			baseURL := getenvDefault("APP_BASE_URL", "http://localhost:8080")
+			baseURL := os.Getenv("APP_BASE_URL")
+			if baseURL == "" {
+				log.Printf("APP_BASE_URL environment variable is not set")
+				return AppError.ErrInternalServer
+			}
 			link := baseURL + "/api/v1/auth/verify?token=" + tokenStr
 			subject := "Verify your RemedyMate account"
 
