@@ -18,8 +18,17 @@ type IUserRepository interface {
 	GetUserStatus(ctx context.Context, userID string) (*entities.UserStatus, error)
 	// CreateUserStatus(ctx context.Context, userStatus *entities.UserStatus) error
 
+	// Activate user by email (sets status.isActive=true)
+	ActivateByEmail(ctx context.Context, email string) error
 }
 
 type IRefreshTokenRepository interface {
 	StoreRefreshToken(ctx context.Context, refreshToken *entities.RefreshToken) error
+	DeleteRefreshToken(ctx context.Context, tokenId string) error
+}
+
+type IActivationTokenRepository interface {
+	Create(ctx context.Context, token *entities.ActivationToken) error
+	FindValidByToken(ctx context.Context, token string) (*entities.ActivationToken, error)
+	MarkUsed(ctx context.Context, id string) error
 }

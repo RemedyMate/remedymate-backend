@@ -7,10 +7,8 @@ import (
 
 	"remedymate-backend/domain/AppError"
 	"remedymate-backend/domain/dto"
-	"remedymate-backend/domain/entities"
 	"remedymate-backend/domain/interfaces"
 	"remedymate-backend/infrastructure/auth"
-	"remedymate-backend/util/hash"
 )
 
 type UserUsecase struct {
@@ -29,35 +27,6 @@ func NewUserUsecase(repo interfaces.IUserRepository) interfaces.IUserUsecase {
 		UserRepo: repo,
 		AESkey:   key,
 	}
-}
-
-func (u *UserUsecase) RegisterUser(ctx context.Context, user entities.User) error {
-	// Check if email exists
-	existing, _ := u.UserRepo.FindByEmail(ctx, user.Email)
-	if existing != nil {
-		return AppError.ErrEmailAlreadyExist
-	}
-
-	// Hash password using the password service
-	hashed, err := hash.HashPassword(user.Password)
-	if err != nil {
-		return err
-	}
-	user.PasswordHash = hashed
-
-	// Initialize user status
-	userStatus := &entities.UserStatus{
-		IsActive:      false,
-		IsProfileFull: false,
-		IsVerified:    true,
-	}
-
-	err = u.UserRepo.CreateUserWithStatus(ctx, &user, userStatus)
-	if err != nil {
-		return err
-	}
-
-	return nil
 }
 
 // GetProfile retrieves user profile by ID

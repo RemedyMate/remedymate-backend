@@ -2,31 +2,120 @@ package user
 
 import (
 	"context"
-
-	// "errors"
 	"log"
+	"os"
 	"time"
 
 	AppError "remedymate-backend/domain/AppError"
 	"remedymate-backend/domain/dto"
 	"remedymate-backend/domain/entities"
 	"remedymate-backend/domain/interfaces"
+	mailInfra "remedymate-backend/infrastructure/mail"
+	apputil "remedymate-backend/util"
 	"remedymate-backend/util/hash"
 	jwtutil "remedymate-backend/util/jwt"
 )
 
 // AuthUsecase implements IAuthUsecase interface
 type AuthUsecase struct {
-	userRepo  interfaces.IUserRepository
-	tokenRepo interfaces.IRefreshTokenRepository
+	userRepo       interfaces.IUserRepository
+	tokenRepo      interfaces.IRefreshTokenRepository
+	mailer         interfaces.IMailService
+	activationRepo interfaces.IActivationTokenRepository
 }
 
 // NewAuthUsecase creates a new Auth usecase instance
-func NewAuthUsecase(userRepo interfaces.IUserRepository, tokenRepo interfaces.IRefreshTokenRepository) *AuthUsecase {
+func NewAuthUsecase(userRepo interfaces.IUserRepository, tokenRepo interfaces.IRefreshTokenRepository, mailer interfaces.IMailService, activationRepo interfaces.IActivationTokenRepository) interfaces.IAuthUsecase {
 	return &AuthUsecase{
-		userRepo:  userRepo,
-		tokenRepo: tokenRepo,
+		userRepo:       userRepo,
+		tokenRepo:      tokenRepo,
+		mailer:         mailer,
+		activationRepo: activationRepo,
 	}
+}
+
+func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User) error {
+	// Check if email exists
+	existing, _ := uc.userRepo.FindByEmail(ctx, user.Email)
+	if existing != nil {
+		return AppError.ErrEmailAlreadyExist
+	}
+
+	// Hash password using the password service
+	hashed, err := hash.HashPassword(user.Password)
+	if err != nil {
+		return err
+	}
+	user.PasswordHash = hashed
+
+	// Initialize user status
+	userStatus := &entities.UserStatus{
+		IsActive:      false,
+		IsProfileFull: false,
+		IsVerified:    false,
+	}
+
+	err = uc.userRepo.CreateUserWithStatus(ctx, user, userStatus)
+	if err != nil {
+		return err
+	}
+
+	// If mailer and activationRepo are configured, send verification email
+	if uc.mailer != nil && uc.activationRepo != nil {
+		// generate token and save
+		tokenStr, genErr := apputil.GenerateToken(32)
+		if genErr == nil {
+			at := &entities.ActivationToken{
+				Token:     tokenStr,
+				UserID:    user.ID,
+				Email:     user.Email,
+				ExpiresAt: time.Now().Add(24 * time.Hour),
+				CreatedAt: time.Now(),
+			}
+			if err := uc.activationRepo.Create(ctx, at); err != nil {
+				return AppError.ErrInternalServer
+			}
+			// send email using template
+			baseURL := os.Getenv("APP_BASE_URL")
+			if baseURL == "" {
+				log.Printf("APP_BASE_URL environment variable is not set")
+				return AppError.ErrInternalServer
+			}
+			link := baseURL + "/api/v1/auth/verify?token=" + tokenStr
+			subject := "Verify your RemedyMate account"
+
+			// Prepare template data
+			firstName := ""
+			if user.PersonalInfo != nil && user.PersonalInfo.FirstName != nil {
+				firstName = *user.PersonalInfo.FirstName
+			}
+			tplData := struct {
+				AppName     string
+				FirstName   string
+				VerifyLink  string
+				ExpiryHours int
+				Year        int
+			}{
+				AppName:     "RemedyMate",
+				FirstName:   firstName,
+				VerifyLink:  link,
+				ExpiryHours: 24,
+				Year:        time.Now().Year(),
+			}
+
+			body, rendErr := mailInfra.RenderTemplate("./infrastructure/mail/templates/activation_email.html", tplData)
+			if rendErr != nil {
+				log.Printf("failed to render activation email template: %v", rendErr)
+				body = "<p>Hello,</p><p>Please verify your account by clicking the link below:</p><p><a href='" + link + "'>Activate Account</a></p>"
+			}
+
+			if err := uc.mailer.Send(user.Email, subject, body); err != nil {
+				return AppError.ErrEmailSendFailed
+			}
+		}
+	}
+
+	return nil
 }
 
 // Login authenticates a user with email and password
@@ -93,6 +182,10 @@ func (uc *AuthUsecase) Login(ctx context.Context, loginData dto.LoginDTO) (*dto.
 	return &dto.LoginResponseDTO{
 		AccessToken:  accessTokenString,
 		RefreshToken: refreshToken.Token,
+		UserID:       user.ID,
+		Username:     user.Username,
+		Email:        user.Email,
+		Role:         user.Role,
 	}, nil
 }
 
@@ -102,8 +195,13 @@ func (uc *AuthUsecase) RefreshToken(ctx context.Context, tokenString string) (*d
 		return nil, err
 	}
 
+	err = uc.tokenRepo.DeleteRefreshToken(ctx, claims.TokenID)
+	if err != nil {
+		return nil, err
+	}
+
 	newAccessTokenString, err := jwtutil.GenerateAccessToken(&entities.User{
-		ID:       claims.ID,
+		ID:       claims.UserID,
 		Username: claims.Username,
 		Email:    claims.Email,
 		Role:     claims.Role})
@@ -112,7 +210,7 @@ func (uc *AuthUsecase) RefreshToken(ctx context.Context, tokenString string) (*d
 	}
 
 	newRefreshToken, err := jwtutil.GenerateRefreshToken(&entities.User{
-		ID:       claims.ID,
+		ID:       claims.UserID,
 		Username: claims.Username,
 		Email:    claims.Email,
 		Role:     claims.Role})
@@ -134,6 +232,41 @@ func (uc *AuthUsecase) RefreshToken(ctx context.Context, tokenString string) (*d
 func (uc *AuthUsecase) Logout(ctx context.Context, userID string) error {
 	// TODO: Implement the logout
 	return nil
+}
+
+// Activate activates a user account by email
+func (uc *AuthUsecase) Activate(ctx context.Context, email string) error {
+	// Ensure user exists
+	_, err := uc.userRepo.FindByEmail(ctx, email)
+	if err != nil {
+		return err
+	}
+	return uc.userRepo.ActivateByEmail(ctx, email)
+}
+
+// VerifyAccount verifies using a token and activates the user account
+func (uc *AuthUsecase) VerifyAccount(ctx context.Context, token string) error {
+	if uc.activationRepo == nil {
+		return AppError.ErrInternalServer
+	}
+	at, err := uc.activationRepo.FindValidByToken(ctx, token)
+	if err != nil {
+		return err
+	}
+	if err := uc.userRepo.ActivateByEmail(ctx, at.Email); err != nil {
+		return err
+	}
+	_ = uc.activationRepo.MarkUsed(ctx, at.ID)
+	return nil
+}
+
+// helper to read env with default
+func getenvDefault(key, def string) string {
+	v := os.Getenv(key)
+	if v == "" {
+		return def
+	}
+	return v
 }
 
 // ChangePassword changes a user's password

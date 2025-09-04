@@ -17,6 +17,7 @@ import (
 	"remedymate-backend/infrastructure/database"
 	"remedymate-backend/infrastructure/guidance"
 	"remedymate-backend/infrastructure/llm"
+	mailInfra "remedymate-backend/infrastructure/mail"
 	"remedymate-backend/infrastructure/remedymate_services"
 	"remedymate-backend/repository"
 	"remedymate-backend/usecase"
@@ -43,6 +44,7 @@ func main() {
 	// Initialize repositories
 	userRepo := repository.NewUserRepository()
 	tokenRepo := repository.NewRefreshTokenRepository()
+	activationRepo := repository.NewActivationTokenRepository()
 	conversationRepo := repository.NewConversationRepository(database.GetCollection("conversation"))
 	redFlagRepo := repository.NewRedFlagRepository()
 	feedbackRepo := repository.NewFeedbackRepository()
@@ -56,9 +58,11 @@ func main() {
 		log.Fatalf("Failed to seed superadmin: %v", err)
 	}
 
+	// Initialize mail service
+	mailService := mailInfra.NewSMTPMailService()
+
 	// Initialize usecases
-	userUsecase := user.NewUserUsecase(userRepo)
-	authUsecase := user.NewAuthUsecase(userRepo, tokenRepo)
+	authUsecase := user.NewAuthUsecase(userRepo, tokenRepo, mailService, activationRepo)
 	publicFeedbackUsecase := usecase.NewPublicFeedbackUsecase(feedbackRepo)
 	topicUsecase := usecase.NewTopicUsecase(topicRepo)
 
@@ -103,10 +107,10 @@ func main() {
 	adminFeedbackUsecase := usecase.NewAdminFeedbackUsecase(feedbackRepo)
 
 	// Initialize controllers
-	authController := controllers.NewAuthController(authUsecase, userUsecase)
+	authController := controllers.NewAuthController(authUsecase)
 	remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
 	conversationController := controllers.NewConversationController(conversationUsecase)
-  topicController := controllers.NewTopicController(topicUsecase)
+  	topicController := controllers.NewTopicController(topicUsecase)
 	adminRedFlagController := controllers.NewAdminRedFlagController(adminRedFlagUsecase)
 	adminFeedbackController := controllers.NewAdminFeedbackController(adminFeedbackUsecase)
 	feedbackPublicController := controllers.NewFeedbackPublicController(publicFeedbackUsecase)
@@ -116,7 +120,7 @@ func main() {
 		authController,
 		remedyMateController,
 		conversationController,
-    topicController
+    topicController,
 		adminRedFlagController,
 		adminFeedbackController,
 		feedbackPublicController,
