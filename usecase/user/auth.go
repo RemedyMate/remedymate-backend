@@ -10,6 +10,7 @@ import (
 	"remedymate-backend/domain/dto"
 	"remedymate-backend/domain/entities"
 	"remedymate-backend/domain/interfaces"
+	mailInfra "remedymate-backend/infrastructure/mail"
 	apputil "remedymate-backend/util"
 	"remedymate-backend/util/hash"
 	jwtutil "remedymate-backend/util/jwt"
@@ -74,11 +75,36 @@ func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User) error 
 			if err := uc.activationRepo.Create(ctx, at); err != nil {
 				return AppError.ErrInternalServer
 			}
-			// send email
+			// send email using template
 			baseURL := getenvDefault("APP_BASE_URL", "http://localhost:8080")
 			link := baseURL + "/api/v1/auth/verify?token=" + tokenStr
 			subject := "Verify your RemedyMate account"
-			body := "<p>Hello,</p><p>Please verify your account by clicking the link below:</p><p><a href='" + link + "'>Activate Account</a></p>"
+
+			// Prepare template data
+			firstName := ""
+			if user.PersonalInfo != nil && user.PersonalInfo.FirstName != nil {
+				firstName = *user.PersonalInfo.FirstName
+			}
+			tplData := struct {
+				AppName     string
+				FirstName   string
+				VerifyLink  string
+				ExpiryHours int
+				Year        int
+			}{
+				AppName:     "RemedyMate",
+				FirstName:   firstName,
+				VerifyLink:  link,
+				ExpiryHours: 24,
+				Year:        time.Now().Year(),
+			}
+
+			body, rendErr := mailInfra.RenderTemplate("./infrastructure/mail/templates/activation_email.html", tplData)
+			if rendErr != nil {
+				log.Printf("failed to render activation email template: %v", rendErr)
+				body = "<p>Hello,</p><p>Please verify your account by clicking the link below:</p><p><a href='" + link + "'>Activate Account</a></p>"
+			}
+
 			if err := uc.mailer.Send(user.Email, subject, body); err != nil {
 				return AppError.ErrEmailSendFailed
 			}
