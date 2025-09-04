@@ -33,6 +33,7 @@ func NewUserRepository() interfaces.IUserRepository {
 	}
 
 	// Ensure no incorrect index exists on users collection for userId
+  // TODO: Check the use of this code
 	ctx := context.Background()
 	cursor, err := userColl.Indexes().List(ctx)
 	if err == nil {
@@ -68,6 +69,11 @@ func NewUserRepository() interfaces.IUserRepository {
 		fmt.Println("Error creating indexes:", err)
 	}
 
+	_, err = userStatColl.Indexes().CreateMany(context.Background(), userStatusIndexModels)
+	if err != nil {
+		fmt.Println("Error creating indexes:", err)
+	}
+
 	return &UserRepository{UserCollection: userColl, UserStatusCollection: userStatColl}
 }
 
@@ -85,10 +91,13 @@ func (r *UserRepository) CreateUserWithStatus(ctx context.Context, user *entitie
 
 	_, err := r.UserCollection.InsertOne(ctx, user)
 	if err != nil {
+
+		log.Printf("Error inserting user: %v", err)
 		return AppError.ErrInternalServer
 	}
 	_, err = r.UserStatusCollection.InsertOne(ctx, userStatus)
 	if err != nil {
+		log.Printf("Error inserting user: %v", err)
 		return AppError.ErrInternalServer
 	}
 
@@ -155,6 +164,7 @@ func (r *UserRepository) SoftDeleteUser(ctx context.Context, userID string) erro
 
 func (r *UserRepository) GetUserStatus(ctx context.Context, userID string) (*entities.UserStatus, error) {
 	var userStatus entities.UserStatus
+
 	// Look up by userId field (unique), not the document _id
 	err := r.UserStatusCollection.FindOne(ctx, bson.M{"userId": userID}).Decode(&userStatus)
 	if err != nil {

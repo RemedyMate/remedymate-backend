@@ -1,0 +1,62 @@
+{
+    "_id": {
+      "$oid": "68b604581530ebab432775d9"
+    },
+    "topic_key": "headache",
+    "name_en": "Tension Headache",
+    "name_am": "የጭንቅላት ሽታ",
+    "description_en": "Common causes and self-care for headaches.",
+    "description_am": "ለራስ በርታ የሚያገለግሉ መረጃዎች።",
+    "status": "active",
+    "translations": {
+      "en": {
+        "self_care": [
+          "Rest in a quiet, dark room",
+          "Use a cool compress on the forehead",
+          "Take OTC analgesics per package instructions"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "Analgesics",
+            "safety_note": "Avoid combining multiple NSAIDs."
+          }
+        ],
+        "seek_care_if": [
+          "Headache worsens rapidly",
+          "New neurologic symptoms (weakness, slurred speech)"
+        ],
+        "disclaimer": "This guidance is general and not a diagnosis."
+      },
+      "am": {
+        "self_care": [
+          "በጸጥ እና በጥቂት ብርታት ውስጥ ዕረፍት ይውሉ",
+          "በ額 ላይ ቀዝቃዛ የሆነ ጭነት ያጠቀሙ",
+          "ከፍ የሚሰጥ መድሃኒት መውሰድ"
+        ],
+        "otc_categories": [
+          {
+            "category_name": "Analgesics",
+            "safety_note": "ከሁለት የሚታወቁ አስተሳሰቦች በአንድ ጊዜ ማድረግ አይቻልም።"
+          }
+        ],
+        "seek_care_if": [
+          "ሽታ በፍጥነት ከፍ ከሆነ",
+          "አዲስ የነገር ምልክቶች (እጥግብ ማለት ወይም ንግግር እርምጃ)"
+        ],
+        "disclaimer": "ይህ መመሪያ አጠቃላይ ነው እና ሕክምና አይደለም።"
+      }
+    },
+    "version": 8,
+    "created_at": {
+      "$date": "2025-09-01T20:38:48.586Z"
+    },
+    "updated_at": {
+      "$date": "2025-09-01T20:50:52.422Z"
+    },
+    "created_by": {
+      "$oid": "64f1a3b2c4d5e6f7890ab1cd"
+    },
+    "updated_by": {
+      "$oid": "64f1a3b2c4d5e6f7890ab1cd"
+    }
+  }

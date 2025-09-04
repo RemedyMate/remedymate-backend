@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"remedymate-backend/domain/dto"
+	"remedymate-backend/domain/entities"
 )
 
 // ConversationUsecase defines the interface for conversation business logic
@@ -16,4 +17,7 @@ type ConversationUsecase interface {
 
 	// GetReport retrieves the final health report for a completed conversation
 	GetReport(ctx context.Context, conversationID string) (*dto.GetReportResponse, error)
+
+	// GetOfflineHealthTopics retrieves all active health topics
+	GetOfflineHealthTopics(ctx context.Context) ([]entities.HealthTopic, error)
 }

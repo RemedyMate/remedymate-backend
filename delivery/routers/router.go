@@ -15,9 +15,11 @@ func SetupRouter(
 	// userController *controllers.UserController,
 	remedyMateController *controllers.RemedyMateController,
 	conversationController *controllers.ConversationController,
+  topicController *controllers.TopicController,
 	adminRedFlagController *controllers.AdminRedFlagController,
 	adminFeedbackController *controllers.AdminFeedbackController,
 	feedbackPublicController *controllers.FeedbackPublicController) *gin.Engine {
+
 
 	r := gin.Default()
 
@@ -42,6 +44,31 @@ func SetupRouter(
 				protected.POST("/logout", authController.Logout)
 			}
 		}
+
+		// Protected API routes (require authentication)
+		protectedAPI := v1.Group("/")
+		protectedAPI.Use(middleware.AuthMiddleware())
+		{
+			// superadmin routes
+			protectedAPI.POST("/register", middleware.SuperAdminMiddleware(), authController.Register)
+			// 	// User profile routes
+			// 	users := protectedAPI.Group("/users")
+			// 	{
+			// 		users.GET("/profile", userController.GetProfile)
+			// 		users.PUT("/profile", userController.UpdateProfile)
+			// 		users.PATCH("/profile", userController.EditProfile)
+			// 		users.DELETE("/profile", userController.DeleteProfile)
+			// 	}
+		}
+		admin := v1.Group("/admin")
+		admin.Use(middleware.AuthMiddleware())
+		{
+			admin.GET("/topics", topicController.ListAllTopicsHandler)
+			admin.POST("/topic", topicController.CreateTopicHandler)
+			admin.PUT("/topics/:topic_key", topicController.UpdateTopicHandler)
+			admin.DELETE("/topics/:topic_key", topicController.DeleteTopicHandler)
+			admin.GET("/topic/:topic_key", topicController.GetTopicHandler)
+		}
 	}
 
 	// Conversation routes (public access, no authentication required)
@@ -49,6 +76,7 @@ func SetupRouter(
 	{
 		// Unified conversation endpoint (handles both start and continue)
 		conversation.POST("/", conversationController.HandleConversation)
+		conversation.GET("/offline-topics", conversationController.GetOfflineHealthTopics)
 	}
 
 	// Admin routes (auth required; all users are admins per requirement)

@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strings"
 
+	"remedymate-backend/domain/entities"
 	jwtutil "remedymate-backend/util/jwt"
 
 	"github.com/gin-gonic/gin"
@@ -62,58 +63,28 @@ func AuthMiddleware() gin.HandlerFunc {
 		c.Set("userID", claims.UserID)
 		c.Set("username", claims.Username)
 		c.Set("email", claims.Email)
+		c.Set("role", claims.Role)
 
 		// Continue to next handler
 		c.Next()
 	}
 }
 
-// OptionalAuthMiddleware allows requests with or without valid tokens
-// func OptionalAuthMiddleware() gin.HandlerFunc {
-// 	return func(c *gin.Context) {
-// 		log.Printf("🔓 Optional auth middleware processing request: %s %s", c.Request.Method, c.Request.URL.Path)
+// SuperAdminMiddleware ensures the user has superadmin role
+func SuperAdminMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		log.Printf("🔒 SuperAdmin middleware processing request: %s %s", c.Request.Method, c.Request.URL.Path)
 
-// 		// Get Authorization header
-// 		authHeader := c.GetHeader("Authorization")
-// 		if authHeader == "" {
-// 			log.Printf("ℹ️ No Authorization header, continuing without authentication")
-// 			c.Next()
-// 			return
-// 		}
+		role, exists := c.Get("role")
+		if !exists || role != entities.RoleSuperAdmin {
+			log.Printf("❌ Access denied. User does not have superadmin role")
+			c.JSON(http.StatusForbidden, gin.H{
+				"error": "Access denied. Superadmin role required",
+			})
+			c.Abort()
+			return
+		}
 
-// 		// Check if header starts with "Bearer "
-// 		if !strings.HasPrefix(authHeader, "Bearer ") {
-// 			log.Printf("ℹ️ Invalid Authorization header format, continuing without authentication")
-// 			c.Next()
-// 			return
-// 		}
-
-// 		// Extract token
-// 		token := strings.TrimPrefix(authHeader, "Bearer ")
-// 		if token == "" {
-// 			log.Printf("ℹ️ Empty token, continuing without authentication")
-// 			c.Next()
-// 			return
-// 		}
-
-// 		log.Printf("🔍 Attempting to validate optional JWT token...")
-
-// 		// Try to validate token
-// 		claims, err := auth.NewJWTService().ValidateToken(token)
-// 		if err != nil {
-// 			log.Printf("ℹ️ Optional JWT token validation failed: %v", err)
-// 			c.Next()
-// 			return
-// 		}
-
-// 		log.Printf("✅ Optional JWT token validated for user: %s (%s)", claims.Username, claims.UserID)
-
-// 		// Set user information in context if token is valid
-// 		c.Set("userID", claims.UserID)
-// 		c.Set("username", claims.Username)
-// 		c.Set("email", claims.Email)
-
-// 		// Continue to next handler
-// 		c.Next()
-// 	}
-// }
+		c.Next()
+	}
+}
