@@ -64,6 +64,18 @@ func (cr *ConversationRepositoryImpl) CreateConversation(ctx context.Context, co
 	return nil
 }
 
+func (cr *ConversationRepositoryImpl) GetOfflineHealthTopics(ctx context.Context) ([]entities.HealthTopic, error) {
+	filter := bson.M{"status": "active"}
+	cursor, err := cr.collection.Find(ctx, filter)
+	if err != nil {
+		return nil, err
+	}
+
+	var healthTopics []entities.HealthTopic
+	cursor.All(ctx, &healthTopics)
+	return healthTopics, nil
+}
+
 // GetConversation retrieves a conversation by ID
 func (cr *ConversationRepositoryImpl) GetConversation(ctx context.Context, conversationID string) (*entities.Conversation, error) {
 	var conversation entities.Conversation

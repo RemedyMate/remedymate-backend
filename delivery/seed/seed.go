@@ -27,9 +27,19 @@ func main() {
 		log.Fatal("❌ Failed to read seed file:", err)
 	}
 
-	// 3️⃣ Temporary struct to parse IDs as strings and dates as strings
+	// MongoDB ObjectID wrapper
+	type ObjectIDWrapper struct {
+		OID string `json:"$oid"`
+	}
+
+	// MongoDB Date wrapper
+	type DateWrapper struct {
+		Date string `json:"$date"`
+	}
+
+	// 3️⃣ Temporary struct to parse MongoDB extended JSON format
 	type rawTopic struct {
-		ID            string                `json:"_id,omitempty"`
+		ID            ObjectIDWrapper       `json:"_id,omitempty"`
 		TopicKey      string                `json:"topic_key"`
 		NameEn        string                `json:"name_en,omitempty"`
 		NameAm        string                `json:"name_am,omitempty"`
@@ -38,10 +48,10 @@ func main() {
 		Status        string                `json:"status,omitempty"`
 		Translations  entities.Translations `json:"translations"`
 		Version       int                   `json:"version,omitempty"`
-		CreatedAt     string                `json:"created_at,omitempty"`
-		UpdatedAt     string                `json:"updated_at,omitempty"`
-		CreatedBy     string                `json:"created_by,omitempty"`
-		UpdatedBy     string                `json:"updated_by,omitempty"`
+		CreatedAt     DateWrapper           `json:"created_at,omitempty"`
+		UpdatedAt     DateWrapper           `json:"updated_at,omitempty"`
+		CreatedBy     ObjectIDWrapper       `json:"created_by,omitempty"`
+		UpdatedBy     ObjectIDWrapper       `json:"updated_by,omitempty"`
 	}
 
 	var rawTopics []rawTopic
@@ -66,14 +76,14 @@ func main() {
 	successCount := 0
 
 	for _, raw := range rawTopics {
-		// Generate ID if not provided
+		// Handle ID
 		var id primitive.ObjectID
-		if raw.ID == "" {
+		if raw.ID.OID == "" {
 			id = primitive.NewObjectID()
 			log.Println("ℹ️  Generated new ID for topic", raw.TopicKey+":", id.Hex())
 		} else {
 			var err error
-			id, err = primitive.ObjectIDFromHex(raw.ID)
+			id, err = primitive.ObjectIDFromHex(raw.ID.OID)
 			if err != nil {
 				log.Println("❌ Invalid _id for topic", raw.TopicKey+":", err)
 				continue // Skip this topic but continue with others
@@ -82,11 +92,11 @@ func main() {
 
 		// Handle createdBy
 		var createdBy primitive.ObjectID
-		if raw.CreatedBy == "" {
+		if raw.CreatedBy.OID == "" {
 			createdBy = defaultCreatedBy
 		} else {
 			var err error
-			createdBy, err = primitive.ObjectIDFromHex(raw.CreatedBy)
+			createdBy, err = primitive.ObjectIDFromHex(raw.CreatedBy.OID)
 			if err != nil {
 				log.Println("❌ Invalid created_by for topic", raw.TopicKey+":", err)
 				continue
@@ -95,11 +105,11 @@ func main() {
 
 		// Handle updatedBy
 		var updatedBy primitive.ObjectID
-		if raw.UpdatedBy == "" {
+		if raw.UpdatedBy.OID == "" {
 			updatedBy = defaultUpdatedBy
 		} else {
 			var err error
-			updatedBy, err = primitive.ObjectIDFromHex(raw.UpdatedBy)
+			updatedBy, err = primitive.ObjectIDFromHex(raw.UpdatedBy.OID)
 			if err != nil {
 				log.Println("❌ Invalid updated_by for topic", raw.TopicKey+":", err)
 				continue
@@ -108,22 +118,22 @@ func main() {
 
 		// Handle timestamps
 		var createdAt, updatedAt time.Time
-		if raw.CreatedAt == "" {
+		if raw.CreatedAt.Date == "" {
 			createdAt = currentTime
 		} else {
 			var err error
-			createdAt, err = time.Parse(time.RFC3339, raw.CreatedAt)
+			createdAt, err = time.Parse(time.RFC3339, raw.CreatedAt.Date)
 			if err != nil {
 				log.Println("❌ Invalid created_at for topic", raw.TopicKey+":", err)
 				continue
 			}
 		}
 
-		if raw.UpdatedAt == "" {
+		if raw.UpdatedAt.Date == "" {
 			updatedAt = currentTime
 		} else {
 			var err error
-			updatedAt, err = time.Parse(time.RFC3339, raw.UpdatedAt)
+			updatedAt, err = time.Parse(time.RFC3339, raw.UpdatedAt.Date)
 			if err != nil {
 				log.Println("❌ Invalid updated_at for topic", raw.TopicKey+":", err)
 				continue
