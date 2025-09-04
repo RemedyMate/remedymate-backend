@@ -24,6 +24,18 @@ func NewConversationController(conversationUsecase interfaces.ConversationUsecas
 	}
 }
 
+func (cc *ConversationController) GetOfflineHealthTopics(c *gin.Context) {
+	topics, err := cc.conversationUsecase.GetOfflineHealthTopics(c.Request.Context())
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, dto.ErrorResponse{
+			Error:   "Failed to get offline health topics",
+			Details: err.Error(),
+		})
+		return
+	}
+	c.JSON(http.StatusOK, topics)
+}
+
 // HandleConversation handles both starting and continuing conversations in a single endpoint
 // POST /api/v1/conversation
 func (cc *ConversationController) HandleConversation(c *gin.Context) {

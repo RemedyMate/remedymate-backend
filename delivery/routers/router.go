@@ -71,6 +71,7 @@ func SetupRouter(
 	{
 		// Unified conversation endpoint (handles both start and continue)
 		conversation.POST("/", conversationController.HandleConversation)
+		conversation.GET("/offline-topics", conversationController.GetOfflineHealthTopics)
 	}
 
 	return r

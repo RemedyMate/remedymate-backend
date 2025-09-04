@@ -1,6 +1,14 @@
 [
   {
+    "_id": {
+      "$oid": "675a1b234567890123456701"
+    },
     "topic_key": "indigestion",
+    "name_en": "Indigestion",
+    "name_am": "የመጀመሪያ ደረጃ የሆድ ህመም",
+    "description_en": "Common causes and self-care for indigestion and stomach discomfort.",
+    "description_am": "ለሆድ ህመም እና የሆድ ሽታ የመጀመሪያ ደረጃ እንክብካቤ መረጃዎች።",
+    "status": "active",
     "translations": {
       "en": {
         "self_care": [
@@ -48,10 +56,31 @@
         ],
         "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
       }
+    },
+    "version": 1,
+    "created_at": {
+      "$date": "2024-12-11T12:00:00.000Z"
+    },
+    "updated_at": {
+      "$date": "2024-12-11T12:00:00.000Z"
+    },
+    "created_by": {
+      "$oid": "64f1a3b2c4d5e6f7890ab1cd"
+    },
+    "updated_by": {
+      "$oid": "64f1a3b2c4d5e6f7890ab1cd"
     }
   },
   {
+    "_id": {
+      "$oid": "675a1b234567890123456702"
+    },
     "topic_key": "headache",
+    "name_en": "Tension Headache",
+    "name_am": "የጭንቅላት ሽታ",
+    "description_en": "Common causes and self-care for headaches.",
+    "description_am": "ለራስ ምታት የሚያገለግሉ መረጃዎች።",
+    "status": "active",
     "translations": {
       "en": {
         "self_care": [
@@ -95,10 +124,31 @@
         ],
         "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
       }
+    },
+    "version": 1,
+    "created_at": {
+      "$date": "2024-12-11T12:00:00.000Z"
+    },
+    "updated_at": {
+      "$date": "2024-12-11T12:00:00.000Z"
+    },
+    "created_by": {
+      "$oid": "64f1a3b2c4d5e6f7890ab1cd"
+    },
+    "updated_by": {
+      "$oid": "64f1a3b2c4d5e6f7890ab1cd"
     }
   },
   {
+    "_id": {
+      "$oid": "675a1b234567890123456703"
+    },
     "topic_key": "sore_throat",
+    "name_en": "Sore Throat",
+    "name_am": "የጉሮሮ ህመም",
+    "description_en": "Common causes and self-care for sore throat.",
+    "description_am": "ለጉሮሮ ህመም የመጀመሪያ ደረጃ እንክብካቤ መረጃዎች።",
+    "status": "active",
     "translations": {
       "en": {
         "self_care": [
@@ -146,10 +196,31 @@
         ],
         "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
       }
+    },
+    "version": 1,
+    "created_at": {
+      "$date": "2024-12-11T12:00:00.000Z"
+    },
+    "updated_at": {
+      "$date": "2024-12-11T12:00:00.000Z"
+    },
+    "created_by": {
+      "$oid": "64f1a3b2c4d5e6f7890ab1cd"
+    },
+    "updated_by": {
+      "$oid": "64f1a3b2c4d5e6f7890ab1cd"
     }
   },
   {
+    "_id": {
+      "$oid": "675a1b234567890123456704"
+    },
     "topic_key": "cough",
+    "name_en": "Cough",
+    "name_am": "ሳል",
+    "description_en": "Common causes and self-care for cough.",
+    "description_am": "ለሳል የመጀመሪያ ደረጃ እንክብካቤ መረጃዎች።",
+    "status": "active",
     "translations": {
       "en": {
         "self_care": [
@@ -199,10 +270,31 @@
         ],
         "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
       }
+    },
+    "version": 1,
+    "created_at": {
+      "$date": "2024-12-11T12:00:00.000Z"
+    },
+    "updated_at": {
+      "$date": "2024-12-11T12:00:00.000Z"
+    },
+    "created_by": {
+      "$oid": "64f1a3b2c4d5e6f7890ab1cd"
+    },
+    "updated_by": {
+      "$oid": "64f1a3b2c4d5e6f7890ab1cd"
     }
   },
   {
+    "_id": {
+      "$oid": "675a1b234567890123456705"
+    },
     "topic_key": "fever",
+    "name_en": "Fever",
+    "name_am": "ትኩሳት",
+    "description_en": "Common causes and self-care for fever.",
+    "description_am": "ለትኩሳት የመጀመሪያ ደረጃ እንክብካቤ መረጃዎች።",
+    "status": "active",
     "translations": {
       "en": {
         "self_care": [
@@ -254,10 +346,31 @@
         ],
         "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
       }
+    },
+    "version": 1,
+    "created_at": {
+      "$date": "2024-12-11T12:00:00.000Z"
+    },
+    "updated_at": {
+      "$date": "2024-12-11T12:00:00.000Z"
+    },
+    "created_by": {
+      "$oid": "64f1a3b2c4d5e6f7890ab1cd"
+    },
+    "updated_by": {
+      "$oid": "64f1a3b2c4d5e6f7890ab1cd"
     }
   },
   {
+    "_id": {
+      "$oid": "675a1b234567890123456706"
+    },
     "topic_key": "back_pain",
+    "name_en": "Back Pain",
+    "name_am": "የጀርባ ህመም",
+    "description_en": "Common causes and self-care for back pain.",
+    "description_am": "ለጀርባ ህመም የመጀመሪያ ደረጃ እንክብካቤ መረጃዎች።",
+    "status": "active",
     "translations": {
       "en": {
         "self_care": [
@@ -305,6 +418,19 @@
         ],
         "disclaimer": "ይህ አጠቃላይ መረጃ ነው፣ የሕክምና ምክር አይደለም። ምልክቶችዎ ከባድ ወይም ቆይተው ከሚታወቁ ከሆነ፣ እባክዎን የሕክምና ባለሙያ ይጠይቁ።"
       }
+    },
+    "version": 1,
+    "created_at": {
+      "$date": "2024-12-11T12:00:00.000Z"
+    },
+    "updated_at": {
+      "$date": "2024-12-11T12:00:00.000Z"
+    },
+    "created_by": {
+      "$oid": "64f1a3b2c4d5e6f7890ab1cd"
+    },
+    "updated_by": {
+      "$oid": "64f1a3b2c4d5e6f7890ab1cd"
     }
   },
   {
