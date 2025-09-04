@@ -83,12 +83,6 @@ func (r *UserRepository) CreateUserWithStatus(ctx context.Context, user *entitie
 	userStatus.UserID = user.ID
 
 	// TODO: create a transaction to ensure both user and user status are created
-	// session, err := database.Client.StartSession()
-	// if err != nil {
-	// 	return fmt.Errorf("failed to start session: %w", err)
-	// }
-	// defer session.EndSession(ctx)
-
 	_, err := r.UserCollection.InsertOne(ctx, user)
 	if err != nil {
 
@@ -101,13 +95,6 @@ func (r *UserRepository) CreateUserWithStatus(ctx context.Context, user *entitie
 		return AppError.ErrInternalServer
 	}
 
-	// callback := func(sessCtx mongo.SessionContext) (interface{}, error) {
-	// 	return nil, nil
-	// }
-	// _, err = session.WithTransaction(ctx, callback)
-	// if err != nil {
-	// 	return err
-	// }
 	return nil
 }
 
@@ -178,6 +165,26 @@ func (r *UserRepository) CreateUserStatus(ctx context.Context, userStatus *entit
 	if err != nil {
 		log.Printf("Error inserting user status: %v", err)
 		return AppError.ErrInternalServer
+	}
+	return nil
+}
+
+// ActivateByEmail sets a user's status IsActive=true by email
+func (r *UserRepository) ActivateByEmail(ctx context.Context, email string) error {
+	// Find user by email to get userID
+	var user entities.User
+	if err := r.UserCollection.FindOne(ctx, bson.M{"email": email}).Decode(&user); err != nil {
+		return AppError.ErrUserNotFound
+	}
+
+	filter := bson.M{"userId": user.ID}
+	update := bson.M{"$set": bson.M{"isActive": true, "isVerified": true}}
+	result, err := r.UserStatusCollection.UpdateOne(ctx, filter, update)
+	if err != nil {
+		return AppError.ErrInternalServer
+	}
+	if result.MatchedCount == 0 {
+		return AppError.ErrUserStatusNotFound
 	}
 	return nil
 }
