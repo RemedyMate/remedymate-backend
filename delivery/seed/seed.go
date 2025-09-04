@@ -124,7 +124,7 @@ func main() {
 			var err error
 			createdAt, err = time.Parse(time.RFC3339, raw.CreatedAt.Date)
 			if err != nil {
-				log.Println("❌ Invalid created_at for topic", raw.TopicKey+":", err)
+				log.Printf("❌ Invalid created_at for topic %s: %v", raw.TopicKey, err)
 				continue
 			}
 		}
