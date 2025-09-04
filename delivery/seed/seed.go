@@ -61,7 +61,7 @@ func main() {
 
 	// 4️⃣ Get collection and prepare context
 	collection := database.GetCollection("health_topics")
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second) // Increased timeout
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second) // Use 30s timeout to accommodate potentially large batch insertions
 	defer cancel()
 
 	// Default values for missing fields
