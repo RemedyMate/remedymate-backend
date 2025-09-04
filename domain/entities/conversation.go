@@ -49,11 +49,13 @@ type Answer struct {
 
 // Remedy represents remedy information from the GetRemedy usecase
 type Remedy struct {
-	Level         TriageLevel   `json:"level" bson:"level"`
+	Triage        TriageResult  `json:"triage" bson:"triage"`
 	SelfCare      []string      `json:"self_care" bson:"self_care"`
 	OTCCategories []OTCCategory `json:"otc_categories,omitempty" bson:"otc_categories,omitempty"`
 	SeekCareIf    []string      `json:"seek_care_if" bson:"seek_care_if"`
 	Disclaimer    string        `json:"disclaimer" bson:"disclaimer"`
+	TopicKey      string        `json:"topic_key,omitempty" bson:"topic_key,omitempty"`
+	Language      string        `json:"language,omitempty" bson:"language,omitempty"`
 }
 
 // HealthReport represents the final structured health report

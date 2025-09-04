@@ -149,11 +149,17 @@ func (cu *ConversationUsecaseImpl) SubmitAnswer(ctx context.Context, req dto.Sub
 		if remedyResponse != nil && remedyResponse.Content != nil {
 			// Add remedy information to the report
 			report.Remedy = &entities.Remedy{
-				Level:         remedyResponse.Triage.Level,
+				Triage: entities.TriageResult{
+					Level:    remedyResponse.Triage.Level,
+					RedFlags: remedyResponse.Triage.RedFlags,
+					Message:  remedyResponse.Triage.Message,
+				},
 				SelfCare:      remedyResponse.Content.SelfCare,
 				OTCCategories: remedyResponse.Content.OTCCategories,
 				SeekCareIf:    remedyResponse.Content.SeekCareIf,
 				Disclaimer:    remedyResponse.Content.Disclaimer,
+				TopicKey:      remedyResponse.Content.TopicKey,
+				Language:      remedyResponse.Content.Language,
 			}
 		}
 

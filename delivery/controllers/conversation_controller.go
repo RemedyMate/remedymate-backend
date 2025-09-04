@@ -170,11 +170,13 @@ func (cc *ConversationController) HandleConversation(c *gin.Context) {
 				remedy = &dto.RemedyResponse{
 					SessionID: generateSessionID(),
 					Triage: dto.TriageResponse{
-						Level:    reportResponse.Report.Remedy.Level,
-						RedFlags: []string{},
-						Message:  "Based on your symptoms",
+						Level:    reportResponse.Report.Remedy.Triage.Level,
+						RedFlags: reportResponse.Report.Remedy.Triage.RedFlags,
+						Message:  reportResponse.Report.Remedy.Triage.Message,
 					},
 					Content: &entities.GuidanceCard{
+						TopicKey:      reportResponse.Report.Remedy.TopicKey,
+						Language:      reportResponse.Report.Remedy.Language,
 						SelfCare:      reportResponse.Report.Remedy.SelfCare,
 						OTCCategories: reportResponse.Report.Remedy.OTCCategories,
 						SeekCareIf:    reportResponse.Report.Remedy.SeekCareIf,
@@ -220,119 +222,6 @@ func (cc *ConversationController) HandleConversation(c *gin.Context) {
 	}
 }
 
-// StartConversation handles POST /api/v1/conversation/start
-func (cc *ConversationController) StartConversation(c *gin.Context) {
-	var req dto.StartConversationRequest
-	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, dto.ErrorResponse{
-			Error:   "Invalid request format",
-			Details: err.Error(),
-		})
-		return
-	}
-
-	// Note: Conversation service is designed for unauthenticated users
-	// UserID is optional and can be provided in the request body if needed
-
-	response, err := cc.conversationUsecase.StartConversation(c.Request.Context(), req)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, dto.ErrorResponse{
-			Error:   "Failed to start conversation",
-			Details: err.Error(),
-		})
-		return
-	}
-
-	c.JSON(http.StatusOK, response)
-}
-
-// SubmitAnswer handles POST /api/v1/conversation/answer
-func (cc *ConversationController) SubmitAnswer(c *gin.Context) {
-	var req dto.SubmitAnswerRequest
-	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, dto.ErrorResponse{
-			Error:   "Invalid request format",
-			Details: err.Error(),
-		})
-		return
-	}
-
-	response, err := cc.conversationUsecase.SubmitAnswer(c.Request.Context(), req)
-	if err != nil {
-		// Check for specific error types
-		if err.Error() == "conversation not found" {
-			c.JSON(http.StatusNotFound, dto.ErrorResponse{
-				Error:   "Conversation not found",
-				Details: "The specified conversation ID does not exist",
-			})
-			return
-		}
-
-		if err.Error() == "conversation is not active" {
-			c.JSON(http.StatusBadRequest, dto.ErrorResponse{
-				Error:   "Conversation not active",
-				Details: "This conversation has already been completed or expired",
-			})
-			return
-		}
-
-		c.JSON(http.StatusInternalServerError, dto.ErrorResponse{
-			Error:   "Failed to submit answer",
-			Details: err.Error(),
-		})
-		return
-	}
-
-	c.JSON(http.StatusOK, response)
-}
-
-// GetReport handles GET /api/v1/conversation/{id}/report
-func (cc *ConversationController) GetReport(c *gin.Context) {
-	conversationID := c.Param("id")
-	if conversationID == "" {
-		c.JSON(http.StatusBadRequest, dto.ErrorResponse{
-			Error:   "Conversation ID is required",
-			Details: "Please provide a valid conversation ID in the URL path",
-		})
-		return
-	}
-
-	response, err := cc.conversationUsecase.GetReport(c.Request.Context(), conversationID)
-	if err != nil {
-		// Check for specific error types
-		if err.Error() == "conversation not found" {
-			c.JSON(http.StatusNotFound, dto.ErrorResponse{
-				Error:   "Conversation not found",
-				Details: "The specified conversation ID does not exist",
-			})
-			return
-		}
-
-		if err.Error() == "conversation is not complete" {
-			c.JSON(http.StatusBadRequest, dto.ErrorResponse{
-				Error:   "Conversation not complete",
-				Details: "This conversation has not been completed yet",
-			})
-			return
-		}
-
-		if err.Error() == "final report not found" {
-			c.JSON(http.StatusInternalServerError, dto.ErrorResponse{
-				Error:   "Report not found",
-				Details: "The final health report could not be generated",
-			})
-			return
-		}
-
-		c.JSON(http.StatusInternalServerError, dto.ErrorResponse{
-			Error:   "Failed to retrieve report",
-			Details: err.Error(),
-		})
-		return
-	}
-
-	c.JSON(http.StatusOK, response)
-}
 
 // generateSessionID generates a unique session ID
 func generateSessionID() string {
