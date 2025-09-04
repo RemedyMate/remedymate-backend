@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	"fmt"
+	"log"
 	"time"
 
 	"remedymate-backend/domain/entities"
@@ -36,7 +37,7 @@ func NewConversationRepository(collection *mongo.Collection) interfaces.Conversa
 
 	if err != nil {
 		// Log error but don't fail - indexes might already exist
-		// log.Printf("Failed to create conversation indexes: %v", err)
+		log.Printf("Failed to create conversation indexes: %v", err)
 	}
 
 	return &ConversationRepositoryImpl{
@@ -72,10 +73,6 @@ func (cr *ConversationRepositoryImpl) GetOfflineHealthTopics(ctx context.Context
 	}
 
 	var healthTopics []entities.HealthTopic
-	if err := cursor.All(ctx, &healthTopics); err != nil {
-		return nil, err
-	}
-
 	if err := cursor.All(ctx, &healthTopics); err != nil {
 		return nil, err
 	}

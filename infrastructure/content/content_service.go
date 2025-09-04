@@ -12,9 +12,10 @@ import (
 )
 
 type ContentService struct {
-	approvedBlocks []entities.ApprovedBlock
-	redFlagRules   []entities.RedFlagRule
-	dataPath       string
+	approvedBlocks  []entities.ApprovedBlock
+	redFlagRules    []entities.RedFlagRule
+	yellowFlagRules []entities.RedFlagRule
+	dataPath        string
 }
 
 // NewContentService creates a new content service instance
@@ -50,6 +51,11 @@ func (cs *ContentService) LoadContent() error {
 	// Load red flag rules
 	if err := cs.loadRedFlagRules(); err != nil {
 		return fmt.Errorf("failed to load red flag rules: %w", err)
+	}
+
+	// Load yellow flag rules
+	if err := cs.loadYellowFlagRules(); err != nil {
+		return fmt.Errorf("failed to load yellow flag rules: %w", err)
 	}
 
 	return nil
@@ -94,6 +100,24 @@ func (cs *ContentService) loadRedFlagRules() error {
 	return nil
 }
 
+// load yellow flag rules from separate file
+func (cs *ContentService) loadYellowFlagRules() error {
+	rulesPath := filepath.Join(cs.dataPath, "yellow_flag_rules.json")
+	rulesData, err := os.ReadFile(rulesPath)
+	if err != nil {
+		return fmt.Errorf("failed to read yellow flag rules file: %w", err)
+	}
+
+	var rules []entities.RedFlagRule
+	if err := json.Unmarshal(rulesData, &rules); err != nil {
+		return fmt.Errorf("failed to parse yellow flag rules JSON: %w", err)
+	}
+
+	cs.yellowFlagRules = rules
+	fmt.Printf("✅ Loaded %d yellow flag rules from %s\n", len(rules), rulesPath)
+	return nil
+}
+
 // returns the red flag rules for triage
 func (cs *ContentService) GetRedFlagRules() []entities.RedFlagRule {
 	return cs.redFlagRules
@@ -113,7 +137,7 @@ func (cs *ContentService) GetRedFlagRulesOnly() []entities.RedFlagRule {
 // returns only yellow flag rules (level YELLOW)
 func (cs *ContentService) GetYellowFlagRules() []entities.RedFlagRule {
 	var yellowRules []entities.RedFlagRule
-	for _, rule := range cs.redFlagRules {
+	for _, rule := range cs.yellowFlagRules {
 		if rule.Level == entities.TriageLevelYellow {
 			yellowRules = append(yellowRules, rule)
 		}

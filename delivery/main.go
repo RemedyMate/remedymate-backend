@@ -46,6 +46,8 @@ func main() {
 	tokenRepo := repository.NewRefreshTokenRepository()
 	activationRepo := repository.NewActivationTokenRepository()
 	conversationRepo := repository.NewConversationRepository(database.GetCollection("conversation"))
+	redFlagRepo := repository.NewRedFlagRepository()
+	feedbackRepo := repository.NewFeedbackRepository()
 	topicRepo, err := repository.NewTopicRepository()
 	if err != nil {
 		log.Fatalf("Failed to initialize TopicRepository: %v", err)
@@ -63,7 +65,9 @@ func main() {
 
 	authUsecase := user.NewAuthUsecase(userRepo, tokenRepo, mailService, activationRepo)
 	userUsecase := user.NewUserUsecase(userRepo)
+	publicFeedbackUsecase := usecase.NewPublicFeedbackUsecase(feedbackRepo)
 	topicUsecase := usecase.NewTopicUsecase(topicRepo)
+
 
 	// Initialize RemedyMate services
 	contentService := content.NewContentService("./data")
@@ -100,15 +104,29 @@ func main() {
 		remedyMateUsecase,
 	)
 
-	// Initialize controllers
-	authController := controllers.NewAuthController(authUsecase, userUsecase) // Added userUsecase
+	// Admin usecases
+	adminRedFlagUsecase := usecase.NewAdminRedFlagUsecase(redFlagRepo)
+	adminFeedbackUsecase := usecase.NewAdminFeedbackUsecase(feedbackRepo)
 
+	// Initialize controllers
+	authController := controllers.NewAuthController(authUsecase, userUsecase)
 	remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
 	conversationController := controllers.NewConversationController(conversationUsecase)
-	topicController := controllers.NewTopicController(topicUsecase)
+  topicController := controllers.NewTopicController(topicUsecase)
+	adminRedFlagController := controllers.NewAdminRedFlagController(adminRedFlagUsecase)
+	adminFeedbackController := controllers.NewAdminFeedbackController(adminFeedbackUsecase)
+	feedbackPublicController := controllers.NewFeedbackPublicController(publicFeedbackUsecase)
 
 	// Setup router
-	r := routers.SetupRouter(authController, remedyMateController, conversationController, topicController) // Added userController back
+	r := routers.SetupRouter(
+		authController,
+		remedyMateController,
+		conversationController,
+    topicController
+		adminRedFlagController,
+		adminFeedbackController,
+		feedbackPublicController,
+	)
 
 	port := os.Getenv("PORT")
 	if port == "" {

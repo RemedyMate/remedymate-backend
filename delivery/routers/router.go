@@ -13,8 +13,11 @@ func SetupRouter(
 	authController *controllers.AuthController,
 	remedyMateController *controllers.RemedyMateController,
 	conversationController *controllers.ConversationController,
-	topicController *controllers.TopicController,
-) *gin.Engine {
+  topicController *controllers.TopicController,
+	adminRedFlagController *controllers.AdminRedFlagController,
+	adminFeedbackController *controllers.AdminFeedbackController,
+	feedbackPublicController *controllers.FeedbackPublicController) *gin.Engine {
+
 
 	r := gin.Default()
 
@@ -23,9 +26,12 @@ func SetupRouter(
 	{
 		// Remedy route which comprises /triage, /map_topic, and /compose
 		v1.POST("/remedy", remedyMateController.GetRemedy)
+		// Public feedback route
+		v1.POST("/feedbacks", feedbackPublicController.Create)
 		// Authentication routes
 		auth := v1.Group("/auth")
 		{
+			auth.POST("/register", authController.Register)
 			auth.POST("/login", authController.Login)
 			auth.POST("/refresh", authController.Refresh)
 			auth.POST("/activate", authController.Activate)
@@ -36,7 +42,6 @@ func SetupRouter(
 			protected.Use(middleware.AuthMiddleware())
 			{
 				protected.POST("/logout", authController.Logout)
-				// protected.POST("/change-password", authController.ChangePassword)
 			}
 		}
 
@@ -72,6 +77,23 @@ func SetupRouter(
 		// Unified conversation endpoint (handles both start and continue)
 		conversation.POST("/", conversationController.HandleConversation)
 		conversation.GET("/offline-topics", conversationController.GetOfflineHealthTopics)
+	}
+
+	// Admin routes (auth required; all users are admins per requirement)
+	admin := v1.Group("/admin")
+	admin.Use(middleware.AuthMiddleware())
+	{
+		// Redflags
+		admin.GET("/redflags", adminRedFlagController.List)
+		admin.POST("/redflags", adminRedFlagController.Create)
+		admin.PUT("/redflags/:id", adminRedFlagController.Update)
+		admin.GET("/redflags/:id", adminRedFlagController.Get)
+		admin.DELETE("/redflags/:id", adminRedFlagController.Delete)
+
+		// Feedbacks
+		admin.GET("/feedbacks", adminFeedbackController.List)
+		admin.GET("/feedbacks/:id", adminFeedbackController.Get)
+		admin.DELETE("/feedbacks/:id", adminFeedbackController.Delete)
 	}
 
 	return r
