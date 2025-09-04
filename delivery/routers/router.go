@@ -15,11 +15,10 @@ func SetupRouter(
 	// userController *controllers.UserController,
 	remedyMateController *controllers.RemedyMateController,
 	conversationController *controllers.ConversationController,
-  topicController *controllers.TopicController,
+	topicController *controllers.TopicController,
 	adminRedFlagController *controllers.AdminRedFlagController,
 	adminFeedbackController *controllers.AdminFeedbackController,
 	feedbackPublicController *controllers.FeedbackPublicController) *gin.Engine {
-
 
 	r := gin.Default()
 
@@ -74,6 +73,8 @@ func SetupRouter(
 	// Conversation routes (public access, no authentication required)
 	conversation := v1.Group("/conversation")
 	{
+		// Initial chat greeting endpoint
+		conversation.POST("/init", conversationController.InitiateChat)
 		// Unified conversation endpoint (handles both start and continue)
 		conversation.POST("/", conversationController.HandleConversation)
 		conversation.GET("/offline-topics", conversationController.GetOfflineHealthTopics)

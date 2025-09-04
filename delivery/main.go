@@ -9,7 +9,6 @@ import (
 	"remedymate-backend/delivery/routers"
 	"remedymate-backend/domain/dto"
 
-
 	"remedymate-backend/infrastructure/bootstrap"
 
 	"remedymate-backend/infrastructure/content"
@@ -116,7 +115,7 @@ func main() {
 		authController,
 		remedyMateController,
 		conversationController,
-    topicController
+    	topicController,
 		adminRedFlagController,
 		adminFeedbackController,
 		feedbackPublicController,
