@@ -3,7 +3,7 @@ package util
 import (
 	"fmt"
 
-	derrors "remedymate-backend/domain/errors"
+	derrors "remedymate-backend/domain/AppError"
 )
 
 // ValidateLanguage checks supported language codes.
