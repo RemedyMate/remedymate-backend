@@ -155,7 +155,7 @@ func main() {
 		nameEn := raw.NameEn
 		if nameEn == "" {
 			// You can add logic to generate default names based on topic_key
-			nameEn = "Default English Name for " + raw.TopicKey
+			nameEn = fmt.Sprintf("Default English Name for %s", raw.TopicKey)
 		}
 
 		nameAm := raw.NameAm
