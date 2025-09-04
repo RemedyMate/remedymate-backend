@@ -152,6 +152,10 @@ func (uc *AuthUsecase) Login(ctx context.Context, loginData dto.LoginDTO) (*dto.
 	return &dto.LoginResponseDTO{
 		AccessToken:  accessTokenString,
 		RefreshToken: refreshToken.Token,
+		UserID:       user.ID,
+		Username:     user.Username,
+		Email:        user.Email,
+		Role:         user.Role,
 	}, nil
 }
 

@@ -37,7 +37,11 @@ type LoginDTO struct {
 type LoginResponseDTO struct {
 	AccessToken  string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
-	// TODO: Decide on which user data to send.
+	// User related data
+	UserID   string        `json:"user_id"`
+	Username string        `json:"username"`
+	Email    string        `json:"email"`
+	Role     entities.Role `json:"role"`
 }
 
 // REFRESH: request
