@@ -72,7 +72,9 @@ func (cr *ConversationRepositoryImpl) GetOfflineHealthTopics(ctx context.Context
 	}
 
 	var healthTopics []entities.HealthTopic
-	cursor.All(ctx, &healthTopics)
+	if err := cursor.All(ctx, &healthTopics); err != nil {
+		return nil, err
+	}
 
 	if err := cursor.All(ctx, &healthTopics); err != nil {
 		return nil, err
