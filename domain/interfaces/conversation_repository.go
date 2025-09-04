@@ -28,4 +28,7 @@ type ConversationRepository interface {
 
 	// DeleteExpiredConversations deletes conversations that have expired
 	DeleteExpiredConversations(ctx context.Context, maxAgeHours int) error
+
+	// GetOfflineHealthTopics retrieves all active health topics
+	GetOfflineHealthTopics(ctx context.Context) ([]entities.HealthTopic, error)
 }
