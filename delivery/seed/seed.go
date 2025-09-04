@@ -80,7 +80,7 @@ func main() {
 		var id primitive.ObjectID
 		if raw.ID.OID == "" {
 			id = primitive.NewObjectID()
-			log.Println("ℹ️  Generated new ID for topic", raw.TopicKey+":", id.Hex())
+			log.Printf("ℹ️  Generated new ID for topic %s: %s", raw.TopicKey, id.Hex())
 		} else {
 			var err error
 			id, err = primitive.ObjectIDFromHex(raw.ID.OID)
