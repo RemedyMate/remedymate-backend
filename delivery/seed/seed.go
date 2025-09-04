@@ -98,7 +98,7 @@ func main() {
 			var err error
 			createdBy, err = primitive.ObjectIDFromHex(raw.CreatedBy.OID)
 			if err != nil {
-				log.Println("❌ Invalid created_by for topic", raw.TopicKey+":", err)
+				log.Printf("❌ Invalid created_by for topic %s: %v", raw.TopicKey, err)
 				continue
 			}
 		}
