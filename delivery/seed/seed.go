@@ -111,7 +111,7 @@ func main() {
 			var err error
 			updatedBy, err = primitive.ObjectIDFromHex(raw.UpdatedBy.OID)
 			if err != nil {
-				log.Println("❌ Invalid updated_by for topic", raw.TopicKey+":", err)
+				log.Printf("❌ Invalid updated_by for topic %s: %v", raw.TopicKey, err)
 				continue
 			}
 		}
