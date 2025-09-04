@@ -85,7 +85,7 @@ func main() {
 			var err error
 			id, err = primitive.ObjectIDFromHex(raw.ID.OID)
 			if err != nil {
-				log.Println("❌ Invalid _id for topic", raw.TopicKey+":", err)
+				log.Printf("❌ Invalid _id for topic %s: %v", raw.TopicKey, err)
 				continue // Skip this topic but continue with others
 			}
 		}
