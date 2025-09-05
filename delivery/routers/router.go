@@ -11,13 +11,13 @@ import (
 
 func SetupRouter(
 	authController *controllers.AuthController,
+	userController *controllers.UserController,
 	remedyMateController *controllers.RemedyMateController,
 	conversationController *controllers.ConversationController,
-  topicController *controllers.TopicController,
+	topicController *controllers.TopicController,
 	adminRedFlagController *controllers.AdminRedFlagController,
 	adminFeedbackController *controllers.AdminFeedbackController,
 	feedbackPublicController *controllers.FeedbackPublicController) *gin.Engine {
-
 
 	r := gin.Default()
 
@@ -42,6 +42,7 @@ func SetupRouter(
 			protected.Use(middleware.AuthMiddleware())
 			{
 				protected.POST("/logout", authController.Logout)
+				protected.POST("/change-password", authController.ChangePassword)
 			}
 		}
 
@@ -51,14 +52,13 @@ func SetupRouter(
 		{
 			// superadmin routes
 			protectedAPI.POST("/register", middleware.SuperAdminMiddleware(), authController.Register)
-			// 	// User profile routes
-			// 	users := protectedAPI.Group("/users")
-			// 	{
-			// 		users.GET("/profile", userController.GetProfile)
-			// 		users.PUT("/profile", userController.UpdateProfile)
-			// 		users.PATCH("/profile", userController.EditProfile)
-			// 		users.DELETE("/profile", userController.DeleteProfile)
-			// 	}
+			// User profile routes
+			users := protectedAPI.Group("/users")
+			{
+				users.GET("/profile", userController.GetProfile)
+				users.PUT("/profile", userController.UpdateProfile)
+				users.DELETE("/profile", userController.DeleteProfile)
+			}
 		}
 		admin := v1.Group("/admin")
 		admin.Use(middleware.AuthMiddleware())

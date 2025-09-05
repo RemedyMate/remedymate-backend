@@ -7,8 +7,10 @@ import (
 
 	"remedymate-backend/domain/AppError"
 	"remedymate-backend/domain/dto"
+	"remedymate-backend/domain/entities"
 	"remedymate-backend/domain/interfaces"
 	"remedymate-backend/infrastructure/auth"
+	"remedymate-backend/util/hash"
 )
 
 type UserUsecase struct {
@@ -45,15 +47,36 @@ func (u *UserUsecase) GetProfile(ctx context.Context, userID string) (*dto.Profi
 		return nil, AppError.ErrUserStatusNotFound
 	}
 
+	// Safe unwraps
+	fn, ln, age, gender, pfp := "", "", 0, "", ""
+	if user.PersonalInfo != nil {
+		if user.PersonalInfo.FirstName != nil {
+			fn = *user.PersonalInfo.FirstName
+		}
+		if user.PersonalInfo.LastName != nil {
+			ln = *user.PersonalInfo.LastName
+		}
+		if user.PersonalInfo.Age != nil {
+			age = *user.PersonalInfo.Age
+		}
+		if user.PersonalInfo.Gender != nil {
+			gender = *user.PersonalInfo.Gender
+		}
+		if user.PersonalInfo.ProfilePictureURL != nil {
+			pfp = *user.PersonalInfo.ProfilePictureURL
+		}
+	}
+
 	profile := &dto.ProfileResponseDTO{
 		ID:       user.ID,
 		Username: user.Username,
 		Email:    user.Email,
 		PersonalInfo: dto.PersonalInfoDTO{
-			FirstName: *user.PersonalInfo.FirstName,
-			LastName:  *user.PersonalInfo.LastName,
-			Age:       *user.PersonalInfo.Age,
-			Gender:    *user.PersonalInfo.Gender,
+			FirstName:         fn,
+			LastName:          ln,
+			Age:               age,
+			Gender:            gender,
+			ProfilePictureURL: pfp,
 		},
 		IsVerified:    userStatus.IsVerified,
 		IsProfileFull: userStatus.IsProfileFull,
@@ -67,126 +90,104 @@ func (u *UserUsecase) GetProfile(ctx context.Context, userID string) (*dto.Profi
 	return profile, nil
 }
 
-// // UpdateProfile updates user profile (basic update)
-// func (u *UserUsecase) UpdateProfile(ctx context.Context, userID string, updateData dto.UpdateProfileDTO) (*dto.ProfileResponseDTO, error) {
-// 	log.Printf("🔄 Updating profile for user: %s", userID)
+// UpdateProfile updates user profile (basic update)
+func (u *UserUsecase) UpdateProfile(ctx context.Context, userID string, updateData dto.UpdateProfileDTO) (*dto.ProfileResponseDTO, error) {
+	log.Printf("🔄 Updating profile for user: %s", userID)
 
-// 	user, err := u.UserRepo.FindByID(ctx, userID)
-// 	if err != nil {
-// 		return nil, errors.New("user not found")
-// 	}
+	user, err := u.UserRepo.FindByID(ctx, userID)
+	if err != nil {
+		return nil, AppError.ErrUserNotFound
+	}
 
-// 	// Update fields if provided
-// 	if updateData.Username != "" {
-// 		user.Username = updateData.Username
-// 	}
+	// Update fields if provided
+	if updateData.Username != "" {
+		user.Username = updateData.Username
+	}
 
-// 	if updateData.PersonalInfo.FirstName != "" {
-// 		user.PersonalInfo.FirstName = updateData.PersonalInfo.FirstName
-// 	}
-// 	if updateData.PersonalInfo.LastName != "" {
-// 		user.PersonalInfo.LastName = updateData.PersonalInfo.LastName
-// 	}
-// 	if updateData.PersonalInfo.Age > 0 {
-// 		user.PersonalInfo.Age = updateData.PersonalInfo.Age
-// 	}
-// 	if updateData.PersonalInfo.Gender != "" {
-// 		user.PersonalInfo.Gender = updateData.PersonalInfo.Gender
-// 	}
+	if user.PersonalInfo == nil {
+		user.PersonalInfo = &entities.PersonalInfo{}
+	}
+	// Apply personal info deltas
+	if updateData.PersonalInfo.FirstName != "" {
+		user.PersonalInfo.FirstName = &updateData.PersonalInfo.FirstName
+	}
+	if updateData.PersonalInfo.LastName != "" {
+		user.PersonalInfo.LastName = &updateData.PersonalInfo.LastName
+	}
+	if updateData.PersonalInfo.Age > 0 {
+		age := updateData.PersonalInfo.Age
+		user.PersonalInfo.Age = &age
+	}
+	if updateData.PersonalInfo.Gender != "" {
+		user.PersonalInfo.Gender = &updateData.PersonalInfo.Gender
+	}
 
-// 	user.UpdatedAt = time.Now()
+	// Apply profile picture URL
+	if updateData.PersonalInfo.ProfilePictureURL != "" {
+		url := updateData.PersonalInfo.ProfilePictureURL
+		user.PersonalInfo.ProfilePictureURL = &url
+	}
 
-// 	if err := u.UserRepo.UpdateUser(ctx, *user); err != nil {
-// 		log.Printf("❌ Failed to update user: %v", err)
-// 		return nil, errors.New("failed to update profile")
-// 	}
+	user.UpdatedAt = time.Now()
 
-// 	log.Printf("✅ Profile updated for user: %s", user.Username)
-// 	return u.GetProfile(ctx, userID)
-// }
+	if err := u.UserRepo.UpdateUser(ctx, user); err != nil {
+		log.Printf("❌ Failed to update user: %v", err)
+		return nil, AppError.ErrInternalServer
+	}
 
-// // EditProfile edits user profile (comprehensive edit)
-// func (u *UserUsecase) EditProfile(ctx context.Context, userID string, editData dto.EditProfileDTO) (*dto.ProfileResponseDTO, error) {
-// 	log.Printf("✏️ Editing profile for user: %s", userID)
+	// Update IsProfileFull status based on completeness
+	if err := u.updateIsProfileFull(ctx, userID); err != nil {
+		log.Printf("warning: failed to update IsProfileFull: %v", err)
+	}
 
-// 	user, err := u.UserRepo.FindByID(ctx, userID)
-// 	if err != nil {
-// 		return nil, errors.New("user not found")
-// 	}
+	log.Printf("✅ Profile updated for user: %s", user.Username)
+	return u.GetProfile(ctx, userID)
+}
 
-// 	// Update fields if provided (similar to update but more comprehensive)
-// 	if editData.Username != "" {
-// 		user.Username = editData.Username
-// 	}
+// EditProfile removed; use UpdateProfile instead.
 
-// 	if editData.PersonalInfo.FirstName != "" {
-// 		user.PersonalInfo.FirstName = editData.PersonalInfo.FirstName
-// 	}
-// 	if editData.PersonalInfo.LastName != "" {
-// 		user.PersonalInfo.LastName = editData.PersonalInfo.LastName
-// 	}
-// 	if editData.PersonalInfo.Age > 0 {
-// 		user.PersonalInfo.Age = editData.PersonalInfo.Age
-// 	}
-// 	if editData.PersonalInfo.Gender != "" {
-// 		user.PersonalInfo.Gender = editData.PersonalInfo.Gender
-// 	}
+// DeleteProfile soft deletes user profile
+func (u *UserUsecase) DeleteProfile(ctx context.Context, userID string, deleteData dto.DeleteProfileDTO) error {
+	log.Printf("🗑️ Deleting profile for user: %s", userID)
 
-// 	// Handle health conditions
-// 	if editData.HealthConditions != "" {
-// 		encrypted, err := auth.Encrypt(editData.HealthConditions, u.AESkey)
-// 		if err != nil {
-// 			return nil, errors.New("failed to encrypt health conditions")
-// 		}
-// 		user.HealthConditions = encrypted
-// 	}
+	user, err := u.UserRepo.FindByID(ctx, userID)
+	if err != nil {
+		return AppError.ErrUserNotFound
+	}
 
-// 	// Handle profile completeness flag
-// 	if editData.IsProfileFull != nil {
-// 		user.IsProfileFull = *editData.IsProfileFull
-// 	}
+	// Verify password for security — compare with PasswordHash
+	ok, verr := hash.VerifyPassword(deleteData.Password, user.PasswordHash)
+	if verr != nil {
+		return verr
+	}
+	if !ok {
+		return AppError.ErrIncorrectPassword
+	}
 
-// 	user.UpdatedAt = time.Now()
+	if err := u.UserRepo.SoftDeleteUser(ctx, userID); err != nil {
+		log.Printf("❌ Failed to delete user: %v", err)
+		return AppError.ErrInternalServer
+	}
 
-// 	if err := u.UserRepo.UpdateUser(ctx, *user); err != nil {
-// 		log.Printf("❌ Failed to edit user: %v", err)
-// 		return nil, errors.New("failed to edit profile")
-// 	}
+	log.Printf("✅ Profile deleted for user: %s", userID)
+	return nil
+}
 
-// 	log.Printf("✅ Profile edited for user: %s", user.Username)
-// 	return u.GetProfile(ctx, userID)
-// }
-
-// // DeleteProfile soft deletes user profile
-// func (u *UserUsecase) DeleteProfile(ctx context.Context, userID string, deleteData dto.DeleteProfileDTO) error {
-// 	log.Printf("🗑️ Deleting profile for user: %s", userID)
-
-// 	user, err := u.UserRepo.FindByID(ctx, userID)
-// 	if err != nil {
-// 		return errors.New("user not found")
-// 	}
-
-// 	// Verify password for security
-// 	isValid, err := u.passwordService.VerifyPassword(deleteData.Password, user.Password)
-// 	if err != nil {
-// 		return errors.New("authentication failed")
-// 	}
-
-// 	if !isValid {
-// 		log.Printf("❌ Invalid password for profile deletion: %s", userID)
-// 		return errors.New("invalid password")
-// 	}
-
-// 	// Log deletion reason if provided
-// 	if deleteData.Reason != "" {
-// 		log.Printf("📝 Deletion reason for user %s: %s", userID, deleteData.Reason)
-// 	}
-
-// 	if err := u.UserRepo.SoftDeleteUser(ctx, userID); err != nil {
-// 		log.Printf("❌ Failed to delete user: %v", err)
-// 		return errors.New("failed to delete profile")
-// 	}
-
-// 	log.Printf("✅ Profile deleted for user: %s", userID)
-// 	return nil
-// }
+// updateIsProfileFull calculates completeness and stores in user_status
+func (u *UserUsecase) updateIsProfileFull(ctx context.Context, userID string) error {
+	user, err := u.UserRepo.FindByID(ctx, userID)
+	if err != nil {
+		return err
+	}
+	// Define completeness: non-empty FirstName, LastName, Age>0, Gender
+	complete := false
+	if user.PersonalInfo != nil &&
+		user.PersonalInfo.FirstName != nil && *user.PersonalInfo.FirstName != "" &&
+		user.PersonalInfo.LastName != nil && *user.PersonalInfo.LastName != "" &&
+		user.PersonalInfo.Age != nil && *user.PersonalInfo.Age > 0 &&
+		user.PersonalInfo.Gender != nil && *user.PersonalInfo.Gender != "" &&
+		user.PersonalInfo.ProfilePictureURL != nil && *user.PersonalInfo.ProfilePictureURL != "" {
+		complete = true
+	}
+	return u.UserRepo.UpdateUserStatusFields(ctx, userID, map[string]interface{}{"isProfileFull": complete})
+}

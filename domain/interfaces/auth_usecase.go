@@ -28,5 +28,5 @@ type IAuthUsecase interface {
 	VerifyAccount(ctx context.Context, token string) error
 
 	// ChangePassword changes a user's password
-	// ChangePassword(ctx context.Context, userID, oldPassword, newPassword string) error
+	ChangePassword(ctx context.Context, userID, oldPassword, newPassword string) error
 }

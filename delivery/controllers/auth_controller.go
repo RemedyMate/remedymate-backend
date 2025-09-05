@@ -178,41 +178,40 @@ func (ac *AuthController) Logout(c *gin.Context) {
 
 // ChangePassword changes a user's password
 // POST /api/v1/auth/change-password
-// func (ac *AuthController) ChangePassword(c *gin.Context) {
-// 	userID, exists := c.Get("userID")
-// 	if !exists {
-// 		c.JSON(http.StatusUnauthorized, gin.H{
-// 			"error": "User not authenticated",
-// 		})
-// 		return
-// 	}
+func (ac *AuthController) ChangePassword(c *gin.Context) {
+	userID, exists := c.Get("userID")
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"error": "User not authenticated",
+		})
+		return
+	}
 
-// 	var request struct {
-// 		OldPassword string `json:"old_password" binding:"required"`
-// 		NewPassword string `json:"new_password" binding:"required,min=6"`
-// 	}
+	var request struct {
+		OldPassword string `json:"old_password" binding:"required"`
+		NewPassword string `json:"new_password" binding:"required,min=6"`
+	}
 
-// 	if err := c.ShouldBindJSON(&request); err != nil {
-// 		log.Printf("❌ Invalid change password request: %v", err)
-// 		c.JSON(http.StatusBadRequest, gin.H{
-// 			"error":   "Invalid request body",
-// 			"details": err.Error(),
-// 		})
-// 		return
-// 	}
+	if err := c.ShouldBindJSON(&request); err != nil {
+		log.Printf("❌ Invalid change password request: %v", err)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Invalid request body",
+		})
+		return
+	}
 
-// 	log.Printf("🔐 Password change request for user: %s", userID)
+	log.Printf("🔐 Password change request for user: %s", userID)
 
-// 	if err := ac.authUsecase.ChangePassword(c.Request.Context(), userID.(string), request.OldPassword, request.NewPassword); err != nil {
-// 		log.Printf("❌ Password change failed for user %s: %v", userID, err)
-// 		c.JSON(http.StatusBadRequest, gin.H{
-// 			"error": err.Error(),
-// 		})
-// 		return
-// 	}
+	if err := ac.authUsecase.ChangePassword(c.Request.Context(), userID.(string), request.OldPassword, request.NewPassword); err != nil {
+		log.Printf("❌ Password change failed for user %s: %v", userID, err)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
 
-// 	log.Printf("✅ Password changed successfully for user: %s", userID)
-// 	c.JSON(http.StatusOK, gin.H{
-// 		"message": "Password changed successfully",
-// 	})
-// }
+	log.Printf("✅ Password changed successfully for user: %s", userID)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Password changed successfully",
+	})
+}

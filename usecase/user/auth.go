@@ -270,49 +270,34 @@ func getenvDefault(key, def string) string {
 }
 
 // ChangePassword changes a user's password
-// func (uc *AuthUsecase) ChangePassword(ctx context.Context, userID, oldPassword, newPassword string) error {
-// 	log.Printf("🔐 Password change requested for user: %s", userID)
+func (uc *AuthUsecase) ChangePassword(ctx context.Context, userID, oldPassword, newPassword string) error {
+	log.Printf("🔐 Password change requested for user: %s", userID)
 
-// 	// Find user by ID
-// 	user, err := uc.userRepo.FindByID(ctx, userID)
-// 	if err != nil {
-// 		log.Printf("❌ Error finding user by ID: %v", err)
-// 		return errors.New("user not found")
-// 	}
+	user, err := uc.userRepo.FindByID(ctx, userID)
+	if err != nil || user == nil {
+		return AppError.ErrUserNotFound
+	}
 
-// 	if user == nil {
-// 		log.Printf("❌ User not found for ID: %s", userID)
-// 		return errors.New("user not found")
-// 	}
+	// Verify old password
+	isValid, verr := hash.VerifyPassword(oldPassword, user.PasswordHash)
+	if verr != nil {
+		return verr
+	}
+	if !isValid {
+		return AppError.ErrIncorrectPassword
+	}
 
-// 	// Verify old password
-// 	isValid, err := uc.passwordService.VerifyPassword(oldPassword, user.Password)
-// 	if err != nil {
-// 		log.Printf("❌ Error verifying old password: %v", err)
-// 		return errors.New("authentication failed")
-// 	}
-
-// 	if !isValid {
-// 		log.Printf("❌ Invalid password for user: %s", userID)
-// 		return errors.New("invalid old password")
-// 	}
-
-// 	// Hash new password
-// 	hashedPassword, err := uc.passwordService.HashPassword(newPassword)
-// 	if err != nil {
-// 		log.Printf("❌ Error hashing new password: %v", err)
-// 		return errors.New("failed to process new password")
-// 	}
-
-// 	// Update user password
-// 	user.Password = hashedPassword
-// 	user.UpdatedAt = time.Now()
-
-// 	if err := uc.userRepo.UpdateUser(ctx, *user); err != nil {
-// 		log.Printf("❌ Failed to update password: %v", err)
-// 		return errors.New("failed to update password")
-// 	}
-
-// 	log.Printf("✅ Password changed successfully for user: %s", userID)
-// 	return nil
-// }
+	// Hash new password and save
+	hashed, herr := hash.HashPassword(newPassword)
+	if herr != nil {
+		return herr
+	}
+	user.PasswordHash = hashed
+	user.UpdatedAt = time.Now()
+	if err := uc.userRepo.UpdateUser(ctx, user); err != nil {
+		log.Printf("❌ Failed to update password: %v", err)
+		return err
+	}
+	log.Printf("✅ Password changed successfully for user: %s", userID)
+	return nil
+}

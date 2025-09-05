@@ -16,6 +16,7 @@ type IUserRepository interface {
 	SoftDeleteUser(ctx context.Context, userID string) error
 	// user status
 	GetUserStatus(ctx context.Context, userID string) (*entities.UserStatus, error)
+	UpdateUserStatusFields(ctx context.Context, userID string, fields map[string]interface{}) error
 	// CreateUserStatus(ctx context.Context, userStatus *entities.UserStatus) error
 
 	// Activate user by email (sets status.isActive=true)
