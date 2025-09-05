@@ -21,6 +21,12 @@ func SetupRouter(
 
 	r := gin.Default()
 
+	// Docs: serve Swagger UI and the OpenAPI YAML
+	docs := controllers.NewDocsController()
+	r.GET("/api/v1/docs", docs.SwaggerUI)
+	// Static serve the openapi.yaml from docs folder
+	r.StaticFile("/api/v1/docs/openapi.yaml", "docs/openapi.yaml")
+
 	// API version 1
 	v1 := r.Group("/api/v1")
 	{
