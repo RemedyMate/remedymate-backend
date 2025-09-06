@@ -59,6 +59,8 @@ func SetupRouter(
 			// 		users.DELETE("/profile", userController.DeleteProfile)
 			// 	}
 		}
+
+		// Admin routes (auth required; all users are admins per requirement)
 		admin := v1.Group("/admin")
 		admin.Use(middleware.AuthMiddleware())
 		{
@@ -80,9 +82,6 @@ func SetupRouter(
 		conversation.GET("/offline-topics", conversationController.GetOfflineHealthTopics)
 	}
 
-	// Admin routes (auth required; all users are admins per requirement)
-	admin := v1.Group("/admin")
-	admin.Use(middleware.AuthMiddleware())
 	{
 		// Redflags
 		admin.GET("/redflags", adminRedFlagController.List)
