@@ -1,0 +1,1479 @@
+openapi: 3.0.0
+info:
+    title: RemedyMate Backend API
+    version: 1.0.0
+    description: |
+        Spec-first OpenAPI v3 definition for RemedyMate.
+        - Auth: registration, login, refresh, verify, activate, logout, change password
+        - Users: profile read/update/delete
+        - Conversation: start/continue unified endpoint and offline topics
+        - Remedy: triage + map + compose
+        - Admin: topics, red flags, feedback management
+
+servers:
+    - url: http://localhost:8080
+      description: Local dev server
+    - url: https://{host}
+      description: Deployed server
+      variables:
+          host:
+              default: api.example.com
+
+tags:
+    - name: Auth
+      description: Authentication and account lifecycle
+    - name: Users
+      description: User profile management
+    - name: Conversation
+      description: Symptom conversation flow (public)
+    - name: Remedy
+      description: Symptom triage, topic mapping, and content composition
+    - name: Topics
+      description: Admin topic management
+    - name: Admin/RedFlags
+      description: Admin red flag rules management
+    - name: Admin/Feedback
+      description: Admin feedback management
+    - name: Feedback
+      description: Public feedback endpoint
+
+components:
+    securitySchemes:
+        bearerAuth:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
+
+    responses:
+        Unauthorized:
+            description: Unauthorized
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/ErrorResponse"
+        Forbidden:
+            description: Forbidden
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/ErrorResponse"
+        NotFound:
+            description: Resource not found
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/ErrorResponse"
+
+    schemas:
+        ErrorResponse:
+            type: object
+            properties:
+                error:
+                    type: string
+                code:
+                    type: string
+                details:
+                    type: string
+
+        # ===== Auth DTOs =====
+        PersonalInfoDTO:
+            type: object
+            properties:
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                age:
+                    type: integer
+                    format: int32
+                gender:
+                    type: string
+                profilePictureUrl:
+                    type: string
+                    format: uri
+            additionalProperties: false
+
+        RegisterDTO:
+            type: object
+            required: [username, email, password, role]
+            properties:
+                username:
+                    type: string
+                email:
+                    type: string
+                    format: email
+                password:
+                    type: string
+                    format: password
+                    minLength: 6
+                role:
+                    type: string
+                    enum: [admin, superadmin]
+                personalInfo:
+                    $ref: "#/components/schemas/PersonalInfoDTO"
+
+        RegisterResponseDTO:
+            type: object
+            properties:
+                message:
+                    type: string
+                username:
+                    type: string
+                password:
+                    type: string
+            example:
+                message: User registered successfully
+                username: rm_4f9a2c
+                password: A8s!keP2
+
+        LoginDTO:
+            type: object
+            required: [email, password]
+            properties:
+                email:
+                    type: string
+                    format: email
+                password:
+                    type: string
+                    format: password
+
+        LoginResponseDTO:
+            type: object
+            properties:
+                access_token:
+                    type: string
+                refresh_token:
+                    type: string
+                user_id:
+                    type: string
+                username:
+                    type: string
+                email:
+                    type: string
+                    format: email
+                role:
+                    type: string
+                    enum: [admin, superadmin]
+            example:
+                access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                refresh_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                user_id: 64f2c7f8a1b2c3d4e5f6a7b8
+                username: johndoe
+                email: john@example.com
+                role: admin
+
+        RefreshDTO:
+            type: object
+            required: [refresh_token]
+            properties:
+                refresh_token:
+                    type: string
+
+        RefreshResponseDTO:
+            type: object
+            properties:
+                access_token:
+                    type: string
+                refresh_token:
+                    type: string
+            example:
+                access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                refresh_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+        ActivateDTO:
+            type: object
+            required: [email]
+            properties:
+                email:
+                    type: string
+                    format: email
+
+        ActivateResponseDTO:
+            type: object
+            properties:
+                message:
+                    type: string
+            example:
+                message: Account activated
+
+        ChangePasswordRequest:
+            type: object
+            required: [old_password, new_password]
+            properties:
+                old_password:
+                    type: string
+                new_password:
+                    type: string
+                    minLength: 6
+            example:
+                old_password: OldP@ssw0rd
+                new_password: NewP@ssw0rd123
+
+        # ===== User Profile DTOs =====
+        ProfileResponseDTO:
+            type: object
+            properties:
+                id:
+                    type: string
+                username:
+                    type: string
+                email:
+                    type: string
+                    format: email
+                personalInfo:
+                    $ref: "#/components/schemas/PersonalInfoDTO"
+                isVerified:
+                    type: boolean
+                isProfileFull:
+                    type: boolean
+                isActive:
+                    type: boolean
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+                lastLogin:
+                    type: string
+                    format: date-time
+
+        UpdateProfileDTO:
+            type: object
+            properties:
+                username:
+                    type: string
+                personalInfo:
+                    $ref: "#/components/schemas/PersonalInfoDTO"
+
+        DeleteProfileDTO:
+            type: object
+            required: [password]
+            properties:
+                password:
+                    type: string
+                reason:
+                    type: string
+
+        # ===== Conversation DTOs =====
+        Question:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                text:
+                    type: string
+                type:
+                    type: string
+                    description: duration | location | severity | history | triggers
+                required:
+                    type: boolean
+
+        ConversationRequest:
+            type: object
+            properties:
+                conversation_id:
+                    type: string
+                    description: Required for continuing, optional for starting
+                symptom:
+                    type: string
+                language:
+                    type: string
+                    enum: [en, am]
+                answer:
+                    type: string
+                user_id:
+                    type: string
+
+        HealthReport:
+            type: object
+            properties:
+                symptom:
+                    type: string
+                duration:
+                    type: string
+                location:
+                    type: string
+                severity:
+                    type: string
+                associated_symptoms:
+                    type: array
+                    items:
+                        type: string
+                medical_history:
+                    type: string
+                triggers:
+                    type: string
+                possible_conditions:
+                    type: array
+                    items:
+                        type: string
+                recommendations:
+                    type: array
+                    items:
+                        type: string
+                urgency_level:
+                    type: string
+                generated_at:
+                    type: string
+                    format: date-time
+                remedy:
+                    $ref: "#/components/schemas/Remedy"
+
+        ConversationResponse:
+            type: object
+            properties:
+                conversation_id:
+                    type: string
+                heading:
+                    type: string
+                subheading:
+                    type: string
+                question:
+                    $ref: "#/components/schemas/Question"
+                message:
+                    type: string
+                is_complete:
+                    type: boolean
+                current_step:
+                    type: integer
+                total_steps:
+                    type: integer
+                report:
+                    $ref: "#/components/schemas/HealthReport"
+                remedy:
+                    $ref: "#/components/schemas/RemedyResponse"
+                is_new_conversation:
+                    type: boolean
+
+        # ===== Remedy DTOs =====
+        TriageLevel:
+            type: string
+            enum: [GREEN, YELLOW, RED]
+
+        TriageResponse:
+            type: object
+            properties:
+                level:
+                    $ref: "#/components/schemas/TriageLevel"
+                red_flags:
+                    type: array
+                    items:
+                        type: string
+                message:
+                    type: string
+                session_id:
+                    type: string
+
+        OTCCategory:
+            type: object
+            properties:
+                category_name:
+                    type: string
+                safety_note:
+                    type: string
+
+        GuidanceCard:
+            type: object
+            properties:
+                topic_key:
+                    type: string
+                language:
+                    type: string
+                    enum: [en, am]
+                self_care:
+                    type: array
+                    items:
+                        type: string
+                otc_categories:
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/OTCCategory"
+                seek_care_if:
+                    type: array
+                    items:
+                        type: string
+                disclaimer:
+                    type: string
+                is_offline:
+                    type: boolean
+
+        RemedyRequest:
+            type: object
+            required: [text, language]
+            properties:
+                text:
+                    type: string
+                    minLength: 3
+                    maxLength: 500
+                language:
+                    type: string
+                    enum: [en, am]
+
+        Remedy:
+            type: object
+            properties:
+                triage:
+                    $ref: "#/components/schemas/TriageResponse"
+                self_care:
+                    type: array
+                    items:
+                        type: string
+                otc_categories:
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/OTCCategory"
+                seek_care_if:
+                    type: array
+                    items:
+                        type: string
+                disclaimer:
+                    type: string
+                topic_key:
+                    type: string
+                language:
+                    type: string
+                    enum: [en, am]
+
+        RemedyResponse:
+            type: object
+            properties:
+                session_id:
+                    type: string
+                triage:
+                    $ref: "#/components/schemas/TriageResponse"
+                guidance_card:
+                    $ref: "#/components/schemas/GuidanceCard"
+
+        # ===== Topics =====
+        LocalizedGuidanceContent:
+            type: object
+            properties:
+                self_care:
+                    type: array
+                    items:
+                        type: string
+                otc_categories:
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/OTCCategory"
+                seek_care_if:
+                    type: array
+                    items:
+                        type: string
+                disclaimer:
+                    type: string
+
+        TopicStatus:
+            type: string
+            enum: [active, deleted]
+
+        Topic:
+            type: object
+            properties:
+                id:
+                    type: string
+                topic_key:
+                    type: string
+                name_en:
+                    type: string
+                name_am:
+                    type: string
+                description_en:
+                    type: string
+                description_am:
+                    type: string
+                status:
+                    $ref: "#/components/schemas/TopicStatus"
+                translations:
+                    type: object
+                    additionalProperties:
+                        $ref: "#/components/schemas/LocalizedGuidanceContent"
+                version:
+                    type: integer
+                revision_history:
+                    type: array
+                    items:
+                        type: object
+                created_at:
+                    type: string
+                    format: date-time
+                updated_at:
+                    type: string
+                    format: date-time
+                created_by:
+                    type: string
+                updated_by:
+                    type: string
+
+        TopicCreateRequest:
+            type: object
+            required:
+                [topic_key, name_en, name_am, is_offline_cachable, translations]
+            properties:
+                topic_key:
+                    type: string
+                name_en:
+                    type: string
+                name_am:
+                    type: string
+                description_en:
+                    type: string
+                description_am:
+                    type: string
+                is_offline_cachable:
+                    type: boolean
+                translations:
+                    type: object
+                    additionalProperties:
+                        $ref: "#/components/schemas/LocalizedGuidanceContent"
+
+        TopicUpdateRequest:
+            type: object
+            properties:
+                name_en:
+                    type: string
+                name_am:
+                    type: string
+                description_en:
+                    type: string
+                description_am:
+                    type: string
+                is_offline_cachable:
+                    type: boolean
+                status:
+                    $ref: "#/components/schemas/TopicStatus"
+                translations:
+                    type: object
+                    additionalProperties:
+                        $ref: "#/components/schemas/LocalizedGuidanceContent"
+
+        PaginatedTopicsResult:
+            type: object
+            properties:
+                topics:
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/Topic"
+                total_count:
+                    type: integer
+                    format: int64
+                page:
+                    type: integer
+                limit:
+                    type: integer
+
+        # ===== Public Feedback =====
+        CreateFeedbackDTO:
+            type: object
+            required: [sessionId, topicKey, language, rating]
+            properties:
+                sessionId:
+                    type: string
+                topicKey:
+                    type: string
+                language:
+                    type: string
+                    enum: [en, am]
+                rating:
+                    type: integer
+                    minimum: 1
+                    maximum: 5
+                message:
+                    type: string
+
+        Feedback:
+            type: object
+            properties:
+                id:
+                    type: string
+                sessionId:
+                    type: string
+                topicKey:
+                    type: string
+                language:
+                    type: string
+                    enum: [en, am]
+                rating:
+                    type: integer
+                message:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+
+        AdminFeedbackListResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/Feedback"
+                total:
+                    type: integer
+
+        # ===== Admin RedFlags =====
+        RedFlag:
+            type: object
+            properties:
+                id:
+                    type: string
+                keywords:
+                    type: array
+                    items:
+                        type: string
+                language:
+                    type: string
+                    enum: [en, am]
+                level:
+                    $ref: "#/components/schemas/TriageLevel"
+                description:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+
+        CreateRedFlagDTO:
+            type: object
+            required: [keywords, language, level, description]
+            properties:
+                keywords:
+                    type: array
+                    minItems: 1
+                    items:
+                        type: string
+                language:
+                    type: string
+                    enum: [en, am]
+                level:
+                    type: string
+                    enum: [RED, YELLOW]
+                description:
+                    type: string
+                    minLength: 3
+
+        UpdateRedFlagDTO:
+            type: object
+            properties:
+                keywords:
+                    type: array
+                    minItems: 1
+                    items:
+                        type: string
+                language:
+                    type: string
+                    enum: [en, am]
+                level:
+                    type: string
+                    enum: [RED, YELLOW]
+                description:
+                    type: string
+
+        # ===== Content Health Topics (public offline) =====
+        HealthTopic:
+            type: object
+            properties:
+                _id:
+                    type: string
+                topic_key:
+                    type: string
+                name_en:
+                    type: string
+                name_am:
+                    type: string
+                description_en:
+                    type: string
+                description_am:
+                    type: string
+                status:
+                    type: string
+                translations:
+                    type: object
+                    properties:
+                        en:
+                            type: object
+                            properties:
+                                self_care:
+                                    type: array
+                                    items:
+                                        type: string
+                                otc_categories:
+                                    type: array
+                                    items:
+                                        $ref: "#/components/schemas/OTCCategory"
+                                seek_care_if:
+                                    type: array
+                                    items:
+                                        type: string
+                                disclaimer:
+                                    type: string
+                        am:
+                            type: object
+                            properties:
+                                self_care:
+                                    type: array
+                                    items:
+                                        type: string
+                                otc_categories:
+                                    type: array
+                                    items:
+                                        $ref: "#/components/schemas/OTCCategory"
+                                seek_care_if:
+                                    type: array
+                                    items:
+                                        type: string
+                                disclaimer:
+                                    type: string
+                version:
+                    type: integer
+                created_at:
+                    type: string
+                    format: date-time
+                updated_at:
+                    type: string
+                    format: date-time
+                created_by:
+                    type: string
+                updated_by:
+                    type: string
+
+paths:
+    /api/v1/register:
+        post:
+            tags: [Auth]
+            summary: Register a new user (admin-only)
+            operationId: authRegisterAdmin
+            description: Creates a new user account and sends an activation email with a verification link. NOTE; role provided is currently ignored by the server and defaults to admin. but restricted to superadmin via JWT.
+            security:
+                - bearerAuth: []
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/RegisterDTO"
+                        examples:
+                            sample:
+                                value:
+                                    username: admin2
+                                    email: admin2@example.com
+                                    password: S3cret!
+                                    role: admin
+            responses:
+                "201":
+                    description: Created
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/RegisterResponseDTO"
+                "400":
+                    description: Bad Request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                            examples:
+                                invalid_body:
+                                    value:
+                                        error: "Invalid request body"
+                                user_exists:
+                                    value:
+                                        error: "User with this email already exists"
+                                validation_error:
+                                    value:
+                                        error: "Key: 'RegisterDTO.Email' Error:Field validation for 'Email' failed on the 'required' tag"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+                "403": { $ref: "#/components/responses/Forbidden" }
+
+    /api/v1/auth/login:
+        post:
+            tags: [Auth]
+            summary: Login
+            operationId: authLogin
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/LoginDTO"
+                        examples:
+                            sample:
+                                value:
+                                    email: john@example.com
+                                    password: MyS3cret!
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/LoginResponseDTO"
+                "400":
+                    description: Bad Request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                            examples:
+                                invalid_body:
+                                    value:
+                                        error: "Invalid request body"
+                                validation_error:
+                                    value:
+                                        error: "Key: 'LoginDTO.Email' Error:Field validation for 'Email' failed on the 'required' tag"
+                "401":
+                    description: Unauthorized
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: string
+                            example:
+                                error: "invalid credentials"
+
+    /api/v1/auth/refresh:
+        post:
+            tags: [Auth]
+            summary: Refresh tokens
+            operationId: authRefresh
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/RefreshDTO"
+                        examples:
+                            sample:
+                                value:
+                                    refresh_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/RefreshResponseDTO"
+                "400":
+                    description: Bad Request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                            examples:
+                                invalid_body:
+                                    value:
+                                        error: "Invalid request body"
+                                invalid_token:
+                                    value:
+                                        error: "Invalid refresh token"
+
+    /api/v1/auth/activate:
+        post:
+            tags: [Auth]
+            summary: Activate account by email
+            operationId: authActivate
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ActivateDTO"
+                        examples:
+                            sample:
+                                value:
+                                    email: john@example.com
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ActivateResponseDTO"
+                            examples:
+                                success:
+                                    value:
+                                        message: Account activated
+                "400":
+                    description: Bad Request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                            examples:
+                                invalid_body:
+                                    value:
+                                        error: "Invalid request body"
+                                not_found:
+                                    value:
+                                        error: "User not found"
+                                invalid_request:
+                                    value:
+                                        error: "Invalid activation request"
+
+    /api/v1/auth/verify:
+        get:
+            tags: [Auth]
+            summary: Verify account via token
+            operationId: authVerify
+            parameters:
+                - in: query
+                  name: token
+                  schema:
+                      type: string
+                  required: true
+                  description: Verification token sent by email
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    message:
+                                        type: string
+                                example:
+                                    message: Account verified
+                "400":
+                    description: Bad Request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                            examples:
+                                missing_token:
+                                    value:
+                                        error: "token is required"
+                                invalid_token:
+                                    value:
+                                        error: "Invalid or expired token"
+
+    /api/v1/auth/logout:
+        post:
+            tags: [Auth]
+            summary: Logout current user
+            operationId: authLogout
+            security:
+                - bearerAuth: []
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    message:
+                                        type: string
+                            examples:
+                                success:
+                                    value:
+                                        message: Logout successful
+                "401": { $ref: "#/components/responses/Unauthorized" }
+                "500":
+                    description: Internal Server Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                            example:
+                                error: "Logout failed"
+
+    /api/v1/auth/change-password:
+        post:
+            tags: [Auth]
+            summary: Change password
+            operationId: authChangePassword
+            security:
+                - bearerAuth: []
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ChangePasswordRequest"
+                        examples:
+                            sample:
+                                value:
+                                    old_password: OldP@ssw0rd
+                                    new_password: NewP@ssw0rd123
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    message:
+                                        type: string
+                            examples:
+                                success:
+                                    value:
+                                        message: Password changed successfully
+                "400":
+                    description: Bad Request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                            examples:
+                                invalid_body:
+                                    value:
+                                        error: "Invalid request body"
+                                incorrect_password:
+                                    value:
+                                        error: "Incorrect old password"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+
+    /api/v1/users/profile:
+        get:
+            tags: [Users]
+            summary: Get current user's profile
+            security:
+                - bearerAuth: []
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    message:
+                                        type: string
+                                    profile:
+                                        $ref: "#/components/schemas/ProfileResponseDTO"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+        put:
+            tags: [Users]
+            summary: Update current user's profile
+            security:
+                - bearerAuth: []
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/UpdateProfileDTO"
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    message:
+                                        type: string
+                                    profile:
+                                        $ref: "#/components/schemas/ProfileResponseDTO"
+                "400":
+                    description: Bad Request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+        delete:
+            tags: [Users]
+            summary: Delete current user's profile (soft delete)
+            description: Requires password in the body.
+            security:
+                - bearerAuth: []
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/DeleteProfileDTO"
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    message:
+                                        type: string
+                "400":
+                    description: Bad Request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+
+    /api/v1/conversation:
+        post:
+            tags: [Conversation]
+            summary: Start or continue a conversation
+            description: |
+                Unified endpoint. Start by omitting conversation_id and providing symptom + language. Continue by sending conversation_id + answer.
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ConversationRequest"
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ConversationResponse"
+                "400":
+                    description: Bad Request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                "404": { $ref: "#/components/responses/NotFound" }
+
+    /api/v1/conversation/offline-topics:
+        get:
+            tags: [Conversation]
+            summary: Get offline health topics
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/HealthTopic"
+
+    /api/v1/remedy:
+        post:
+            tags: [Remedy]
+            summary: Get remedy from symptom input
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/RemedyRequest"
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/RemedyResponse"
+                "400":
+                    description: Bad Request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /api/v1/admin/topics:
+        get:
+            tags: [Topics]
+            summary: List topics (paginated)
+            security:
+                - bearerAuth: []
+            parameters:
+                - in: query
+                  name: page
+                  schema: { type: integer, default: 1 }
+                - in: query
+                  name: limit
+                  schema: { type: integer, default: 20 }
+                - in: query
+                  name: search
+                  schema: { type: string }
+                - in: query
+                  name: sort_by
+                  schema: { type: string, default: name_en }
+                - in: query
+                  name: sort_order
+                  schema: { type: string, default: asc }
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/PaginatedTopicsResult"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+
+    /api/v1/admin/topic:
+        post:
+            tags: [Topics]
+            summary: Create topic
+            security:
+                - bearerAuth: []
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/TopicCreateRequest"
+            responses:
+                "201":
+                    description: Created
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Topic"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+
+    /api/v1/admin/topics/{topic_key}:
+        delete:
+            tags: [Topics]
+            summary: Delete (soft) topic by key
+            security:
+                - bearerAuth: []
+            parameters:
+                - in: path
+                  name: topic_key
+                  required: true
+                  schema: { type: string }
+            responses:
+                "204":
+                    description: No Content
+                "401": { $ref: "#/components/responses/Unauthorized" }
+                "404": { $ref: "#/components/responses/NotFound" }
+        put:
+            tags: [Topics]
+            summary: Update topic by key
+            security:
+                - bearerAuth: []
+            parameters:
+                - in: path
+                  name: topic_key
+                  required: true
+                  schema:
+                      type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/TopicUpdateRequest"
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Topic"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+                "404": { $ref: "#/components/responses/NotFound" }
+
+    /api/v1/admin/topic/{topic_key}:
+        get:
+            tags: [Topics]
+            summary: Get topic by key
+            security:
+                - bearerAuth: []
+            parameters:
+                - in: path
+                  name: topic_key
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Topic"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+                "404": { $ref: "#/components/responses/NotFound" }
+
+    /api/v1/feedbacks:
+        post:
+            tags: [Feedback]
+            summary: Create public feedback
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/CreateFeedbackDTO"
+            responses:
+                "201":
+                    description: Created
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Feedback"
+                "400":
+                    description: Bad Request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+
+    /api/v1/admin/feedbacks:
+        get:
+            tags: [Admin/Feedback]
+            summary: List feedbacks (admin)
+            security:
+                - bearerAuth: []
+            parameters:
+                - in: query
+                  name: limit
+                  schema: { type: integer, default: 20 }
+                - in: query
+                  name: offset
+                  schema: { type: integer, default: 0 }
+                - in: query
+                  name: language
+                  schema: { type: string }
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/AdminFeedbackListResponse"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+
+    /api/v1/admin/feedbacks/{id}:
+        get:
+            tags: [Admin/Feedback]
+            summary: Get feedback by id (admin)
+            security:
+                - bearerAuth: []
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema: { type: string }
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Feedback"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+                "404": { $ref: "#/components/responses/NotFound" }
+        delete:
+            tags: [Admin/Feedback]
+            summary: Delete feedback by id (admin)
+            security:
+                - bearerAuth: []
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema: { type: string }
+            responses:
+                "204":
+                    description: No Content
+                "401": { $ref: "#/components/responses/Unauthorized" }
+                "404": { $ref: "#/components/responses/NotFound" }
+
+    /api/v1/admin/redflags:
+        get:
+            tags: [Admin/RedFlags]
+            summary: List red flag rules
+            security:
+                - bearerAuth: []
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: "#/components/schemas/RedFlag"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+        post:
+            tags: [Admin/RedFlags]
+            summary: Create red flag rule
+            security:
+                - bearerAuth: []
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/CreateRedFlagDTO"
+            responses:
+                "201":
+                    description: Created
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/RedFlag"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+
+    /api/v1/admin/redflags/{id}:
+        get:
+            tags: [Admin/RedFlags]
+            summary: Get red flag by id
+            security:
+                - bearerAuth: []
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema: { type: string }
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/RedFlag"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+                "404": { $ref: "#/components/responses/NotFound" }
+        put:
+            tags: [Admin/RedFlags]
+            summary: Update red flag by id
+            security:
+                - bearerAuth: []
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema: { type: string }
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/UpdateRedFlagDTO"
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/RedFlag"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+                "404": { $ref: "#/components/responses/NotFound" }
+        delete:
+            tags: [Admin/RedFlags]
+            summary: Delete red flag by id
+            security:
+                - bearerAuth: []
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema: { type: string }
+            responses:
+                "204":
+                    description: No Content
+                "401": { $ref: "#/components/responses/Unauthorized" }
+                "404": { $ref: "#/components/responses/NotFound" }

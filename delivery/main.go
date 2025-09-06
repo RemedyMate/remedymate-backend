@@ -62,9 +62,10 @@ func main() {
 
 	// Initialize usecases
 	authUsecase := user.NewAuthUsecase(userRepo, tokenRepo, mailService, activationRepo)
+	userUsecase := user.NewUserUsecase(userRepo)
+
 	publicFeedbackUsecase := usecase.NewPublicFeedbackUsecase(feedbackRepo)
 	topicUsecase := usecase.NewTopicUsecase(topicRepo)
-
 
 	// Initialize RemedyMate services
 	contentService := content.NewContentService("./data")
@@ -107,9 +108,10 @@ func main() {
 
 	// Initialize controllers
 	authController := controllers.NewAuthController(authUsecase)
+	userController := controllers.NewUserController(userUsecase)
 	remedyMateController := controllers.NewRemedyMateController(remedyMateUsecase)
 	conversationController := controllers.NewConversationController(conversationUsecase)
-  	topicController := controllers.NewTopicController(topicUsecase)
+	topicController := controllers.NewTopicController(topicUsecase)
 	adminRedFlagController := controllers.NewAdminRedFlagController(adminRedFlagUsecase)
 	adminFeedbackController := controllers.NewAdminFeedbackController(adminFeedbackUsecase)
 	feedbackPublicController := controllers.NewFeedbackPublicController(publicFeedbackUsecase)
@@ -117,10 +119,10 @@ func main() {
 	// Setup router
 	r := routers.SetupRouter(
 		authController,
+		userController,
 		remedyMateController,
 		conversationController,
-    	topicController,
-
+    topicController,
 		adminRedFlagController,
 		adminFeedbackController,
 		feedbackPublicController,

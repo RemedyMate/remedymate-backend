@@ -33,7 +33,7 @@ func NewUserRepository() interfaces.IUserRepository {
 	}
 
 	// Ensure no incorrect index exists on users collection for userId
-  // TODO: Check the use of this code
+	// TODO: Check the use of this code
 	ctx := context.Background()
 	cursor, err := userColl.Indexes().List(ctx)
 	if err == nil {
@@ -107,6 +107,15 @@ func (r *UserRepository) FindByEmail(ctx context.Context, email string) (*entiti
 	return &user, nil
 }
 
+func (r *UserRepository) FindByUsername(ctx context.Context, username string) (*entities.User, error) {
+	var user entities.User
+	err := r.UserCollection.FindOne(ctx, bson.M{"username": username}).Decode(&user)
+	if err != nil {
+		return nil, AppError.ErrUserNotFound
+	}
+	return &user, nil
+}
+
 // CheckByRole checks if any user exists with the specified role
 func (r *UserRepository) CheckByRole(ctx context.Context, role string) (*bool, error) {
 	count, err := r.UserCollection.CountDocuments(ctx, bson.M{"role": role})
@@ -164,6 +173,17 @@ func (r *UserRepository) CreateUserStatus(ctx context.Context, userStatus *entit
 	_, err := r.UserStatusCollection.InsertOne(ctx, userStatus)
 	if err != nil {
 		log.Printf("Error inserting user status: %v", err)
+		return AppError.ErrInternalServer
+	}
+	return nil
+}
+
+// UpdateUserStatusFields updates specific fields in user_status for a given userId
+func (r *UserRepository) UpdateUserStatusFields(ctx context.Context, userID string, fields map[string]interface{}) error {
+	filter := bson.M{"userId": userID}
+	update := bson.M{"$set": fields}
+	_, err := r.UserStatusCollection.UpdateOne(ctx, filter, update)
+	if err != nil {
 		return AppError.ErrInternalServer
 	}
 	return nil

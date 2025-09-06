@@ -11,6 +11,7 @@ import (
 
 func SetupRouter(
 	authController *controllers.AuthController,
+	userController *controllers.UserController,
 	remedyMateController *controllers.RemedyMateController,
 	conversationController *controllers.ConversationController,
 	topicController *controllers.TopicController,
@@ -19,6 +20,12 @@ func SetupRouter(
 	feedbackPublicController *controllers.FeedbackPublicController) *gin.Engine {
 
 	r := gin.Default()
+
+	// Docs: serve Swagger UI and the OpenAPI YAML
+	docs := controllers.NewDocsController()
+	r.GET("/api/v1/docs", docs.SwaggerUI)
+	// Static serve the openapi.yaml from docs folder
+	r.StaticFile("/api/v1/docs/openapi.yaml", "docs/openapi.yaml")
 
 	// API version 1
 	v1 := r.Group("/api/v1")
@@ -30,7 +37,6 @@ func SetupRouter(
 		// Authentication routes
 		auth := v1.Group("/auth")
 		{
-			auth.POST("/register", authController.Register)
 			auth.POST("/login", authController.Login)
 			auth.POST("/refresh", authController.Refresh)
 			auth.POST("/activate", authController.Activate)
@@ -41,6 +47,7 @@ func SetupRouter(
 			protected.Use(middleware.AuthMiddleware())
 			{
 				protected.POST("/logout", authController.Logout)
+				protected.POST("/change-password", authController.ChangePassword)
 			}
 		}
 
@@ -50,14 +57,13 @@ func SetupRouter(
 		{
 			// superadmin routes
 			protectedAPI.POST("/register", middleware.SuperAdminMiddleware(), authController.Register)
-			// 	// User profile routes
-			// 	users := protectedAPI.Group("/users")
-			// 	{
-			// 		users.GET("/profile", userController.GetProfile)
-			// 		users.PUT("/profile", userController.UpdateProfile)
-			// 		users.PATCH("/profile", userController.EditProfile)
-			// 		users.DELETE("/profile", userController.DeleteProfile)
-			// 	}
+			// User profile routes
+			users := protectedAPI.Group("/users")
+			{
+				users.GET("/profile", userController.GetProfile)
+				users.PUT("/profile", userController.UpdateProfile)
+				users.DELETE("/profile", userController.DeleteProfile)
+			}
 		}
 
 		// Admin routes (auth required; all users are admins per requirement)
