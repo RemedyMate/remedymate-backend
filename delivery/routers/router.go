@@ -59,17 +59,17 @@ func SetupRouter(
 			// 		users.DELETE("/profile", userController.DeleteProfile)
 			// 	}
 		}
+	}
 
-		// Admin routes (auth required; all users are admins per requirement)
-		admin := v1.Group("/admin")
-		admin.Use(middleware.AuthMiddleware())
-		{
-			admin.GET("/topics", topicController.ListAllTopicsHandler)
-			admin.POST("/topic", topicController.CreateTopicHandler)
-			admin.PUT("/topics/:topic_key", topicController.UpdateTopicHandler)
-			admin.DELETE("/topics/:topic_key", topicController.DeleteTopicHandler)
-			admin.GET("/topic/:topic_key", topicController.GetTopicHandler)
-		}
+	// Admin routes (auth required; all users are admins per requirement)
+	admin := v1.Group("/admin")
+	admin.Use(middleware.AuthMiddleware())
+	{
+		admin.GET("/topics", topicController.ListAllTopicsHandler)
+		admin.POST("/topic", topicController.CreateTopicHandler)
+		admin.PUT("/topics/:topic_key", topicController.UpdateTopicHandler)
+		admin.DELETE("/topics/:topic_key", topicController.DeleteTopicHandler)
+		admin.GET("/topic/:topic_key", topicController.GetTopicHandler)
 	}
 
 	// Conversation routes (public access, no authentication required)
