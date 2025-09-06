@@ -24,3 +24,20 @@ type TopicListQueryParams struct {
 	FilterQueryParams
 	SortQueryParams
 }
+
+// PaginationMetadata contains metadata for paginated responses
+type PaginationMetadata struct {
+	Page       int   `json:"page"`        // Current page number
+	Limit      int   `json:"limit"`       // Number of items per page
+	Total      int64 `json:"total"`       // Total number of items
+	TotalPages int   `json:"total_pages"` // Total number of pages
+	HasNext    bool  `json:"has_next"`    // Whether there's a next page
+	HasPrev    bool  `json:"has_prev"`    // Whether there's a previous page
+}
+
+// PaginatedResponse represents a paginated API response
+type PaginatedResponse struct {
+	Data       interface{}        `json:"data"`
+	Pagination PaginationMetadata `json:"pagination"`
+	Message    string             `json:"message"`
+}

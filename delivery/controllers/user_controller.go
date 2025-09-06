@@ -3,6 +3,7 @@ package controllers
 import (
 	"log"
 	"net/http"
+	"strconv"
 
 	"remedymate-backend/domain/dto"
 	"remedymate-backend/domain/interfaces"
@@ -122,4 +123,56 @@ func (uc *UserController) DeleteProfile(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Profile deleted successfully",
 	})
+}
+
+// GetUserProfilesPaginated retrieves user profiles with pagination, filtering, and sorting (superadmin only)
+// GET /api/v1/admin/users/profiles/paginated
+func (uc *UserController) GetUserProfilesPaginated(c *gin.Context) {
+	log.Printf("👥 Get user profiles with pagination request")
+
+	// Parse query parameters
+	var params dto.UserProfilesQueryParams
+
+	// Parse pagination parameters
+	if pageStr := c.Query("page"); pageStr != "" {
+		if page, err := strconv.Atoi(pageStr); err == nil && page > 0 {
+			params.Page = page
+		}
+	}
+	if params.Page == 0 {
+		params.Page = 1
+	}
+
+	if limitStr := c.Query("limit"); limitStr != "" {
+		if limit, err := strconv.Atoi(limitStr); err == nil && limit > 0 {
+			params.Limit = limit
+		}
+	}
+	if params.Limit == 0 {
+		params.Limit = 10
+	}
+
+	// Parse other parameters
+	params.Search = c.Query("search")
+	params.Status = c.Query("status")
+	params.Role = c.Query("role")
+	params.SortBy = c.Query("sort_by")
+	params.Order = c.Query("order")
+
+	// Default sort order
+	if params.Order != "asc" && params.Order != "desc" {
+		params.Order = "desc"
+	}
+
+	response, err := uc.UserUsecase.GetUserProfilesWithPagination(c.Request.Context(), params)
+	if err != nil {
+		log.Printf("❌ Get user profiles with pagination failed: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	log.Printf("✅ User profiles with pagination retrieved successfully")
+	c.JSON(http.StatusOK, response)
 }

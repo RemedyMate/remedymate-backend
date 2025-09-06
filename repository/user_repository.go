@@ -6,6 +6,7 @@ import (
 	"log"
 
 	AppError "remedymate-backend/domain/AppError"
+	"remedymate-backend/domain/dto"
 	"remedymate-backend/domain/entities"
 	"remedymate-backend/domain/interfaces"
 	"remedymate-backend/infrastructure/database"
@@ -136,6 +137,101 @@ func (r *UserRepository) FindByID(ctx context.Context, userID string) (*entities
 	return &user, nil
 }
 
+// FindUsersWithPagination retrieves users with pagination, filtering, and sorting
+func (r *UserRepository) FindUsersWithPagination(ctx context.Context, params dto.UserProfilesQueryParams) ([]*entities.User, int64, error) {
+	// Build the filter
+	filter := bson.M{}
+
+	// Add search filter
+	if params.Search != "" {
+		searchPattern := bson.M{"$regex": params.Search, "$options": "i"}
+		filter["$or"] = []bson.M{
+			{"username": searchPattern},
+			{"email": searchPattern},
+			{"personalInfo.firstName": searchPattern},
+			{"personalInfo.lastName": searchPattern},
+		}
+	}
+
+	// Add role filter
+	if params.Role != "" && params.Role != "all" {
+		filter["role"] = params.Role
+	}
+
+	// Build sort options
+	sort := bson.D{}
+	sortField := "createdAt"
+	if params.SortBy != "" {
+		switch params.SortBy {
+		case "username", "email", "created_at", "last_login":
+			if params.SortBy == "created_at" {
+				sortField = "createdAt"
+			} else if params.SortBy == "last_login" {
+				sortField = "lastLogin"
+			} else {
+				sortField = params.SortBy
+			}
+		}
+	}
+
+	sortOrder := 1 // ascending
+	if params.Order == "desc" {
+		sortOrder = -1
+	}
+	sort = append(sort, bson.E{Key: sortField, Value: sortOrder})
+
+	// Set default pagination values
+	page := params.Page
+	if page < 1 {
+		page = 1
+	}
+	limit := params.Limit
+	if limit < 1 {
+		limit = 10
+	}
+	if limit > 100 { // Max limit to prevent abuse
+		limit = 100
+	}
+
+	// Calculate skip
+	skip := (page - 1) * limit
+
+	// Get total count
+	total, err := r.UserCollection.CountDocuments(ctx, filter)
+	if err != nil {
+		return nil, 0, AppError.ErrInternalServer
+	}
+
+	// Build find options
+	findOptions := options.Find()
+	findOptions.SetSort(sort)
+	findOptions.SetSkip(int64(skip))
+	findOptions.SetLimit(int64(limit))
+
+	// Execute query
+	cursor, err := r.UserCollection.Find(ctx, filter, findOptions)
+	if err != nil {
+		return nil, 0, AppError.ErrInternalServer
+	}
+	defer cursor.Close(ctx)
+
+	var users []*entities.User
+	for cursor.Next(ctx) {
+		var user entities.User
+		if err := cursor.Decode(&user); err != nil {
+			log.Printf("Error decoding user: %v", err)
+			continue
+		}
+		users = append(users, &user)
+	}
+
+	if err := cursor.Err(); err != nil {
+		return nil, 0, AppError.ErrInternalServer
+	}
+
+	return users, total, nil
+}
+
 // UpdateUser updates an existing user
 func (r *UserRepository) UpdateUser(ctx context.Context, user *entities.User) error {
 	filter := bson.M{"_id": user.ID}
@@ -167,6 +263,39 @@ func (r *UserRepository) GetUserStatus(ctx context.Context, userID string) (*ent
 		return nil, AppError.ErrUserStatusNotFound
 	}
 	return &userStatus, nil
+}
+
+// GetUserStatusesByUserIDs retrieves user statuses for specific user IDs
+func (r *UserRepository) GetUserStatusesByUserIDs(ctx context.Context, userIDs []string) ([]*entities.UserStatus, error) {
+	filter := bson.M{"userId": bson.M{"$in": userIDs}}
+
+	cursor, err := r.UserStatusCollection.Find(ctx, filter)
+	if err != nil {
+		return nil, AppError.ErrInternalServer
+	}
+	defer cursor.Close(ctx)
+
+	var userStatuses []*entities.UserStatus
+	for cursor.Next(ctx) {
+		var userStatus entities.UserStatus
+		if err := cursor.Decode(&userStatus); err != nil {
+			log.Printf("Error decoding user status: %v", err)
+			continue
+		}
+		userStatuses = append(userStatuses, &userStatus)
+	}
+
+	if err := cursor.Err(); err != nil {
+		return nil, AppError.ErrInternalServer
+	}
+
+	return userStatuses, nil
+}
+
+// GetUserStatusesWithPagination retrieves user statuses for specific user IDs (used for pagination)
+func (r *UserRepository) GetUserStatusesWithPagination(ctx context.Context, userIDs []string) ([]*entities.UserStatus, error) {
+	// This is essentially the same as GetUserStatusesByUserIDs for our use case
+	return r.GetUserStatusesByUserIDs(ctx, userIDs)
 }
 
 func (r *UserRepository) CreateUserStatus(ctx context.Context, userStatus *entities.UserStatus) error {
