@@ -36,6 +36,49 @@ func (cc *ConversationController) GetOfflineHealthTopics(c *gin.Context) {
 	c.JSON(http.StatusOK, topics)
 }
 
+// InitiateChat handles initial chat initiation/greeting
+// POST /api/v1/conversation/init
+func (cc *ConversationController) InitiateChat(c *gin.Context) {
+	var req struct {
+		Language string `json:"language" binding:"required" validate:"oneof=en am"`
+		UserID   string `json:"user_id,omitempty"`
+	}
+
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, dto.ErrorResponse{
+			Error:   "Invalid request format",
+			Details: err.Error(),
+		})
+		return
+	}
+
+	// Create a welcoming response based on language
+	var heading, subheading, message string
+	if req.Language == "am" {
+		heading = "ሰላም! እንዴት ሊረዳዎ እችላለሁ?"
+		subheading = "የጤና ሁኔታዎን ይንገሩኝ"
+		message = "የሚሰማዎትን ምልክት ወይም ችግር ይጥቀሱ፣ እና ተጨማሪ ጥያቄዎችን ጠይቄ ሊረዳዎ እሞክራለሁ።"
+	} else {
+		heading = "Hello! How can I help you today?"
+		subheading = "Tell me about your health concern"
+		message = "Please describe your symptom or health issue, and I'll ask follow-up questions to better understand your condition."
+	}
+
+	response := dto.ConversationResponse{
+		ConversationID:    "", // No conversation ID yet
+		Heading:           heading,
+		Subheading:        subheading,
+		Question:          nil, // No questions yet
+		Message:           message,
+		IsComplete:        false,
+		CurrentStep:       0,
+		TotalSteps:        0,
+		IsNewConversation: true,
+	}
+
+	c.JSON(http.StatusOK, response)
+}
+
 // HandleConversation handles both starting and continuing conversations in a single endpoint
 // POST /api/v1/conversation
 func (cc *ConversationController) HandleConversation(c *gin.Context) {
@@ -50,11 +93,37 @@ func (cc *ConversationController) HandleConversation(c *gin.Context) {
 
 	// Determine if this is a new conversation or continuing an existing one
 	if req.ConversationID == "" {
-		// Starting a new conversation
-		if req.Symptom == "" || req.Language == "" {
+		// Starting a new conversation - symptom and language are required
+		if req.Symptom == "" {
 			c.JSON(http.StatusBadRequest, dto.ErrorResponse{
-				Error:   "Missing required fields",
-				Details: "symptom and language are required for starting a new conversation",
+				Error:   "Symptom required",
+				Details: "Please describe your symptom or health concern to start the conversation. Use the /init endpoint for initial greeting.",
+			})
+			return
+		}
+
+		if req.Language == "" {
+			c.JSON(http.StatusBadRequest, dto.ErrorResponse{
+				Error:   "Language required",
+				Details: "Please specify your preferred language (en or am).",
+			})
+			return
+		}
+
+		// Validate symptom using LLM
+		isValid, feedback, err := cc.conversationUsecase.ValidateSymptom(c.Request.Context(), req.Symptom, req.Language)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, dto.ErrorResponse{
+				Error:   "Failed to validate symptom",
+				Details: err.Error(),
+			})
+			return
+		}
+
+		if !isValid {
+			c.JSON(http.StatusBadRequest, dto.ErrorResponse{
+				Error:   "Please describe your health concern",
+				Details: feedback,
 			})
 			return
 		}
@@ -221,7 +290,6 @@ func (cc *ConversationController) HandleConversation(c *gin.Context) {
 		}
 	}
 }
-
 
 // generateSessionID generates a unique session ID
 func generateSessionID() string {

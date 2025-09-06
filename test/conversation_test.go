@@ -2,6 +2,7 @@ package test
 
 import (
 	"context"
+	"strings"
 	"testing"
 
 	"remedymate-backend/domain/dto"
@@ -26,9 +27,9 @@ func TestConversationFlow(t *testing.T) {
 	// Create mock LLM client
 	mockLLM := &MockLLMClient{}
 
-	// Mock responses for question generation
+	// Mock responses for question generation - match by content instead of length
 	mockLLM.On("ClassifyTriage", mock.Anything, mock.MatchedBy(func(prompt string) bool {
-		return len(prompt) > 0 && len(prompt) < 1000 // Question generation prompts are typically shorter
+		return strings.Contains(prompt, "Generate exactly 5 targeted follow-up questions")
 	})).Return(`[
 		{"id": 1, "text": "How long have you had this headache?", "type": "duration", "required": true},
 		{"id": 2, "text": "Where is the pain located?", "type": "location", "required": true},
@@ -39,12 +40,12 @@ func TestConversationFlow(t *testing.T) {
 
 	// Mock responses for answer validation
 	mockLLM.On("ClassifyTriage", mock.Anything, mock.MatchedBy(func(prompt string) bool {
-		return len(prompt) > 0 && len(prompt) < 500 // Validation prompts are shorter
+		return strings.Contains(prompt, "Validate this answer to a medical question")
 	})).Return(`{"valid": true, "feedback": ""}`, nil)
 
 	// Mock response for health report generation
 	mockLLM.On("ClassifyTriage", mock.Anything, mock.MatchedBy(func(prompt string) bool {
-		return len(prompt) > 1000 // Report generation prompts are longer
+		return strings.Contains(prompt, "Create a structured health report")
 	})).Return(`{
 		"symptom": "Headache",
 		"duration": "3 days",
