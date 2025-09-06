@@ -37,7 +37,6 @@ func SetupRouter(
 		// Authentication routes
 		auth := v1.Group("/auth")
 		{
-			auth.POST("/register", authController.Register)
 			auth.POST("/login", authController.Login)
 			auth.POST("/refresh", authController.Refresh)
 			auth.POST("/activate", authController.Activate)
