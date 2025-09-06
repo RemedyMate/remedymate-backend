@@ -16,14 +16,12 @@ import (
 // AuthController handles authentication-related HTTP requests
 type AuthController struct {
 	authUsecase interfaces.IAuthUsecase
-	userUsecase interfaces.IUserUsecase // Added for registration
 }
 
 // NewAuthController creates a new Auth controller instance
-func NewAuthController(authUsecase interfaces.IAuthUsecase, userUsecase interfaces.IUserUsecase) *AuthController {
+func NewAuthController(authUsecase interfaces.IAuthUsecase) *AuthController {
 	return &AuthController{
 		authUsecase: authUsecase,
-		userUsecase: userUsecase,
 	}
 }
 
@@ -60,7 +58,7 @@ func (ac *AuthController) Register(c *gin.Context) {
 		LastLogin: time.Now(),
 	}
 
-	if err := ac.userUsecase.RegisterUser(context.Background(), user); err != nil {
+	if err := ac.authUsecase.Register(context.Background(), &user); err != nil {
 		HandleHTTPError(c, err)
 		return
 	}
@@ -120,6 +118,35 @@ func (ac *AuthController) Refresh(c *gin.Context) {
 
 	log.Printf("✅ Token refreshed successfully")
 	c.JSON(http.StatusOK, response)
+}
+
+// Verify handles GET /api/v1/auth/verify?token=...
+func (ac *AuthController) Verify(c *gin.Context) {
+	token := c.Query("token")
+	if token == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "token is required"})
+		return
+	}
+	if err := ac.authUsecase.VerifyAccount(c.Request.Context(), token); err != nil {
+		HandleHTTPError(c, err)
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "Account verified"})
+}
+
+// Activate activates an account using the email
+// POST /api/v1/auth/activate
+func (ac *AuthController) Activate(c *gin.Context) {
+	var req dto.ActivateDTO
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
+		return
+	}
+	if err := ac.authUsecase.Activate(c.Request.Context(), req.Email); err != nil {
+		HandleHTTPError(c, err)
+		return
+	}
+	c.JSON(http.StatusOK, dto.ActivateResponseDTO{Message: "Account activated"})
 }
 
 // Logout logs out a user
