@@ -58,6 +58,7 @@ func (ac *AuthController) Register(c *gin.Context) {
 		LastLogin: time.Now(),
 	}
 
+
 	resp, err := ac.authUsecase.Register(context.Background(), &user)
 	if err != nil {
 		HandleHTTPError(c, err)

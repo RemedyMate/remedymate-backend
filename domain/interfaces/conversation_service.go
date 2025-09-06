@@ -8,6 +8,9 @@ import (
 
 // ConversationService defines the interface for conversation management
 type ConversationService interface {
+	// ValidateSymptom validates if the provided symptom is medical and appropriate
+	ValidateSymptom(ctx context.Context, symptom, language string) (bool, string, error)
+
 	// GenerateQuestions generates follow-up questions based on the initial symptom
 	GenerateQuestions(ctx context.Context, symptom, language string) ([]entities.Question, error)
 

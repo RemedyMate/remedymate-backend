@@ -63,6 +63,7 @@ func main() {
 	// Initialize usecases
 	authUsecase := user.NewAuthUsecase(userRepo, tokenRepo, mailService, activationRepo)
 	userUsecase := user.NewUserUsecase(userRepo)
+
 	publicFeedbackUsecase := usecase.NewPublicFeedbackUsecase(feedbackRepo)
 	topicUsecase := usecase.NewTopicUsecase(topicRepo)
 
@@ -121,7 +122,7 @@ func main() {
 		userController,
 		remedyMateController,
 		conversationController,
-		topicController,
+    topicController,
 		adminRedFlagController,
 		adminFeedbackController,
 		feedbackPublicController,

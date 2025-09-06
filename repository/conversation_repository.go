@@ -66,8 +66,11 @@ func (cr *ConversationRepositoryImpl) CreateConversation(ctx context.Context, co
 }
 
 func (cr *ConversationRepositoryImpl) GetOfflineHealthTopics(ctx context.Context) ([]entities.HealthTopic, error) {
+	// Use the correct collection for health topics
+	healthTopicsCollection := cr.collection.Database().Collection("health_topics")
+
 	filter := bson.M{"status": "active"}
-	cursor, err := cr.collection.Find(ctx, filter)
+	cursor, err := healthTopicsCollection.Find(ctx, filter)
 	if err != nil {
 		return nil, err
 	}

@@ -65,6 +65,8 @@ func SetupRouter(
 				users.DELETE("/profile", userController.DeleteProfile)
 			}
 		}
+
+		// Admin routes (auth required; all users are admins per requirement)
 		admin := v1.Group("/admin")
 		admin.Use(middleware.AuthMiddleware())
 		{
@@ -73,32 +75,29 @@ func SetupRouter(
 			admin.PUT("/topics/:topic_key", topicController.UpdateTopicHandler)
 			admin.DELETE("/topics/:topic_key", topicController.DeleteTopicHandler)
 			admin.GET("/topic/:topic_key", topicController.GetTopicHandler)
+
+			// Redflags
+			admin.GET("/redflags", adminRedFlagController.List)
+			admin.POST("/redflags", adminRedFlagController.Create)
+			admin.PUT("/redflags/:id", adminRedFlagController.Update)
+			admin.GET("/redflags/:id", adminRedFlagController.Get)
+			admin.DELETE("/redflags/:id", adminRedFlagController.Delete)
+
+			// Feedbacks
+			admin.GET("/feedbacks", adminFeedbackController.List)
+			admin.GET("/feedbacks/:id", adminFeedbackController.Get)
+			admin.DELETE("/feedbacks/:id", adminFeedbackController.Delete)
 		}
 	}
 
 	// Conversation routes (public access, no authentication required)
 	conversation := v1.Group("/conversation")
 	{
+		// Initial chat greeting endpoint
+		conversation.POST("/init", conversationController.InitiateChat)
 		// Unified conversation endpoint (handles both start and continue)
 		conversation.POST("/", conversationController.HandleConversation)
 		conversation.GET("/offline-topics", conversationController.GetOfflineHealthTopics)
-	}
-
-	// Admin routes (auth required; all users are admins per requirement)
-	admin := v1.Group("/admin")
-	admin.Use(middleware.AuthMiddleware())
-	{
-		// Redflags
-		admin.GET("/redflags", adminRedFlagController.List)
-		admin.POST("/redflags", adminRedFlagController.Create)
-		admin.PUT("/redflags/:id", adminRedFlagController.Update)
-		admin.GET("/redflags/:id", adminRedFlagController.Get)
-		admin.DELETE("/redflags/:id", adminRedFlagController.Delete)
-
-		// Feedbacks
-		admin.GET("/feedbacks", adminFeedbackController.List)
-		admin.GET("/feedbacks/:id", adminFeedbackController.Get)
-		admin.DELETE("/feedbacks/:id", adminFeedbackController.Delete)
 	}
 
 	return r

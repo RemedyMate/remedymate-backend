@@ -31,6 +31,11 @@ func NewConversationUsecase(
 	}
 }
 
+// ValidateSymptom validates if the provided symptom is medical and appropriate
+func (cu *ConversationUsecaseImpl) ValidateSymptom(ctx context.Context, symptom, language string) (bool, string, error) {
+	return cu.conversationService.ValidateSymptom(ctx, symptom, language)
+}
+
 // StartConversation starts a new conversation with the initial symptom
 func (cu *ConversationUsecaseImpl) StartConversation(ctx context.Context, req dto.StartConversationRequest) (*dto.StartConversationResponse, error) {
 	// Generate questions using AI

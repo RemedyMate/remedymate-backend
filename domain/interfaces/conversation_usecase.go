@@ -9,6 +9,9 @@ import (
 
 // ConversationUsecase defines the interface for conversation business logic
 type ConversationUsecase interface {
+	// ValidateSymptom validates if the provided symptom is medical and appropriate
+	ValidateSymptom(ctx context.Context, symptom, language string) (bool, string, error)
+
 	// StartConversation starts a new conversation with the initial symptom
 	StartConversation(ctx context.Context, req dto.StartConversationRequest) (*dto.StartConversationResponse, error)
 
