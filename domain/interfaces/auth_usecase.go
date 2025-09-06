@@ -10,7 +10,7 @@ import (
 // IAuthUsecase defines the contract for authentication business logic
 type IAuthUsecase interface {
 	// Register registers a new admin
-	Register(ctx context.Context, user *entities.User) error
+	Register(ctx context.Context, user *entities.User) (*dto.RegisterResponseDTO, error)
 
 	// Login authenticates a user with email and password
 	Login(ctx context.Context, loginData dto.LoginDTO) (*dto.LoginResponseDTO, error)

@@ -9,6 +9,7 @@ import (
 type IUserRepository interface {
 	CreateUserWithStatus(ctx context.Context, user *entities.User, userStatus *entities.UserStatus) error
 	FindByEmail(ctx context.Context, email string) (*entities.User, error)
+	FindByUsername(ctx context.Context, username string) (*entities.User, error)
 	CheckByRole(ctx context.Context, role string) (*bool, error)
 	UpdateUser(ctx context.Context, user *entities.User) error
 	FindByID(ctx context.Context, userID string) (*entities.User, error)

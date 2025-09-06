@@ -58,15 +58,14 @@ func (ac *AuthController) Register(c *gin.Context) {
 		LastLogin: time.Now(),
 	}
 
-	if err := ac.authUsecase.Register(context.Background(), &user); err != nil {
+	resp, err := ac.authUsecase.Register(context.Background(), &user)
+	if err != nil {
 		HandleHTTPError(c, err)
 		return
 	}
 
 	log.Printf("✅ Registration successful for email: %s", input.Email)
-	c.JSON(http.StatusCreated, gin.H{
-		"message": "User registered successfully",
-	})
+	c.JSON(http.StatusCreated, resp)
 }
 
 // Login authenticates a user with email and password

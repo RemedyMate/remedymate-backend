@@ -34,17 +34,47 @@ func NewAuthUsecase(userRepo interfaces.IUserRepository, tokenRepo interfaces.IR
 	}
 }
 
-func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User) error {
+func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User) (*dto.RegisterResponseDTO, error) {
 	// Check if email exists
 	existing, _ := uc.userRepo.FindByEmail(ctx, user.Email)
 	if existing != nil {
-		return AppError.ErrEmailAlreadyExist
+		return nil, AppError.ErrEmailAlreadyExist
+	}
+
+	// Generate username if empty and ensure uniqueness
+	if user.Username == "" {
+		// try a handful of times to avoid rare collision
+		for i := 0; i < 5; i++ {
+			token, _ := apputil.GenerateToken(3) // 6 hex chars
+			candidate := "rm_" + token
+			if _, err := uc.userRepo.FindByUsername(ctx, candidate); err != nil {
+				// not found => use it
+				user.Username = candidate
+				break
+			}
+		}
+		if user.Username == "" {
+			user.Username = "rm_user"
+		}
+	} else {
+		// If provided, ensure it's unique
+		if _, err := uc.userRepo.FindByUsername(ctx, user.Username); err == nil {
+			return nil, AppError.ErrDuplicateUsername
+		}
+	}
+
+	// Generate password if empty
+	generatedPassword := user.Password
+	if generatedPassword == "" {
+		pwToken, _ := apputil.GenerateToken(8) // 16 hex chars
+		generatedPassword = pwToken
+		user.Password = generatedPassword
 	}
 
 	// Hash password using the password service
 	hashed, err := hash.HashPassword(user.Password)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	user.PasswordHash = hashed
 
@@ -57,7 +87,7 @@ func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User) error 
 
 	err = uc.userRepo.CreateUserWithStatus(ctx, user, userStatus)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	// If mailer and activationRepo are configured, send verification email
@@ -73,13 +103,13 @@ func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User) error 
 				CreatedAt: time.Now(),
 			}
 			if err := uc.activationRepo.Create(ctx, at); err != nil {
-				return AppError.ErrInternalServer
+				return nil, AppError.ErrInternalServer
 			}
 			// send email using template
 			baseURL := os.Getenv("APP_BASE_URL")
 			if baseURL == "" {
 				log.Printf("APP_BASE_URL environment variable is not set")
-				return AppError.ErrInternalServer
+				return nil, AppError.ErrInternalServer
 			}
 			link := baseURL + "/api/v1/auth/verify?token=" + tokenStr
 			subject := "Verify your RemedyMate account"
@@ -110,12 +140,16 @@ func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User) error 
 			}
 
 			if err := uc.mailer.Send(user.Email, subject, body); err != nil {
-				return AppError.ErrEmailSendFailed
+				return nil, AppError.ErrEmailSendFailed
 			}
 		}
 	}
 
-	return nil
+	return &dto.RegisterResponseDTO{
+		Message:  "User registered successfully",
+		Username: user.Username,
+		Password: generatedPassword,
+	}, nil
 }
 
 // Login authenticates a user with email and password

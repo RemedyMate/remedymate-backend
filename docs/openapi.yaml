@@ -117,8 +117,14 @@ components:
             properties:
                 message:
                     type: string
+                username:
+                    type: string
+                password:
+                    type: string
             example:
                 message: User registered successfully
+                username: rm_4f9a2c
+                password: A8s!keP2
 
         LoginDTO:
             type: object
@@ -764,6 +770,22 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/RegisterResponseDTO"
+                "400":
+                    description: Bad Request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                            examples:
+                                invalid_body:
+                                    value:
+                                        error: "Invalid request body"
+                                user_exists:
+                                    value:
+                                        error: "User with this email already exists"
+                                validation_error:
+                                    value:
+                                        error: "Key: 'RegisterDTO.Email' Error:Field validation for 'Email' failed on the 'required' tag"
                 "401": { $ref: "#/components/responses/Unauthorized" }
                 "403": { $ref: "#/components/responses/Forbidden" }
 
@@ -790,7 +812,30 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/LoginResponseDTO"
-                "401": { $ref: "#/components/responses/Unauthorized" }
+                "400":
+                    description: Bad Request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                            examples:
+                                invalid_body:
+                                    value:
+                                        error: "Invalid request body"
+                                validation_error:
+                                    value:
+                                        error: "Key: 'LoginDTO.Email' Error:Field validation for 'Email' failed on the 'required' tag"
+                "401":
+                    description: Unauthorized
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    error:
+                                        type: string
+                            example:
+                                error: "invalid credentials"
 
     /api/v1/auth/refresh:
         post:
@@ -820,6 +865,13 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/ErrorResponse"
+                            examples:
+                                invalid_body:
+                                    value:
+                                        error: "Invalid request body"
+                                invalid_token:
+                                    value:
+                                        error: "Invalid refresh token"
 
     /api/v1/auth/activate:
         post:
@@ -853,6 +905,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/ErrorResponse"
+                            examples:
+                                invalid_body:
+                                    value:
+                                        error: "Invalid request body"
+                                not_found:
+                                    value:
+                                        error: "User not found"
+                                invalid_request:
+                                    value:
+                                        error: "Invalid activation request"
 
     /api/v1/auth/verify:
         get:
@@ -884,6 +946,13 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/ErrorResponse"
+                            examples:
+                                missing_token:
+                                    value:
+                                        error: "token is required"
+                                invalid_token:
+                                    value:
+                                        error: "Invalid or expired token"
 
     /api/v1/auth/logout:
         post:
@@ -907,6 +976,14 @@ paths:
                                     value:
                                         message: Logout successful
                 "401": { $ref: "#/components/responses/Unauthorized" }
+                "500":
+                    description: Internal Server Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                            example:
+                                error: "Logout failed"
 
     /api/v1/auth/change-password:
         post:
@@ -946,6 +1023,13 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/ErrorResponse"
+                            examples:
+                                invalid_body:
+                                    value:
+                                        error: "Invalid request body"
+                                incorrect_password:
+                                    value:
+                                        error: "Incorrect old password"
                 "401": { $ref: "#/components/responses/Unauthorized" }
 
     /api/v1/users/profile:
@@ -1169,7 +1253,8 @@ paths:
                 - in: path
                   name: topic_key
                   required: true
-                  schema: { type: string }
+                  schema:
+                      type: string
             requestBody:
                 required: true
                 content:
@@ -1196,7 +1281,8 @@ paths:
                 - in: path
                   name: topic_key
                   required: true
-                  schema: { type: string }
+                  schema:
+                      type: string
             responses:
                 "200":
                     description: OK

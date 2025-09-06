@@ -15,16 +15,18 @@ type PersonalInfoDTO struct {
 }
 
 type RegisterDTO struct {
-	Username     string          `json:"username" binding:"required"`
+	Username     string          `json:"username,omitempty"`
 	Email        string          `json:"email" binding:"required,email"`
-	Password     string          `json:"password" binding:"required,min=6"`
+	Password     string          `json:"password,omitempty"`
 	Role         entities.Role   `json:"role" binding:"required,oneof=admin superadmin"`
 	PersonalInfo PersonalInfoDTO `json:"personalInfo"`
 }
 
 // REGISTER: response
 type RegisterResponseDTO struct {
-	Message string `json:"message" example:"User registered successfully"`
+	Message  string `json:"message" example:"User registered successfully"`
+	Username string `json:"username" example:"rm_4f9a2c"`
+	Password string `json:"password" example:"A8s!keP2"`
 }
 
 // LOGIN: request
