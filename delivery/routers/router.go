@@ -69,6 +69,18 @@ func SetupRouter(
 			admin.PUT("/topics/:topic_key", topicController.UpdateTopicHandler)
 			admin.DELETE("/topics/:topic_key", topicController.DeleteTopicHandler)
 			admin.GET("/topic/:topic_key", topicController.GetTopicHandler)
+
+			// Redflags
+			admin.GET("/redflags", adminRedFlagController.List)
+			admin.POST("/redflags", adminRedFlagController.Create)
+			admin.PUT("/redflags/:id", adminRedFlagController.Update)
+			admin.GET("/redflags/:id", adminRedFlagController.Get)
+			admin.DELETE("/redflags/:id", adminRedFlagController.Delete)
+
+			// Feedbacks
+			admin.GET("/feedbacks", adminFeedbackController.List)
+			admin.GET("/feedbacks/:id", adminFeedbackController.Get)
+			admin.DELETE("/feedbacks/:id", adminFeedbackController.Delete)
 		}
 	}
 
@@ -80,20 +92,6 @@ func SetupRouter(
 		// Unified conversation endpoint (handles both start and continue)
 		conversation.POST("/", conversationController.HandleConversation)
 		conversation.GET("/offline-topics", conversationController.GetOfflineHealthTopics)
-	}
-
-	{
-		// Redflags
-		admin.GET("/redflags", adminRedFlagController.List)
-		admin.POST("/redflags", adminRedFlagController.Create)
-		admin.PUT("/redflags/:id", adminRedFlagController.Update)
-		admin.GET("/redflags/:id", adminRedFlagController.Get)
-		admin.DELETE("/redflags/:id", adminRedFlagController.Delete)
-
-		// Feedbacks
-		admin.GET("/feedbacks", adminFeedbackController.List)
-		admin.GET("/feedbacks/:id", adminFeedbackController.Get)
-		admin.DELETE("/feedbacks/:id", adminFeedbackController.Delete)
 	}
 
 	return r
