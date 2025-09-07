@@ -21,9 +21,6 @@ func (uc *AdminFeedbackUsecaseImpl) List(ctx context.Context, limit, offset int,
 		return nil, 0, err
 	}
 
-	if items == nil {
-		items = []entities.Feedback{}
-	}
 
 	count, err := uc.repo.Count(ctx, language)
 	if err != nil {
