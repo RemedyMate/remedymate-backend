@@ -25,10 +25,6 @@ func (c *AdminRedFlagController) List(ctx *gin.Context) {
 		return
 	}
 
-	if items == nil {
-		items = []entities.RedFlag{}
-	}
-
 	ctx.JSON(http.StatusOK, gin.H{"items": items})
 }
 
