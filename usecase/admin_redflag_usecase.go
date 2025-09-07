@@ -23,10 +23,6 @@ func (uc *AdminRedFlagUsecaseImpl) List(ctx context.Context) ([]entities.RedFlag
 		return nil, err
 	}
 
-	if redFlags == nil {
-		redFlags = []entities.RedFlag{}
-	}
-
 	return redFlags, nil
 }
 
