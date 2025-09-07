@@ -25,7 +25,8 @@ var (
 	ErrEmailSendFailed      = errors.New("failed to send email")
 
 	// Token
-	ErrRefreshTokenNotFound = errors.New("refresh token not found")
+	ErrRefreshTokenNotFound   = errors.New("refresh token not found")
+	ErrInvalidActivationToken = errors.New("invalid or expired activation token")
 
 	// server errors
 	ErrInternalServer = errors.New("internal server error")

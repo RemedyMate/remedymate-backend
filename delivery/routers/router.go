@@ -30,8 +30,6 @@ func SetupRouter(
 	// API version 1
 	v1 := r.Group("/api/v1")
 	{
-		// Remedy route which comprises /triage, /map_topic, and /compose
-		v1.POST("/remedy", remedyMateController.GetRemedy)
 		// Public feedback route
 		v1.POST("/feedbacks", feedbackPublicController.Create)
 		// Authentication routes
@@ -41,6 +39,7 @@ func SetupRouter(
 			auth.POST("/refresh", authController.Refresh)
 			auth.POST("/activate", authController.Activate)
 			auth.GET("/verify", authController.Verify)
+			auth.POST("/resend-verification", authController.ResendVerification)
 
 			// Protected routes (require authentication)
 			protected := auth.Group("/")
@@ -70,6 +69,9 @@ func SetupRouter(
 		admin := v1.Group("/admin")
 		admin.Use(middleware.AuthMiddleware())
 		{
+			// Superadmin only routes
+			admin.GET("/users/profiles/paginated", middleware.SuperAdminMiddleware(), userController.GetUserProfilesPaginated)
+
 			admin.GET("/topics", topicController.ListAllTopicsHandler)
 			admin.POST("/topic", topicController.CreateTopicHandler)
 			admin.PUT("/topics/:topic_key", topicController.UpdateTopicHandler)
@@ -93,8 +95,6 @@ func SetupRouter(
 	// Conversation routes (public access, no authentication required)
 	conversation := v1.Group("/conversation")
 	{
-		// Initial chat greeting endpoint
-		conversation.POST("/init", conversationController.InitiateChat)
 		// Unified conversation endpoint (handles both start and continue)
 		conversation.POST("/", conversationController.HandleConversation)
 		conversation.GET("/offline-topics", conversationController.GetOfflineHealthTopics)

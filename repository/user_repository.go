@@ -4,8 +4,10 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"strings"
 
 	AppError "remedymate-backend/domain/AppError"
+	"remedymate-backend/domain/dto"
 	"remedymate-backend/domain/entities"
 	"remedymate-backend/domain/interfaces"
 	"remedymate-backend/infrastructure/database"
@@ -136,6 +138,148 @@ func (r *UserRepository) FindByID(ctx context.Context, userID string) (*entities
 	return &user, nil
 }
 
+// FindUsersWithPagination retrieves users with pagination, filtering, and sorting
+func (r *UserRepository) FindUsersWithPagination(
+	ctx context.Context,
+	params dto.UserProfilesQueryParams,
+) ([]*entities.User, int64, error) {
+	// --- Normalize pagination defaults ---
+	page := params.Page
+	if page < 1 {
+		page = 1
+	}
+	limit := params.Limit
+	if limit < 1 {
+		limit = 10
+	}
+	if limit > 100 {
+		limit = 100
+	}
+	skip := (page - 1) * limit
+
+	// --- Build filters ---
+	match := buildMatch(params)
+	statusMatch := buildStatusMatch(params)
+	sort := buildSort(params)
+
+	// --- Base pipeline (shared by both data + count) ---
+	basePipeline := bson.A{}
+	if len(match) > 0 {
+		basePipeline = append(basePipeline, bson.M{"$match": match})
+	}
+
+	// Join with user_status
+	basePipeline = append(basePipeline, bson.M{"$lookup": bson.M{
+		"from":         "user_status",
+		"localField":   "_id",
+		"foreignField": "userId",
+		"as":           "status",
+	}})
+	basePipeline = append(basePipeline, bson.M{"$unwind": bson.M{
+		"path":                       "$status",
+		"preserveNullAndEmptyArrays": true,
+	}})
+
+	if len(statusMatch) > 0 {
+		basePipeline = append(basePipeline, bson.M{"$match": statusMatch})
+	}
+
+	// --- Count pipeline ---
+	countPipeline := append(basePipeline, bson.M{"$count": "total"})
+	countCursor, err := r.UserCollection.Aggregate(ctx, countPipeline)
+	if err != nil {
+		return nil, 0, AppError.ErrInternalServer
+	}
+	var countResult []bson.M
+	if err := countCursor.All(ctx, &countResult); err != nil {
+		return nil, 0, AppError.ErrInternalServer
+	}
+	var total int64
+	if len(countResult) > 0 {
+		switch t := countResult[0]["total"].(type) {
+		case int32:
+			total = int64(t)
+		case int64:
+			total = t
+		}
+	}
+
+	// --- Data pipeline ---
+	dataPipeline := append(basePipeline,
+		bson.M{"$sort": sort},
+		bson.M{"$skip": skip},
+		bson.M{"$limit": limit},
+	)
+
+	cursor, err := r.UserCollection.Aggregate(ctx, dataPipeline)
+	if err != nil {
+		return nil, 0, AppError.ErrInternalServer
+	}
+	defer cursor.Close(ctx)
+
+	var users []*entities.User
+	if err := cursor.All(ctx, &users); err != nil {
+		return nil, 0, AppError.ErrInternalServer
+	}
+
+	return users, total, nil
+}
+
+// --- Helpers ---
+
+func buildMatch(params dto.UserProfilesQueryParams) bson.M {
+	match := bson.M{}
+	if params.Search != "" {
+		regex := primitive.Regex{Pattern: params.Search, Options: "i"}
+		match["$or"] = []bson.M{
+			{"username": regex},
+			{"email": regex},
+			{"personalInfo.firstName": regex},
+			{"personalInfo.lastName": regex},
+		}
+	}
+	if params.Role != "" && params.Role != "all" {
+		match["role"] = params.Role
+	}
+	return match
+}
+
+func buildStatusMatch(params dto.UserProfilesQueryParams) bson.M {
+	statusMatch := bson.M{}
+	switch params.Status {
+	case "active":
+		statusMatch["status.isActive"] = true
+	case "inactive":
+		statusMatch["status.isActive"] = false
+	case "verified":
+		statusMatch["status.isVerified"] = true
+	case "unverified":
+		statusMatch["status.isVerified"] = false
+	}
+	return statusMatch
+}
+
+func buildSort(params dto.UserProfilesQueryParams) bson.D {
+	sortFieldMap := map[string]string{
+		"username":   "username",
+		"email":      "email",
+		"created_at": "createdAt",
+		"last_login": "lastLogin",
+	}
+
+	sortField := "createdAt"
+	if f, ok := sortFieldMap[params.SortBy]; ok {
+		sortField = f
+	}
+
+	sortOrder := 1
+	if strings.ToLower(params.Order) == "desc" {
+		sortOrder = -1
+	}
+
+	return bson.D{{Key: sortField, Value: sortOrder}}
+}
+
 // UpdateUser updates an existing user
 func (r *UserRepository) UpdateUser(ctx context.Context, user *entities.User) error {
 	filter := bson.M{"_id": user.ID}
@@ -167,6 +311,39 @@ func (r *UserRepository) GetUserStatus(ctx context.Context, userID string) (*ent
 		return nil, AppError.ErrUserStatusNotFound
 	}
 	return &userStatus, nil
+}
+
+// GetUserStatusesByUserIDs retrieves user statuses for specific user IDs
+func (r *UserRepository) GetUserStatusesByUserIDs(ctx context.Context, userIDs []string) ([]*entities.UserStatus, error) {
+	filter := bson.M{"userId": bson.M{"$in": userIDs}}
+
+	cursor, err := r.UserStatusCollection.Find(ctx, filter)
+	if err != nil {
+		return nil, AppError.ErrInternalServer
+	}
+	defer cursor.Close(ctx)
+
+	var userStatuses []*entities.UserStatus
+	for cursor.Next(ctx) {
+		var userStatus entities.UserStatus
+		if err := cursor.Decode(&userStatus); err != nil {
+			log.Printf("Error decoding user status: %v", err)
+			continue
+		}
+		userStatuses = append(userStatuses, &userStatus)
+	}
+
+	if err := cursor.Err(); err != nil {
+		return nil, AppError.ErrInternalServer
+	}
+
+	return userStatuses, nil
+}
+
+// GetUserStatusesWithPagination retrieves user statuses for specific user IDs (used for pagination)
+func (r *UserRepository) GetUserStatusesWithPagination(ctx context.Context, userIDs []string) ([]*entities.UserStatus, error) {
+	// This is essentially the same as GetUserStatusesByUserIDs for our use case
+	return r.GetUserStatusesByUserIDs(ctx, userIDs)
 }
 
 func (r *UserRepository) CreateUserStatus(ctx context.Context, userStatus *entities.UserStatus) error {

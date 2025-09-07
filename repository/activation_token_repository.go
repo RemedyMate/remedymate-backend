@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"log"
 	"time"
 
 	AppError "remedymate-backend/domain/AppError"
@@ -47,4 +48,14 @@ func (r *ActivationTokenRepository) MarkUsed(ctx context.Context, id string) err
 		return AppError.ErrInternalServer
 	}
 	return nil
+}
+
+func (r *ActivationTokenRepository) FindValidActivationTokenByEmail(ctx context.Context, email string) (*entities.ActivationToken, error) {
+	var at entities.ActivationToken
+	err := r.collection.FindOne(ctx, bson.M{"email": email, "usedAt": bson.M{"$exists": false}, "expiresAt": bson.M{"$gt": time.Now()}}).Decode(&at)
+	if err != nil {
+		log.Println("Error finding activation token by email:", err)
+		return nil, AppError.ErrInvalidActivationToken
+	}
+	return &at, nil
 }

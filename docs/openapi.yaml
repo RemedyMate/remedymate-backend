@@ -24,6 +24,8 @@ tags:
       description: Authentication and account lifecycle
     - name: Users
       description: User profile management
+    - name: Admin/Users
+      description: Admin user management (superadmin only)
     - name: Conversation
       description: Symptom conversation flow (public)
     - name: Remedy
@@ -95,10 +97,11 @@ components:
 
         RegisterDTO:
             type: object
-            required: [username, email, password, role]
+            required: [email, role, personalInfo, frontendDomain]
             properties:
                 username:
                     type: string
+                    description: Optional. If not provided, will be generated.
                 email:
                     type: string
                     format: email
@@ -106,25 +109,24 @@ components:
                     type: string
                     format: password
                     minLength: 6
+                    description: Optional. If not provided, will be generated and sent in verification email.
                 role:
                     type: string
                     enum: [admin, superadmin]
                 personalInfo:
                     $ref: "#/components/schemas/PersonalInfoDTO"
+                frontendDomain:
+                    type: string
+                    format: uri
+                    description: Frontend web domain (e.g. https://app.example.com) used for verification link.
 
         RegisterResponseDTO:
             type: object
             properties:
                 message:
                     type: string
-                username:
-                    type: string
-                password:
-                    type: string
             example:
                 message: User registered successfully
-                username: rm_4f9a2c
-                password: A8s!keP2
 
         LoginDTO:
             type: object
@@ -154,6 +156,9 @@ components:
                 role:
                     type: string
                     enum: [admin, superadmin]
+                message:
+                    type: string
+                    description: Optional. Present on first login to remind user to change password.
             example:
                 access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
                 refresh_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
@@ -161,6 +166,26 @@ components:
                 username: johndoe
                 email: john@example.com
                 role: admin
+                message: Welcome! For your security, please change your password now.
+        ResendVerificationDTO:
+            type: object
+            required: [email, frontendDomain]
+            properties:
+                email:
+                    type: string
+                    format: email
+                frontendDomain:
+                    type: string
+                    format: uri
+                    description: Frontend web domain (e.g. https://app.example.com) used for verification link.
+
+        ResendVerificationResponseDTO:
+            type: object
+            properties:
+                message:
+                    type: string
+            example:
+                message: Verification email resent if the account exists.
 
         RefreshDTO:
             type: object
@@ -254,6 +279,59 @@ components:
                     type: string
                 reason:
                     type: string
+
+        # ===== Admin User Management DTOs =====
+        PaginationMetadata:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    description: Current page number
+                limit:
+                    type: integer
+                    description: Number of items per page
+                total:
+                    type: integer
+                    format: int64
+                    description: Total number of items
+                total_pages:
+                    type: integer
+                    description: Total number of pages
+                has_next:
+                    type: boolean
+                    description: Whether there's a next page
+                has_prev:
+                    type: boolean
+                    description: Whether there's a previous page
+            example:
+                page: 1
+                limit: 10
+                total: 25
+                total_pages: 3
+                has_next: true
+                has_prev: false
+
+        PaginatedResponse:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items: {}
+                    description: Array of data items
+                pagination:
+                    $ref: "#/components/schemas/PaginationMetadata"
+                message:
+                    type: string
+            example:
+                message: "Data retrieved successfully"
+                pagination:
+                    page: 1
+                    limit: 10
+                    total: 25
+                    total_pages: 3
+                    has_next: true
+                    has_prev: false
+                data: []
 
         # ===== Conversation DTOs =====
         Question:
@@ -796,13 +874,7 @@ paths:
                     application/json:
                         schema:
                             $ref: "#/components/schemas/RegisterDTO"
-                        examples:
-                            sample:
-                                value:
-                                    username: admin2
-                                    email: admin2@example.com
-                                    password: S3cret!
-                                    role: admin
+
             responses:
                 "201":
                     description: Created
@@ -993,6 +1065,36 @@ paths:
                                 invalid_token:
                                     value:
                                         error: "Invalid or expired token"
+    /api/v1/auth/resend-verification:
+        post:
+            tags: [Auth]
+            summary: Resend verification email
+            operationId: authResendVerification
+            description: Resends the verification email with a new or existing token if the account exists and is not yet verified.
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ResendVerificationDTO"
+                        examples:
+                            sample:
+                                value:
+                                    email: john@example.com
+                                    frontendDomain: https://app.example.com
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ResendVerificationResponseDTO"
+                "400":
+                    description: Bad Request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
 
     /api/v1/auth/logout:
         post:
@@ -1150,6 +1252,98 @@ paths:
                             schema:
                                 $ref: "#/components/schemas/ErrorResponse"
                 "401": { $ref: "#/components/responses/Unauthorized" }
+
+    /api/v1/admin/users/profiles/paginated:
+        get:
+            tags: [Admin/Users]
+            summary: Get user profiles with pagination, filtering, and sorting (superadmin only)
+            description: |
+                Retrieves user profiles with pagination support, including filtering by status and role,
+                searching by username/email/name, and sorting capabilities.
+                Only accessible by users with superadmin role.
+            operationId: adminGetUserProfilesPaginated
+            security:
+                - bearerAuth: []
+            parameters:
+                - name: page
+                  in: query
+                  description: Page number (1-indexed)
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      default: 1
+                  example: 1
+                - name: limit
+                  in: query
+                  description: Number of items per page (max 100)
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 100
+                      default: 10
+                  example: 10
+                - name: search
+                  in: query
+                  description: Search by username, email, first name, or last name
+                  required: false
+                  schema:
+                      type: string
+                  example: "john"
+                - name: status
+                  in: query
+                  description: Filter by user status
+                  required: false
+                  schema:
+                      type: string
+                      enum: [active, inactive, verified, unverified, all]
+                      default: all
+                  example: "active"
+                - name: role
+                  in: query
+                  description: Filter by user role
+                  required: false
+                  schema:
+                      type: string
+                      enum: [admin, superadmin, all]
+                      default: all
+                  example: "admin"
+                - name: sort_by
+                  in: query
+                  description: Sort by field
+                  required: false
+                  schema:
+                      type: string
+                      enum: [username, email, created_at, last_login]
+                      default: created_at
+                  example: "username"
+                - name: order
+                  in: query
+                  description: Sort order
+                  required: false
+                  schema:
+                      type: string
+                      enum: [asc, desc]
+                      default: desc
+                  example: "asc"
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/PaginatedResponse"
+                "401": { $ref: "#/components/responses/Unauthorized" }
+                "403": { $ref: "#/components/responses/Forbidden" }
+                "500":
+                    description: Internal Server Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
+                            example:
+                                error: "internal server error"
 
     /api/v1/conversation:
         post:

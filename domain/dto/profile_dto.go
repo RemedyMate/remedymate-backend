@@ -27,3 +27,13 @@ type DeleteProfileDTO struct {
 	Password string `json:"password" binding:"required"` // Require password for security
 	Reason   string `json:"reason,omitempty"`            // Optional reason for deletion
 }
+
+// UserProfilesQueryParams defines parameters for filtering and paginating user profiles
+type UserProfilesQueryParams struct {
+	PaginationQueryParams
+	Search string `form:"search" json:"search"`   // Search by username, email, first name, or last name
+	Status string `form:"status" json:"status"`   // Filter by status: "active", "inactive", "verified", "unverified", "all"
+	Role   string `form:"role" json:"role"`       // Filter by role: "admin", "superadmin", "all"
+	SortBy string `form:"sort_by" json:"sort_by"` // Sort by: "username", "email", "created_at", "last_login"
+	Order  string `form:"order" json:"order"`     // Sort order: "asc", "desc"
+}

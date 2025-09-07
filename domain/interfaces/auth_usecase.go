@@ -10,7 +10,7 @@ import (
 // IAuthUsecase defines the contract for authentication business logic
 type IAuthUsecase interface {
 	// Register registers a new admin
-	Register(ctx context.Context, user *entities.User) (*dto.RegisterResponseDTO, error)
+	Register(ctx context.Context, user *entities.User, frontendDomain string) (*dto.RegisterResponseDTO, error)
 
 	// Login authenticates a user with email and password
 	Login(ctx context.Context, loginData dto.LoginDTO) (*dto.LoginResponseDTO, error)
@@ -29,4 +29,7 @@ type IAuthUsecase interface {
 
 	// ChangePassword changes a user's password
 	ChangePassword(ctx context.Context, userID, oldPassword, newPassword string) error
+
+	// ResendVerificationToken resends the verification email if token expired or not used
+	ResendVerificationToken(ctx context.Context, email, frontendDomain string) error
 }
