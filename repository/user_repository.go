@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"strings"
 
 	AppError "remedymate-backend/domain/AppError"
 	"remedymate-backend/domain/dto"
@@ -138,49 +139,11 @@ func (r *UserRepository) FindByID(ctx context.Context, userID string) (*entities
 }
 
 // FindUsersWithPagination retrieves users with pagination, filtering, and sorting
-func (r *UserRepository) FindUsersWithPagination(ctx context.Context, params dto.UserProfilesQueryParams) ([]*entities.User, int64, error) {
-	// Build the filter
-	filter := bson.M{}
-
-	// Add search filter
-	if params.Search != "" {
-		searchPattern := bson.M{"$regex": params.Search, "$options": "i"}
-		filter["$or"] = []bson.M{
-			{"username": searchPattern},
-			{"email": searchPattern},
-			{"personalInfo.firstName": searchPattern},
-			{"personalInfo.lastName": searchPattern},
-		}
-	}
-
-	// Add role filter
-	if params.Role != "" && params.Role != "all" {
-		filter["role"] = params.Role
-	}
-
-	// Build sort options
-	sort := bson.D{}
-	sortField := "createdAt"
-	if params.SortBy != "" {
-		switch params.SortBy {
-		case "username", "email", "created_at", "last_login":
-			if params.SortBy == "created_at" {
-				sortField = "createdAt"
-			} else if params.SortBy == "last_login" {
-				sortField = "lastLogin"
-			} else {
-				sortField = params.SortBy
-			}
-		}
-	}
-
-	sortOrder := 1 // ascending
-	if params.Order == "desc" {
-		sortOrder = -1
-	}
-	sort = append(sort, bson.E{Key: sortField, Value: sortOrder})
-
-	// Set default pagination values
+func (r *UserRepository) FindUsersWithPagination(
+	ctx context.Context,
+	params dto.UserProfilesQueryParams,
+) ([]*entities.User, int64, error) {
+	// --- Normalize pagination defaults ---
 	page := params.Page
 	if page < 1 {
 		page = 1
@@ -189,47 +152,132 @@ func (r *UserRepository) FindUsersWithPagination(ctx context.Context, params dto
 	if limit < 1 {
 		limit = 10
 	}
-	if limit > 100 { // Max limit to prevent abuse
+	if limit > 100 {
 		limit = 100
 	}
-
-	// Calculate skip
 	skip := (page - 1) * limit
 
-	// Get total count
-	total, err := r.UserCollection.CountDocuments(ctx, filter)
+	// --- Build filters ---
+	match := buildMatch(params)
+	statusMatch := buildStatusMatch(params)
+	sort := buildSort(params)
+
+	// --- Base pipeline (shared by both data + count) ---
+	basePipeline := bson.A{}
+	if len(match) > 0 {
+		basePipeline = append(basePipeline, bson.M{"$match": match})
+	}
+
+	// Join with user_status
+	basePipeline = append(basePipeline, bson.M{"$lookup": bson.M{
+		"from":         "user_status",
+		"localField":   "_id",
+		"foreignField": "userId",
+		"as":           "status",
+	}})
+	basePipeline = append(basePipeline, bson.M{"$unwind": bson.M{
+		"path":                       "$status",
+		"preserveNullAndEmptyArrays": true,
+	}})
+
+	if len(statusMatch) > 0 {
+		basePipeline = append(basePipeline, bson.M{"$match": statusMatch})
+	}
+
+	// --- Count pipeline ---
+	countPipeline := append(basePipeline, bson.M{"$count": "total"})
+	countCursor, err := r.UserCollection.Aggregate(ctx, countPipeline)
 	if err != nil {
 		return nil, 0, AppError.ErrInternalServer
 	}
+	var countResult []bson.M
+	if err := countCursor.All(ctx, &countResult); err != nil {
+		return nil, 0, AppError.ErrInternalServer
+	}
+	var total int64
+	if len(countResult) > 0 {
+		switch t := countResult[0]["total"].(type) {
+		case int32:
+			total = int64(t)
+		case int64:
+			total = t
+		}
+	}
 
-	// Build find options
-	findOptions := options.Find()
-	findOptions.SetSort(sort)
-	findOptions.SetSkip(int64(skip))
-	findOptions.SetLimit(int64(limit))
+	// --- Data pipeline ---
+	dataPipeline := append(basePipeline,
+		bson.M{"$sort": sort},
+		bson.M{"$skip": skip},
+		bson.M{"$limit": limit},
+	)
 
-	// Execute query
-	cursor, err := r.UserCollection.Find(ctx, filter, findOptions)
+	cursor, err := r.UserCollection.Aggregate(ctx, dataPipeline)
 	if err != nil {
 		return nil, 0, AppError.ErrInternalServer
 	}
 	defer cursor.Close(ctx)
 
 	var users []*entities.User
-	for cursor.Next(ctx) {
-		var user entities.User
-		if err := cursor.Decode(&user); err != nil {
-			log.Printf("Error decoding user: %v", err)
-			continue
-		}
-		users = append(users, &user)
-	}
-
-	if err := cursor.Err(); err != nil {
+	if err := cursor.All(ctx, &users); err != nil {
 		return nil, 0, AppError.ErrInternalServer
 	}
 
 	return users, total, nil
+}
+
+// --- Helpers ---
+
+func buildMatch(params dto.UserProfilesQueryParams) bson.M {
+	match := bson.M{}
+	if params.Search != "" {
+		regex := primitive.Regex{Pattern: params.Search, Options: "i"}
+		match["$or"] = []bson.M{
+			{"username": regex},
+			{"email": regex},
+			{"personalInfo.firstName": regex},
+			{"personalInfo.lastName": regex},
+		}
+	}
+	if params.Role != "" && params.Role != "all" {
+		match["role"] = params.Role
+	}
+	return match
+}
+
+func buildStatusMatch(params dto.UserProfilesQueryParams) bson.M {
+	statusMatch := bson.M{}
+	switch params.Status {
+	case "active":
+		statusMatch["status.isActive"] = true
+	case "inactive":
+		statusMatch["status.isActive"] = false
+	case "verified":
+		statusMatch["status.isVerified"] = true
+	case "unverified":
+		statusMatch["status.isVerified"] = false
+	}
+	return statusMatch
+}
+
+func buildSort(params dto.UserProfilesQueryParams) bson.D {
+	sortFieldMap := map[string]string{
+		"username":   "username",
+		"email":      "email",
+		"created_at": "createdAt",
+		"last_login": "lastLogin",
+	}
+
+	sortField := "createdAt"
+	if f, ok := sortFieldMap[params.SortBy]; ok {
+		sortField = f
+	}
+
+	sortOrder := 1
+	if strings.ToLower(params.Order) == "desc" {
+		sortOrder = -1
+	}
+
+	return bson.D{{Key: sortField, Value: sortOrder}}
 }
 
 // UpdateUser updates an existing user

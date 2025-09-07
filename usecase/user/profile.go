@@ -224,37 +224,6 @@ func (u *UserUsecase) GetUserProfilesWithPagination(ctx context.Context, params 
 		statusMap[status.UserID] = status
 	}
 
-	// Apply status filtering if requested
-	var filteredUsers []*entities.User
-	if params.Status != "" && params.Status != "all" {
-		for _, user := range users {
-			userStatus, exists := statusMap[user.ID]
-			if !exists {
-				continue
-			}
-
-			switch params.Status {
-			case "active":
-				if userStatus.IsActive {
-					filteredUsers = append(filteredUsers, user)
-				}
-			case "inactive":
-				if !userStatus.IsActive {
-					filteredUsers = append(filteredUsers, user)
-				}
-			case "verified":
-				if userStatus.IsVerified {
-					filteredUsers = append(filteredUsers, user)
-				}
-			case "unverified":
-				if !userStatus.IsVerified {
-					filteredUsers = append(filteredUsers, user)
-				}
-			}
-		}
-		users = filteredUsers
-	}
-
 	// Build profile responses
 	var profiles []*dto.ProfileResponseDTO
 	for _, user := range users {
