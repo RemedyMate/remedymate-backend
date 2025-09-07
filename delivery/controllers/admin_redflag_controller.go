@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"remedymate-backend/domain/dto"
-	"remedymate-backend/domain/entities"
 	"remedymate-backend/domain/interfaces"
 
 	"github.com/gin-gonic/gin"
