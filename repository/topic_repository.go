@@ -11,6 +11,7 @@ import (
 	"remedymate-backend/infrastructure/database"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -24,9 +25,15 @@ type TopicRepository struct {
 func NewTopicRepository() (*TopicRepository, error) {
 	topicColl := database.Client.Database("remedymate").Collection("topics")
 
-	// ensure unique index on topic_key
+	// ensure text index on relevant fields
 	idxModel := mongo.IndexModel{
-		Keys: bson.D{{Key: "topic_key", Value: 1}},
+		Keys: bson.D{
+			{Key: "name_en", Value: "text"},
+			{Key: "name_am", Value: "text"},
+			{Key: "topic_key", Value: "text"},
+			{Key: "description_en", Value: "text"},
+			{Key: "description_am", Value: "text"},
+		},
 	}
 	if _, err := topicColl.Indexes().CreateOne(context.Background(), idxModel); err != nil {
 		return nil, fmt.Errorf("failed to create topic_key index: %w", err)
@@ -83,12 +90,12 @@ func (tr *TopicRepository) UpdateTopic(ctx context.Context, topicKey string, upd
 		"updated_by": update.UpdatedBy,
 	}
 
-	updateFields["name_en"] = update.NameEN  
-    updateFields["name_am"] = update.NameAM  
-    updateFields["description_en"] = update.DescriptionEN  
-    updateFields["description_am"] = update.DescriptionAM  
-    updateFields["status"] = update.Status 
-	
+	updateFields["name_en"] = update.NameEN
+	updateFields["name_am"] = update.NameAM
+	updateFields["description_en"] = update.DescriptionEN
+	updateFields["description_am"] = update.DescriptionAM
+	updateFields["status"] = update.Status
+
 	if update.Translations != nil {
 		updateFields["translations"] = update.Translations
 	}
@@ -142,8 +149,14 @@ func (tr *TopicRepository) ListAllTopics(ctx context.Context, params dto.TopicLi
 		"status": bson.M{"$ne": entities.TopicStatusDeleted},
 	}
 	if params.Search != "" {
-		// require a text index on relevant fields for this to work
-		filter["$text"] = bson.M{"$search": params.Search}
+		regex := primitive.Regex{Pattern: params.Search, Options: "i"}
+		filter["$or"] = []bson.M{
+			{"name_en": regex},
+			{"name_am": regex},
+			{"topic_key": regex},
+			{"description_en": regex},
+			{"description_am": regex},
+		}
 	}
 	findOptions := options.Find()
 	// Sorting: default by name_en ascending
