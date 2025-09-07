@@ -28,10 +28,6 @@ func (c *AdminFeedbackController) List(ctx *gin.Context) {
 		return
 	}
 
-	if items == nil {
-		items = []entities.Feedback{}
-	}
-
 	ctx.JSON(http.StatusOK, gin.H{"items": items, "total": total})
 }
 
