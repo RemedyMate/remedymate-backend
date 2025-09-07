@@ -488,8 +488,15 @@ components:
                     $ref: "#/components/schemas/TopicStatus"
                 translations:
                     type: object
-                    additionalProperties:
-                        $ref: "#/components/schemas/LocalizedGuidanceContent"
+                    properties:
+                        en:
+                            $ref: "#/components/schemas/LocalizedGuidanceContent"
+                        am:
+                            $ref: "#/components/schemas/LocalizedGuidanceContent"
+                    required:
+                        - en
+                        - am
+                    additionalProperties: false
                 version:
                     type: integer
                 revision_history:
@@ -510,7 +517,7 @@ components:
         TopicCreateRequest:
             type: object
             required:
-                [topic_key, name_en, name_am, is_offline_cachable, translations]
+                [topic_key, name_en, name_am, is_offline_cachable]
             properties:
                 topic_key:
                     type: string
@@ -526,8 +533,34 @@ components:
                     type: boolean
                 translations:
                     type: object
-                    additionalProperties:
-                        $ref: "#/components/schemas/LocalizedGuidanceContent"
+                    properties:
+                        en:
+                            $ref: "#/components/schemas/LocalizedGuidanceContent"
+                        am:
+                            $ref: "#/components/schemas/LocalizedGuidanceContent"
+                    required:
+                        - en
+                        - am
+                    additionalProperties: false
+                    example:
+                        en:
+                            self_care:
+                            - "Get plenty of rest."
+                            otc_categories:
+                                - category_name: "Fever reducer / pain reliever"
+                            safety_note: "Follow dosage instructions"
+                            seek_care_if:
+                                - "Your fever is 39°C (102°F) or higher."
+                            disclaimer: "This is not medical advice."
+                        am:
+                            self_care:
+                                - "በቂ እረፍት ያግኙ።"
+                            otc_categories:
+                                - category_name: "ትኩሳት መቀነሻ"
+                            safety_note: "የአጠቃቀም መመሪያ ይከተሉ።"
+                            seek_care_if:
+                                - "ትኩሳቱ ከ3 ቀናት በላይ ከቆየ።"
+                            disclaimer: "ይህ አጠቃላይ መረጃ ነው።"
 
         TopicUpdateRequest:
             type: object
@@ -546,8 +579,15 @@ components:
                     $ref: "#/components/schemas/TopicStatus"
                 translations:
                     type: object
-                    additionalProperties:
-                        $ref: "#/components/schemas/LocalizedGuidanceContent"
+                    properties:
+                        en:
+                            $ref: "#/components/schemas/LocalizedGuidanceContent"
+                        am:
+                            $ref: "#/components/schemas/LocalizedGuidanceContent"
+                    required:
+                        - en
+                        - am
+                    additionalProperties: false
 
         PaginatedTopicsResult:
             type: object
