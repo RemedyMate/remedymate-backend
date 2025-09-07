@@ -517,7 +517,7 @@ components:
         TopicCreateRequest:
             type: object
             required:
-                [topic_key, name_en, name_am, is_offline_cachable]
+                [topic_key, name_en, name_am, is_offline_cachable, translations]
             properties:
                 topic_key:
                     type: string
