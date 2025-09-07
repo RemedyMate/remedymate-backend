@@ -30,15 +30,24 @@ func NewFeedbackRepository() interfaces.FeedbackRepository {
 
 func (r *FeedbackRepositoryImpl) List(ctx context.Context, limit, offset int, language string) ([]entities.Feedback, error) {
 	filter := bson.M{"isDeleted": bson.M{"$ne": true}}
-	if language != "" { filter["language"] = language }
+	if language != "" {
+		filter["language"] = language
+	}
 	opts := options.Find().SetSort(bson.D{{Key: "createdAt", Value: -1}}).SetLimit(int64(limit)).SetSkip(int64(offset))
 	cur, err := r.coll.Find(ctx, filter, opts)
-	if err != nil { return nil, err }
+	if err != nil {
+		return nil, err
+	}
 	defer cur.Close(ctx)
-	var out []entities.Feedback
+
+	// Initialize empty slice to ensure JSON marshals as [] instead of null
+	out := make([]entities.Feedback, 0)
+
 	for cur.Next(ctx) {
 		var f entities.Feedback
-		if err := cur.Decode(&f); err != nil { return nil, err }
+		if err := cur.Decode(&f); err != nil {
+			return nil, err
+		}
 		out = append(out, f)
 	}
 	return out, cur.Err()
@@ -46,14 +55,18 @@ func (r *FeedbackRepositoryImpl) List(ctx context.Context, limit, offset int, la
 
 func (r *FeedbackRepositoryImpl) Count(ctx context.Context, language string) (int64, error) {
 	filter := bson.M{"isDeleted": bson.M{"$ne": true}}
-	if language != "" { filter["language"] = language }
+	if language != "" {
+		filter["language"] = language
+	}
 	return r.coll.CountDocuments(ctx, filter)
 }
 
 func (r *FeedbackRepositoryImpl) GetByID(ctx context.Context, id string) (*entities.Feedback, error) {
 	var f entities.Feedback
 	err := r.coll.FindOne(ctx, bson.M{"_id": id, "isDeleted": bson.M{"$ne": true}}).Decode(&f)
-	if err != nil { return nil, err }
+	if err != nil {
+		return nil, err
+	}
 	return &f, nil
 }
 

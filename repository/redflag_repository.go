@@ -31,12 +31,19 @@ func NewRedFlagRepository() interfaces.RedFlagRepository {
 func (r *RedFlagRepositoryImpl) List(ctx context.Context) ([]entities.RedFlag, error) {
 	filter := bson.M{"isDeleted": bson.M{"$ne": true}}
 	cur, err := r.coll.Find(ctx, filter, options.Find().SetSort(bson.D{{Key: "createdAt", Value: -1}}))
-	if err != nil { return nil, err }
+	if err != nil {
+		return nil, err
+	}
 	defer cur.Close(ctx)
-	var out []entities.RedFlag
+
+	// Initialize empty slice to ensure JSON marshals as [] instead of null
+	out := make([]entities.RedFlag, 0)
+
 	for cur.Next(ctx) {
 		var rf entities.RedFlag
-		if err := cur.Decode(&rf); err != nil { return nil, err }
+		if err := cur.Decode(&rf); err != nil {
+			return nil, err
+		}
 		out = append(out, rf)
 	}
 	return out, cur.Err()
@@ -45,7 +52,9 @@ func (r *RedFlagRepositoryImpl) List(ctx context.Context) ([]entities.RedFlag, e
 func (r *RedFlagRepositoryImpl) GetByID(ctx context.Context, id string) (*entities.RedFlag, error) {
 	var rf entities.RedFlag
 	err := r.coll.FindOne(ctx, bson.M{"_id": id, "isDeleted": bson.M{"$ne": true}}).Decode(&rf)
-	if err != nil { return nil, err }
+	if err != nil {
+		return nil, err
+	}
 	return &rf, nil
 }
 
