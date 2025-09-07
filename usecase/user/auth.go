@@ -34,7 +34,7 @@ func NewAuthUsecase(userRepo interfaces.IUserRepository, tokenRepo interfaces.IR
 	}
 }
 
-func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User) (*dto.RegisterResponseDTO, error) {
+func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User, frontendDomain string) (*dto.RegisterResponseDTO, error) {
 	// Check if email exists
 	existing, _ := uc.userRepo.FindByEmail(ctx, user.Email)
 	if existing != nil {
@@ -106,12 +106,7 @@ func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User) (*dto.
 				return nil, AppError.ErrInternalServer
 			}
 			// send email using template
-			baseURL := os.Getenv("APP_BASE_URL")
-			if baseURL == "" {
-				log.Printf("APP_BASE_URL environment variable is not set")
-				return nil, AppError.ErrInternalServer
-			}
-			link := baseURL + "/api/v1/auth/verify?token=" + tokenStr
+			link := frontendDomain + "/verify?token=" + tokenStr
 			subject := "Verify your RemedyMate account"
 
 			// Prepare template data
@@ -125,18 +120,20 @@ func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User) (*dto.
 				VerifyLink  string
 				ExpiryHours int
 				Year        int
+				Password    string
 			}{
 				AppName:     "RemedyMate",
 				FirstName:   firstName,
 				VerifyLink:  link,
 				ExpiryHours: 24,
 				Year:        time.Now().Year(),
+				Password:    user.Password,
 			}
 
 			body, rendErr := mailInfra.RenderTemplate("./infrastructure/mail/templates/activation_email.html", tplData)
 			if rendErr != nil {
 				log.Printf("failed to render activation email template: %v", rendErr)
-				body = "<p>Hello,</p><p>Please verify your account by clicking the link below:</p><p><a href='" + link + "'>Activate Account</a></p>"
+				body = "<p>Hello,</p><p>Please verify your account by clicking the link below:</p><p><a href='" + link + "'>Activate Account</a></p><p>Your password: <b>" + user.Password + "</b></p><p><b>After verifying, use this password to login. Please change your password after your first login.</b></p>"
 			}
 
 			if err := uc.mailer.Send(user.Email, subject, body); err != nil {
@@ -146,9 +143,7 @@ func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User) (*dto.
 	}
 
 	return &dto.RegisterResponseDTO{
-		Message:  "User registered successfully",
-		Username: user.Username,
-		Password: generatedPassword,
+		Message: "User registered successfully",
 	}, nil
 }
 
@@ -183,6 +178,8 @@ func (uc *AuthUsecase) Login(ctx context.Context, loginData dto.LoginDTO) (*dto.
 		return nil, AppError.ErrIncorrectPassword
 	}
 
+	// Check if this is the first login (e.g., by comparing CreatedAt and LastLogin)
+	isFirstLogin := user.CreatedAt.Equal(user.LastLogin)
 	// Update last login
 	user.LastLogin = time.Now()
 	if err := uc.userRepo.UpdateUser(ctx, user); err != nil {
@@ -213,14 +210,18 @@ func (uc *AuthUsecase) Login(ctx context.Context, loginData dto.LoginDTO) (*dto.
 	}
 
 	log.Printf("✅ Login successful for user: %s (%s)", user.Username, user.Email)
-	return &dto.LoginResponseDTO{
+	resp := &dto.LoginResponseDTO{
 		AccessToken:  accessTokenString,
 		RefreshToken: refreshToken.Token,
 		UserID:       user.ID,
 		Username:     user.Username,
 		Email:        user.Email,
 		Role:         user.Role,
-	}, nil
+	}
+	if isFirstLogin {
+		resp.Message = "Welcome! For your security, please change your password now."
+	}
+	return resp, nil
 }
 
 func (uc *AuthUsecase) RefreshToken(ctx context.Context, tokenString string) (*dto.RefreshResponseDTO, error) {
@@ -333,5 +334,70 @@ func (uc *AuthUsecase) ChangePassword(ctx context.Context, userID, oldPassword, 
 		return err
 	}
 	log.Printf("✅ Password changed successfully for user: %s", userID)
+	return nil
+}
+
+// ResendVerificationToken resends the verification email if token expired or not used
+func (uc *AuthUsecase) ResendVerificationToken(ctx context.Context, email, frontendDomain string) error {
+	user, err := uc.userRepo.FindByEmail(ctx, email)
+	if err != nil || user == nil {
+		// Do not reveal if user exists
+		return nil
+	}
+	var tokenStr string
+	var at *entities.ActivationToken
+	if uc.activationRepo != nil {
+		// Try to find a valid, unexpired token for this user/email
+		at, err = uc.activationRepo.FindValidActivationTokenByEmail(ctx, user.Email)
+		if err != nil {
+			log.Println("Error finding activation token by email:", err)
+			return err
+		}
+
+		if at == nil || at.ExpiresAt.Before(time.Now()) {
+			tokenStr, _ = apputil.GenerateToken(32)
+			at = &entities.ActivationToken{
+				Token:     tokenStr,
+				UserID:    user.ID,
+				Email:     user.Email,
+				ExpiresAt: time.Now().Add(24 * time.Hour),
+				CreatedAt: time.Now(),
+			}
+			if err := uc.activationRepo.Create(ctx, at); err != nil {
+				return AppError.ErrInternalServer
+			}
+		} else {
+			tokenStr = at.Token
+		}
+	}
+	// send email using template
+	link := frontendDomain + "/verify?token=" + tokenStr
+	subject := "Verify your RemedyMate account"
+	firstName := ""
+	if user.PersonalInfo != nil && user.PersonalInfo.FirstName != nil {
+		firstName = *user.PersonalInfo.FirstName
+	}
+	tplData := struct {
+		AppName     string
+		FirstName   string
+		VerifyLink  string
+		ExpiryHours int
+		Year        int
+		Password    string
+	}{
+		AppName:     "RemedyMate",
+		FirstName:   firstName,
+		VerifyLink:  link,
+		ExpiryHours: 24,
+		Year:        time.Now().Year(),
+		Password:    user.Password,
+	}
+	body, rendErr := mailInfra.RenderTemplate("./infrastructure/mail/templates/activation_email.html", tplData)
+	if rendErr != nil {
+		body = "<p>Hello,</p><p>Please verify your account by clicking the link below:</p><p><a href='" + link + "'>Activate Account</a></p><p>Your password: <b>" + user.Password + "</b></p><p><b>After verifying, use this password to login. Please change your password after your first login.</b></p>"
+	}
+	if err := uc.mailer.Send(user.Email, subject, body); err != nil {
+		return AppError.ErrEmailSendFailed
+	}
 	return nil
 }

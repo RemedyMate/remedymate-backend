@@ -97,10 +97,11 @@ components:
 
         RegisterDTO:
             type: object
-            required: [username, email, password, role]
+            required: [email, role, personalInfo, frontendDomain]
             properties:
                 username:
                     type: string
+                    description: Optional. If not provided, will be generated.
                 email:
                     type: string
                     format: email
@@ -108,25 +109,24 @@ components:
                     type: string
                     format: password
                     minLength: 6
+                    description: Optional. If not provided, will be generated and sent in verification email.
                 role:
                     type: string
                     enum: [admin, superadmin]
                 personalInfo:
                     $ref: "#/components/schemas/PersonalInfoDTO"
+                frontendDomain:
+                    type: string
+                    format: uri
+                    description: Frontend web domain (e.g. https://app.example.com) used for verification link.
 
         RegisterResponseDTO:
             type: object
             properties:
                 message:
                     type: string
-                username:
-                    type: string
-                password:
-                    type: string
             example:
                 message: User registered successfully
-                username: rm_4f9a2c
-                password: A8s!keP2
 
         LoginDTO:
             type: object
@@ -156,6 +156,9 @@ components:
                 role:
                     type: string
                     enum: [admin, superadmin]
+                message:
+                    type: string
+                    description: Optional. Present on first login to remind user to change password.
             example:
                 access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
                 refresh_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
@@ -163,6 +166,26 @@ components:
                 username: johndoe
                 email: john@example.com
                 role: admin
+                message: Welcome! For your security, please change your password now.
+        ResendVerificationDTO:
+            type: object
+            required: [email, frontendDomain]
+            properties:
+                email:
+                    type: string
+                    format: email
+                frontendDomain:
+                    type: string
+                    format: uri
+                    description: Frontend web domain (e.g. https://app.example.com) used for verification link.
+
+        ResendVerificationResponseDTO:
+            type: object
+            properties:
+                message:
+                    type: string
+            example:
+                message: Verification email resent if the account exists.
 
         RefreshDTO:
             type: object
@@ -811,13 +834,7 @@ paths:
                     application/json:
                         schema:
                             $ref: "#/components/schemas/RegisterDTO"
-                        examples:
-                            sample:
-                                value:
-                                    username: admin2
-                                    email: admin2@example.com
-                                    password: S3cret!
-                                    role: admin
+
             responses:
                 "201":
                     description: Created
@@ -1008,6 +1025,36 @@ paths:
                                 invalid_token:
                                     value:
                                         error: "Invalid or expired token"
+    /api/v1/auth/resend-verification:
+        post:
+            tags: [Auth]
+            summary: Resend verification email
+            operationId: authResendVerification
+            description: Resends the verification email with a new or existing token if the account exists and is not yet verified.
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ResendVerificationDTO"
+                        examples:
+                            sample:
+                                value:
+                                    email: john@example.com
+                                    frontendDomain: https://app.example.com
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ResendVerificationResponseDTO"
+                "400":
+                    description: Bad Request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorResponse"
 
     /api/v1/auth/logout:
         post:

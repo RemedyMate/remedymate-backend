@@ -57,16 +57,16 @@ func (ac *AuthController) Register(c *gin.Context) {
 		UpdatedAt: time.Now(),
 		LastLogin: time.Now(),
 	}
+	frontendDomain := input.FrontendDomain
 
-
-	resp, err := ac.authUsecase.Register(context.Background(), &user)
+	resp, err := ac.authUsecase.Register(context.Background(), &user, frontendDomain)
 	if err != nil {
 		HandleHTTPError(c, err)
 		return
 	}
 
 	log.Printf("✅ Registration successful for email: %s", input.Email)
-	c.JSON(http.StatusCreated, resp)
+	c.JSON(http.StatusCreated, gin.H{"message": resp.Message})
 }
 
 // Login authenticates a user with email and password
@@ -214,4 +214,22 @@ func (ac *AuthController) ChangePassword(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Password changed successfully",
 	})
+}
+
+// ResendVerification handles POST /api/v1/auth/resend-verification
+func (ac *AuthController) ResendVerification(c *gin.Context) {
+	var req struct {
+		Email          string `json:"email" binding:"required,email"`
+		FrontendDomain string `json:"frontendDomain" binding:"required,url"`
+	}
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
+		return
+	}
+	err := ac.authUsecase.ResendVerificationToken(c.Request.Context(), req.Email, req.FrontendDomain)
+	if err != nil {
+		HandleHTTPError(c, err)
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "Verification email resent if the account exists."})
 }

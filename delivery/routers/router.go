@@ -39,6 +39,7 @@ func SetupRouter(
 			auth.POST("/refresh", authController.Refresh)
 			auth.POST("/activate", authController.Activate)
 			auth.GET("/verify", authController.Verify)
+			auth.POST("/resend-verification", authController.ResendVerification)
 
 			// Protected routes (require authentication)
 			protected := auth.Group("/")

@@ -35,6 +35,8 @@ type IRefreshTokenRepository interface {
 
 type IActivationTokenRepository interface {
 	Create(ctx context.Context, token *entities.ActivationToken) error
+	// FindValidByToken can now take either a token or an email (if token is empty, search by email for latest valid)
 	FindValidByToken(ctx context.Context, token string) (*entities.ActivationToken, error)
+	FindValidActivationTokenByEmail(ctx context.Context, email string) (*entities.ActivationToken, error)
 	MarkUsed(ctx context.Context, id string) error
 }
