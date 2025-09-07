@@ -35,9 +35,11 @@ func NewAuthUsecase(userRepo interfaces.IUserRepository, tokenRepo interfaces.IR
 }
 
 func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User, frontendDomain string) (*dto.RegisterResponseDTO, error) {
+	log.Printf("🆕 Registering new user: %s (%s)", user.Username, user.Email)
 	// Check if email exists
 	existing, _ := uc.userRepo.FindByEmail(ctx, user.Email)
 	if existing != nil {
+		log.Printf("[Register] Email already exists: %s", user.Email)
 		return nil, AppError.ErrEmailAlreadyExist
 	}
 
@@ -54,11 +56,12 @@ func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User, fronte
 			}
 		}
 		if user.Username == "" {
-			user.Username = "rm_user"
+			user.Username = user.Email
 		}
 	} else {
 		// If provided, ensure it's unique
 		if _, err := uc.userRepo.FindByUsername(ctx, user.Username); err == nil {
+			log.Printf("[Register] Duplicate username: %s", user.Username)
 			return nil, AppError.ErrDuplicateUsername
 		}
 	}
@@ -74,6 +77,7 @@ func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User, fronte
 	// Hash password using the password service
 	hashed, err := hash.HashPassword(user.Password)
 	if err != nil {
+		log.Printf("[Register] Error hashing password for %s: %v", user.Email, err)
 		return nil, err
 	}
 	user.PasswordHash = hashed
@@ -87,6 +91,7 @@ func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User, fronte
 
 	err = uc.userRepo.CreateUserWithStatus(ctx, user, userStatus)
 	if err != nil {
+		log.Printf("[Register] Error creating user with status for %s: %v", user.Email, err)
 		return nil, err
 	}
 
@@ -103,6 +108,7 @@ func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User, fronte
 				CreatedAt: time.Now(),
 			}
 			if err := uc.activationRepo.Create(ctx, at); err != nil {
+				log.Println("[Register] Error creating activation token:", err)
 				return nil, AppError.ErrInternalServer
 			}
 			// send email using template
@@ -132,11 +138,12 @@ func (uc *AuthUsecase) Register(ctx context.Context, user *entities.User, fronte
 
 			body, rendErr := mailInfra.RenderTemplate("./infrastructure/mail/templates/activation_email.html", tplData)
 			if rendErr != nil {
-				log.Printf("failed to render activation email template: %v", rendErr)
+				log.Printf("[Register] Failed to render activation email template for %s: %v", user.Email, rendErr)
 				body = "<p>Hello,</p><p>Please verify your account by clicking the link below:</p><p><a href='" + link + "'>Activate Account</a></p><p>Your password: <b>" + user.Password + "</b></p><p><b>After verifying, use this password to login. Please change your password after your first login.</b></p>"
 			}
 
 			if err := uc.mailer.Send(user.Email, subject, body); err != nil {
+				log.Printf("[Register] Failed to send verification email to %s: %v", user.Email, err)
 				return nil, AppError.ErrEmailSendFailed
 			}
 		}

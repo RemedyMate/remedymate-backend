@@ -8,7 +8,18 @@ import (
 )
 
 func HandleHTTPError(c *gin.Context, err error) {
+	// user authentication
 	switch {
+	case errors.Is(err, AppError.ErrUserNotAuthenticated):
+		c.JSON(401, gin.H{"error": err.Error()})
+	case errors.Is(err, AppError.ErrDuplicateUsername):
+		c.JSON(409, gin.H{"error": err.Error()})
+	case errors.Is(err, AppError.ErrInvalidInput):
+		c.JSON(400, gin.H{"error": err.Error()})
+	case errors.Is(err, AppError.ErrTopicAlreadyExists):
+		c.JSON(409, gin.H{"error": err.Error()})
+	case errors.Is(err, AppError.ErrInvalidActivationToken):
+		c.JSON(400, gin.H{"error": err.Error()})
 	// topic-related
 	case errors.Is(err, AppError.ErrTopicNotFound):
 		c.JSON(404, gin.H{"error": err.Error()})
