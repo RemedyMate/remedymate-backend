@@ -42,6 +42,7 @@ func main() {
 
 	// Initialize repositories
 	userRepo := repository.NewUserRepository()
+	// appUserRepo := repository.NewAppUserRepository()
 	tokenRepo := repository.NewRefreshTokenRepository()
 	activationRepo := repository.NewActivationTokenRepository()
 	conversationRepo := repository.NewConversationRepository(database.GetCollection("conversation"))
@@ -122,7 +123,7 @@ func main() {
 		userController,
 		remedyMateController,
 		conversationController,
-    topicController,
+		topicController,
 		adminRedFlagController,
 		adminFeedbackController,
 		feedbackPublicController,
