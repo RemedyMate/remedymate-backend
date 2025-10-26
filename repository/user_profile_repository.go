@@ -21,7 +21,7 @@ type UserProfileRepository struct {
 
 // NewUserProfileRepository constructs a new UserProfileRepository using the global DB client.
 func NewUserProfileRepository() *UserProfileRepository {
-	coll := database.Client.Database("remedymate").Collection("app_users")
+	coll := database.Client.Database(database.GetDatabaseName()).Collection("app_users")
 
 	// ensure index on userId (unique)
 	ctx := context.Background()

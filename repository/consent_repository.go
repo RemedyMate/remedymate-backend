@@ -22,7 +22,7 @@ type ConsentRepository struct {
 
 // NewConsentRepository constructs a new ConsentRepository using the global DB client.
 func NewConsentRepository() *ConsentRepository {
-	coll := database.Client.Database("remedymate").Collection("consent_records")
+	coll := database.Client.Database(database.GetDatabaseName()).Collection("consent_records")
 
 	// ensure index on userId + createdAt for queries
 	ctx := context.Background()

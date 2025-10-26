@@ -16,7 +16,7 @@ type RefreshTokenRepository struct {
 }
 
 func NewRefreshTokenRepository() interfaces.IRefreshTokenRepository {
-	collection := database.Client.Database("remedymate").Collection("refresh_tokens")
+	collection := database.Client.Database(database.GetDatabaseName()).Collection("refresh_tokens")
 
 	return &RefreshTokenRepository{
 		collection: collection,

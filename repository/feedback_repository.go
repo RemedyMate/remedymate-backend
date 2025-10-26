@@ -19,7 +19,7 @@ type FeedbackRepositoryImpl struct {
 }
 
 func NewFeedbackRepository() interfaces.FeedbackRepository {
-	c := database.Client.Database("remedymate").Collection("feedbacks")
+	c := database.Client.Database(database.GetDatabaseName()).Collection("feedbacks")
 	_, _ = c.Indexes().CreateMany(context.Background(), []mongo.IndexModel{
 		{Keys: bson.D{{Key: "createdAt", Value: -1}}},
 		{Keys: bson.D{{Key: "language", Value: 1}}},

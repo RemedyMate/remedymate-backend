@@ -11,7 +11,7 @@ import (
 	"remedymate-backend/domain/dto"
 
 	"remedymate-backend/infrastructure/bootstrap"
-
+	"remedymate-backend/infrastructure/cache"
 	"remedymate-backend/infrastructure/content"
 	"remedymate-backend/infrastructure/conversation"
 	"remedymate-backend/infrastructure/database"
@@ -24,7 +24,6 @@ import (
 	"remedymate-backend/usecase/user"
 
 	"github.com/joho/godotenv"
-	"github.com/redis/go-redis/v9"
 )
 
 func main() {
@@ -42,10 +41,7 @@ func main() {
 		redisAddr = "localhost:6379"
 	}
 	redisPassword := os.Getenv("REDIS_PASSWORD")
-	redisClient := redis.NewClient(&redis.Options{
-		Addr:     redisAddr,
-		Password: redisPassword,
-	})
+	redisClient := cache.NewRedisClient(redisAddr, redisPassword)
 	// Test Redis connection
 	ctx := context.Background()
 	if err := redisClient.Ping(ctx).Err(); err != nil {

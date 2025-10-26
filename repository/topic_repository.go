@@ -23,7 +23,7 @@ type TopicRepository struct {
 
 // NewTopicRepository creates a repository using the provided mongo.Database.
 func NewTopicRepository() (*TopicRepository, error) {
-	topicColl := database.Client.Database("remedymate").Collection("topics")
+	topicColl := database.Client.Database(database.GetDatabaseName()).Collection("topics")
 
 	// ensure text index on relevant fields
 	idxModel := mongo.IndexModel{

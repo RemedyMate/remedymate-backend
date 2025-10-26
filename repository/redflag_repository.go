@@ -19,7 +19,7 @@ type RedFlagRepositoryImpl struct {
 }
 
 func NewRedFlagRepository() interfaces.RedFlagRepository {
-	c := database.Client.Database("remedymate").Collection("redflags")
+	c := database.Client.Database(database.GetDatabaseName()).Collection("redflags")
 	_, _ = c.Indexes().CreateMany(context.Background(), []mongo.IndexModel{
 		{Keys: bson.D{{Key: "language", Value: 1}, {Key: "level", Value: 1}}},
 		{Keys: bson.D{{Key: "isDeleted", Value: 1}}},

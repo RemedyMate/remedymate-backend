@@ -20,7 +20,7 @@ type ActivationTokenRepository struct {
 }
 
 func NewActivationTokenRepository() interfaces.IActivationTokenRepository {
-	return &ActivationTokenRepository{collection: database.Client.Database("remedymate").Collection("activation_tokens")}
+	return &ActivationTokenRepository{collection: database.Client.Database(database.GetDatabaseName()).Collection("activation_tokens")}
 }
 
 func (r *ActivationTokenRepository) Create(ctx context.Context, token *entities.ActivationToken) error {
