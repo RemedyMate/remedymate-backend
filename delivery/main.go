@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"os"
 
@@ -23,6 +24,7 @@ import (
 	"remedymate-backend/usecase/user"
 
 	"github.com/joho/godotenv"
+	"github.com/redis/go-redis/v9"
 )
 
 func main() {
@@ -34,6 +36,23 @@ func main() {
 	// Connect to MongoDB
 	database.ConnectMongo()
 
+	// Connect to Redis
+	redisAddr := os.Getenv("REDIS_ADDR")
+	if redisAddr == "" {
+		redisAddr = "localhost:6379"
+	}
+	redisPassword := os.Getenv("REDIS_PASSWORD")
+	redisClient := redis.NewClient(&redis.Options{
+		Addr:     redisAddr,
+		Password: redisPassword,
+	})
+	// Test Redis connection
+	ctx := context.Background()
+	if err := redisClient.Ping(ctx).Err(); err != nil {
+		log.Fatalf("Failed to connect to Redis: %v", err)
+	}
+	log.Println("✅ Connected to Redis")
+
 	// Load OAuth configuration
 	oauthConfig := config.LoadOAuthConfig()
 	if err := oauthConfig.ValidateConfig(); err != nil {
@@ -42,7 +61,8 @@ func main() {
 
 	// Initialize repositories
 	userRepo := repository.NewUserRepository()
-	// appUserRepo := repository.NewAppUserRepository()
+	userProfileRepo := repository.NewUserProfileRepository()
+	consentRepo := repository.NewConsentRepository()
 	tokenRepo := repository.NewRefreshTokenRepository()
 	activationRepo := repository.NewActivationTokenRepository()
 	conversationRepo := repository.NewConversationRepository(database.GetCollection("conversation"))
@@ -107,6 +127,9 @@ func main() {
 	adminRedFlagUsecase := usecase.NewAdminRedFlagUsecase(redFlagRepo)
 	adminFeedbackUsecase := usecase.NewAdminFeedbackUsecase(feedbackRepo)
 
+	// Profile usecase
+	profileUsecase := usecase.NewProfileUsecase(userProfileRepo, consentRepo, redisClient)
+
 	// Initialize controllers
 	authController := controllers.NewAuthController(authUsecase)
 	userController := controllers.NewUserController(userUsecase)
@@ -116,6 +139,7 @@ func main() {
 	adminRedFlagController := controllers.NewAdminRedFlagController(adminRedFlagUsecase)
 	adminFeedbackController := controllers.NewAdminFeedbackController(adminFeedbackUsecase)
 	feedbackPublicController := controllers.NewFeedbackPublicController(publicFeedbackUsecase)
+	profileController := controllers.NewProfileController(profileUsecase)
 
 	// Setup router
 	r := routers.SetupRouter(
@@ -127,6 +151,7 @@ func main() {
 		adminRedFlagController,
 		adminFeedbackController,
 		feedbackPublicController,
+		profileController,
 	)
 
 	port := os.Getenv("PORT")

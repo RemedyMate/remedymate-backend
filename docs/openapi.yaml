@@ -234,34 +234,313 @@ components:
                 old_password: OldP@ssw0rd
                 new_password: NewP@ssw0rd123
 
-        # ===== User Profile DTOs =====
-        ProfileResponseDTO:
+                # ===== Profile Onboarding DTOs =====
+        OnboardingStatusResponse:
             type: object
             properties:
-                id:
+                percent_complete:
+                    type: integer
+                    minimum: 0
+                    maximum: 100
+                    example: 50
+                next_step:
                     type: string
-                username:
+                    example: "demographics"
+                    description: Next required onboarding step, empty if complete
+                sections:
+                    type: object
+                    additionalProperties:
+                        type: object
+                        properties:
+                            complete:
+                                type: boolean
+                            last_updated:
+                                type: string
+                                format: date-time
+                    example:
+                        consent:
+                            complete: true
+                            last_updated: "2024-01-15T10:30:00Z"
+                        demographics:
+                            complete: false
+                            last_updated: "2024-01-15T09:15:00Z"
+                        medical_history:
+                            complete: false
+                            last_updated: "2024-01-15T09:15:00Z"
+                        lifestyle:
+                            complete: false
+                            last_updated: "2024-01-15T09:15:00Z"
+
+        ConsentPostRequest:
+            type: object
+            required: [consents]
+            properties:
+                consents:
+                    type: array
+                    minItems: 1
+                    items:
+                        type: object
+                        required: [type, granted]
+                        properties:
+                            type:
+                                type: string
+                                example: "TERMS_OF_SERVICE"
+                            granted:
+                                type: boolean
+                                example: true
+                            purpose:
+                                type: string
+                                enum: [baseline, optional]
+                                example: "baseline"
+                            version:
+                                type: string
+                                example: "1.0"
+
+        ConsentPatchRequest:
+            type: object
+            required: [consents]
+            properties:
+                consents:
+                    type: array
+                    minItems: 1
+                    items:
+                        type: object
+                        required: [type, granted]
+                        properties:
+                            type:
+                                type: string
+                                example: "DATA_PROCESSING"
+                            granted:
+                                type: boolean
+                                example: false
+                            revocation_reason:
+                                type: string
+                                example: "Changed my mind about data sharing"
+
+        DemographicsRequest:
+            type: object
+            required: [full_name, date_of_birth, gender]
+            properties:
+                full_name:
                     type: string
-                email:
+                    example: "John Doe"
+                date_of_birth:
                     type: string
-                    format: email
-                personalInfo:
-                    $ref: "#/components/schemas/PersonalInfoDTO"
-                isVerified:
-                    type: boolean
-                isProfileFull:
-                    type: boolean
-                isActive:
-                    type: boolean
-                createdAt:
+                    format: date
+                    example: "1990-05-15"
+                gender:
                     type: string
-                    format: date-time
-                updatedAt:
+                    enum: [male, female, other, prefer_not_to_say]
+                    example: "male"
+                height:
+                    type: object
+                    properties:
+                        value:
+                            type: number
+                            example: 175.5
+                        unit:
+                            type: string
+                            enum: [cm, in]
+                            example: "cm"
+                weight:
+                    type: object
+                    properties:
+                        value:
+                            type: number
+                            example: 70.2
+                        unit:
+                            type: string
+                            enum: [kg, lb]
+                            example: "kg"
+                blood_type:
                     type: string
-                    format: date-time
-                lastLogin:
+                    enum: [A+, A-, B+, B-, AB+, AB-, O+, O-]
+                    example: "O+"
+                contact:
+                    type: object
+                    properties:
+                        phone:
+                            type: string
+                            example: "+1234567890"
+                        email:
+                            type: string
+                            format: email
+                            example: "john.doe@example.com"
+                location:
+                    type: object
+                    properties:
+                        country:
+                            type: string
+                            example: "US"
+                        region:
+                            type: string
+                            example: "CA"
+                        city:
+                            type: string
+                            example: "San Francisco"
+                primary_language:
                     type: string
-                    format: date-time
+                    example: "en"
+                emergency_contact:
+                    type: object
+                    properties:
+                        name:
+                            type: string
+                            example: "Jane Doe"
+                        relation:
+                            type: string
+                            example: "spouse"
+                        phone:
+                            type: string
+                            example: "+1234567891"
+
+        MedicalHistoryRequest:
+            type: object
+            properties:
+                existing_conditions:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            condition:
+                                type: string
+                                example: "Hypertension"
+                            diagnosed_date:
+                                type: string
+                                format: date
+                                example: "2020-03-15"
+                            code_system:
+                                type: string
+                                example: "SNOMED_CT"
+                            code:
+                                type: string
+                                example: "38341003"
+                past_surgeries:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            surgery:
+                                type: string
+                                example: "Appendectomy"
+                            date:
+                                type: string
+                                format: date
+                                example: "2018-07-22"
+                            code:
+                                type: string
+                                example: "80146002"
+                current_medications:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            name:
+                                type: string
+                                example: "Lisinopril"
+                            dosage:
+                                type: string
+                                example: "10mg"
+                            frequency:
+                                type: string
+                                example: "Once daily"
+                            rx_norm:
+                                type: string
+                                example: "314076"
+                allergies:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            allergen:
+                                type: string
+                                example: "Penicillin"
+                            reaction:
+                                type: string
+                                example: "Rash"
+                            severity:
+                                type: string
+                                enum: [mild, moderate, severe]
+                                example: "moderate"
+                            snomed:
+                                type: string
+                                example: "91936005"
+                family_history:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            relation:
+                                type: string
+                                example: "father"
+                            condition:
+                                type: string
+                                example: "Heart Disease"
+                            code:
+                                type: string
+                                example: "56265001"
+
+        LifestyleRequest:
+            type: object
+            properties:
+                dietary_habits:
+                    type: object
+                    properties:
+                        diet_type:
+                            type: string
+                            enum: [omnivore, vegetarian, vegan, pescatarian, other]
+                            example: "omnivore"
+                        meals_per_day:
+                            type: integer
+                            minimum: 1
+                            maximum: 10
+                            example: 3
+                        vegetable_servings_per_day:
+                            type: integer
+                            minimum: 0
+                            example: 4
+                        daily_water_intake_liters:
+                            type: number
+                            minimum: 0
+                            example: 2.5
+                physical_activity:
+                    type: object
+                    properties:
+                        frequency_per_week:
+                            type: integer
+                            minimum: 0
+                            example: 4
+                        primary_type:
+                            type: string
+                            example: "Running"
+                substance_use:
+                    type: object
+                    properties:
+                        smoking_status:
+                            type: string
+                            enum: [never, former, current]
+                            example: "never"
+                        alcohol_consumption_per_week:
+                            type: string
+                            example: "2-3 drinks"
+                sleep:
+                    type: object
+                    properties:
+                        average_duration_hours:
+                            type: number
+                            minimum: 0
+                            maximum: 24
+                            example: 7.5
+                stress:
+                    type: object
+                    properties:
+                        level:
+                            type: string
+                            enum: [low, moderate, high]
+                            example: "moderate"
+                occupation:
+                    type: string
+                    example: "Software Engineer"
 
         UpdateProfileDTO:
             type: object
@@ -279,6 +558,34 @@ components:
                     type: string
                 reason:
                     type: string
+
+        # ===== User Profile DTOs =====
+        ProfileResponseDTO:
+            type: object
+            properties:
+                id:
+                    type: string
+                username:
+                    type: string
+                email:
+                    type: string
+                personalInfo:
+                    $ref: "#/components/schemas/PersonalInfoDTO"
+                isVerified:
+                    type: boolean
+                isProfileFull:
+                    type: boolean
+                isActive:
+                    type: boolean
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+                lastLogin:
+                    type: string
+                    format: date-time
 
         # ===== Admin User Management DTOs =====
         PaginationMetadata:
@@ -860,6 +1167,348 @@ components:
                     type: string
 
 paths:
+    /api/v1/user/profile/onboarding-status:
+        get:
+          summary: Get onboarding status for the authenticated user
+          description: Returns the current onboarding progress including completion percentage, next required step, and detailed status for each section.
+          tags: [Users]
+          responses:
+            '200':
+              description: Onboarding status retrieved successfully
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/OnboardingStatusResponse"
+                  examples:
+                    partial_complete:
+                      value:
+                        percent_complete: 50
+                        next_step: "demographics"
+                        sections:
+                          consent:
+                            complete: true
+                            last_updated: "2024-01-15T10:30:00Z"
+                          demographics:
+                            complete: false
+                            last_updated: "2024-01-15T09:15:00Z"
+                          medical_history:
+                            complete: false
+                            last_updated: "2024-01-15T09:15:00Z"
+                          lifestyle:
+                            complete: false
+                            last_updated: "2024-01-15T09:15:00Z"
+                    fully_complete:
+                      value:
+                        percent_complete: 100
+                        next_step: ""
+                        sections:
+                          consent:
+                            complete: true
+                            last_updated: "2024-01-15T10:30:00Z"
+                          demographics:
+                            complete: true
+                            last_updated: "2024-01-15T10:45:00Z"
+                          medical_history:
+                            complete: true
+                            last_updated: "2024-01-15T11:00:00Z"
+                          lifestyle:
+                            complete: true
+                            last_updated: "2024-01-15T11:15:00Z"
+            '401':
+              $ref: "#/components/responses/Unauthorized"
+            '500':
+              description: Internal server error
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/ErrorResponse"
+                  example:
+                    error: "Failed to retrieve onboarding status"
+          security:
+            - bearerAuth: []
+
+    /api/v1/user/profile/consent:
+        post:
+          summary: Record granular consents for user
+          description: Records initial consent preferences for data processing, sharing, and privacy policies.
+          tags: [Users]
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/ConsentPostRequest"
+                examples:
+                  baseline_consents:
+                    value:
+                      consents:
+                        - type: "TERMS_OF_SERVICE"
+                          granted: true
+                          purpose: "baseline"
+                          version: "1.0"
+                        - type: "PRIVACY_POLICY"
+                          granted: true
+                          purpose: "baseline"
+                          version: "1.0"
+                        - type: "DATA_PROCESSING"
+                          granted: true
+                          purpose: "baseline"
+                          version: "1.0"
+                  with_optional:
+                    value:
+                      consents:
+                        - type: "TERMS_OF_SERVICE"
+                          granted: true
+                          purpose: "baseline"
+                          version: "1.0"
+                        - type: "DATA_SHARING_RESEARCH"
+                          granted: false
+                          purpose: "optional"
+                          version: "1.0"
+          responses:
+            '201':
+              description: Consent records created successfully
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Consent recorded successfully"
+            '400':
+              description: Bad request - invalid consent data
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/ErrorResponse"
+                  example:
+                    error: "Invalid request body"
+            '401':
+              $ref: "#/components/responses/Unauthorized"
+          security:
+            - bearerAuth: []
+        patch:
+          summary: Update or revoke consents (append-only revocation record)
+          description: Updates consent preferences or records revocation of previously granted consents.
+          tags: [Users]
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/ConsentPatchRequest"
+                examples:
+                  revoke_consent:
+                    value:
+                      consents:
+                        - type: "DATA_SHARING_RESEARCH"
+                          granted: false
+                          revocation_reason: "Changed my mind about research participation"
+          responses:
+            '200':
+              description: Consent records updated successfully
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Consents updated successfully"
+            '400':
+              description: Bad request - invalid consent data
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/ErrorResponse"
+                  example:
+                    error: "Invalid request body"
+            '401':
+              $ref: "#/components/responses/Unauthorized"
+          security:
+            - bearerAuth: []
+
+    /api/v1/user/profile/demographics:
+        put:
+          summary: Create or update user demographics
+          description: Updates user demographic information including personal details, contact information, and location.
+          tags: [Users]
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/DemographicsRequest"
+                examples:
+                  minimal_required:
+                    value:
+                      full_name: "John Doe"
+                      date_of_birth: "1990-05-15"
+                      gender: "male"
+                  full_profile:
+                    value:
+                      full_name: "John Doe"
+                      date_of_birth: "1990-05-15"
+                      gender: "male"
+                      height:
+                        value: 175.5
+                        unit: "cm"
+                      weight:
+                        value: 70.2
+                        unit: "kg"
+                      blood_type: "O+"
+                      contact:
+                        phone: "+1234567890"
+                        email: "john.doe@example.com"
+                      location:
+                        country: "US"
+                        region: "CA"
+                        city: "San Francisco"
+                      primary_language: "en"
+                      emergency_contact:
+                        name: "Jane Doe"
+                        relation: "spouse"
+                        phone: "+1234567891"
+          responses:
+            '200':
+              description: Demographics updated successfully
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Demographics updated successfully"
+            '400':
+              description: Bad request - invalid demographic data
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/ErrorResponse"
+                  example:
+                    error: "Invalid request body"
+            '401':
+              $ref: "#/components/responses/Unauthorized"
+          security:
+            - bearerAuth: []
+
+    /api/v1/user/profile/medical-history:
+        put:
+          summary: Create or update medical history
+          description: Updates user's medical history including conditions, surgeries, medications, allergies, and family history.
+          tags: [Users]
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/MedicalHistoryRequest"
+                examples:
+                  comprehensive_history:
+                    value:
+                      existing_conditions:
+                        - condition: "Hypertension"
+                          diagnosed_date: "2020-03-15"
+                          code_system: "SNOMED_CT"
+                          code: "38341003"
+                      past_surgeries:
+                        - surgery: "Appendectomy"
+                          date: "2018-07-22"
+                          code: "80146002"
+                      current_medications:
+                        - name: "Lisinopril"
+                          dosage: "10mg"
+                          frequency: "Once daily"
+                          rx_norm: "314076"
+                      allergies:
+                        - allergen: "Penicillin"
+                          reaction: "Rash"
+                          severity: "moderate"
+                          snomed: "91936005"
+                      family_history:
+                        - relation: "father"
+                          condition: "Heart Disease"
+                          code: "56265001"
+          responses:
+            '200':
+              description: Medical history updated successfully
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Medical history updated successfully"
+            '400':
+              description: Bad request - invalid medical history data
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/ErrorResponse"
+                  example:
+                    error: "Invalid request body"
+            '401':
+              $ref: "#/components/responses/Unauthorized"
+          security:
+            - bearerAuth: []
+
+    /api/v1/user/profile/lifestyle:
+        put:
+          summary: Create or update lifestyle data
+          description: Updates user's lifestyle information including dietary habits, physical activity, substance use, sleep, stress, and occupation.
+          tags: [Users]
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/LifestyleRequest"
+                examples:
+                  comprehensive_lifestyle:
+                    value:
+                      dietary_habits:
+                        diet_type: "omnivore"
+                        meals_per_day: 3
+                        vegetable_servings_per_day: 4
+                        daily_water_intake_liters: 2.5
+                      physical_activity:
+                        frequency_per_week: 4
+                        primary_type: "Running"
+                      substance_use:
+                        smoking_status: "never"
+                        alcohol_consumption_per_week: "2-3 drinks"
+                      sleep:
+                        average_duration_hours: 7.5
+                      stress:
+                        level: "moderate"
+                      occupation: "Software Engineer"
+          responses:
+            '200':
+              description: Lifestyle data updated successfully
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Lifestyle updated successfully"
+            '400':
+              description: Bad request - invalid lifestyle data
+              content:
+                application/json:
+                  schema:
+                    $ref: "#/components/schemas/ErrorResponse"
+                  example:
+                    error: "Invalid request body"
+            '401':
+              $ref: "#/components/responses/Unauthorized"
+          security:
+            - bearerAuth: []
+
     /api/v1/register:
         post:
             tags: [Auth]
