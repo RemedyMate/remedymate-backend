@@ -24,8 +24,8 @@ type UserRepository struct {
 }
 
 func NewUserRepository() interfaces.IUserRepository {
-	userColl := database.Client.Database("remedymate").Collection("users")
-	userStatColl := database.Client.Database("remedymate").Collection("user_status")
+	userColl := database.Client.Database(database.GetDatabaseName()).Collection("users")
+	userStatColl := database.Client.Database(database.GetDatabaseName()).Collection("user_status")
 	userIndexModels := []mongo.IndexModel{
 		{Keys: bson.M{"username": 1}, Options: options.Index().SetUnique(true)},
 		{Keys: bson.M{"email": 1}, Options: options.Index().SetUnique(true)},

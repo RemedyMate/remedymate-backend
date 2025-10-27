@@ -17,7 +17,8 @@ func SetupRouter(
 	topicController *controllers.TopicController,
 	adminRedFlagController *controllers.AdminRedFlagController,
 	adminFeedbackController *controllers.AdminFeedbackController,
-	feedbackPublicController *controllers.FeedbackPublicController) *gin.Engine {
+	feedbackPublicController *controllers.FeedbackPublicController,
+	profileController *controllers.ProfileController) *gin.Engine {
 
 	r := gin.Default()
 
@@ -62,6 +63,17 @@ func SetupRouter(
 				users.GET("/profile", userController.GetProfile)
 				users.PUT("/profile", userController.UpdateProfile)
 				users.DELETE("/profile", userController.DeleteProfile)
+			}
+
+			// Onboarding and profile routes
+			profile := protectedAPI.Group("/user/profile")
+			{
+				profile.GET("/onboarding-status", profileController.GetOnboardingStatus)
+				profile.POST("/consent", profileController.PostConsent)
+				profile.PATCH("/consent", profileController.PatchConsent)
+				profile.PUT("/demographics", profileController.PutDemographics)
+				profile.PUT("/medical-history", profileController.PutMedicalHistory)
+				profile.PUT("/lifestyle", profileController.PutLifestyle)
 			}
 		}
 

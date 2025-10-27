@@ -20,13 +20,37 @@ type AppUser struct {
 	UpdatedAt time.Time `bson:"updatedAt" json:"updated_at"`
 }
 
-// OnboardingStatus provides step completion flags and audit timestamp
+// SectionStatus represents the status of an onboarding section
+type SectionStatus struct {
+	Complete    bool      `bson:"complete" json:"complete"`
+	LastUpdated time.Time `bson:"lastUpdated" json:"last_updated"`
+}
+
+// OnboardingStatus provides step completion flags, progress tracking, and audit timestamp
 type OnboardingStatus struct {
-	ConsentCompleted        bool      `bson:"consentCompleted" json:"consent_completed"`
-	DemographicsCompleted   bool      `bson:"demographicsCompleted" json:"demographics_completed"`
-	MedicalHistoryCompleted bool      `bson:"medicalHistoryCompleted" json:"medical_history_completed"`
-	LifestyleCompleted      bool      `bson:"lifestyleCompleted" json:"lifestyle_completed"`
-	LastUpdated             time.Time `bson:"lastUpdated" json:"last_updated"`
+	PercentComplete         int                      `bson:"percentComplete" json:"percent_complete"`
+	NextStep                string                   `bson:"nextStep,omitempty" json:"next_step,omitempty"`
+	Sections                map[string]SectionStatus `bson:"sections" json:"sections"`
+	ConsentCompleted        bool                     `bson:"consentCompleted" json:"consent_completed"`
+	DemographicsCompleted   bool                     `bson:"demographicsCompleted" json:"demographics_completed"`
+	MedicalHistoryCompleted bool                     `bson:"medicalHistoryCompleted" json:"medical_history_completed"`
+	LifestyleCompleted      bool                     `bson:"lifestyleCompleted" json:"lifestyle_completed"`
+	LastUpdated             time.Time                `bson:"lastUpdated" json:"last_updated"`
+}
+
+// ConsentRecord represents a consent record (append-only)
+type ConsentRecord struct {
+	ID                      string                 `bson:"_id,omitempty"`
+	UserID                  string                 `bson:"userId"`
+	ConsentGiven            bool                   `bson:"consentGiven"`
+	TermsVersion            string                 `bson:"termsVersion"`
+	ConsentDate             time.Time              `bson:"consentDate"`
+	DataSharingWithDoctors  bool                   `bson:"dataSharingWithDoctors"`
+	DataSharingWithResearch bool                   `bson:"dataSharingWithResearch"`
+	Signature               string                 `bson:"signature,omitempty"`
+	CreatedAt               time.Time              `bson:"createdAt"`
+	RevocationTimestamp     *time.Time             `bson:"revocationTimestamp,omitempty"`
+	Metadata                map[string]interface{} `bson:"metadata,omitempty"`
 }
 
 // ConsentEnvelope captures granular consents and versioning + audit
@@ -43,6 +67,7 @@ type ConsentItem struct {
 	Granted   bool      `bson:"granted" json:"granted"`
 	Version   string    `bson:"version,omitempty" json:"version,omitempty"`
 	Timestamp time.Time `bson:"timestamp" json:"timestamp"`
+	Reason    string    `bson:"reason,omitempty" json:"reason,omitempty"` // revocation reason
 }
 
 // Demographics stores standard identifiers with ISO/E.164 and encrypted PHI

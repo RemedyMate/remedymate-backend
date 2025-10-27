@@ -47,3 +47,12 @@ func GetCollection(collectionName string) *mongo.Collection {
 	}
 	return Client.Database(dbName).Collection(collectionName)
 }
+
+// GetDatabaseName returns the configured database name from environment or default
+func GetDatabaseName() string {
+	dbName := os.Getenv("DB_NAME")
+	if dbName == "" {
+		dbName = "remedymate" // default database name
+	}
+	return dbName
+}

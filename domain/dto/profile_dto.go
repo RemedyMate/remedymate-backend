@@ -14,6 +14,31 @@ type ProfileResponseDTO struct {
 	LastLogin     string          `json:"lastLogin"`
 }
 
+// ConsentPostRequest represents the POST consent request
+type ConsentPostRequest struct {
+	Consents []ConsentItemDTO `json:"consents" binding:"required"`
+}
+
+// ConsentPatchRequest represents the PATCH consent request
+type ConsentPatchRequest struct {
+	Consents []ConsentRevocationDTO `json:"consents" binding:"required"`
+}
+
+// ConsentItemDTO represents a consent item in requests
+type ConsentItemDTO struct {
+	Type    string `json:"type" binding:"required"`
+	Granted bool   `json:"granted"`
+	Purpose string `json:"purpose,omitempty"`
+	Version string `json:"version,omitempty"`
+}
+
+// ConsentRevocationDTO represents a consent revocation in PATCH
+type ConsentRevocationDTO struct {
+	Type             string `json:"type" binding:"required"`
+	Granted          bool   `json:"granted"`
+	RevocationReason string `json:"revocation_reason,omitempty"`
+}
+
 // UpdateProfileDTO represents the update profile request
 type UpdateProfileDTO struct {
 	Username     string          `json:"username,omitempty"`
